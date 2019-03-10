@@ -28,9 +28,9 @@ You can download the project files here:
  
 The provided zip file has a number of subfolders and files corresponding to the different parts of the phase detector. This contains the documents necessary to build the project. You will start from HLS folder to design your phase detector using Vivado HLS. Use the provided script.tcl to create your project.
 
-* HLS \fir_top folder: This folder contains *.cpp*,*.h*, and script files for a complex FIR filter. This is a particular type of filter called a matched filter. You are matching the incoming signal to complex I and Q Golay codes that are provided for you. In the fir.cpp file, there are four sub functions firI1, firI2, firQ1, and firQ2. These functions are real FIR filters i.e., the same that you designed in Project 1. You can use your favorite code from Project 1 in these four sub functions. In the complex FIR filter, four of these functions are used in the “fir” function. In that function, you need to connect the four FIR filters “firI1, firI2, firQ1, and firQ2” to an adder and subtractor to create the complex matched filter. This structure is demonstrated in the Simulink file.
+* HLS \ fir_top folder: This folder contains *.cpp*,*.h*, and script files for a complex FIR filter. This is a particular type of filter called a matched filter. You are matching the incoming signal to complex I and Q Golay codes that are provided for you. In the fir.cpp file, there are four sub functions firI1, firI2, firQ1, and firQ2. These functions are real FIR filters i.e., the same that you designed in Project 1. You can use your favorite code from Project 1 in these four sub functions. In the complex FIR filter, four of these functions are used in the “fir” function. In that function, you need to connect the four FIR filters “firI1, firI2, firQ1, and firQ2” to an adder and subtractor to create the complex matched filter. This structure is demonstrated in the Simulink file.
 
-* HLS \cordic folder:
+* HLS \ cordic folder:
 
         - cordiccart2pol.cpp - The place where you write your synthesizable code. Currently, it only contains the function prototype.
 
@@ -40,7 +40,7 @@ The provided zip file has a number of subfolders and files corresponding to the 
 
         - script.tcl - Use this to create your project
 
-* HLS \cordic_LUT folder:
+* HLS \ cordic_LUT folder:
 
         - cordiccart2pol.cpp - The place where you can find the synthesizable code. Currently, it contains a simple implementation.
 
@@ -50,7 +50,7 @@ The provided zip file has a number of subfolders and files corresponding to the 
 
         - script.tcl - Use this to create your project
 
-* HLS \phasedetector folder: After you design the cordic and the complex fir, you will use them to design the phase detector.
+* HLS \ phasedetector folder: After you design the cordic and the complex fir, you will use them to design the phase detector.
 
         - fir.cpp - complex fir filter you designed previously.
 
@@ -191,8 +191,11 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 .. toctree::
 
-   axidma
    :maxdepth: 2
+
+   axidma
+   axidma2
+
 ..   :caption: Contents:
 
 

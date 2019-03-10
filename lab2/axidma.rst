@@ -75,4 +75,137 @@ Add **ZYNQ7 Processing System** to your design:
 
 Double click on **ZYNQ7 IP** to customize it. In the opened window, double click on **High Performance AXI 32b/64b Slave Parts**:
 
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/148617913-pynq7.png
+
+Select and check **S AXI HP0 interface**:
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3126944786-pynq8.png
+
+Add a **Smul** to your design and rename it to **smul**:
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2813328635-pynq9.png
+
+Add a **AXI Direct Memory Access** to your design and rename it to **smul_dma**. Double click on your **AXI DMA** and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to 23:
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/816419694-pynq10.png
+
+Add a **Constant** to your design
+
+2.4) Manual connections
+#######################
+
+Connect the following ports:
+
+**smul::OUTPUT_r to smul_dma::S_AXIS_S2MM**
+
+**smul_dma::M_AXIS_MM2S to smul::INPUT_r**
+
+**xlconstant_0 to smul::ap_ctrl::ap_start**
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3242937011-pynq11.png
+
+2.5) Automatic connections
+##########################
+
+Now you can leave the rest of the connections to the tool. There should be a highlighted strip on top of your diagram window.
+
+1- Click on **Run Block Automation**
+
+2- Click on **Run Connection Automation** and select all
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2236315451-pynq12.png
+
+3- **IMPORTANT!** you have to click again on **Run Connection Automation**
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1550495145-pynq13.png
+
+At this point your design should look like this:
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/4144014292-pynq14.png
+
+2.6) Generate bitstream
+#######################
+
+1- Save your design **CTRL+S** or **File > Save Block Design.**
+
+2- Validate your design: **Tools > Validate Design**
+
+3- In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+
+4- Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
+
+2.7) Note required addresses and export block design
+####################################################
+
+After bitstream generating process is done, open **Address Editor** from **window** menu.
+
+Note that **smul address** is **0x43C00000**, we need this address in our host program for sending **length** data.
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3507230747-pynq17.png
+
+In sources, expand **design_1_wrapper::design_1::design_1::streamMul::smul::design_1_smul_0_0::inst : smul**, double click on **smul_CTRL_s_axi_U**, and note the address for **length_r** is **0x10**. We need this address in our host program.
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2224243640-pynq18.png
+
+Export your block design from **File > Export > Export Block Design** and name it **smul.tcl.** This file includes all of your hardware addresses and describes your design for our host program.
+
+.. image :: https://bitbucket.org/repo/x8q9Ed8/images/585052686-pynq19.png
+
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** You should have both **smul.tcl** and **smul.bit.**
+
+You can close and exit from Vivado tool.
+
+3) Host program
+---------------
+
+In this section we use python to test our design
+
+3.1) Move your files
+####################
+
+Create a new folder in your PYNQ board and move both **smul.tcl** and **smul.bit** into it.
+
+3.2) Python code
+################
+
+Create a new Jupyter notebook and run the following code to test your design:
+
+.. code-block :: python3
+
+	import time
+	from pynq import Overlay
+	import pynq.lib.dma
+	from pynq import Xlnk
+	import numpy as np
+	from pynq import MMIO
+	import random
+
+	ol = Overlay('/home/xilinx/jupyter_notebooks/smul/smul.bit') # check your path
+	ol.download() # it downloads your bit to FPGA
+	dma = ol.streamMul.smul_dma # creating a dma instance. Note that we packed smul and smul_dma into streamMul
+	sadd_ip = MMIO(0x43c00000, 0x10000) # we got this IP from Address Editor
+	xlnk = Xlnk()
+
+.. code-block :: python3
+
+	length = 11
+
+	in_buffer = xlnk.cma_array(shape=(length,), dtype=np.int32) # input buffer
+	out_buffer = xlnk.cma_array(shape=(length,), dtype=np.int32) # output buffer
+
+	samples = random.sample(range(0, length), length)
+	np.copyto(in_buffer, samples) # copy samples to inout buffer
+
+	sadd_ip.write(0x10, length) # we got this address from Vivado source
+	t_start = time.time()
+	dma.sendchannel.transfer(in_buffer)
+	dma.recvchannel.transfer(out_buffer)
+	dma.sendchannel.wait() # wait for send channel
+	dma.recvchannel.wait() # wait for recv channel
+	t_stop = time.time()
+	in_buffer.close()
+	out_buffer.close()
+	print('Hardware execution time: ', t_stop-t_start)
+	for i in range(0, length):
+	    print('{}*2 = {}'.format(in_buffer[i], out_buffer[i]))
 
