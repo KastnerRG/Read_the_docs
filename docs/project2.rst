@@ -189,20 +189,4 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 **Note on cheating:** Each partner member is responsible for understanding everything in the report. If you do not understand part of the report, then I consider this cheating.
 
 
-.. toctree::
-
-   :maxdepth: 2
-
-   axidma
-   axidma2
-
-..   :caption: Contents:
-
-
-
-.. Indices and tables
-.. ==================
-
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search` 
+ 

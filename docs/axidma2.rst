@@ -1,5 +1,5 @@
-AXI_DMA_2
-=========
+Lab3-Part2
+===========
 
 Simple streaming Example with multiple inputs
 *********************************************

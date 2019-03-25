@@ -1,5 +1,5 @@
-AXI_DMA
-=======
+Lab3-Part1
+===================
 
 Simple streaming Example
 ************************
