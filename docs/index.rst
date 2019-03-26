@@ -255,14 +255,16 @@ Your grade will be determined by your answers to the questions and how well your
    :maxdepth: 2
    :hidden:	
 
-   PYNQ-example
+   self
    project2
+   project3
+   project4
+   PYNQ-example
    axidma
    axidma2
-   project3
    pl-ps_interrupt
-   project4
    Lab5.ipynb
+
 
 
 
