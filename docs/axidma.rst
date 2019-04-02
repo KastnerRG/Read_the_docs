@@ -209,3 +209,4 @@ Create a new Jupyter notebook and run the following code to test your design:
 	for i in range(0, length):
 	    print('{}*2 = {}'.format(in_buffer[i], out_buffer[i]))
 
+.. Note:: To obtain the solutions , create a directory Lab-3-Part1-solutions. Type **cd Lab-3-Part1-solutions** and then type the command **pip install Lab-3-Part1 -t .** to obtain the files

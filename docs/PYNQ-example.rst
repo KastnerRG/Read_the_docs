@@ -175,16 +175,5 @@ Run on board
 ~~~~~~~~~~~~
 You can run this code on an actual board at `here <http://krg_pynq_01.ucsd.edu:9090/notebooks/mul_test/demo.ipynb>`_ (password: xilinx).
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-.. Indices and tables
-.. ==================
-
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+.. Note:: To obtain the solutions , create a directory Lab-2-solutions. Type **cd Lab-2-solutions** and then type the command **pip install Lab-2 -t .** to obtain the files
 

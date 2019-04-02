@@ -251,10 +251,14 @@ Place your code on your Bitbucket repository. Put separate assignments in separa
 
 Your grade will be determined by your answers to the questions and how well your "best" design compares to the other students in the class. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is concise. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
+
+
+
+
 .. toctree::
    :maxdepth: 2
-   :hidden:	
-
+   :hidden:
+   
    self
    project2
    project3
@@ -264,7 +268,5 @@ Your grade will be determined by your answers to the questions and how well your
    axidma2
    pl-ps_interrupt
    Lab5.ipynb
-
-
 
 

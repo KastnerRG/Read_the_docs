@@ -235,4 +235,4 @@ Connect to your PYNQ board and create a new folder. Copy fact_intrpt.tcl and fac
 	# Removing the IP task from the event loop.
 	ip_task.cancel()
 
-
+.. Note:: To obtain the solutions , create a directory Lab-4 solutions. Type **cd Lab-4-solutions** and then type the command **pip install Lab-4 -t .** to obtain the files
