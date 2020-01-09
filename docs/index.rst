@@ -33,7 +33,7 @@ Below are the required steps which help in installing vivado
 3)PYNQ Setup
 ------------
 
-Please follow this `link<https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the pynq setup.
+Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the pynq setup.
 
 .. toctree::
    :maxdepth: 2

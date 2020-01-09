@@ -47,9 +47,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'fir'
-copyright = '2019, Alireza Khodamoradi'
-author = 'Alireza Khodamoradi'
+project = 'cse237c'
+copyright = '2019, Sivasankar Palaniappan'
+author = 'Sivasankar Palaniappan'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
