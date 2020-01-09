@@ -171,9 +171,4 @@ Open a new Notebook and run the following code to test your IP
   mul_ip.write(0x00, 1)
   print("output:", mul_ip.read(0x10)) 
 
-Run on board
-~~~~~~~~~~~~
-You can run this code on an actual board at `here <http://krg_pynq_01.ucsd.edu:9090/notebooks/mul_test/demo.ipynb>`_ (password: xilinx).
-
-.. Note:: To obtain the solutions , create a directory Lab-2-solutions. Type **cd Lab-2-solutions** and then type the command **pip install Lab-2 -t .** to obtain the files
 
