@@ -16,6 +16,8 @@ You should start this assignment by understanding the 11 tap FIR filter, and imp
 2) Preparation
 --------------
 
+.. Note:: You should have completed this by now.
+
 Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files at `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/Vivado_HLS_Tutorial.zip?raw=true>`_
 
 
@@ -58,6 +60,12 @@ You can download the project files here:
 * demo folder: Demo folder for 11 tap filter
 
   - input.dat - input chirp signal
+
+* Target Board: xc7z020clg400-1
+
+* Software: Vivado 2019.1
+
+* Time Period: 10 ns or 100MHz
 
 4) Project Goal
 ---------------
@@ -114,7 +122,7 @@ For each of the following questions you need to reference a design or multiple d
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
 
-7) Demo on PYNQ
+7) Demo on PYNQ (WES only)
 ---------------
 
 Following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook, and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
@@ -141,7 +149,7 @@ FIR11
 
 * Submit synthesis reports (.rpt file **and** .xml document files, located in a "/syn/report" folder).
 
-Demo
+Demo (WES only)
 ~~~~
 
 * Submit your code (only host code)
@@ -244,5 +252,10 @@ Place your code on your Bitbucket repository. Put separate assignments in separa
 10) Grading Rubric
 ------------------
 
-Your grade will be determined by your answers to the questions and how well your "best" design compares to the other students in the class. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is concise. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+Your grade will be determined by your answers to the questions. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is concise. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
+The report comprises of 80% of your grade. Remaining 20% is for the performance of the best version of the fir128. If your design achieves a throughput of greater than 0.5MHz but less than 1MHz then you will be awarded 10 points. If you achieve 1MHz and higher than you will get complete 20 points. Try to make resource usage as minimal as possible. Resource usage should be within the resources provided by the board. Similarly the timing has to be fulfilled i.e. the clock achieved should be within 10ns. If you fail either of the two you will not be awarded any points.  
+
+CSE237C students can do the demo and show the output to the instructor or TA and get bonus points if they want to boost their scores. If you have got maximum scores , this bonus will be added on to other projects and labs in order to boost up your grades.
+
+You are allowed two late days for all of your labs and projects combined. Use them wisely.
