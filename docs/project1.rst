@@ -4,19 +4,18 @@ Project 1: FIR Filter Design
 1) Introduction
 ---------------
 
-The goal of this project is for you to learn how the basics of the HLS tool. The expected learning outcomes are gaining a basic understanding of how the HLS tool works, learning different types of HLS optimizations, and performing design space exploration and find a "best" design.
+The goal of this project is to learn how the basics of an HLS tool. The learning outcomes are to gain a basic understanding of how the Vivado HLS tool works, to get exposed to the different types of HLS optimizations, to perform a guided design space exploration to obtain architectures with different tradeoffs in performance and resource usage, to generate a high quality FIR architecture, and to demonstrate the integration of that FIR on the Zynq FPGA using the Pynq infrastructure.
 
-The project is divided into two parts:
+The project is divided into three parts:
 
 * Design an 11 tap FIR filter
 * Design and optimize a 128 tap FIR filter
+* Prototype an FIR filter architectures on a Zynq FPGA
 
-You should start this assignment by understanding the 11 tap FIR filter, and implementing a functionally correct design. Next, you modify the code and experiment different optimizations which are specified in the questions. Note that the 128 FIR filter is more complex and may have different trade-offs, and in the final report you need to answer the questions with regard to the 128 tap filter. Your answers should demonstrate your understanding of different optimization and their effects on throughput, latency and area.
+You should start this assignment by understanding the 11 tap FIR filter, and implementing a functionally correct design. Next, you modify the code and experiment different optimizations which are specified in the questions. Note that the 128 FIR filter is more complex and may have different trade-offs, and in the final report you need to answer the questions with regard to the 128 tap filter. Your answers should demonstrate your understanding of different optimization and their effects on throughput, latency and area. Finally, you will take one of your FIR filter designs, program that on a Zynq FPGA, and demonstrate its functionality with the Pynq infrastructure.
 
 2) Preparation
 --------------
-
-.. Note:: You should have completed this by now.
 
 Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files at `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/Vivado_HLS_Tutorial.zip?raw=true>`_
 
@@ -98,31 +97,31 @@ Questions:
 
 For each of the following questions you need to reference a design or multiple designs. The source code in your design should have all the necessary pragmas.
 
-* **Question 1 - Variable Bitwidths:** The bitwidth of the variables provides a tradeoff between precision, resource usage, and performance. It is possible to specify the exact size of each variable to the tools. Make sure that you do not affect the results, i.e., the output still matches the golden output.
+* **Question 1 - Variable Bitwidths:** It is possible to specify a very precise data type for each variable in your design. The number of different data types is extensive: floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
 
-  Change the bitwidth of the variables inside the function. How does the bitwidth affect the performance? How many resources are used for the different data types? What is the minimum data size that you can use without losing accuracy (i.e., your results still match the golden output)?
+  Change the bitwidth of the variables inside the function. How does the bitwidth affect the performance? How does it affect the resource usage? What is the minimum data size that you can use without losing accuracy (i.e., your results still match the golden output)?
 
-* **Question 2 - Pipelining:** This increases the throughput at the cost of additional resources (registers). The resource usage and performance can be varied by changing the initiation interval (II).
+* **Question 2 - Pipelining:** Pipelining increases the throughput typically at the cost of additional resources. The initiation interval (II) is an important design parameter that changes the performance and resource usage.
 
   Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle. How does increasing the II affect the loop latency? What are the trends? At some point setting the II to a larger value does not make sense. What is that value in this example? How would you calculate that value for a general for loop?
 
-* **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals limit the possible parallelism and often require additional resources. If the code can be rewritten to remove them, it can make the resulting design smaller and faster.
+* **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. If the code can be rewritten to remove them, it can make the resulting design more efficient.
 
-  Compare designs with and without if/else condition. Is there a difference in performance and/or resource utilization? Does the presence of the conditional branch have any effect when the design is pipelined? If so, how and why?
+  Rewrite the code to remove any conditional statements. Compare the designs with and without if/else condition. Is there a difference in performance and/or resource utilization? Does the presence of the conditional branch have any effect when the design is pipelined? If so, how and why?
 
-* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel. This may increase the performance and the resource usage.
+* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel, enable loop level pipelining, or provide other benefits. This may increase the performance and the resource usage.
 
-  Compare your hardware designs before and after loop partitioning. What is the difference in performance? How do the number of resources change? Why?
+  Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How do the number of resources change? Why?
 
-* **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory. And this memory can have a different number of ports (e.g., one or two ports for FPGA block RAM). Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each of the variables as its own register, which allows simultaneous access to all of the variables at every clock cycle, but has high resource usage.
+* **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each of the variables as its own register, which allows simultaneous access to all of the variables at every clock cycle.
 
   Compare the memory partitioning parameters: block, cyclic, and complete. What is the difference in performance and resource usage (particularly with respect to BRAMs and FFs)? Which one gives the best performance? Why?
 
-* **Question 6 - Best Design:** Combine any number of the above optimizations in order to get your best architecture. In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
+* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
 
-7) Demo on PYNQ (WES only)
+7) PYNQ Demo
 ---------------
 
 Following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook, and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
@@ -149,7 +148,7 @@ FIR11
 
 * Submit synthesis reports (.rpt file **and** .xml document files, located in a "/syn/report" folder).
 
-Demo (WES only)
+Demo
 ~~~~
 
 * Submit your code (only host code)
@@ -252,10 +251,6 @@ Place your code on your Bitbucket repository. Put separate assignments in separa
 10) Grading Rubric
 ------------------
 
-Your grade will be determined by your answers to the questions. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is concise. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+Your grade will be determined by your answers to the questions. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
-The report comprises of 80% of your grade. Remaining 20% is for the performance of the best version of the fir128. If your design achieves a throughput of greater than 0.5MHz but less than 1MHz then you will be awarded 10 points. If you achieve 1MHz and higher than you will get complete 20 points. Try to make resource usage as minimal as possible. Resource usage should be within the resources provided by the board. Similarly the timing has to be fulfilled i.e. the clock achieved should be within 10ns. If you fail either of the two you will not be awarded any points.  
-
-CSE237C students can do the demo and show the output to the instructor or TA and get bonus points if they want to boost their scores. If you have got maximum scores , this bonus will be added on to other projects and labs in order to boost up your grades.
-
-You are allowed two late days for all of your labs and projects combined. Use them wisely.
+The report comprises of 80% of your grade. Remaining 20% is for the performance of the best version of your fir128 filter. If your design achieves a throughput of greater than 0.5MHz but less than 1MHz then you will be awarded 10 points. If you achieve 1MHz and higher than you will get complete 20 points. Try to make resource usage as small as possible. The resource usage must be within the resources provided by the Pynq board. Similarly the timing has to be fulfilled, i.e. the clock achieved should be within 10ns (100 MHz).  
