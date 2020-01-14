@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 2:Phase Detector
+Project 2: Phase Detector
 =========================================
 
 1)Introduction
