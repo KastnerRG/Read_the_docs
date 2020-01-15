@@ -1,10 +1,12 @@
-Project 1: FIR Filter Design
+Project: FIR Filter Design
 ============================
 
 1) Introduction
 ---------------
 
 The goal of this project is to learn how the basics of an HLS tool. The learning outcomes are to gain a basic understanding of how the Vivado HLS tool works, to get exposed to the different types of HLS optimizations, to perform a guided design space exploration to obtain architectures with different tradeoffs in performance and resource usage, to generate a high quality FIR architecture, and to demonstrate the integration of that FIR on the Zynq FPGA using the Pynq infrastructure.
+
+This project is designed to be paired with Chapter 2 from `Parallel Programming for FPGAs book <http://kastner.ucsd.edu/hlsbook/>`_. The book directly covers many aspects of the optimizations in this project. We strongly encourage the reader to use this as a reference.
 
 The project is divided into three parts:
 
