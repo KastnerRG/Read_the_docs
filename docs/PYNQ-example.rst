@@ -1,8 +1,8 @@
 
-Lab 2
+Lab: Pynq Memory Mapped IO
 ======
 
-In this example we implement :math:`f(x) = 2x` as an IP on PYNQ.
+This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
 
 1) Vivado HLS: C/C++ to RTL
 ---------------------------
