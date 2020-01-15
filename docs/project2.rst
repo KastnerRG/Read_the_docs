@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 2: Phase Detector
+Project: Phase Detector
 =========================================
 
-1)Introduction
+1) Introduction
 --------------
 
-In this project, you will design a phase detector by implementing a complex FIR filter and a COordinate Rotation DIgital Computer (CORDIC) IP core. You are going to build a complex FIR filter by hierarchically instantiating four “real” FIR filters similar to what you developed in Project 1. You will develop one CORDIC IP core from scratch, and experiment with another one that is provided to you.
+The goal of this project is to design a simple phase detector. This is done by combining a complex FIR filter and a COordinate Rotation DIgital Computer (CORDIC). You build a complex FIR filter by hierarchically instantiating four “real” FIR filters similar to what you developed in the FIR filter project. In this project, you develop one CORDIC IP core from scratch using HLS and experiment with another one that is provided to you.
 
 The complex FIR filter is used to correlate to a known complex signal. We use Golay codes which have some great properties related to orthogonality and auto-correlation. This is not important to this lab, but is some really amazing math. I hope you look into it.
 
@@ -19,7 +19,7 @@ In the end, you will combine all of these modules into a phase detector. This is
 
 We provide a Simulink file that models a transmitter, channel, and receiver. You are building an equivalent receiver in HLS in this project. The Simulink file is provided for your information only. You do not have to edit or do anything with this file though it could be useful for understanding the overall application better.
 
-2)Materials
+2) Materials
 -----------
 
 You can download the project files here:
@@ -78,7 +78,7 @@ The provided zip file has a number of subfolders and files corresponding to the 
 
         - out_gold.dat - golden output
 
-3)Tasks
+3) Tasks
 -------
 In this project, you will build a phase detector to process the given a complex signal (I and Q or real and imaginary parts) demonstrated in the figure below.
 
@@ -100,7 +100,7 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
 
 .. Note:: You are encouraged to modify this implementation code to gain better utilization or throughput.                                                                                              	 Remember to submit modified .cpp and .h files
         
-4)Demo
+4) Demo
 ------
 Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to your second lab, but you need to modify your HLS code for streaming interface.
 
@@ -124,7 +124,7 @@ You also should see these outputs:
 
 These are the rotated phases that have been detected by your design.
 
-5)Report
+5) Report
 --------
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses. 
@@ -142,7 +142,7 @@ Your report should answer the following questions. Make it very clear where you 
  * **Question 5**: These questions all refer to the LUT-based CORDIC: Summarize the design space exploration that you performed as you modified the data types of the input variables and the LUT entries.   In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resources, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
 
 
-6)Submission Procedure
+6) Submission Procedure
 ----------------------
 
 You must also submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your *.cpp file and directly synthesize it. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
@@ -177,7 +177,7 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
 
-7)Grading Rubric
+7) Grading Rubric
 ----------------
 
 **50 points:** Correct design in simulation (passes testbenches for the entire receiver).                                                                                               (if error results are sufficiently low)
