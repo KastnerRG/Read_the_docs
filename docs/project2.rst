@@ -142,51 +142,6 @@ Your report should answer the following questions. Make it very clear where you 
  * **Question 5**: These questions all refer to the LUT-based CORDIC: Summarize the design space exploration that you performed as you modified the data types of the input variables and the LUT entries.   In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resources, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
 
 
-6) Submission Procedure
-----------------------
-
-You must also submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your *.cpp file and directly synthesize it. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
-
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
-
-Your repo must contains a folder named "project2" at the top-level. This folder must be organized as follows (similar as project1):
-
-* **Report.pdf**
-
-* Folder **fir_top_baseline**: fir.h | fir.cpp | script.tcl | report.rpt and .xml
-
-* Folder **cordic_baseline**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml> 
-
-* Folder **cordic_optimized1**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
-
-* Folder **cordic_optimized2**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
-
-* ...
-
-* Folder **phasedetector_optimized1**: phasedetector.h | phasedetector.cpp | cordiccart2pol.cpp | fir.cpp | script.tcl | <report rpt/xml>
-
-* Folder **phasedetector_optimized2**: phasedetector.h | phasedetector.cpp | cordiccart2pol.cpp | fir.cpp | script.tcl | <report rpt/xml>
-
-* ...
-
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | | …
-
-* Folder **Demo** (WES students only): host.ipynb | phasedetector.h | phasedetector.cpp | .bit | .tcl
-
-* **Note**: change <report rpt/xml> by both the .rpt and the .xml files in the /syn/report folder.
-
-* **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
-
-7) Grading Rubric
-----------------
-
-**50 points:** Correct design in simulation (passes testbenches for the entire receiver).                                                                                               (if error results are sufficiently low)
-
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
-
-**50 points (WES only):** Correct working project on PYNQ.
-
-**Note on cheating:** Each partner member is responsible for understanding everything in the report. If you do not understand part of the report, then I consider this cheating.
 
 
  

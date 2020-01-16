@@ -210,49 +210,4 @@ Figure 1 shows an example graph of resource usage for 8 designs. Figure 2 shows 
 
 *Figure 2. Example throughput results for different FIR designs. Note that these are only for reference and do not necessarily correspond exactly to results that you can/should obtain.*
 
-9) Submission Procedure
------------------------
 
-You should submit a report as described in the report instructions for project 1.
-
-You must also submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your fir.cpp/h file and directly synthesize it. You can assume that we have correctly set up the design environment (fir_test.cpp, etc.).
-
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
-
-Your repo must contain a folder named "project1" at the top-level. This folder must be organized as follows:
-
-* **Report.pdf**
-
-* Folder **fir11_baseline**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_baseline**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_optimized1**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_optimized2**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_optimized3**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_optimized4**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_optimized5**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_best**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **demo**: (WES students only) host_fir.ipynb | bitstream | tcl file | results.[jpg|png]
-
-* *fir128_optimizedN* correspond to the architectures that you generated to answer the questions. You can have one or multiple, just make sure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
-
-* *fir128_best* is the folder containing your best architecture.
-
-Submission
-~~~~~~~~~~
-
-Place your code on your Bitbucket repository. Put separate assignments in separate folders. Name each folder "projectX" where X is the assignment number. Place your report directly under your project folder.
-
-10) Grading Rubric
-------------------
-
-Your grade will be determined by your answers to the questions. Your answers should be well written. Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
-
-The report comprises of 80% of your grade. Remaining 20% is for the performance of the best version of your fir128 filter. If your design achieves a throughput of greater than 0.5MHz but less than 1MHz then you will be awarded 10 points. If you achieve 1MHz and higher than you will get complete 20 points. Try to make resource usage as small as possible. The resource usage must be within the resources provided by the Pynq board. Similarly the timing has to be fulfilled, i.e. the clock achieved should be within 10ns (100 MHz).  

@@ -93,36 +93,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA and interrupts. From the downloaded materials for this project, copy the Demo folder to your PYNQ board and start by going through the examples. Required files are provided to run everything before the second example. For the second example and your host program, you need to copy your DFT 1024 .bit and .tcl files to the Demo folder on your PYNQ. You have to complete the code in *project3_host.ipynb* for your host program.
 
-7.Submission Procedure
-----------------------
 
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change testbench files to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft.cpp, dft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so double check your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project3" at the top-level. This folder must be organized as follows (similar as project1 or project2):
-
-**Contents:**
-
-* Report.pdf
-
-* Folder *dft256_baseline*
-
-* Folder *dft256_optimized1*
-
-* Folder *dft256_optimized2*
-
-* ...
-
-* Folder *dft256_dataflow*
-
-* Folder *dft256_best*
-
-* Folder *dft1024_best*
-
-* Folder *dft1024_bonus* (if you have)
-
-* Make sure each folder contains the source code (only) and the reports (rpt and xml).
-
-* Do **not** submit DFT 8 and 32.
-
-* Folder *Demo*: dft.bit | dft.tcl | project3_host.ipynb
  
 
 
