@@ -64,15 +64,15 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses. 
 
- * **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
+* **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
 
 * **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does determining the best data type depend on the input data?  What is the best technique for the designer to determine the data type?  
 
- * **Question 3**: What is the effect of using simple operations (add and shift) in the CORDIC as opposed to floating-point multiply and divide? How does the resource usage change? Performance? Accuracy?
+* **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to floating-point multiply and divide? How does the resource usage change? Performance? Accuracy?
 
- * **Question 4**: How does the ternary operator ‘?’ synthesize? Is it useful in this project?
+* **Question 4:** How does the ternary operator ‘?’ synthesize? Is it useful in this project?
 	
- * **Question 5**: These questions all refer to the LUT-based CORDIC: Summarize the design space exploration that you performed as you modified the data types of the input variables and the LUT entries.   In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resources, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
+* **Question 5:** These questions all refer to the LUT-based CORDIC: Summarize the design space exploration that you performed as you modified the data types of the input variables and the LUT entries.   In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resources, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
 
 
 6) Submission Procedure
