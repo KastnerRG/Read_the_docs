@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: Cordic
+Project: CORDIC
 =========================================
 
 1) Introduction
 --------------
 
-The goal of this project is to design a  a COordinate Rotation DIgital Computer (CORDIC).  A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. CORDIC can do a lot of different functions; we will use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta). 
+The goal of this project is to design a COordinate Rotation DIgital Computer (CORDIC).  A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. We will specifically use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta). 
 
 2) Materials
 -----------
