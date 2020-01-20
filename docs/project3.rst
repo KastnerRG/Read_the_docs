@@ -3,15 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 3: Discrete Fourier Transform (DFT)
+Project: Discrete Fourier Transform (DFT)
 ===========================================
 
-1.Introduction
+1. Introduction
 --------------
 
 The goal of this project is to design architectures that implement the Discrete Fourier Transform (DFT). DFT is a common operation in signal processing which generates a frequency domain representation of the discrete input signal. We start with the direct implementation of the DFT which is a matrix-vector multiplication. The input signal is a vector of samples and the matrix is composed of a set of basis functions corresponding to discrete cosine and sine waveforms of different frequencies. The multiplication of the input signal with these basis functions describes how well the input signal correlates with those waveforms, which is the value of the Fourier series at that frequency.
 
-2.Materials
+2. Materials
 -----------
 
 The files neccessary for this project can be got from `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project3.zip?raw=true>`_ 
@@ -41,7 +41,7 @@ Demo folder contains three files:
 * fact_intrpt.tcl - this is used for an example in your demo instructions
 
 
-3.Project Goal
+3. Project Goal
 --------------
 
 You should modify the code to create a number of different architectures that perform tradeoffs between performance and area. For dft_256_precomputed and dft_1024_precomputed designs, you need to use precomputed values from coefficients256.h and coefficients1024.h
@@ -52,7 +52,7 @@ The 8 and 32 point folders are provided for your convenience. If you would like,
 
 The key in this project is to understand the tradeoffs between loop optimizations (unrolling and pipelining) and data partitioning. Therefore you should focus on these optimizations.
 
-4.Optimization guidelines
+4. Optimization guidelines
 -------------------------
 
 * You should use a clock period of 10 ns.
@@ -71,22 +71,22 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * Your report must explicitly state how you calculated the throughput results. Note that this is often not simply a function of the latency and the clock period, and involves using the initiation interval.
 
-5.Questions
+5. Questions
 -----------
 
-* **Question1:** What changes would this code require if you were to use a custom CORDIC similar to what you designed for Project 2? Compared to a baseline code with HLS math functions for cos() and sin(), would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance? Note that you do not need to implement the CORDIC in your code, we are just asking you to discuss potential tradeoffs that would be possible if you used a CORDIC that you designed instead of the one from Xilinx.
+* **Question 1:** What changes would this code require if you were to use a custom CORDIC similar to what you designed for Project 2? Compared to a baseline code with HLS math functions for cos() and sin(), would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance? Note that you do not need to implement the CORDIC in your code, we are just asking you to discuss potential tradeoffs that would be possible if you used a CORDIC that you designed instead of the one from Xilinx.
 
-* **Question2:** Rewrite the code to eliminate these math function calls (i.e. cos() and sin()) by utilizing a table lookup. How does this change the throughput and area? What happens to the table lookup when you change the size of your DFT?
+* **Question 2:** Rewrite the code to eliminate these math function calls (i.e. cos() and sin()) by utilizing a table lookup. How does this change the throughput and area? What happens to the table lookup when you change the size of your DFT?
 
-* **Question3:** Modify the DFT function interface so that the input and outputs are stored in separate arrays. How does this affect the optimizations that you can perform? How does it change the performance? What about the area results? Modify your testbench to accommodate this change to DFT interface.**You should use this modified interface for the remaining questions.**
+* **Question 3:** Modify the DFT function interface so that the input and outputs are stored in separate arrays. How does this affect the optimizations that you can perform? How does it change the performance? What about the area results? Modify your testbench to accommodate this change to DFT interface.**You should use this modified interface for the remaining questions.**
 
-* **Question4:** Study the effects of loop unrolling and array partitioning on the performance and area. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of matrix vector multiply operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for area (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases? Which design would you select? Why?
+* **Question 4:** Study the effects of loop unrolling and array partitioning on the performance and area. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of matrix vector multiply operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for area (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases? Which design would you select? Why?
 
-* **Question5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=157>`_,and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
+* **Question 5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=157>`_,and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
 
-* **Question6:** (Best architecture) Briefly describe your "best" architecture. In what way is it the best? What optimizations did you use to obtain this result? What is tradeoff you consider for the best architecture?
+* **Question 6:** (Best architecture) Briefly describe your "best" architecture. In what way is it the best? What optimizations did you use to obtain this result? What is tradeoff you consider for the best architecture?
 
-* **Question7:** Bonus; streaming architecture) If you create a design using hls::stream, you will get bonus points of Project 3. We do not provide any testbench for this case since this is optional. You must write your own testbench because we expect you to change the function prototype from DTYPE to hls::stream. Please briefly describe what benefit you can achieve with hls::stream and why? NOTE: To get the full bonus point, your design must pass Co-Simulation (Not C-Simulation). You can learn about hls::stream from the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=225>`_.
+* **Question 7:** Bonus; streaming architecture) If you create a design using hls::stream, you will get bonus points of Project 3. We do not provide any testbench for this case since this is optional. You must write your own testbench because we expect you to change the function prototype from DTYPE to hls::stream. Please briefly describe what benefit you can achieve with hls::stream and why? NOTE: To get the full bonus point, your design must pass Co-Simulation (Not C-Simulation). You can learn about hls::stream from the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=225>`_.
 
 6.Demo
 ------
