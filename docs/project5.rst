@@ -66,9 +66,9 @@ Your report should answer the following questions. Make it very clear where you 
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
 
-* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does determining the best data type depend on the input data?  What is the best technique for the designer to determine the data type?  
+* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type?  
 
-* **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to floating-point multiply and divide? How does the resource usage change? Performance? Accuracy?
+* **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
 
 * **Question 4:** How does the ternary operator ‘?’ synthesize? Is it useful in this project?
 	
