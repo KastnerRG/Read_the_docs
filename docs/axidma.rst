@@ -1,4 +1,4 @@
-Lab3-Part1
+Lab: Axistream Single DMA
 ===================
 
 Simple streaming Example

@@ -27,5 +27,5 @@ Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/
    axidma
    axidma2
    pl-ps_interrupt
-   Lab5.ipynb
+   microblaze.ipynb
 
