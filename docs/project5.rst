@@ -102,4 +102,4 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * **Note**: Provide the architectures that you used to answer the questions. 
 
-* **Note**: You should use ap_int or ap _fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_. 
+* **Note**: You should use ap_int or ap_fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_. 

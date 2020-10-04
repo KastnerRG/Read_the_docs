@@ -56,7 +56,7 @@ An example of the bit reversed data for an 8 point FFT is as follows:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/project4_1.png
 
-n other words, the input data that was initially stored in the array at location 1 is stored in location 4 after the bit reversal is completed. The input data stored in the array at location 4 will be put in array location 1. The input data stored in locations 0, 2, 5 and 7 stay in those locations. Note that this is only true for an 8 point FFT. Other sizes of FFT will have different reordering of the data though it is still based on the bit reversed pattern. For example, in a 16 point FFT, the input data stored in location 1 (binary 0001) will be relocated into location 8 (binary 1000).
+In other words, the input data that was initially stored in the array at location 1 is stored in location 4 after the bit reversal is completed. The input data stored in the array at location 4 will be put in array location 1. The input data stored in locations 0, 2, 5 and 7 stay in those locations. Note that this is only true for an 8 point FFT. Other sizes of FFT will have different reordering of the data though it is still based on the bit reversed pattern. For example, in a 16 point FFT, the input data stored in location 1 (binary 0001) will be relocated into location 8 (binary 1000).
 
 You should create an architecture that, efficiently as possible, transforms the input data into a bit reversed order. Note that there are many “software” implementations of this that will not effectively map to “hardware”. While the first goal is to get a working function, you should also consider the performance of the architecture.
 
@@ -139,6 +139,7 @@ You should connect the FFT and the QPSK decoder together to form the complete OF
 
 6. Demo on PYNQ
 ---------------
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow :doc:`Simple IO <axidma>`'s example with the only difference being that you will have 2 inputs and 2 outputs instead of 1 input and 1 output.							  
 
 The final part is to integrate the receiver onto the PYNQ using a proper interface to transmit data to the OFDM receiver, and receive the decoded data back from your hardware implementation in the programmable logic.
 
@@ -147,10 +148,34 @@ We provided the general framework for creating different PL-PS interfaces and Ju
 **The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what is done in the previous project).
 
 
+7. Submission Procedure
+-----------------------
 
+You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so DOUBLE CHECK your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project4" at the top-level. This folder must be organized as follows (similar as previous projects):
 
+**Contents:**
 
+* Report.pdf
 
+* Folder fft1024_best
+  - Source code and reports (rpt and xml).
 
+* Folder OFDM_receiver
+  - Folder containing all of the HLS files necessary to build the complete OFDM receiver.
+  - You are welcome to include multiple architectures if you please.
 
+* Folder Demo
 
+  - bit and .tcl files
+  - .ipynb host file
+
+**Report :**
+
+For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final FFT and OFDM design are functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
+
+7. Grading
+-----------
+
+* 50 points- Functionally correct design
+* 40 points- Achieving target performance
+* 10 points- Report

@@ -14,7 +14,7 @@ The goal of this project is to design architectures that implement the Discrete 
 2. Materials
 -----------
 
-The files neccessary for this project can be got from `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project3.zip?raw=true>`_ 
+The files neccessary for this project can be got from `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/DFT.zip?raw=true>`_ 
 
 You can find the following files in the zip file. These are divided into five folders, dft_8_precomputed, dft_32_precomputed, dft_256_precomputed, dft_1024_precomputed, and Demo. Each of the first four folders has its own testbench, out.gold.dat file, and coefficients.h file.
 
@@ -32,14 +32,9 @@ Each dft_xx_precomputed folder contains following files:
 
 * script.tcl and directives.tcl file to create the project
 
-Demo folder contains three files:
+Demo folder contains one file:
 
-* project3_host.ipynb - this file has your demo instructions. It provides two examples for streaming and using interrupts. You should use the examples to create your host program.
-
-* fact_intrpt.bit - this is used for an example in your demo instructions
-
-* fact_intrpt.tcl - this is used for an example in your demo instructions
-
+* DFT.ipynb - notebook for demo
 
 3. Project Goal
 --------------
@@ -82,21 +77,53 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * **Question 4:** Study the effects of loop unrolling and array partitioning on the performance and area. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of matrix vector multiply operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for area (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases? Which design would you select? Why?
 
-* **Question 5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=157>`_,and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
+* **Question 5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=145>`_,and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
 
 * **Question 6:** (Best architecture) Briefly describe your "best" architecture. In what way is it the best? What optimizations did you use to obtain this result? What is tradeoff you consider for the best architecture?
 
-* **Question 7:** Bonus; streaming architecture) If you create a design using hls::stream, you will get bonus points of Project 3. We do not provide any testbench for this case since this is optional. You must write your own testbench because we expect you to change the function prototype from DTYPE to hls::stream. Please briefly describe what benefit you can achieve with hls::stream and why? NOTE: To get the full bonus point, your design must pass Co-Simulation (Not C-Simulation). You can learn about hls::stream from the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_4/ug902-vivado-high-level-synthesis.pdf#page=225>`_.
+* **Question 7:** (Bonus; streaming architecture) If you create a design using hls::stream, you will get bonus points of Project 3. We do not provide any testbench for this case since this is optional. You must write your own testbench because we expect you to change the function prototype from DTYPE to hls::stream. Please briefly describe what benefit you can achieve with hls::stream and why? NOTE: To get the full bonus point, your design must pass Co-Simulation (Not C-Simulation). You can learn about hls::stream from the `HLS user guide <ttps://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=216>`_.
 
 6.Demo
 ------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA and interrupts. From the downloaded materials for this project, copy the Demo folder to your PYNQ board and start by going through the examples. Required files are provided to run everything before the second example. For the second example and your host program, you need to copy your DFT 1024 .bit and .tcl files to the Demo folder on your PYNQ. You have to complete the code in *project3_host.ipynb* for your host program.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA . You need to follow Lab2 example only difference being you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT and stream all outputs.
 
+7.Submission Procedure
+----------------------
 
+You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change testbench files to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft.cpp, dft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so double check your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project3" at the top-level. This folder must be organized as follows (similar as project1 or project2):
+
+**Contents:**
+
+* Report.pdf
+
+* Folder *dft256_baseline*
+
+* Folder *dft256_optimized1*
+
+* Folder *dft256_optimized2*
+
+* ...
+
+* Folder *dft256_dataflow*
+
+* Folder *dft256_best*
+
+* Folder *dft1024_best*
+
+* Make sure each folder contains the source code (only) and the reports (rpt and xml).
+
+* Do **not** submit DFT 8 and 32.
+
+* Folder *Demo*: dft.bit | dft.hwh | DFT.ipynb
  
 
+8.Grading
+----------
 
+* Report: 50 points
+
+* Demo: 50 points
    
 
 
