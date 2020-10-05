@@ -11,7 +11,7 @@ Parallel Programming for FPGAs is an open-source book aimed at teaching hardware
 2) PYNQ Setup
 --------------
 
-Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the pynq setup.
+Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup.
 
 .. toctree::
    :maxdepth: 2
