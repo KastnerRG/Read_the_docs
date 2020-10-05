@@ -1,7 +1,7 @@
 Lab: Axistream Multiple DMAs
 ===========
 
-Simple streaming Example with multiple inputs
+Simple streaming example with multiple inputs
 *********************************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create a design with two streaming inputs and one streaming output.
 

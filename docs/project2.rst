@@ -72,7 +72,7 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
 
 .. Note:: You are encouraged to modify this implementation code to gain better utilization or throughput.                                                                                              	 Remember to submit modified .cpp and .h files
         
-4) Demo
+4) PYNQ Demo
 ------
 Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to your second lab, but you need to modify your HLS code for streaming interface.
 

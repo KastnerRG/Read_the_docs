@@ -6,17 +6,17 @@
 Project: FFT - OFDM Receiver
 ==============================
 
-1. Introduction
+1) Introduction
 ---------------
 
 In this project, you will learn the basic idea behind an orthogonal frequency-division multiplexing (OFDM) system by implementing a simple OFDM receiver in programmable logic. A major part of OFDM is a Fast Fourier Transform (FFT), and thus that is a major focus of this project. The project guides you through the process of building an efficient FFT module one submodule at a time. You are given a set of test benches for the different submodules. You should design and test each individual submodule individually and integrate them into the FFT module. In the final part of the project, you will complete the OFDM receiver by combining the FFT module with a QPSK symbol decoder.
 
-2.Goal
+2) Goal
 ------
 
 The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. Finally, you must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50K FFT operations per second**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
 
-3.Materials
+3) Materials
 -----------
 
 `download link <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project4.zip?raw=true>`_
@@ -33,7 +33,7 @@ The structure of each of these folders is largely the same.
 
 * script.tcl and directive.tcl - These allow you to easily create a project.
 
-4. Design Instructions
+4) Design Instructions
 ----------------------
 
 The major portion of the OFDM receiver is a 1024-point FFT. The FFT is a more efficient version of the Discrete Fourier Transform (DFT). The FFT utilizes symmetry in the DFT coefficients to provide a recursive implementation that reduces the runtime from O(N^2) to O(N log N) where N is the number of samples in the input signal.
@@ -114,7 +114,7 @@ Once you have a correctly functioning set of functions, you should copy and past
 
 Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles.
 
-5.QPSK Decoder
+5) QPSK Decoder
 --------------
 
 The decoder takes the output of the FFT (complex values) and translates them into data. This is essentially undoing the effect of the QPSK encoder which takes input data for transmission and encodes it into into a complex exponential i.e., an I/Q complex number. You can think of this as a translation from the input data into a complex number.
@@ -137,7 +137,7 @@ You should connect the FFT and the QPSK decoder together to form the complete OF
 
 * It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
-6. Demo on PYNQ
+6) Demo on PYNQ
 ---------------
 For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow :doc:`Simple IO <axidma>`'s example with the only difference being that you will have 2 inputs and 2 outputs instead of 1 input and 1 output.							  
 
@@ -148,7 +148,7 @@ We provided the general framework for creating different PL-PS interfaces and Ju
 **The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what is done in the previous project).
 
 
-7. Submission Procedure
+7) Submission Procedure
 -----------------------
 
 You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so DOUBLE CHECK your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project4" at the top-level. This folder must be organized as follows (similar as previous projects):
@@ -173,7 +173,7 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final FFT and OFDM design are functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
-7. Grading
+8) Grading
 -----------
 
 * 50 points- Functionally correct design
