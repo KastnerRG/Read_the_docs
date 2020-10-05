@@ -137,7 +137,7 @@ You should connect the FFT and the QPSK decoder together to form the complete OF
 
 * It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
-6) Demo on PYNQ
+6) PYNQ Demo
 ---------------
 For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow :doc:`Simple IO <axidma>`'s example with the only difference being that you will have 2 inputs and 2 outputs instead of 1 input and 1 output.							  
 
