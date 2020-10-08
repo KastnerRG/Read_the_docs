@@ -62,7 +62,7 @@ The provided zip file has a number of subfolders and files corresponding to the 
 4. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed point types is more performant, but may reduce the accuracy of the results. Perform design space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs. 
 
         
-4) Demo
+4) PYNQ Demo
 ---------
 The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The notebook passes data to the CORDIC IP, receives the result, and compares it with the result computed in Python.
 
