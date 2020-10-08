@@ -15,7 +15,7 @@ PART 1: CORDIC
 1) Introduction
 --------------
 The goal of this part is to design a  a COordinate Rotation DIgital Computer (CORDIC). 
-You are tasked with building one version of the CORDIC from scratch. This will likely take the majority of the time spent working on this project. A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. CORDIC can do a lot of different functions; we will use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta).
+You are tasked with building one version of the CORDIC from scratch. This will likely take the majority of the time spent working on this project. A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. CORDIC can do a lot of different functions; here we will specifically use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta).
 
 2) Materials
 --------------
@@ -24,8 +24,7 @@ You can download the project files here:
 
 * `cordic.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/cordic.zip?raw=true>`_
  
-The provided zip file has a number of subfolders and files corresponding to the different parts of the phase detector. This contains the documents necessary to build the project. You will start from HLS folder to design your phase detector using Vivado HLS. Use the provided script.tcl to create your project.
-
+The provided zip file has a number of subfolders and files related to implementing the CORDIC. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using Vivado HLS. Use the provided script.tcl to create your project.
 
 * HLS \ cordic folder:
 
@@ -53,7 +52,7 @@ The provided zip file has a number of subfolders and files corresponding to the 
 
 3) Tasks
 ---------
-1. Implement the CORDIC HLS code and verify it with the given testbench. Note that the testbench may not cover all cases; in fact, it may be poor. You are encouraged to create a more extensive testbench to ensure that your code is correct.
+1. Design and verify a functionally complete CORDIC IP core using HLS. You are provided a testbench that you can use though that the testbench does not cover all cases. You are encouraged to create a more extensive testbench to ensure that your code is correct.
 
 2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float. Once you have a functionally correct CORDIC, then change data types to fixed point types and this should change your multiplications into shifts and adds. You should verify that this is indeed happening.
 
@@ -73,7 +72,7 @@ Your report should answer the following questions. Make it very clear where you 
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
 
-* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type? 
+* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type?
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
 
@@ -239,7 +238,7 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * ...
 
-* Folder **Demo** : host.ipynb | phasedetector.h | phasedetector.cpp | .bit | .hwh
+* Folder **Demo** : PhaseDetector.ipynb | .bit | .hwh
 
 * **Note**: change <report rpt/xml> by both the .rpt and the .xml files in the /syn/report folder.
 
@@ -251,7 +250,3 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 **50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
 
 **50 points :** Correct working project on PYNQ.
-
-
-
- 
