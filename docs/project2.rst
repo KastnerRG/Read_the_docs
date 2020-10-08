@@ -9,8 +9,9 @@ This project is divided into two **PARTS**.
 
 **Part - 1 will be CORDIC Design and Part - 2 will be designing a Phase Detector using CORDIC**.
 
-PART - 1
-==========
+PART 1: CORDIC
+--------------
+
 1) Introduction
 --------------
 The goal of this part is to design a  a COordinate Rotation DIgital Computer (CORDIC). 
@@ -69,7 +70,7 @@ Again, the final task integrates the Cordic onto a PYNQ.Use the memory mapped IO
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses. 
 
- * **Question 1:** These questions all refer to the CORDIC design. Why does the accuracy stop improving after so many iterations? What is the minimal amount of bits required for each variable? Does this   depend  on the input data? If so, can you characterize the input data to help you restrict the number of required bits? Do different variables require different number of bits? You should use ap_int or ap _fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_.  
+ * **Question 1:** These questions all refer to the CORDIC design. Why does the accuracy stop improving after so many iterations? What is the minimal amount of bits required for each variable? Does this depend on the input data? If so, can you characterize the input data to help you restrict the number of required bits? Do different variables require different number of bits? You should use ap_int or ap _fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_.  
 
 
  * **Question 2**: What is the effect of using simple operations (add and shift) in the CORDIC as opposed to floating-point multiply and divide?
@@ -115,8 +116,8 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 **50 points :** Correct working project on PYNQ.
 
-PART - 2
-==========
+PART 2: Phase Detector
+-----------------
 
 1) Introduction
 -----------------
@@ -213,7 +214,7 @@ These are the rotated phases that have been detected by your design.
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses. 
 
-* **Question 1:** What is the throughput of your Phase Detector?How does that relate to the individual components (FIR, CORDIC, etc.)? How can you make it better?
+* **Question 1:** What is the throughput of your Phase Detector? How does that relate to the individual components (FIR, CORDIC, etc.)? How can you make it better?
 
 6) Submission Procedure
 ----------------------
