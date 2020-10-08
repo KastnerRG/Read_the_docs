@@ -6,6 +6,7 @@
 Project: CORDIC
 =========================================
 This project is divided into two **PARTS**. 
+
 **Part - 1 will be CORDIC Design and Part - 2 will be designing a Phase Detector using CORDIC**.
 
 PART - 1
