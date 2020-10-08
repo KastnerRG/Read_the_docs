@@ -240,6 +240,13 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
 
+7) Grading Rubric
+-------------------
+
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
+
+**50 points :** Correct working project on PYNQ.
+
 
 
  
