@@ -55,15 +55,16 @@ The provided zip file has a number of subfolders and files corresponding to the 
 ---------
 1. Implement the CORDIC HLS code and verify it with the given testbench. Note that the testbench may not cover all cases; in fact, it may be poor. You are encouraged to create a more extensive testbench to ensure that your code is correct.
 
-2. The ultimate goal of the CORDIC is to use only simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float. Once you have a functionally correct CORDIC, then change data types to fixed point types and this should change your multiplications into shifts and adds. You should verify that this is indeed happening.
+2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float. Once you have a functionally correct CORDIC, then change data types to fixed point types and this should change your multiplications into shifts and adds. You should verify that this is indeed happening.
 
-3. Develop a CORDIC core using a lookup table-based technique. We have provided a fully functional base implementation of this. You should read and understand this provided lookup table CORDIC code. You should analyze the design space of this lookup table IP core by changing the resolution of the look-up tables and varying the width of the input data. This will give you different resource, performance andaccuracy results.
+3. Explore the architectural tradeoffs of a CORDIC core architecture based upon a lookup table. We have provided a fully functional base implementation of this. You should read and understand this CORDIC code. You should analyze the design space of this lookup table IP core by changing the parameters of the look-up tables, e.g., varying by varying the data type of the input data and changing the number of entries. This should allow you to find architectures with different resource, performance, and accuracy results.
 
-.. Note:: You are encouraged to modify this implementation code to gain better utilization or throughput.                                                                                              	 Remember to submit modified .cpp and .h files
+4. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed point types is more performant, but may reduce the accuracy of the results. Perform design space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs. 
+
         
 4) Demo
 ---------
-Again, the final task integrates the Cordic onto a PYNQ.Use the memory mapped IO lab tutorial and run the given notebook. The output you obtain from HLS IP is compared with a python implementation of the same.
+The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The notebook passes data to the CORDIC IP, receives the result, and compares it with the result computed in Python.
 
 5) Report
 ----------
