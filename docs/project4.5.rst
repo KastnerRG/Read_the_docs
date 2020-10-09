@@ -96,7 +96,7 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct. The report will help us to understand your design.
 
-7) Grading
+7) Grading Rubric
 -----------
 
 * 50 points- Functionally correct design

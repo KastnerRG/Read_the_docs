@@ -118,7 +118,7 @@ You must also submit your code (and only your code, not other files, not HLS pro
 * Folder *Demo*: dft.bit | dft.hwh | DFT.ipynb
  
 
-8) Grading
+8) Grading Rubric
 ----------
 
 * Report: 50 points
