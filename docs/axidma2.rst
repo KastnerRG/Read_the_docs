@@ -5,12 +5,12 @@ Simple streaming example with multiple inputs
 *********************************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create a design with two streaming inputs and one streaming output.
 
-1)Vivado_HLS: Generating RTL code from C/C++ code
+1) Vivado HLS: Generating RTL code from C/C++ code
 -------------------------------------------------
 
-In this section you learn how to create a project in Vivado_HLS, synthesis your code, and generate RTL.
+In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
 
-1.1)Download code and create a Vivado_HLS project
+1.1) Download code and create a Vivado_HLS project
 #################################################
 
 Download and unzip `streamAdd.zip. <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamAdd.zip>`_ Generate your project using the provided script.tcl file:
