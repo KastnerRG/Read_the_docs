@@ -15,7 +15,7 @@ Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/
 
 Link to Book
 --------------
-http://kastner.ucsd.edu/hlsbook/
+Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook associated with these projects and labs.
 
 
 
