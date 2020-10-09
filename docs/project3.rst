@@ -121,9 +121,9 @@ You must also submit your code (and only your code, not other files, not HLS pro
 8) Grading Rubric
 ----------
 
-* Report: 50 points
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
 
-* Demo: 50 points
+**50 points:** Correct working project on PYNQ.
    
 
 
