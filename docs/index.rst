@@ -20,8 +20,10 @@ Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/
    self
    project1
    project2
+   project2.5
    project3
    project4
+   project4.5
    PYNQ-example
    axidma
    axidma2
