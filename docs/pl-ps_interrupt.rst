@@ -1,4 +1,4 @@
-Lab4
+Lab: Interrupts
 ====================
 
 Interrupt Controller

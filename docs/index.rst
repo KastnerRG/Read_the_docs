@@ -6,12 +6,12 @@
 Parallel Programming for FPGAs Projects and Labs
 ===================================================
 
-Parallel Programming for FPGAs is an open-source book aimed at teaching hardware and software developers how to efficiently program FPGAs using high-level synthesis (HLS). The goal is to train people to effectively use HLS tools. The book was developed over many years to serve as a primary reference for UCSD 237C — a hardware design class targeting first-year graduate students and advanced undergraduate students. While writing the book, we developed projects and labs for the students to learn the HLS tools and to build real systems using FPGAs. This serves a general one stop shop for those projects and labs.
+Parallel Programming for FPGAs is an open-source book aimed at teaching hardware and software developers how to efficiently program FPGAs using high-level synthesis (HLS). The goal is to train people to effectively use HLS tools. The book was developed over many years to serve as a primary reference for UCSD's 237C — a hardware design class targeting first-year graduate students and advanced undergraduate students. While writing the book, we developed projects and labs for the students to learn the HLS tools and to build real systems using FPGAs. This serves a general one stop shop for those projects and labs.
 
 2) PYNQ Setup
 --------------
 
-Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the pynq setup.
+Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup.
 
 .. toctree::
    :maxdepth: 2
@@ -19,13 +19,14 @@ Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/
    
    self
    project1
-   project5
    project2
+   project2.5
    project3
    project4
+   project4.5
    PYNQ-example
    axidma
    axidma2
    pl-ps_interrupt
-   Lab5.ipynb
+   microblaze.ipynb
 

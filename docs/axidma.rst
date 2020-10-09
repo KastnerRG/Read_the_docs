@@ -1,7 +1,7 @@
-Lab3-Part1
+Lab: Axistream Single DMA
 ===================
 
-Simple streaming Example
+Simple streaming example
 ************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create streaming interfaces for and IP.
 
