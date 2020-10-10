@@ -123,6 +123,7 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 
 5) PYNQ Demo
 ---------------
+
 For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4 . You need to follow Lab3 example only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output. 
 
 6) Submission Procedure
@@ -146,15 +147,11 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
-
 7) Grading Rubric
 -----------
 
-* 50 points- Functionally correct design
-* 40 points- Achieving target performance
-* 10 points- Report
+**50 points:** Functionally correct design
 
+**40 points:** Achieving target performance
 
-
-
-
+**10 points:** Report
