@@ -239,7 +239,7 @@ Your repo must contain a folder named "project1" at the top-level. This folder m
 
 * Folder **fir128_best**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
 
-* Folder **demo**: (WES students only) host_fir.ipynb | bitstream | tcl file | results.[jpg|png]
+* Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh | results.[jpg|png]
 
 * *fir128_optimizedN* correspond to the architectures that you generated to answer the questions. You can have one or multiple, just make sure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
 
