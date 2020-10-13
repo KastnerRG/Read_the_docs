@@ -126,7 +126,7 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
 
-* **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
+* **Note**: Provide the architectures that you used to answer the questions. You may optimize individual components (FIR/CORDIC), or the phase detector directly.
 
 7) Grading Rubric
 -------------------
