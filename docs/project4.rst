@@ -136,11 +136,11 @@ You must also submit your code (and only your code, not other files, not HLS pro
 * Report.pdf
 
 * Folder fft1024_best
-  - Source code (*.cpp, *.h, *.tcl) and reports (rpt and xml).
+  - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
 
 * Folder Demo
 
-  - bit and .hwh files
+  - .bit and .hwh files
   - FFT.ipynb host file
 
 **Report :**

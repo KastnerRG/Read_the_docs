@@ -111,7 +111,7 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 * Folder *dft1024_best*
 
-* Make sure each folder contains the source code (only) and the reports (rpt and xml).
+* Make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
 * Do **not** submit DFT 8 and 32.
 

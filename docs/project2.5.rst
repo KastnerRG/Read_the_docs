@@ -124,7 +124,7 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * Folder **Demo** : host.ipynb | .bit | .hwh
 
-* **Note**: change <report rpt/xml> by both the .rpt and the .xml files in the /syn/report folder.
+* **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
 
 * **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
 
