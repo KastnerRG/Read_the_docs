@@ -87,12 +87,14 @@ You must also submit your code (and only your code, not other files, not HLS pro
 * Folder **OFDM_receiver**
 
   - Folder containing all of the HLS files necessary to build the complete OFDM receiver.
-  - You are welcome to include multiple architectures if you please, in additional folders.
 
 * Folder **Demo**
 
   - .bit and .hwh files
   - .ipynb host file
+  
+* You are welcome to include multiple OFDM architectures if you please, in additional folders.
+
 
 **Report :**
 
