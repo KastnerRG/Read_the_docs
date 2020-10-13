@@ -95,7 +95,7 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 **Contents:**
 
-* Report.pdf
+* **Report.pdf**
 
 * Folder **dft256_baseline**
 
