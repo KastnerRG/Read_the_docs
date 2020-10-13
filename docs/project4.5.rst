@@ -80,15 +80,14 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 * Report.pdf
 
-* Folder fft1024_best
+* Folder **fft1024_best**
   - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
 
-* Folder OFDM_receiver
+* Folder **OFDM_receiver**
   - Folder containing all of the HLS files necessary to build the complete OFDM receiver.
   - You are welcome to include multiple architectures if you please.
 
-* Folder Demo
-
+* Folder **Demo**
   - .bit and .hwh files
   - .ipynb host file
 

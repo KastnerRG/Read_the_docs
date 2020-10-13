@@ -97,31 +97,32 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 * Report.pdf
 
-* Folder *dft256_baseline*
+* Folder **dft256_baseline**
 
-* Folder *dft256_optimized1*
+* Folder **dft256_optimized1**
 
-* Folder *dft256_optimized2*
+* Folder **dft256_optimized2**
 
 * ...
 
-* Folder *dft256_dataflow*
+* Folder **dft256_dataflow**
 
-* Folder *dft256_best*
+* Folder **dft256_best**
 
-* Folder *dft1024_best*
+* Folder **dft1024_best**
 
-* Make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
+* Folder **Demo**: DFT.ipynb | dft.bit | dft.hwh
 
-* Do **not** submit DFT 8 and 32.
+* * **Note**: Provide the architectures that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
-* Folder *Demo*: dft.bit | dft.hwh | DFT.ipynb
+* * **Note** Do **not** submit DFT 8 and 32.
+
  
 
 8) Grading Rubric
 ----------
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced their entries and observable trends between entries. Spelling errors are unacceptable.
 
 **50 points:** Correct working project on PYNQ.
    
