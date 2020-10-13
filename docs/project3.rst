@@ -113,9 +113,9 @@ You must also submit your code (and only your code, not other files, not HLS pro
 
 * Folder **Demo**: DFT.ipynb | dft.bit | dft.hwh
 
-* * **Note**: Provide the architectures that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
+* **Note**: Provide the architectures that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
-* * **Note** Do **not** submit DFT 8 and 32.
+* **Note** Do **not** submit DFT 8 and 32.
 
  
 
