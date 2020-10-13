@@ -10,7 +10,7 @@ In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/prod
 
 In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
 
-1.1) Download code and create a Vivado_HLS project
+1.1) Download code and create a Vivado HLS project
 #################################################
 
 Download and unzip `streamAdd.zip. <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamAdd.zip>`_ Generate your project using the provided script.tcl file:
@@ -23,7 +23,7 @@ Windows: open vivado_hls command line and run the following ::
 
     $ vivado_hls script.tcl
 
-Now you can open your project in Vivado_HLS. It should look like this:
+Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/757890213-pynq1.png
 
@@ -40,7 +40,7 @@ Now you can export your RTL code by clicking on **Export RTL**:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/582121524-pynq3.png
 
-After exporting is done, you can close and exit from Vivado_HLS.
+After exporting is done, you can close and exit from Vivado HLS.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -61,7 +61,7 @@ Select **xc7z020clg400-1** for your part:
 2.2) Import RTL code
 ####################
 
-Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado_HLS project > solution1 > impl > ip** and select it:
+Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado HLS project > solution1 > impl > ip** and select it:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3379362706-pynq5.png
 

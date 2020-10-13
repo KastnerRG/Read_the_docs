@@ -5,12 +5,12 @@ Simple streaming example
 ************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create streaming interfaces for and IP.
 
-1) Vivado_HLS: Generating RTL code from C/C++ code
+1) Vivado HLS: Generating RTL code from C/C++ code
 -------------------------------------------------
 
-In this section you learn how to create a project in Vivado_HLS, synthesize your code, and generate RTL.
+In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
 
-1.1) Download code and create a Vivado_HLS project
+1.1) Download code and create a Vivado HLS project
 #################################################
 
 Download and unzip `streamMul.zip. <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamMul.zip>`_ Generate your project using the provided script.tcl file:
@@ -23,7 +23,7 @@ Windows: open vivado_hls command line and run the following ::
 
     $ vivado_hls script.tcl
 
-Now can open you your project in Vivado_HLS. **Your code is not complete!**, modify your code to become same as the following:
+Now can open you your project in Vivado HLS. **Your code is not complete!**, modify your code to become same as the following:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3975727536-pynq1.png
 
@@ -40,7 +40,7 @@ Now you can export your RTL code by clicking on **Export RTL**:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/582121524-pynq3.png
 
-After exporting is done, you can close and exit from Vivado_HLS.
+After exporting is done, you can close and exit from Vivado HLS.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -61,7 +61,7 @@ Select **xc7z020clg400-1** for your part:
 2.2) Import RTL code
 ####################
 
-Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado_HLS project > solution1 > impl > ip** and select it:
+Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado HLS project > solution1 > impl > ip** and select it:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3508043996-pynq5.png
 
