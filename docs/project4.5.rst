@@ -14,7 +14,7 @@ In this project, you will learn the basic idea behind an orthogonal frequency-di
 2) Goal
 ------
 
-The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFP project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
+The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFT project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
 
 3) Materials
 -----------
