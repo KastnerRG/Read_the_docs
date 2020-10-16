@@ -219,7 +219,7 @@ You must also submit your code (and only your code, not other files). Your code 
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "project1" at the top-level. This folder must be organized as follows:
+Your repo must contain a folder named "fir" at the top-level. This folder must be organized as follows:
 
 * **Report.pdf**
 
@@ -248,7 +248,7 @@ Your repo must contain a folder named "project1" at the top-level. This folder m
 Submission
 ~~~~~~~~~~
 
-Place your code on your Bitbucket repository. Put separate assignments in separate folders. Name each folder "projectX" where X is the assignment number. Place your report directly under your project folder.
+Place your code on your private Bitbucket or GitHub repository. Give collaborator or read-only access to the TAs, whose email addresses and usernames will be made available on Piazza. Put separate assignments in separate folders; name each folder according to the project. Place your report directly under your project folder.
 
 10) Grading Rubric
 ------------------
