@@ -87,17 +87,17 @@ The first step for the project is to get a functionally correct design working f
 
 You must complete the following tasks:
 
-1. First, implement a functionally correct, but not optimized, 128 tap FIR filter. This is your baseline implementation. Use the provided script.tcl to create your project.
+1. First, implement a functionally correct, but not optimized, 128 tap FIR filter. This is your baseline implementation. Use the provided script.tcl to create your project. As you attempt each individual optimization according to the questions below, try to think about what other optimizations would well in conjunction with them.
 
-2. Then generate one or multiple designs that will help you answer the questions in your report. In your answers, you should reference the design that you generated for your experiment. You can reference the same design from multiple answers. Your resulting code must always be functionally correct, i.e., match the golden output. In your report you need to clearly answer the effect of following optimizations on your design. You can test other optimizations as you wish, but you do not need to include in the report.
+2. Next, generate one or multiple designs that will help you answer the questions in your report. In your answers, you should reference the design that you generated for your experiment. You can reference the same design from multiple answers. Your resulting code must always be functionally correct (i.e. match the golden output). In your report you need to clearly answer the effect of following optimizations on your design. You can test other optimizations as you wish, but you do not need to include these in your report. For every design you include in your report, be sure to report the corresponding throughput, instead of estimated clock period and latency.
 
-3. Finally, generate your best architecture by combining any number of optimizations that you wish.
+3. Finally, for Q6, generate your best architecture by combining any number of optimizations that you wish. Use what you learned from your designs for Q1-Q5.
 
 4. Your report should only include the answers to the following questions.
 
-Questions:
+For each of the following questions you need to reference a design or multiple designs. The source code in your design should have all the necessary pragmas. Please refer to Chapter 2 in the PP4FPGAs textbook before starting this assignment.
 
-For each of the following questions you need to reference a design or multiple designs. The source code in your design should have all the necessary pragmas.
+Questions:
 
 * **Question 1 - Variable Bitwidths:** It is possible to specify a very precise data type for each variable in your design. The number of different data types is extensive: floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
 
@@ -107,11 +107,11 @@ For each of the following questions you need to reference a design or multiple d
 
   Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle. How does increasing the II affect the loop latency? What are the trends? At some point setting the II to a larger value does not make sense. What is that value in this example? How would you calculate that value for a general for loop?
 
-* **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. If the code can be rewritten to remove them, it can make the resulting design more efficient.
+* **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. If the code can be rewritten to remove them, it can make the resulting design more efficient. This is known as code hoisting.
 
   Rewrite the code to remove any conditional statements. Compare the designs with and without if/else condition. Is there a difference in performance and/or resource utilization? Does the presence of the conditional branch have any effect when the design is pipelined? If so, how and why?
 
-* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel, enable loop level pipelining, or provide other benefits. This may increase the performance and the resource usage.
+* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop level pipelining, or provide other benefits. This may increase the performance and the resource usage.
 
   Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How do the number of resources change? Why?
 
@@ -122,6 +122,8 @@ For each of the following questions you need to reference a design or multiple d
 * **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
+
+* **Note**: You should use ap_int or ap_fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_. 
 
 7) PYNQ Demo
 ---------------
@@ -170,9 +172,9 @@ FIR128
 
   -"Interesting" is imprecise, but it is often difficult to say definitively that one design is the best. Typically there are different designs that Pareto optimal. Any design that you discuss in answers to your questions should be submitted. Often one performs a lot of design space exploration by changing values, and this can lead to a lot of architectures, many of which are "bad" or "uninteresting". We don't need details on those. A good target is more than 5 and less than 20 "interesting" designs. Your report should only include the answer to the questions. Please clearly indicate where each question is answered in your report.
 
-For each question, explicitly mention which design(s) you used in your answers. You are asked to discuss different performance and resource metrics. Make sure that the method used to calculate the performance and resource metrics is clear. Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles.
+For each question, explicitly mention which design(s) you used in your answers. You are asked to discuss different performance and resource metrics. Make sure that the method used to calculate the performance and resource metrics is clear. Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles. For this reason, we **require** you to state the corresponding throughput for every design, instead of estimated clock period and latency.
 
-You are strongly encouraged to use figures to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These are not the best figures, and can certainly be made better, but serve as a reference that can relatively easily be generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your process of design space exploration).
+You are strongly encouraged to use figures and tables to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These are not the best figures, and can certainly be made better, but serve as a reference that can relatively easily be generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your process of design space exploration).
 
 Throughput Calculation
 ~~~~~~~~~~~~~~~~~~~~~~
