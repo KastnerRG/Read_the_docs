@@ -14,7 +14,7 @@ In this project, you will learn the basic idea behind an orthogonal frequency-di
 2) Goal
 ------
 
-The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFP project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
+The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFT project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
 
 3) Materials
 -----------
@@ -74,27 +74,35 @@ We provided the general framework for creating different PL-PS interfaces and Ju
 6) Submission Procedure
 -----------------------
 
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so DOUBLE CHECK your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project4" at the top-level. This folder must be organized as follows (similar as previous projects):
+You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). 
+
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+
+Your repo must contain a folder named "ofdm_receiver" at the top-level. This folder must be organized as follows (similar to previous projects):
 
 **Contents:**
 
-* Report.pdf
+* **Report.pdf**
 
-* Folder fft1024_best
-  - Source code (*.cpp, *.h, *.tcl) and reports (rpt and xml).
+* Folder **fft1024_best**
 
-* Folder OFDM_receiver
+  - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
+
+* Folder **OFDM_receiver**
+
   - Folder containing all of the HLS files necessary to build the complete OFDM receiver.
-  - You are welcome to include multiple architectures if you please.
 
-* Folder Demo
+* Folder **Demo**
 
-  - bit and .hwh files
+  - .bit and .hwh files
   - .ipynb host file
+  
+* You are welcome to include multiple OFDM architectures if you please, in additional folders.
+
 
 **Report :**
 
-For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct. The report will help us to understand your design.
+For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final OFDM design achieves the target performance. The report will help us to understand your design.
 
 7) Grading Rubric
 -----------	

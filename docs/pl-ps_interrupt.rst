@@ -52,7 +52,7 @@ You can synthesize your code by clicking on **C Synthesis**. After finishing C s
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/1632797711-fact5.png
 
-Now that you exported your RTL, you can close Vivado_HLS.
+Now that you exported your RTL, you can close Vivado HLS.
 
 2) Vivado: RTL to Bitstream
 ---------------------------
@@ -77,7 +77,7 @@ In **Flow Navigator**, under **Project Manager**, click on **IP Catalog**.
 
 On the newly opened window, right click and select **Add Repository**.
 
-Navigate to your Vivado_HLS project directory and select **solution1 > impl > ip**.
+Navigate to your Vivado HLS project directory and select **solution1 > impl > ip**.
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/1764593390-fact7.png
 

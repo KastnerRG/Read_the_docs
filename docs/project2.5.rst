@@ -106,11 +106,11 @@ Your report should answer the following questions. Make it very clear where you 
 6) Submission Procedure
 ----------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contains a folder named "project2" at the top-level. This folder must be organized as follows (similar as project1):
+Your repo must contain a folder named "phase_detector" at the top-level. This folder must be organized as follows (similar to project1):
 
 * **Report.pdf**
 
@@ -122,16 +122,16 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * ...
 
-* Folder **Demo** : host.ipynb | .bit | .hwh
+* Folder **Demo**: host.ipynb | .bit | .hwh
 
-* **Note**: change <report rpt/xml> by both the .rpt and the .xml files in the /syn/report folder.
+* **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
 
-* **Note**: Provide the architectures that you used to answer the questions. You may optimize on individual components (FIR/CORDIC), or on the phase detector directly.
+* **Note**: Provide the architectures that you used to answer the questions. You may optimize individual components (FIR/CORDIC), or the phase detector directly.
 
 7) Grading Rubric
 -------------------
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced each entry, and the observable trends between entries. Spelling errors are unacceptable.
 
 **50 points:** Correct working project on PYNQ.
 

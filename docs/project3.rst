@@ -91,37 +91,42 @@ For this demo, your will create an IP for the DFT 1024, and run it from the Jupy
 7) Submission Procedure
 ----------------------
 
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change testbench files to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft.cpp, dft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so double check your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project3" at the top-level. This folder must be organized as follows (similar as project1 or project2):
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft_test.cpp, dft.h, etc.).
+
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+
+Your repo must contain a folder named "dft" at the top-level. This folder must be organized as follows (similar to project1 or project2):
 
 **Contents:**
 
-* Report.pdf
+* **Report.pdf**
 
-* Folder *dft256_baseline*
+* Folder **dft256_baseline**
 
-* Folder *dft256_optimized1*
+* Folder **dft256_optimized1**
 
-* Folder *dft256_optimized2*
+* Folder **dft256_optimized2**
 
 * ...
 
-* Folder *dft256_dataflow*
+* Folder **dft256_dataflow**
 
-* Folder *dft256_best*
+* Folder **dft256_best**
 
-* Folder *dft1024_best*
+* Folder **dft1024_best**
 
-* Make sure each folder contains the source code (only) and the reports (rpt and xml).
+* Folder **Demo**: DFT.ipynb | dft.bit | dft.hwh
 
-* Do **not** submit DFT 8 and 32.
+* **Note**: Provide the architectures that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
-* Folder *Demo*: dft.bit | dft.hwh | DFT.ipynb
+* **Note** Do **not** submit DFT 8 and 32.
+
  
 
 8) Grading Rubric
 ----------
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced each entry, and the observable trends between entries. Spelling errors are unacceptable.
 
 **50 points:** Correct working project on PYNQ.
    

@@ -81,11 +81,11 @@ Your report should answer the following questions. Make it very clear where you 
 6) Submission Procedure
 -------------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contains a folder named "project2" at the top-level. This folder must be organized as follows (similar as project1):
+Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to project1):
 
 * **Report.pdf**
 
@@ -97,11 +97,11 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 
 * ...
 
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | | …
+* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | <report rpt/xml>
 
-* Folder **Demo** : Cordic.ipynb | .bit | .hwh
+* Folder **Demo**: Cordic.ipynb | .bit | .hwh
 
-* **Note**: change <report rpt/xml> by both the .rpt and the .xml files in the /syn/report folder.
+* **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
 
 * **Note**: Provide the architectures that you used to answer the questions.
 
@@ -110,7 +110,15 @@ Your repo must contains a folder named "project2" at the top-level. This folder 
 7) Grading Rubric
 -------------------
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Figures should be well thought out and described in the text. Spelling errors are unacceptable.
+Unlike project 1, it is not explicitly necessary to come up with an optimally efficient solution for the CORDIC core using pipelining, unrolling, and other HLS directives to meet a certain frequency. This project is more about precision and accuracy of data using bit widths. However, the larger goal of this class is to understand how to obtain resource-efficient designs while still achieving the level of functionality you desire. So there's no performance target to hit, but do your best.
+
+The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass c-sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy. You don't need to submit cordic_LUT, just answer the related questions in your report.
+
+In this project and in future projects, you may find it necessary to edit the test-bench. Either the test-bench doesn't cover enough cases, or (as in the case of cordic_LUT) the threshold for error of theta may be too high. We may even instruct you to edit the test-bench. In these cases, you are welcome to change this file, and if you do, please **submit the altered test-bench file** too, and explicitly state in your report what changes you made.
+
+The cordiccart2pol.cpp file in the cordic_LUT project has a comment asking what happens if you direct HLS to use RAM_1P_LUTRAM for the my_LUT_r and my_LUT_th variables. This question isn't on this page. **You don't have to answer them in the report**, but please do try them out for an understanding of LUTRAMs.
+
+**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced each entry, and the observable trends between entries. Spelling errors are unacceptable.
 
 **50 points:** Correct working project on PYNQ.
 

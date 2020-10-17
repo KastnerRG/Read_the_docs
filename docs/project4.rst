@@ -124,28 +124,33 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 5) PYNQ Demo
 ---------------
 
-For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4 . You need to follow Lab3 example only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output. 
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4 . You need to follow Lab: Axistream Multiple DMAs example only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output. 
 
 6) Submission Procedure
 -----------------------
 
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). You must follow the file structure below. We use automated scripts to pull your data, so DOUBLE CHECK your file/folder names to make sure it corresponds to the instructions. Your repo must contains a folder named "project4" at the top-level. This folder must be organized as follows (similar as previous projects):
+You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). 
+
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+
+Your repo must contain a folder named "fft" at the top-level. This folder must be organized as follows (similar to previous projects):
 
 **Contents:**
 
-* Report.pdf
+* **Report.pdf**
 
-* Folder fft1024_best
-  - Source code (*.cpp, *.h, *.tcl) and reports (rpt and xml).
+* Folder **fft1024_best**
 
-* Folder Demo
+  - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
 
-  - bit and .hwh files
+* Folder **Demo**
+
+  - .bit and .hwh files
   - FFT.ipynb host file
 
 **Report :**
 
-For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figure, diagram, table, or chart to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions, or no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
+For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
 7) Grading Rubric
 -----------
