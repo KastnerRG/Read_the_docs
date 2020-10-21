@@ -74,7 +74,7 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
         
 4) PYNQ Demo
 ------
-Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to your third lab (Axistream Multiple DMAs), but you will need to modify your HLS code for the streaming interface.
+Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab: Axistream Multiple DMAs<axidmas>`, but you will need to modify your HLS code for the streaming interface.
 
 You also should see these outputs:
 

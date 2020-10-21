@@ -134,7 +134,7 @@ The specific things you must do in this section are:
 
 * Download an appropriate image for your board from `PYNQ.io <http://www.pynq.io/>`_ and write it to your SDCard (`instructions <https://pynq.readthedocs.io/en/latest/getting_started.html>`_).
 
-* Go through :doc:`Simple IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
+* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
 * Implement your 11-tap FIR design on PYNQ board.
 
