@@ -91,13 +91,13 @@ Add the axi4 sqrt IP to the design.
 2.4) Automatic connections
 ##########################
 
-1- Click on **Run Block Automation**
+1. Click on **Run Block Automation**
 
-2- Click on **Run Connection Automation** and select all.Click ok.
+2. Click on **Run Connection Automation** and select all. Click OK.
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq23.png
 
-3- Click on **Run Connection Automation** again and select all. Click ok.
+3. Click on **Run Connection Automation** again and select all. Click OK.
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq24.png
 
@@ -108,13 +108,13 @@ This is how the final design should look
 2.5) Generate bitstream
 #######################
 
-1- Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design.**
 
-2- Validate your design: **Tools > Validate Design**
+2. Validate your design: **Tools > Validate Design**
 
-3- In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
 
-4- Generate bitstream by clicking on **Generate Bitstream** in **Program and Debug**
+4. Generate bitstream by clicking on **Generate Bitstream** in **Program and Debug**
 
 2.6) Post bitstream Generation
 ##############################
