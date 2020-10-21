@@ -86,7 +86,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA . You need to follow Lab2 example only difference being you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT and stream all outputs.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA . You need to follow the third lab's example (Axistream Multiple DMAs), with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT and stream all outputs.
 
 7) Submission Procedure
 ----------------------
