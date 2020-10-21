@@ -22,7 +22,7 @@ We provide a Simulink file that models a transmitter, channel, and receiver. You
 
 You can download the project files here:
 
-* `phase_Detector.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/phase_detector.zip?raw=true>`_
+* `phase_detector.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/phase_detector.zip?raw=true>`_
  
 The provided zip file has a number of subfolders and files corresponding to the different parts of the phase detector. This contains the documents necessary to build the project. You will start from HLS folder to design your phase detector using Vivado HLS. Use the provided script.tcl to create your project.
 
