@@ -83,7 +83,7 @@ Select and check **S AXI HP0 interface**:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq21.png
 
-Add the axi4 sqrt IP to the design.
+Add the axi4_sqrt IP to the design.
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq22.png
 
