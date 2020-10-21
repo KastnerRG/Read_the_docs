@@ -6,12 +6,12 @@ Simple example of AXI4-Burst Mode
 
 This lab is an example of AXI4 data transfer in burst mode. It takes in a given sample of values and provides the square root. 
 
-1)Vivado_HLS: Generating RTL code from C/C++ code
+1) Vivado HLS: Generating RTL code from C/C++ code
 -------------------------------------------------
 
-In this section you learn how to create a project in Vivado_HLS, synthesis your code, and generate RTL.
+In this section you learn how to create a project in Vivado HLS, synthesis your code, and generate RTL.
 
-1.1)Download code and create a Vivado_HLS project
+1.1) Download code and create a Vivado HLS project
 #################################################
 
 Download and unzip `axi4_burst.zip. <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_ Generate your project using the provided script.tcl file:
@@ -24,7 +24,7 @@ Windows: open vivado_hls command line and run the following ::
 
     $ vivado_hls -f script.tcl
 
-Now you can open your project in Vivado_HLS. It should look like this:
+Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq18.png
 
@@ -41,7 +41,7 @@ Now you can export your RTL code by clicking on **Export RTL**:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/582121524-pynq3.png
 
-After exporting is done, you can close and exit from Vivado_HLS.
+After exporting is done, you can close and exit from Vivado HLS.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -62,7 +62,7 @@ Select **xc7z020clg400-1** for your part:
 2.2) Import RTL code
 ####################
 
-Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado_HLS project > solution1 > impl > ip** and select it:
+Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado HLS project > solution1 > impl > ip** and select it:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq20.png
 
