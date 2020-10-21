@@ -28,7 +28,7 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq18.png
 
-*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 is a master (m_axi) based protocol, unlike AXI-Lite which is a slave (s_axilite) based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 which we are implementing is master-based and hence we use the high-performance ports for communication to the PS (just like DMA). We do not know the address to read and write and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are number of samples and control signals respectively) are AXI-Lite.
+*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 is a master (m_axi) based protocol, unlike AXI-Lite which is a slave (s_axilite) based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 which we are implementing is master-based and hence we use the high-performance ports for communication to the PS (just like DMA). We do not know the address to read and write and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
 
 1.2) Generate RTL code and export it
 ####################################
