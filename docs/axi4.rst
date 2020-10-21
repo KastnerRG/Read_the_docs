@@ -132,7 +132,7 @@ Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > de
 3) Host program
 ---------------
 
-In this section we use python to test our design
+In this section we use python to test our design.
 
 3.1) Move your files
 ####################
