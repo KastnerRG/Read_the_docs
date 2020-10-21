@@ -46,7 +46,7 @@ After exporting is done, you can close and exit from Vivado HLS.
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
 
-In this section we import our RTL code from last section, add some required IPs, and generate our bitstream
+In this section we import our RTL code from last section, add some required IPs, and generate our bitstream.
 
 2.1) Create a new Vivado project
 ################################
@@ -132,7 +132,7 @@ Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > de
 3) Host program
 ---------------
 
-In this section we use python to test our design.
+In this section we use Python to test our design.
 
 3.1) Move your files
 ####################
