@@ -124,7 +124,7 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 5) PYNQ Demo
 ---------------
 
-For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT, then stream all outputs.
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 inputs and 1 output.
 
 6) Submission Procedure
 -----------------------
