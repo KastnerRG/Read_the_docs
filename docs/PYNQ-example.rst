@@ -139,9 +139,10 @@ Under **Project Manager**, click on **Generate Bitstream** to build .bit and .tc
 
 Before closing Vivado, we need to note our IP and its ports addresses. 
 
+Under **Sources**, open **mul_test_mul_io_s_axi.v**, scroll down and note addresses for in and out ports. We need these addresses for our host program.
+
 In the example below for the streamMul, the addresses to pay attention to are 0x00 (control bus ap_ctrl), 0x10 (output), and 0x18 (input). These are the addresses you will need to use to write data to the fabric from the ARM core, start the fabric to run your design and generate your outputs, and then read your outputs from the fabric into the ARM core on the Pynq board.
 
-Under **Sources**, open **mul_test_mul_io_s_axi.v**, scroll down and note addresses for in and out ports. We need these addresses for our host program.
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq16.png
 
