@@ -35,7 +35,6 @@ Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook a
    PYNQ-example
    axidma
    axidma2
-   axi4
    pl-ps_interrupt
    microblaze.ipynb
 
