@@ -68,7 +68,7 @@ The final part is to integrate the receiver onto the PYNQ using a proper interfa
 
 We provided the general framework for creating different PL-PS interfaces and Jupyter Notebook host applications in previous labs. You should use that to create this demo. We will not be providing you with anything more than what was given in previous labs.
 
-**The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what is done in the previous project).
+**The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what was done in the previous project).
 
 
 6) Submission Procedure
