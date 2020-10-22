@@ -47,18 +47,18 @@ The provided zip file has a number of subfolders and files related to implementi
 
 3) Tasks
 ---------
-1. Design and verify a functionally complete CORDIC IP core using HLS. You are provided a testbench that you can use though that the testbench does not cover all cases. You are encouraged to create a more extensive testbench to ensure that your code is correct.
+1. Design and verify a functionally complete CORDIC IP core using HLS: **cordic_baseline**. You are provided a testbench that you can use though that the testbench does not cover all cases. You are encouraged to create a more extensive testbench to ensure that your code is correct.
 
-2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float. Once you have a functionally correct CORDIC, then change data types to fixed point types and this should change your multiplications into shifts and adds. You should verify that this is indeed happening.
+2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float variables. Once you have a functionally correct CORDIC, then change data types to fixed-point types incrementally while checking to see that the test-bench still passes. This should result in your multiplications being synthesized into shifts and adds (you should verify that this is indeed happening). Do not change your function header/definition/interface (the input and output variables and their datatypes), only change variables inside the body of your cordiccart2pol function. You may use new typedefs if you wish. Try to perform as few operations with float as possible, meaning there will likely be a lot of typecasting involved.
 
-3. Explore the architectural tradeoffs of a CORDIC core architecture based upon a lookup table. We have provided a fully functional base implementation of this. You should read and understand this CORDIC code. You should analyze the design space of this lookup table IP core by changing the parameters of the look-up tables, e.g., varying by varying the data type of the input data and changing the number of entries. This should allow you to find architectures with different resource, performance, and accuracy results.
+3. Explore the architectural tradeoffs of a CORDIC core architecture based upon a lookup table. We have provided a fully functional base implementation of this. You should read and understand this CORDIC code. You should analyze the design-space of this lookup table IP core by changing the parameters of the look-up tables, e.g., by varying the data type of the input data, and changing the number of entries. This should allow you to find architectures with different resource usage, performance, and accuracy results.
 
-4. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed point types is more performant, but may reduce the accuracy of the results. Perform design space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs. 
+4. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed-point types is more performant, but may reduce the accuracy of the results. Perform design-space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs. 
 
         
 4) PYNQ Demo
 ---------
-The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The notebook passes data to the CORDIC IP, receives the result, and compares it with the result computed in Python.
+The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
 
 5) Report
 ----------
@@ -67,21 +67,23 @@ Your report should answer the following questions. Make it very clear where you 
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
 
-* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type?
+
+* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type(s)?
+
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
 
 
-* **Question 4:** How does the ternary operator ‘?’ synthesize? Is it useful in this project?
+* **Question 4:** Thinking from a logic-design hardware perspective, what operation does the ternary operator '?' perform? What function would you expect this operator to synthesize as? Do you notice a difference between using it and an if-else block? Is it useful in this project?
 
 	
-* **Question 5:** These questions all refer to the LUT-based CORDIC: Summarize the design space exploration that you performed as you modified the data types of the input variables and the LUT entries.   In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resources, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
+* **Question 5:** These questions all refer to the LUT-based CORDIC: Summarize the design-space exploration that you performed as you modified the data types of the input variables and the LUT entries. In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resource usage, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
 
 
 6) Submission Procedure
 -------------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and *.tcl) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
@@ -112,9 +114,9 @@ Your repo must contain a folder named "cordic" at the top-level. This folder mus
 
 Unlike project 1, it is not explicitly necessary to come up with an optimally efficient solution for the CORDIC core using pipelining, unrolling, and other HLS directives to meet a certain frequency. This project is more about precision and accuracy of data using bit widths. However, the larger goal of this class is to understand how to obtain resource-efficient designs while still achieving the level of functionality you desire. So there's no performance target to hit, but do your best.
 
-The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass c-sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy. You don't need to submit cordic_LUT, just answer the related questions in your report.
+The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass c-sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy.
 
-In this project and in future projects, you may find it necessary to edit the test-bench. Either the test-bench doesn't cover enough cases, or (as in the case of cordic_LUT) the threshold for error of theta may be too high. We may even instruct you to edit the test-bench. In these cases, you are welcome to change this file, and if you do, please **submit the altered test-bench file** too, and explicitly state in your report what changes you made.
+In this project and in future projects, you may find it necessary to edit the test-bench. Either the test-bench doesn't cover enough cases, or (as in the case of cordic_LUT) the threshold for error of theta may be too high. We may even instruct you to edit the test-bench. In these cases, you are welcome to change this file, and if you do, please **submit the altered test-bench file** too, and explicitly state in your report what changes you made and why.
 
 The cordiccart2pol.cpp file in the cordic_LUT project has a comment asking what happens if you direct HLS to use RAM_1P_LUTRAM for the my_LUT_r and my_LUT_th variables. This question isn't on this page. **You don't have to answer them in the report**, but please do try them out for an understanding of LUTRAMs.
 

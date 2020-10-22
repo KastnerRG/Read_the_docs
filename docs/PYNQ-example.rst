@@ -1,5 +1,5 @@
 
-Lab: Pynq Memory Mapped IO
+Lab: Pynq Memory Mapped IO (AXI-Lite)
 ===========================
 
 This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
@@ -137,9 +137,12 @@ Under **Project Manager**, click on **Generate Bitstream** to build .bit and .tc
 2.5) Bitstream, hwh, and addresses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before closing Vivado, we need to note our IP and its ports addresses:
+Before closing Vivado, we need to note our IP and its ports addresses. 
 
 Under **Sources**, open **mul_test_mul_io_s_axi.v**, scroll down and note addresses for in and out ports. We need these addresses for our host program.
+
+In the example below for the streamMul, the addresses to pay attention to are 0x00 (control bus ap_ctrl), 0x10 (output), and 0x18 (input). These are the addresses you will need to use to write data to the fabric from the ARM core, start the fabric to run your design and generate your outputs, and then read your outputs from the fabric into the ARM core on the Pynq board.
+
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq16.png
 
@@ -150,25 +153,26 @@ Under **Address Editor** note IP's address
 3) PYNQ board and Host program
 ------------------------------
 
-Using SMB or SCP, copy **design_1_wrapper.bit** from **vivado_project_path/mul_test.runs/impl1** and copy **design_1.hwh** from **vivado_project_path/mul_test.srcs/sources_1/bd/design_1/hw_handoff** to your PYNQ board at **/home/xilinx/jupyter_notebooks/mul_test**.
+Using SMB or SCP or the Jupyter interface, copy **design_1_wrapper.bit** from **vivado_project_path/mul_test.runs/impl1** and copy **design_1.hwh** from **vivado_project_path/mul_test.srcs/sources_1/bd/design_1/hw_handoff** to your PYNQ board at **/home/xilinx/jupyter_notebooks/mul_test**.
+
+Make sure to name the .bit file and the .hwh file with the same name. In this case, we name them "design_1_wrapper.bit" and "design_1_wrapper.hwh".
 
 Open a new Notebook and run the following code to test your IP
 
 .. code-block:: python
 
-  from pynq import Overlay
-  from pynq import MMIO
+	from pynq import Overlay
+	from pynq import MMIO
 
-  ol = Overlay("/home/xilinx/jupyter_notebooks/mul_test/design_1_wrapper.bit")
-  ol.download()
+	ol = Overlay("/home/xilinx/jupyter_notebooks/mul_test/design_1_wrapper.bit") # designate a bitstream to be flashed to the FPGA
+	ol.download() # flash the FPGA
 
-  mul_ip=MMIO(0x43C00000, 0x10000)
+	mul_ip = MMIO(0x43C00000, 0x10000) # (IP_BASE_ADDRESS, ADDRESS_RANGE), told to us by Pynq documentation
+	inp = 5 # number we want to double
 
-  inp = 5
-
-  mul_ip.write(0x18, inp)
-  print("input:", mul_ip.read(0x18)) 
-  mul_ip.write(0x00, 1)
-  print("output:", mul_ip.read(0x10)) 
+	mul_ip.write(0x18, inp) # write input value to input address in fabric
+	print("input:", mul_ip.read(0x18)) # confirm that our value was written correctly to the fabric
+	mul_ip.write(0x00, 1) # set ap_start to 1 which initiates the process we wrote to the fabric
+	print("output:", mul_ip.read(0x10)) # read corresponding output value from the output address of the fabric 
 
 

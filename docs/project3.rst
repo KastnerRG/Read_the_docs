@@ -86,12 +86,12 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMA . You need to follow Lab2 example only difference being you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT and stream all outputs.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>`'s example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT, then stream all outputs.
 
 7) Submission Procedure
 ----------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and scripts) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft_test.cpp, dft.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and *.tcl) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (dft_test.cpp, dft.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
@@ -117,7 +117,7 @@ Your repo must contain a folder named "dft" at the top-level. This folder must b
 
 * Folder **Demo**: DFT.ipynb | dft.bit | dft.hwh
 
-* **Note**: Provide the architectures that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
+* **Note**: Provide every architecture that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
 * **Note** Do **not** submit DFT 8 and 32.
 
