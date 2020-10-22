@@ -148,7 +148,7 @@ Your repo must contain a folder named "fft" at the top-level. This folder must b
   - .bit and .hwh files
   - FFT.ipynb host file
 
-**Report :**
+**Report:**
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
