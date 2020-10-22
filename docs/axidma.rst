@@ -5,6 +5,8 @@ Simple streaming example
 ************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create streaming interfaces for and IP.
 
+This class will not go too deep into AXI protocols and Vivado, but a nice tutorial of the AXI Direct Memory Access (DMA) exists `here. <https://www.fpgadeveloper.com/2014/08/using-the-axi-dma-in-vivado.html>`_
+
 1) Vivado HLS: Generating RTL code from C/C++ code
 -------------------------------------------------
 
