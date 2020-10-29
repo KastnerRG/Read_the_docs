@@ -14,21 +14,21 @@ The goal of this project is to design architectures that implement the Discrete 
 2) Materials
 -----------
 
-The files neccessary for this project can be got from `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/DFT.zip?raw=true>`_ 
+The files necessary for this project can be found `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/DFT.zip?raw=true>`_
 
-You can find the following files in the zip file. These are divided into five folders, dft_8_precomputed, dft_32_precomputed, dft_256_precomputed, dft_1024_precomputed, and Demo. Each of the first four folders has its own testbench, out.gold.dat file, and coefficients.h file.
+You can find the following files in the zip file: they are divided into five folders, dft_8_precomputed, dft_32_precomputed, dft_256_precomputed, dft_1024_precomputed, and Demo. Each of the first four folders has its own testbench, out.gold.dat file, and coefficients.h file.
 
 Each dft_xx_precomputed folder contains following files:
 
-* dft.cpp -the baseline implementation for the dft function.
+* dft.cpp - the baseline implementation for the dft function.
 
-* dft.h -header file
+* dft.h - header file
 
-* dft_test.cpp -test bench
+* dft_test.cpp - test bench
 
-* coefficientsX.h -a file containing the values of corresponding to one sine/cosine period sampled based upon the DFT points. For example, an 8 point DFT has 8 samples across both the sine and cosine function evenly spaced across one period. This is equivalent to dividing one rotation in the complex plane equally by the number of points in the DFT.
+* coefficientsX.h - a file containing the values of corresponding to one sine/cosine period sampled based upon the DFT points. For example, an 8 point DFT has 8 samples across both the sine and cosine function evenly spaced across one period. This is equivalent to dividing one rotation in the complex plane equally by the number of points in the DFT.
 
-* out.gold.dat -"Golden” output. The testbench (dft_test.cpp) generates a sample input and calls the function dft in dft.cpp with that sample input. This output of the function is compared to the expected output. This will indicate PASS or FAIL. If it fails, then the code iFolder Demo: dft.bit | dft.tcl | project3_host.ipynbn dft is incorrect. There are four different versions of depending on the DFT size and way in which the DFT coefficients were generated.
+* out.gold.dat - "Golden” output. The testbench (dft_test.cpp) generates a sample input and calls the function dft in dft.cpp with that sample input. This output of the function is compared to the expected output. This will indicate PASS or FAIL. If it fails, then the code in the folder Demo: dft.bit | dft.tcl | project3_host.ipynbn dft is incorrect. There are four different versions of depending on the DFT size and way in which the DFT coefficients were generated.
 
 * script.tcl and directives.tcl file to create the project
 
@@ -58,13 +58,13 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * There are many different ways to generate the DFT coefficients including using HLS math functions. These can be implemented as constants when the DFT size is fixed. We have given you the coefficients for both 256 (in coefficients256.h) and 1024 (in coefficients1024.h). They each have two constant arrays, sin_table and cos_table. You can use these coefficient arrays directly as memories in your architectures. You are also free to create your own arrays using a different structure (e.g., 2D array, reordering of elements in the given 1D arrays, etc.). Or you could dynamically generate the coefficients.
 
-* There is significant amount of parallelism that can be exploited by (partially) unrolling the for loops. Pipelining these (partially) unrolled for loops should lead to higher throughputs.
+* There is significant amount of parallelism that can be exploited by (partially) unrolling the for-loops. Pipelining these (partially) unrolled for-loops should lead to higher throughputs.
 
-* There are more efficient methods for performing the DFT that exploit the symmetries of the Fourier constants, e.g., the fast Fourier transform (FFT). **Do not use these symmetries.** In other words, treat this like a matrix-vector multiply with unknown matrix values. Don’t worry, we will implement FFT architectures soon enough that will fully take advantage of these symmetries.
+* There are more efficient methods for performing the DFT that exploit the symmetries of the Fourier constants, e.g., the fast Fourier transform (FFT). **Do not use these symmetries.** In other words, treat this like a matrix-vector multiply with unknown matrix values. Don’t worry, we will implement FFT architectures soon enough that will fully take advantage of these symmetries in :doc:`Project: Fast Fourier Transform (FFT)<project4>`
 
 * You do not need to report your optimizations for your 8 point and 32 point DFT; these folders are provided for your convenience. Since these will very likely synthesize much faster than larger point DFT functions, it may be useful to use these to debug your code or in your initial design space exploration.
 
-* Your report must explicitly state how you calculated the throughput results. Note that this is often not simply a function of the latency and the clock period, and involves using the initiation interval.
+* Your report must explicitly state how you calculated the throughput results. Note that this is often not simply a function of the latency and the clock period, and involves using the initiation interval (II).
 
 5) Questions
 -----------
@@ -77,7 +77,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * **Question 4:** Study the effects of loop unrolling and array partitioning on the performance and area. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of matrix vector multiply operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for area (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases? Which design would you select? Why?
 
-* **Question 5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=145>`_,and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
+* **Question 5:** Please read dataflow section in the `HLS user guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=145>`_, and apply dataflow pragma to your design to improve throughput. You may need to change your code and make submodules. How much improvement can you make with it? How much does your design use resources? What about BRAM usage? Please describe your architecture with figures on your report. (Make sure to add dataflow pragma on your top function.)
 
 * **Question 6:** (Best architecture) Briefly describe your "best" architecture. In what way is it the best? What optimizations did you use to obtain this result? What is tradeoff you consider for the best architecture?
 
@@ -86,7 +86,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>`'s example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, compute DFT, then stream all outputs.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>`'s example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Unlike the lab here you cannot start computation immediately after you stream an input. You must stream all inputs, then compute the DFT, and finally stream all outputs.
 
 7) Submission Procedure
 ----------------------
