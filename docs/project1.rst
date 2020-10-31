@@ -28,6 +28,8 @@ You can download the project files here:
 
 * `project1.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project1.zip?raw=true>`_
 
+This contains:
+
 * fir11 folder: 11 tap fir filter
 
   - fir.cpp - Implements top level function
