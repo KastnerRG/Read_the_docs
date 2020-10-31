@@ -1,4 +1,4 @@
-Lab: AXI4-Burst Mode
+Lab 3: AXI4-Burst Mode
 =============================
 
 Simple example of AXI4-Burst Mode

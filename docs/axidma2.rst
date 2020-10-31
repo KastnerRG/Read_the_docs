@@ -1,4 +1,4 @@
-Lab: Axistream Multiple DMAs
+Lab 2b: Axistream Multiple DMAs
 ===========
 
 Simple streaming example with multiple inputs
@@ -119,13 +119,13 @@ Connect the following ports:
 
 Now you can leave the rest of the connections to the tool. There should be a highlighted strip on top of your diagram window.
 
-1- Click on **Run Block Automation**
+1. Click on **Run Block Automation**
 
-2- Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
+2. Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/175618043-pynq12.png
 
-3- **IMPORTANT!** you have to click again on **Run Connection Automation**
+3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/938036616-pynq13.png
 
@@ -147,13 +147,13 @@ Your design should look like this:
 2.7) Generate bitstream
 #######################
 
-1- Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design.**
 
-2- Validate your design: **Tools > Validate Design**
+2. Validate your design: **Tools > Validate Design**
 
-3- In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
 
-4- Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
+4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
 2.8) Note required addresses and export block design
 ####################################################
@@ -179,7 +179,7 @@ You can close and exit from Vivado tool.
 3) Host program
 ---------------
 
-In this section we use python to test our design
+In this section we use Python to test our design.
 
 3.1) Move your files
 ####################

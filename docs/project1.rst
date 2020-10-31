@@ -1,4 +1,4 @@
-Project: FIR Filter Design
+Project 1: FIR Filter Design
 ============================
 
 1) Introduction
@@ -19,8 +19,7 @@ You should start this assignment by understanding the 11 tap FIR filter, and imp
 2) Preparation
 --------------
 
-Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files at `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_
-
+Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. We will refer to these labs collectively as Lab 0.
 
 3) Materials
 ------------
@@ -134,7 +133,7 @@ The specific things you must do in this section are:
 
 * Download an appropriate image for your board from `PYNQ.io <http://www.pynq.io/>`_ and write it to your SDCard (`instructions <https://pynq.readthedocs.io/en/latest/getting_started.html>`_).
 
-* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
+* Go through :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
 * Implement your 11-tap FIR design on PYNQ board.
 

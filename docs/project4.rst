@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: Fast Fourier Transform (FFT)
+Project 4: Fast Fourier Transform (FFT)
 ==============================
+
+If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 4.5: OFDM Receiver <project4.5>` for this assignment.
 
 1) Introduction
 ---------------
@@ -124,7 +126,7 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 5) PYNQ Demo
 ---------------
 
-For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab 3: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
 
 6) Submission Procedure
 -----------------------

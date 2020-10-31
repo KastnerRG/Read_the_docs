@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: OFDM Receiver
+Project 4.5: OFDM Receiver
 ==============================
+
+Required for UCSD's WES 237C, but not for UCSD's CSE 237C. 
 
 1) Introduction
 ---------------

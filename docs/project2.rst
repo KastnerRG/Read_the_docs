@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: CORDIC
+Project 2: CORDIC
 =========================================
+
+If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 2.5: Phase Detector <project2.5>` for this assignment.
 
 1) Introduction
 --------------
@@ -58,7 +60,7 @@ The provided zip file has a number of subfolders and files related to implementi
         
 4) PYNQ Demo
 ---------
-The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
+The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
 
 5) Report
 ----------

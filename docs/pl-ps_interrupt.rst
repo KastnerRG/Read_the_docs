@@ -1,4 +1,4 @@
-Lab: Interrupts
+Lab 4: Interrupts
 ====================
 
 Interrupt Controller
@@ -163,7 +163,7 @@ In this section we use a Jupyter notebook to interact with our IP.
 3.1) Move files to PYNQ
 #######################
 
-Connect to your PYNQ board and create a new folder. Copy fact_intrpt.tcl and fact_intrpt.bit to this folder. Create a new Jupyter notebook and complete it as following to interact with your design:
+Connect to your PYNQ board and create a new folder. Copy fact_intrpt.hwh and fact_intrpt.bit to this folder like we have done in previous labs. Create a new Jupyter notebook and complete it as following to interact with your design:
 
 .. code-block :: python3
 

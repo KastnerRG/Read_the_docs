@@ -3,8 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: Phase Detector
+Project 2.5: Phase Detector
 =========================================
+
+Required for UCSD's WES 237C, but not for UCSD's CSE 237C. 
 
 1) Introduction
 -----------------
@@ -74,7 +76,7 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
         
 4) PYNQ Demo
 ------
-Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab: Axistream Multiple DMAs<axidma2>`, but you will need to modify your HLS code for the streaming interface.
+Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`, but you will need to modify your HLS code for the streaming interface.
 
 You also should see these outputs:
 
