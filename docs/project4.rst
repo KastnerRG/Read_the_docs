@@ -131,6 +131,8 @@ For this demo, your will create an IP for the FFT 1024, and run it from the Jupy
 6) Submission Procedure
 -----------------------
 
+If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 4.5: OFDM Receiver <project4.5>` for this assignment.
+
 You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). 
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
