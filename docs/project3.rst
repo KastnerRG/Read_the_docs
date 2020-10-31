@@ -96,7 +96,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMAs. You need to follow the :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`'s example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. 
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using DMAs. You need to follow the :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`' example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. 
 
 You will additionally need to change the depth of your interface ports to 1024 (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_).
 
