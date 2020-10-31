@@ -66,19 +66,15 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * Your report must explicitly state how you calculated the throughput results. Note that this is often not simply a function of the latency and the clock period, and involves using the initiation interval (II).
 
-Here are samples for throughput results achieved by previous students for the DFT project. 
+* Here are samples for throughput results achieved by previous students for the DFT project: 
 
-Example 1:
-
-DFT256:		max throughput: 1247	DFT/second
-
-DFT1024:	max throughput: 79		DFT/second 
-
-Example 2:
-
-DFT256:		max throughput: 1.37	kHz 
-
-DFT1024:	max throughput: 89		Hz
++------------+----------------------+--------------------+
+| Example:   | DFT256               | DFT1024            |
++------------+----------------------+--------------------+
+| DFT/second | max throughput: 1247 | max throughput: 79 |
++------------+----------------------+--------------------+
+| Hz         | max throughput: 1370 | max throughput: 89 |
++------------+----------------------+--------------------+
 
 5) Questions
 ------------
