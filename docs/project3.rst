@@ -100,7 +100,7 @@ For this demo, your will create an IP for the DFT 1024, and run it from the Jupy
 
 You will additionally need to change the depth of your interface ports to 1024 (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_).
 
-Note that the DTYPE struct in this project is exactly like the axis_t typedef we used in Lab 2b. 
+Note that the DTYPE struct in this project is exactly like the axis_t typedef we used in Lab 2b, containing a float (data) and an int (last).
 
 Unlike the lab here you cannot start computation immediately after you stream an input struct. You must stream in all struct inputs, then compute the DFT using their float components, and finally stream all outputs as structs. When streaming the output structs, the last bit should be set to 1 for the last struct to be streamed, indicating end of stream. You may need to explicitly set the other last bits to 0, otherwise your stream may terminate early and without warning.
 
