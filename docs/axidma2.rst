@@ -184,7 +184,7 @@ In this section we use python to test our design
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **sadd.tcl** and **sadd.bit** into it.
+Create a new folder in your PYNQ board and move both **sadd.hwh** and **sadd.bit** into it.
 
 3.2) Python code
 ################
