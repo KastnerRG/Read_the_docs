@@ -68,13 +68,13 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * Here are samples for throughput results achieved by previous students for the DFT project: 
 
-+------------+----------------------+--------------------+
-| Example:   | DFT256               | DFT1024            |
-+------------+----------------------+--------------------+
-| DFT/second | max throughput: 1247 | max throughput: 79 |
-+------------+----------------------+--------------------+
-| Hz         | max throughput: 1370 | max throughput: 89 |
-+------------+----------------------+--------------------+
+		+------------+----------------------+--------------------+
+		| Example:   | DFT256               | DFT1024            |
+		+------------+----------------------+--------------------+
+		| DFT/second | max throughput: 1247 | max throughput: 79 |
+		+------------+----------------------+--------------------+
+		| Hz         | max throughput: 1370 | max throughput: 89 |
+		+------------+----------------------+--------------------+
 
 5) Questions
 ------------
