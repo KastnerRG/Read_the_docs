@@ -16,12 +16,12 @@ In this project, you will work on the Fast Fourier Transform (FFT) The project g
 2) Goal
 -------
 
- The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
+The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
 
 3) Materials
 ------------	
 
-`download link <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/FFT.zip?raw=true>`_
+`Download link.<https://github.com/KastnerRG/pp4fpgas/blob/master/labs/FFT.zip?raw=true>`_
 
 You are given a zip file with four folders 0_Initial, 1_Subcomponents, 2_Skeleton_Restructured. Folder 0_Initial contains the files corresponding to the “software” version of the FFT. Folder 2_Skeleton_Restructured provides a framework for a more optimized FFT implementation. And folder 1_Subcomponents has a number of subfolders that allow you to create projects for individual functions that you will develop over the project. This is largely for your convenience for testing and development. All of the code developed here will eventually be placed into 0_Initial and 2_Skeleton_Restructured.
 

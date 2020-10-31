@@ -14,7 +14,7 @@ The goal of this project is to design architectures that implement the Discrete 
 2) Materials
 ------------
 
-The files necessary for this project can be found `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/DFT.zip?raw=true>`_
+The files necessary for this project can be found `here <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/DFT.zip?raw=true>`_.
 
 You can find the following files in the zip file: they are divided into five folders, dft_8_precomputed, dft_32_precomputed, dft_256_precomputed, dft_1024_precomputed, and Demo. Each of the first four folders has its own testbench, out.gold.dat file, and coefficients.h file.
 
