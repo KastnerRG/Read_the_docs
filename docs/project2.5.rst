@@ -76,11 +76,11 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
         
 4) PYNQ Demo
 ------
-Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`, but you will need to modify your HLS code for the streaming interface.
+Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`, but you will need to modify your HLS code for the streaming interface. You will need to specify the axis_t struct like we did in Lab 2b, which contains a float (data) and an int (last).
 
-You will need to specify the axis_t struct like we did in Lab 2b, which contains a float (data) and an int (last).
+When streaming the output structs, the last bit should be set to 1 for the last struct to be streamed, indicating end of stream. You may need to explicitly set the other last bits to 0, otherwise your stream may terminate early and without warning. You do not need to do this for inputs, as the tool takes care of it for you. Sometimes, the output streaming's last bit is also handled by the tool, but sometimes it may not which will cause the DMA to hang (corresponding to a forever running Jupyter cell) and it is better to hard code it.
 
-When streaming the output structs, the last bit should be set to 1 for the last struct to be streamed, indicating end of stream. You may need to explicitly set the other last bits to 0, otherwise your stream may terminate early and without warning.
+In Vivado, the HP ports are High Performance ports which can be accessed by several interfaces. It is something like dynamic channel (also known as memory) which can access the entire channel at one go. Therefore it is not necessary to enable more than one HP port. This `link <https://forums.xilinx.com/t5/Processor-System-Design-and-AXI/MCDMA-or-Multiple-DMAs-Single-HP-port-or-Multiple-HP-ports/td-p/991992>`_ says to use two HP ports if you value performance. If you use multiple HP ports, in the memory map you can see this will give you more space to access (like 512M instead of 256M). So it is always safer to use separate ports although not required. You should have both DMAs be write-enabled (the lab had only one output, but here you have two outputs, so we'll need both). If you choose to use more than one HP port, HP0 and HP1 should have different masters. So HP0 will have the first DMA as its master, and HP1 will have the second DMA. Two DMAs can point to a single HP port, but two HP ports cannot have the same DMA as master. 
 
 You also should see these outputs:
 
