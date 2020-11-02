@@ -136,7 +136,7 @@ At this point your design should look like this:
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-2.7) Note required addresses and export block design
+2.7) Note required addresses and copy generated files
 ####################################################
 
 After bitstream generating process is done, open **Address Editor** from **window** menu.
@@ -149,11 +149,11 @@ In sources, expand **design_1_wrapper::design_1::design_1::streamMul::smul::desi
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2224243640-pynq18.png
 
-Export your block design from **File > Export > Export Block Design** and name it **smul.tcl.** This file includes all of your hardware addresses and describes your design for our host program.
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** 
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/585052686-pynq19.png
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **smul.hwh**.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** You should have both **smul.tcl** and **smul.bit.**
+You should have both **smul.bit** and **smul.hwh**.
 
 You can close and exit from Vivado tool.
 
@@ -165,7 +165,7 @@ In this section we use Python to test our design.
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **smul.hwh** and **smul.bit** into it.
+Create a new folder in your PYNQ board and move both **smul.bit** and **smul.hwh** into it.
 
 3.2) Python code
 ################
