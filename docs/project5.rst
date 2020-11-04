@@ -38,7 +38,7 @@ The WBFM receiver implementation in GNU Radio has 4 main parts in its Python wra
 
 .. image :: https://bitbucket-assetroot.s3.amazonaws.com/repository/gjdo4X/1122914715-p5_1.png?AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&Expires=1604530703&Signature=gz6LLlxivZqW2h725G0JDNjN9Aw%3D
 
-You need to report each function’s throughput for this part. The number of optimizations will not affect your grade. However, each block’s throughput will effect your total throughput and thus it will impact audio output quality.
+You need to report each function’s throughput for this part. The number of optimizations will not affect your grade. However, each block’s throughput will effect your total throughput and thus will impact audio output quality.
 
 **fm_demod**
 ##########
@@ -64,7 +64,7 @@ This part is a wrapper in Python that calculates coefficients for an IIR filter 
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. Feel free to use these in your code.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. Feel free to use these in your code.
 
 5) PYNQ Demo
 ---------------
@@ -126,9 +126,9 @@ For project 5, you need to submit a report the throughput with 1 page for each f
 7) Grading Rubric
 -----------
 
-**30 points:** Functionally correct design. You will get full credit if we be able to build your blocks without any effort. All four functions must pass their test benches. You need to report your throughput.
+**30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. All four functions must pass their test benches. You need to report your throughput for each function in your report.
 
-**60 points:** Pynq Demo. You will get full credit for clear audio output, system must operate for at least 1 minute (continuous audio output).
+**60 points:** Pynq Demo. You will get full credit for clear audio output; system must operate for at least 1 minute (continuous audio output).
 
 **10 points:** Report.
 
