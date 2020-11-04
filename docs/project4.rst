@@ -13,7 +13,7 @@ If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 4.5:
 
 In this project, you will work on the Fast Fourier Transform (FFT) The project guides you through the process of building an efficient FFT module one submodule at a time. It is an improvement of DFT in terms of computational efficiency. You will be implementing this with AXI4 burst mode.
 
-2) Goal
+2) Project Goal
 -------
 
 The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.

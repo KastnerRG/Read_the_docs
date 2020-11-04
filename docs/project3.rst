@@ -98,7 +98,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`' example, with the only difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
 
-You will additionally need to change the depth of your interface ports to 1024 (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_).
+You will additionally need to change the depth of your interface ports (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_).
 
 Note that the DTYPE struct in this project is exactly like the axis_t typedef we used in Lab 2b, containing a float (data) and an int (last).
 
@@ -116,7 +116,7 @@ You must submit your code (and only your code, not other files). Your code shoul
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "dft" at the top-level. This folder must be organized as follows (similar to project1 or project2):
+Your repo must contain a folder named "dft" at the top-level. This folder must be organized as follows (similar to the structures in project 1 or project 2):
 
 **Contents:**
 
@@ -147,7 +147,7 @@ Your repo must contain a folder named "dft" at the top-level. This folder must b
 8) Grading Rubric
 -----------------
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced each entry, and the observable trends between entries. Spelling errors are unacceptable.
+**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
 **50 points:** Correct working project on PYNQ.
    
