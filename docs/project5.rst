@@ -121,7 +121,7 @@ Your repo must contain a folder named "wbfm_receiver" at the top-level. This fol
 
 **Report:**
 
-For project 5, you need to submit a report the throughput with 1 page for each function from section 1. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+For project 5, you need to submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (they pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
 7) Grading Rubric
 -----------
@@ -130,7 +130,7 @@ For project 5, you need to submit a report the throughput with 1 page for each f
 
 **60 points:** Pynq Demo. You will get full credit for clear audio output, system must operate for at least 1 minute (continuous audio output).
 
-**10 points:** Report. 
+**10 points:** Report.
 
 **Bonus:** You are free to explore and improve the existing project as you wish. The amount of extra credit will depend upon the work. Contact the professor and TAs beforehand if you wish to know how many additional points that a project enhancement will provide. Some examples of improvement are:
 
