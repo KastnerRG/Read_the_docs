@@ -34,7 +34,7 @@ The structure of each of these folders is largely the same.
 
 4) Design Instructions
 ----------------------
-The WBFM receiver implementation in GNU Radio has 4 main parts in its python wrapper: fm_demod, audio_coeffs, audio_filter and deemph.
+The WBFM receiver implementation in GNU Radio has 4 main parts in its Python wrapper: fm_demod, audio_coeffs, audio_filter and deemph.
 
 .. image :: https://bitbucket-assetroot.s3.amazonaws.com/repository/gjdo4X/1122914715-p5_1.png?AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&Expires=1604527165&Signature=0wQgsdS%2Fx5G9MStTJA%2F1QqYim8w%3D
 
@@ -54,7 +54,7 @@ This part has one function: fir_filter_fff(); we will call it fir(). You can fin
 
 **deemph**
 ##########
-This part is a wrapper in python that calculates coefficients for an IIR filter and then calls a C++ function, iir_filter_ffd(). We will call this function iir(). You can find the implementation in GNU Radio source or on online cross references. The coefficients for this IIR filter are also calculated once and will not change during a run. These coefficients are provided in your HLS test bench and you don’t need to calculate them. But you need to implement the iir() in HLS.
+This part is a wrapper in Python that calculates coefficients for an IIR filter and then calls a C++ function, iir_filter_ffd(). We will call this function iir(). You can find the implementation in GNU Radio source or on online cross references. The coefficients for this IIR filter are also calculated once and will not change during a run. These coefficients are provided in your HLS test bench and you don’t need to calculate them. But you need to implement the iir() in HLS.
 
 **Optimization Guidelines**
 
