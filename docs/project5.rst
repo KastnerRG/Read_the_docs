@@ -36,7 +36,7 @@ The structure of each of these folders is largely the same.
 ----------------------
 The WBFM receiver implementation in GNU Radio has 4 main parts in its Python wrapper: fm_demod, audio_coeffs, audio_filter and deemph.
 
-.. image :: https://bitbucket-assetroot.s3.amazonaws.com/repository/gjdo4X/1122914715-p5_1.png?AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&Expires=1604527165&Signature=0wQgsdS%2Fx5G9MStTJA%2F1QqYim8w%3D
+.. image :: https://bitbucket-assetroot.s3.amazonaws.com/repository/gjdo4X/1122914715-p5_1.png?AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&Expires=1604530703&Signature=gz6LLlxivZqW2h725G0JDNjN9Aw%3D
 
 You need to report each function’s throughput for this part. The number of optimizations will not affect your grade. However, each block’s throughput will effect your total throughput and thus it will impact audio output quality.
 
