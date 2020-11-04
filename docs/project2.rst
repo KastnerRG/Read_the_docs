@@ -6,8 +6,6 @@
 Project 2: CORDIC
 =========================================
 
-If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 2.5: Phase Detector <project2.5>` for this assignment.
-
 1) Introduction
 --------------
 
@@ -85,8 +83,6 @@ Your report should answer the following questions. Make it very clear where you 
 
 6) Submission Procedure
 -------------------------
-
-If you are in UCSD's WES 237C, you will also need to complete :doc:`Project 2.5: Phase Detector <project2.5>` for this assignment.
 
 You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and *.tcl) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
