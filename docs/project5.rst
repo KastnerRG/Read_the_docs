@@ -8,7 +8,7 @@ Project 5: WBFM Receiver
 
 1) Introduction
 ---------------
-`Lab slides <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/WES237C%20-%20Lab%205.pdf>`_.
+Please go through the `project slides <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/WES237C%20-%20Lab%205.pdf>`_.
 
 2) Project Goal
 ---------------
