@@ -18,7 +18,7 @@ We use matrix multiplication as an example as it is relatively simple, yet funda
 Before we begin, please complete :doc:`Lab 6: DPC++ on Intel DevCloud<devcloud>`_. We will use this code as your baseline architecture.
 
 3) Tasks and Questions
----------------------_
+----------------------
 
 Optimize Load Transfers
 ##########################
