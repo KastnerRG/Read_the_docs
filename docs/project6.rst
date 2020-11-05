@@ -61,7 +61,7 @@ References:
 4) Block Matrix Multiplication (BMM)
 ------------------------------------
 
-Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_draft/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the dessign to the problem at hand.
+Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the dessign to the problem at hand.
 
 Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments.
 
@@ -72,7 +72,7 @@ You also have to show the result of each step in a throughput vs. hardware utili
 Requirements
 ###############
 
-1. **Knobs**: Similar to the DSE example, you should define a set of variables (**knobs**) to change your optimizations for monitoring their effects on your design's performance and hardware utilization. You should use the following knobs:
+1. **Knobs**: You should define a set of variables (**knobs**) to change your optimizations for monitoring their effects on your design's performance and hardware utilization. You should use the following knobs:
 
 	* Block Size
 
@@ -92,7 +92,7 @@ The `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable
 5) Submission Procedure
 -----------------------
 
-You must also submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code We must be able to only import your source file and directly synthesize it. You can assume that we have correctly set up the design environment. 
+You must also submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. We must be able to only import your source file and directly synthesize it. You can assume that we have correctly set up the design environment. 
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
