@@ -167,7 +167,7 @@ Open a new Notebook and run the following code to test your IP
 	ol = Overlay("/home/xilinx/jupyter_notebooks/mul_test/design_1_wrapper.bit") # designate a bitstream to be flashed to the FPGA
 	ol.download() # flash the FPGA
 
-	mul_ip = MMIO(0x43C00000, 0x10000) # (IP_BASE_ADDRESS, ADDRESS_RANGE), told to us in Vivado's Address Editor
+	mul_ip = MMIO(0x43C00000, 0x10000) # (IP_BASE_ADDRESS, ADDRESS_RANGE), told to us in Vivado
 	inp = 5 # number we want to double
 
 	mul_ip.write(0x18, inp) # write input value to input address in fabric

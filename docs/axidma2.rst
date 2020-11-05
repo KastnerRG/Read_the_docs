@@ -223,7 +223,7 @@ Create a new Jupyter notebook and run the following code to test your design:
 	samples = random.sample(range(0, length), length)
 	np.copyto(in_buffer2, samples)
 
-	sadd_ip.write(0x10, length) # we got this address from vivado
+	sadd_ip.write(0x10, length) # we got this address from vivado. Since we didn't do port=return, and we set a constant for ap_start, we only have to write length.
 	t_start = time.time()
 	dma1.sendchannel.transfer(in_buffer1)
 	dma2.sendchannel.transfer(in_buffer2)
