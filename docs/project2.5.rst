@@ -76,7 +76,7 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
 ------
 Again, the final task integrates the phase detector onto a PYNQ. Implement the receiver design on the board. This process is mostly similar to :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`, but you will need to modify your HLS code for the streaming interface. 
 
-Note that the DTYPE struct in this project is almost identical to the axis_t typedef we used in Lab 2b, here containing a float (data) and an int (last).
+Note that the DTYPE struct in this project is almost identical to the axis_t typedef we used in Lab 2b, here containing a float (*data*) and an int (*last*).
 
 When streaming the output structs, the last bit should be set to 1 for the last struct to be streamed, indicating end of stream. You may need to explicitly set the other last bits to 0, otherwise your stream may terminate early and without warning since there may be garbage data at the memory addresses of the struct you create that are streamed out. You do not need to do this for inputs, as the tool takes care of it for you. Sometimes, the output streaming's last bit is also handled by the tool, but sometimes it may not be, which will cause the DMA to hang (corresponding to a forever-running Jupyter cell) and it is better to hard code it.
 
