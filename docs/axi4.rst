@@ -14,7 +14,7 @@ In this section you learn how to create a project in Vivado HLS, synthesis your 
 1.1) Download code and create a Vivado HLS project
 #################################################
 
-Download and unzip `axi4_burst.zip. <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_. Generate your project using the provided script.tcl file:
+Download and unzip `axi4_burst.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_. Generate your project using the provided script.tcl file:
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 
