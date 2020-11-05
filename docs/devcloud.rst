@@ -1,4 +1,4 @@
-Lab 6: DPC++ on Intel DevCloud
+Lab: DPC++ on Intel DevCloud
 ====================
 
 Getting Started

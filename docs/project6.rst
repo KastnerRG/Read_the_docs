@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 6: Matrix Multiplication on Intel DevCloud Using DPC++
-==============================
+Project: Matrix Multiplication on Intel DevCloud Using DPC++
+===============================================================
 
 1) Introduction
 ---------------
@@ -15,7 +15,7 @@ This project provides an introduction to hardware acceleration using Intel `DevC
 
 We use matrix multiplication as an example as it is relatively simple, yet fundamentally important computation used in a wide variety of applications. As such, it is very well-studied in the hardware acceleration literature with a substantial number of technical reports and research papers. The project develops a block matrix multiplication architecture and discusses some common methods to optimize it. This enables a design space exploration process to determine the best architecture.
 
-Before we begin, please complete :doc:`Lab 6: DPC++ on Intel DevCloud<devcloud>`. We will use this code as your baseline architecture.
+Before we begin, please complete :doc:`Lab: DPC++ on Intel DevCloud<devcloud>`. We will use this code as your baseline architecture.
 
 3) Tasks and Questions
 ----------------------
@@ -115,7 +115,7 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
   - Source code (*.cpp, *.hpp) and reports (screenshots).
 
 
-**Report:** For project 6, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
+**Report:** For this project, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
 
 6) Grading Rubric
 -----------------

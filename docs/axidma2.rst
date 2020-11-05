@@ -1,12 +1,12 @@
-Lab 2b: Axistream Multiple DMAs
-===========
+Lab: Axistream Multiple DMAs (AXIS)
+===================================
 
 Simple streaming example with multiple inputs
 *********************************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create a design with two streaming inputs and one streaming output.
 
 1) Vivado HLS: Generating RTL code from C/C++ code
--------------------------------------------------
+--------------------------------------------------
 
 In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
 
@@ -138,7 +138,7 @@ At this point your design should look like this:
 2.6) Create a Hierarchy
 #######################
 
-Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized.
+Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized. This step is optional, but it is good to know how to do. Note that, in the Jupyter notebook, we will have to access the hierarchy before accessing the DMA or the IP. You can see this in the Python code at the bottom of the page. 
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2766584167-pynq15.png
 
@@ -158,7 +158,7 @@ Your design should look like this:
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
 2.8) Note required addresses and copy generated files
-####################################################
+#####################################################
 
 After bitstream generating process is done, open **Address Editor** from **window** menu.
 
@@ -205,8 +205,8 @@ Create a new Jupyter notebook and run the following code to test your design:
 
 	ol = Overlay('/home/xilinx/jupyter_notebooks/sadd/sadd.bit') # check this path
 	ol.download() # this downloads your bitstream into FPGA
-	dma1 = ol.streamAdd.sadd_dma1 # first dma
-	dma2 = ol.streamAdd.sadd_dma2 # second dma
+	dma1 = ol.streamAdd.sadd_dma1 # first DMA. Note that we had to access the hierarchy before accessing the DMA
+	dma2 = ol.streamAdd.sadd_dma2 # second DMA
 	sadd_ip = MMIO(0x43c00000, 0x10000) # we got this address from 
 	xlnk = Xlnk()
 

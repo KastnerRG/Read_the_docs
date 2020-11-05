@@ -1,4 +1,4 @@
-Lab 3: AXI4-Burst Mode
+Lab: AXI4-Burst Mode
 =============================
 
 Simple example of AXI4-Burst Mode
@@ -14,7 +14,7 @@ In this section you learn how to create a project in Vivado HLS, synthesis your 
 1.1) Download code and create a Vivado HLS project
 #################################################
 
-Download and unzip `axi4_burst.zip. <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_ Generate your project using the provided script.tcl file:
+Download and unzip `axi4_burst.zip. <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_. Generate your project using the provided script.tcl file:
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 
@@ -28,7 +28,7 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq18.png
 
-*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 is a master (m_axi) based protocol, unlike AXI-Lite which is a slave (s_axilite) based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 which we are implementing is master-based and hence we use the high-performance ports for communication to the PS (just like DMA). We do not know the address to read and write and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
+*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 (*m_axi*) is a master-based protocol, unlike AXI-Lite (*s_axilite*) which is a slave-based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 is master-based and hence we use the high-performance ports for communication to the PS (just like in the DMA labs). We do not know the address to read from and write to, and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
 
 1.2) Generate RTL code and export it
 ####################################

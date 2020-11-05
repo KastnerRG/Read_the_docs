@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 2: CORDIC
-=========================================
+Project: CORDIC
+==================
 
 1) Introduction
 --------------
@@ -58,7 +58,7 @@ The provided zip file has a number of subfolders and files related to implementi
         
 4) PYNQ Demo
 ---------
-The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
+The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
 
 5) Report
 ----------
@@ -88,7 +88,7 @@ You must submit your code (and only your code, not other files). Your code shoul
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to the structure in project 1):
+Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to the structure in other projects):
 
 * **Report.pdf**
 
@@ -111,7 +111,7 @@ Your repo must contain a folder named "cordic" at the top-level. This folder mus
 7) Grading Rubric
 -------------------
 
-Unlike project 1, it is not explicitly necessary to come up with an optimally efficient solution for the CORDIC core using pipelining, unrolling, and other HLS directives to meet a certain frequency. This project is more about precision and accuracy of data using bit widths. However, the larger goal of this class is to understand how to obtain resource-efficient designs while still achieving the level of functionality you desire. So there's no performance target to hit, but do your best.
+Unlike the FIR project, it is not explicitly necessary to come up with an optimally efficient solution for the CORDIC core using pipelining, unrolling, and other HLS directives to meet a certain frequency. This project is more about precision and accuracy of data using bit widths. However, the larger goal of this class is to understand how to obtain resource-efficient designs while still achieving the level of functionality you desire. So there's no performance target to hit, but do your best.
 
 The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass C-Sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy.
 

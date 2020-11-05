@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 3: Discrete Fourier Transform (DFT)
-===========================================
+Project: Discrete Fourier Transform (DFT)
+============================================
 
 1) Introduction
 ---------------
@@ -60,7 +60,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * There is significant amount of parallelism that can be exploited by (partially) unrolling the for-loops. Pipelining these (partially) unrolled for-loops should lead to higher throughputs. However, you may find that pipelining doesn't make a difference once you have loop unrolling and array partitioning handled well. When you try to incorporate pipelining, the major issue you will face is data dependencies. You can read more about them `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug902-vivado-high-level-synthesis.pdf#page=133>`_. Since you have some data dependencies, accessing memory will be the major overhead. This is why your estimated clock period may go beyond 10ns; to perform some task within N clock cycles each clock cycle needs to be high for the task to be completed. For example, at clock cycle 1 you might write a[1] and at clock cycle 2 you will need to read a[1] which would not be ready as the operation might take 4 clock cycles. This is a data dependency issue which is very common in pipelining. This is why pipelining does not seem to work well even though your loop unrolling and partitioning is the best you can find. Another reason is that the overhead might not be because of the task (it might take only 1 clock cycle), but the memory it is stored in might have only 2 ports or 1 port and this would mean that the memory cannot be accessed in parallel. You can see the critical path in the Synthesis log itself. Otherwise you can open the Analysis view and view which operation(s) or data path is critical and causing this delay, which in turn limits the performance of pipelining. There is a slightly different conversation `here <https://forums.xilinx.com/t5/High-Level-Synthesis-HLS/Pipeline-and-unroll-in-the-for-loop-which-is-better/td-p/909247>`_ that may be helpful to read through. This paragraph might make more sense after you complete the project, so be sure to read through it again when you're finalizing your report. 
 
-* There are more efficient methods for performing the DFT that exploit the symmetries of the Fourier constants, e.g., the Fast Fourier Transform (FFT). **Do not use these symmetries.** In other words, treat this like a matrix-vector multiply with unknown matrix values. Don’t worry, we will implement FFT architectures soon enough that will fully take advantage of these symmetries in :doc:`Project 4: Fast Fourier Transform (FFT)<project4>`.
+* There are more efficient methods for performing the DFT that exploit the symmetries of the Fourier constants, e.g., the Fast Fourier Transform (FFT). **Do not use these symmetries.** In other words, treat this like a matrix-vector multiply with unknown matrix values. Don’t worry, we will implement FFT architectures soon enough that will fully take advantage of these symmetries in :doc:`Project: Fast Fourier Transform (FFT)<project4>`.
 
 * You do not need to report your optimizations for your 8 point and 32 point DFT; these folders are provided for your convenience. Since these will very likely synthesize much faster than larger point DFT functions, it may be useful to use these to debug your code or in your initial design space exploration.
 
@@ -79,7 +79,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 5) Questions
 ------------
 
-* **Question 1:** What changes would this code require if you were to use a custom CORDIC similar to what you designed for Project 2? Compared to a baseline code with HLS math functions for cos() and sin(), would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance? Note that you do not need to implement the CORDIC in your code, we are just asking you to discuss potential tradeoffs that would be possible if you used a CORDIC that you designed instead of the one from Xilinx.
+* **Question 1:** What changes would this code require if you were to use a custom CORDIC similar to what you designed for Project: CORDIC? Compared to a baseline code with HLS math functions for cos() and sin(), would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance? Note that you do not need to implement the CORDIC in your code, we are just asking you to discuss potential tradeoffs that would be possible if you used a CORDIC that you designed instead of the one from Xilinx.
 
 * **Question 2:** Rewrite the code to eliminate these math function calls (i.e. cos() and sin()) by utilizing a table lookup. How does this change the throughput and resource utilization? What happens to the table lookup when you change the size of your DFT?
 
@@ -96,15 +96,15 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab 2b: Axistream Multiple DMAs<axidma2>`' example, with the major difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>`' example, with the major difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
 
 You will additionally need to change the depth of your variable interface ports (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_). For the single s_axilite port, you can either choose to do port=length like we did for the lab (in which case you will need to add a constant to your block diagram like we do in the lab, and you will need to write the length from Jupyter to the appropriate address), or you can choose to do port=return (in which case ap_start will not appear in your HLS IP, and you will need to write 1 to the appropriate address from Jupyter to start the process like in previous projects and labs).
 
-Note that the DTYPE struct in this project is almost identical to the axis_t typedef we used in Lab 2b, here containing a float (*data*) and an int (*last*).
+Note that the DTYPE struct in this project is almost identical to the axis_t typedef we used in the multiple DMA, here containing a float (*data*) and an int (*last*).
 
 Unlike the lab here you cannot start computation immediately after you stream an input struct. You must stream in all struct inputs, then compute the DFT using their float components, and finally stream all outputs as structs. When streaming the output structs, the *last* bit should be set to 1 for the last struct to be streamed, indicating end of stream. You may need to explicitly set the other *last* bits to 0, otherwise your stream may terminate early and without warning since there may be garbage data at the memory addresses of the struct you create that are streamed out. You do not need to do this for inputs, as the tool takes care of it for you. Sometimes, the output streaming's *last* bit is also handled by the tool, but sometimes it may not be, which will cause the DMA to hang (corresponding to a forever-running Jupyter cell) and it is better to hard code it.
 
-Another point worth discussing here is why we use pointers for inputs and outputs, and why we have to post-increment the pointer manually (like we did in Lab 2b) when we stream inputs and outputs, but why it is a bad idea to use pointers in your code. You cannot use pointers in HLS; pointers are dynamic memory and Vivado HLS will not be able to synthesize it since it is not a deterministic thing (datapath could change depending on inputs). Arrays, on the other hand, are fixed memory locations and therefore they can be synthesized to vectors in RTL. You can use pointers only as ports and even then you have to specify axistream, otherwise that will lead to synthesis issues as well.
+Another point worth discussing here is why we use pointers for inputs and outputs, and why we have to post-increment the pointer manually (like we did in the multiple DMA lab) when we stream inputs and outputs, but why it is a bad idea to use pointers in your code. You cannot use pointers in HLS; pointers are dynamic memory and Vivado HLS will not be able to synthesize it since it is not a deterministic thing (datapath could change depending on inputs). Arrays, on the other hand, are fixed memory locations and therefore they can be synthesized to vectors in RTL. You can use pointers only as ports and even then you have to specify axistream, otherwise that will lead to synthesis issues as well.
 
 In Vivado, the HP ports are High Performance ports which can be accessed by several interfaces. It is something like dynamic channel (also known as memory) which can access the entire channel at one go. Therefore it is not necessary to enable more than one HP port. This `link <https://forums.xilinx.com/t5/Processor-System-Design-and-AXI/MCDMA-or-Multiple-DMAs-Single-HP-port-or-Multiple-HP-ports/td-p/991992>`_ says to use two HP ports if you value performance. If you use multiple HP ports, in the memory map you can see this will give you more space to access (like 512M instead of 256M). So it is always safer to use separate ports although not required. You should have both DMAs be write-enabled (the lab had only one output, but here you have two outputs, so we'll need both). If you choose to use more than one HP port, HP0 and HP1 should have different masters. So HP0 will have the first DMA as its master, and HP1 will have the second DMA. Two DMAs can point to a single HP port, but two HP ports cannot have the same DMA as master. Pay attention to which DMAs have been assigned to which interface variables, so you know what values are coming out of the fabric.
 
@@ -116,7 +116,7 @@ You must submit your code (and only your code, not other files). Your code shoul
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "dft" at the top-level. This folder must be organized as follows (similar to the structures in project 1 or project 2):
+Your repo must contain a folder named "dft" at the top-level. This folder must be organized as follows (similar to the structure in other projects):
 
 **Contents:**
 

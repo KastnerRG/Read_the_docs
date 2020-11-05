@@ -1,5 +1,5 @@
-Lab 2a: Axistream Single DMA
-===================
+Lab: Axistream Single DMA (AXIS)
+================================
 
 Simple streaming example
 ************************
