@@ -12,7 +12,7 @@ DevCloud provides several ways to access the software and hardware. We recommend
 
 * **SSH** gives a simple command-line interface to the resources. You also can use SSHFS and SCP to access and transfer your files to/from the cloud. We strongly recommend Linux for this lab.
 
-.. image :: https://bitbucket.org/repo/gjdo4X/images/887619150-getstarted.png
+.. image :: https://i.imgur.com/Z2bRl46.png
 
 We suggest reviewing modules 1, 2, and 3 of *Introduction to oneAPI* and *Essentials of Data-Parallel C++*, available on the *Get Started* page.
 
@@ -48,7 +48,7 @@ This section walks through some example matrix multiplication code to illustrate
 
 	* Click the + sign to open the *Launcher*.
 
-	.. image :: https://bitbucket.org/repo/gjdo4X/images/1093789907-launcher.png
+	.. image :: https://i.imgur.com/UmK4kbY.png
 
 
 	* Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline matrix multiplication project.
@@ -71,7 +71,7 @@ This section walks through some example matrix multiplication code to illustrate
 	
 This creates several files inside the *matrix_mul* folder: 
 
-.. image :: https://bitbucket.org/repo/gjdo4X/images/2936320123-matrix_mul.png
+.. image :: https://i.imgur.com/n2q6v8C.png
 
 The source file is in the *src folder* and the *README* provides instructions to compile the code.
 
