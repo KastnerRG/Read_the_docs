@@ -104,15 +104,15 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
 
 * Folder **mm_optimized1**
 
-  - Source code (*.cpp, *.h) and reports (screenshots).
+  - Source code (*.cpp, *.hpp) and reports (screenshots).
   
 * Folder **mm_optimized2**
 
-  - Source code (*.cpp, *.h) and reports (screenshots).
+  - Source code (*.cpp, *.hpp) and reports (screenshots).
   
 * Folder **mm_optimized3**
 
-  - Source code (*.cpp, *.h) and reports (screenshots).
+  - Source code (*.cpp, *.hpp) and reports (screenshots).
 
 
 **Report:** For project 6, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
