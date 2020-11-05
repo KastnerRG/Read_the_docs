@@ -7,12 +7,12 @@ Simple example of AXI4-Burst Mode
 This lab is an example of AXI4 data transfer in burst mode. It takes in a given sample of values and provides the square root. 
 
 1) Vivado HLS: Generating RTL code from C/C++ code
--------------------------------------------------
+--------------------------------------------------
 
 In this section you learn how to create a project in Vivado HLS, synthesis your code, and generate RTL.
 
 1.1) Download code and create a Vivado HLS project
-#################################################
+##################################################
 
 Download and unzip `axi4_burst.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_. Generate your project using the provided script.tcl file:
 
@@ -108,11 +108,11 @@ This is how the final design should look
 2.5) Generate bitstream
 #######################
 
-1. Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design**
 
 2. Validate your design: **Tools > Validate Design**
 
-3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper**
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Program and Debug**
 
@@ -125,9 +125,9 @@ In sources, expand **design_1_wrapper::design_1_i::design_1::axi4_sqrt_0::design
 
 You can close and exit from Vivado tool.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **axi4_sqrt.bit.**
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **axi4_sqrt.bit**
 
-Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh.**
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh**
 
 3) Host program
 ---------------
