@@ -164,7 +164,7 @@ Add three classes in your code as follows:
 	class b_init;
 	class c_calc;
 	
-Now you can assign each class to one of your kernels. For example, a_init will be assigned to the kernel that initializes buffer a as follows:
+Now you can assign each class to one of your kernels. For example, a_init will be assigned to the kernel that initializes buffer *a* as follows:
 
 .. code-block :: c++
 
