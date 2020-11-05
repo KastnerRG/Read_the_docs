@@ -115,9 +115,7 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
   - Source code (*.cpp, *.h) and reports (screenshots).
 
 
-**Report:**
-
-For project 6, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
+**Report:** For project 6, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
 
 6) Grading Rubric
 -----------------

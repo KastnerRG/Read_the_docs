@@ -119,9 +119,7 @@ Your repo must contain a folder named "wbfm_receiver" at the top-level. This fol
   - .bit and .hwh files
   - WBFM.ipynb host file
 
-**Report:**
-
-For project 5, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (they pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For project 5, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (they pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
 7) Grading Rubric
 -----------------
