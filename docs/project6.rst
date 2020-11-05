@@ -8,7 +8,7 @@ Project 6: Matrix Multiplication on Intel DevCloud Using DPC++
 
 1) Introduction
 ---------------
-This project provides an introduction to hardware acceleration using Intel DevCloud. `DevCloud <https://devcloud.intel.com/>`_. provides access to Intel `oneAPI <https://www.oneapi.com/>`_ - a set of hardware acceleration development tools. We focus on the Data Parallel C++ (DPC++) programming methodology that is a core part of oneAPI. DevCloud provides access to different Intel hardware platforms including multicore CPUs, GPUs, and FPGAs. DPC++ aims to provide a single source programming methodology that covers these different hardware accelerators. 
+This project provides an introduction to hardware acceleration using Intel `DevCloud <https://devcloud.intel.com/>`_. DevCloud provides access to Intel `oneAPI <https://www.oneapi.com/>`_ - a set of hardware acceleration development tools. We focus on the Data Parallel C++ (DPC++) programming methodology that is a core part of oneAPI. DevCloud provides access to different Intel hardware platforms including multicore CPUs, GPUs, and FPGAs. DPC++ aims to provide a single source programming methodology that covers these different hardware accelerators. 
 
 2) Project Goal
 ---------------
