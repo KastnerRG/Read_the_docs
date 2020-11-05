@@ -74,13 +74,13 @@ Requirements
 
 1. **Knobs**: Similar to the DSE example, you should define a set of variables (**knobs**) to change your optimizations for monitoring their effects on your design's performance and hardware utilization. You should use the following knobs:
 
-* Block Size
+	* Block Size
 
-* Matrix size (we use square matrices)
+	* Matrix size (we use square matrices)
 
-* Unrolling factor for the unroll pragma
+	* Unrolling factor for the unroll pragma
 
-* Unrolling factor for the manual unrolling
+	* Unrolling factor for the manual unrolling
 
 References: Spector is a good example to start with DSE; sample codes are available `here <https://github.com/KastnerRG/spector/tree/master/mm>`_.
 
