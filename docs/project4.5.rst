@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: OFDM Receiver
+Project 4.5: OFDM Receiver
 ==============================
 
 1) Introduction
@@ -11,7 +11,7 @@ Project: OFDM Receiver
 
 In this project, you will learn the basic idea behind an orthogonal frequency-division multiplexing (OFDM) system by implementing a simple OFDM receiver in programmable logic. A major part of OFDM is a Fast Fourier Transform (FFT), and thus you will be working with your FFT implementation from the previous project. You are given a set of test benches for the different submodules. You should design and test each individual submodule individually and integrate them into the FFT module. In the final part of the project, you will complete the OFDM receiver by combining the FFT module with a QPSK symbol decoder.
 
-2) Goal
+2) Project Goal
 ------
 
 The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFT project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
@@ -19,7 +19,7 @@ The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You
 3) Materials
 -----------
 
-`download link <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project4.zip?raw=true>`_
+`Download <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project4.zip?raw=true>`_.
 
 You are given a zip file with four folders 0_Initial, 1_Subcomponents, 2_Skeleton_Restructured, and 3_OFDM. Folder 0_Initial contains the files corresponding to the “software” version of the FFT. Folder 2_Skeleton_Restructured provides a framework for a more optimized FFT implementation. Folder 3_OFDM gives a basic structure for the OFDM receiver with QPSK decoder. And folder 1_Subcomponents has a number of subfolders that allow you to create projects for individual functions that you will develop over the project. This is largely for your convenience for testing and development. All of the code developed here will eventually be placed into 0_Initial and 2_Skeleton_Restructured.
 
@@ -100,7 +100,7 @@ Your repo must contain a folder named "ofdm_receiver" at the top-level. This fol
 * You are welcome to include multiple OFDM architectures if you please, in additional folders.
 
 
-**Report :**
+**Report:**
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final OFDM design achieves the target performance. The report will help us to understand your design.
 

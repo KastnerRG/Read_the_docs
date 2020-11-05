@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: CORDIC
+Project 2: CORDIC
 =========================================
 
 1) Introduction
@@ -58,14 +58,14 @@ The provided zip file has a number of subfolders and files related to implementi
         
 4) PYNQ Demo
 ---------
-The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
+The final task integrates a CORDIC IP core onto the programmable logic (PL) using PYNQ. The provided notebook gives a skeleton for running the CORDIC using memory mapped IO for communication. The :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` serves as an example you can follow. The notebook passes data to the CORDIC IP, starts the process, reads the result, and compares it with the result computed in Python.
 
 5) Report
 ----------
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses. 
 
-* **Question 1:** One important design parameter is the number of rotations. Change that number and describe the results. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after so many iterations? Can you precisely state when that occurs? 
+* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20 and describe the trends. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after some number of iterations? Can you precisely state when that occurs? 
 
 
 * **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type(s)?
@@ -79,6 +79,7 @@ Your report should answer the following questions. Make it very clear where you 
 	
 * **Question 5:** These questions all refer to the LUT-based CORDIC: Summarize the design-space exploration that you performed as you modified the data types of the input variables and the LUT entries. In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resource usage, and performance? What advantages/disadvantages does the regular CORDIC approach have over an LUT-based approach? 
 
+* **Note**: You should use ap_int or ap_fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf>`_. 
 
 6) Submission Procedure
 -------------------------
@@ -87,7 +88,7 @@ You must submit your code (and only your code, not other files). Your code shoul
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to project1):
+Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to the structure in project 1):
 
 * **Report.pdf**
 
@@ -107,20 +108,18 @@ Your repo must contain a folder named "cordic" at the top-level. This folder mus
 
 * **Note**: Provide the architectures that you used to answer the questions.
 
-* **Note**: You should use ap_int or ap_fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_. 
-
 7) Grading Rubric
 -------------------
 
 Unlike project 1, it is not explicitly necessary to come up with an optimally efficient solution for the CORDIC core using pipelining, unrolling, and other HLS directives to meet a certain frequency. This project is more about precision and accuracy of data using bit widths. However, the larger goal of this class is to understand how to obtain resource-efficient designs while still achieving the level of functionality you desire. So there's no performance target to hit, but do your best.
 
-The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass c-sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy.
+The provided cordic_LUT does not pass the test. This is expected and fine. The idea is for this portion of the project is design-space exploration. It is possible to run synthesis for a design that doesn't pass C-Sim, but for this question alone you may modify the threshold to make it pass. **Do not do this for other designs or projects without checking with us first**; we want to be able to compare all your designs as if they met or surpassed a certain standard of accuracy.
 
 In this project and in future projects, you may find it necessary to edit the test-bench. Either the test-bench doesn't cover enough cases, or (as in the case of cordic_LUT) the threshold for error of theta may be too high. We may even instruct you to edit the test-bench. In these cases, you are welcome to change this file, and if you do, please **submit the altered test-bench file** too, and explicitly state in your report what changes you made and why.
 
 The cordiccart2pol.cpp file in the cordic_LUT project has a comment asking what happens if you direct HLS to use RAM_1P_LUTRAM for the my_LUT_r and my_LUT_th variables. This question isn't on this page. **You don't have to answer them in the report**, but please do try them out for an understanding of LUTRAMs.
 
-**50 points:** Response to the questions in your report. Points will be deducted based upon poor presentation, grammar, formatting, spelling, etc. Results should be discussed succinctly but with a enough detail to understand your architectures and tradeoffs. Tables and figures should be properly labeled, well thought out, and described in the text with comments on both the design that produced each entry, and the observable trends between entries. Spelling errors are unacceptable.
+**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput, resource usage, and accuracy for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
 **50 points:** Correct working project on PYNQ.
 

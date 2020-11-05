@@ -1,4 +1,4 @@
-Lab: Axistream Multiple DMAs
+Lab 2b: Axistream Multiple DMAs
 ===========
 
 Simple streaming example with multiple inputs
@@ -119,13 +119,13 @@ Connect the following ports:
 
 Now you can leave the rest of the connections to the tool. There should be a highlighted strip on top of your diagram window.
 
-1- Click on **Run Block Automation**
+1. Click on **Run Block Automation**
 
-2- Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
+2. Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/175618043-pynq12.png
 
-3- **IMPORTANT!** you have to click again on **Run Connection Automation**
+3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/938036616-pynq13.png
 
@@ -147,15 +147,15 @@ Your design should look like this:
 2.7) Generate bitstream
 #######################
 
-1- Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design.**
 
-2- Validate your design: **Tools > Validate Design**
+2. Validate your design: **Tools > Validate Design**
 
-3- In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
 
-4- Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
+4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-2.8) Note required addresses and export block design
+2.8) Note required addresses and copy generated files
 ####################################################
 
 After bitstream generating process is done, open **Address Editor** from **window** menu.
@@ -168,23 +168,23 @@ In sources, expand **design_1_wrapper::design_1::design_1::streamAdd::sadd::desi
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3619837071-pynq18.png
 
-Export your block design from **File > Export > Export Block Design** and name it **sadd.tcl.** This file includes all of your hardware addresses and describes your design for our host program.
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **sadd.bit.** 
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2950424644-pynq19.png
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **sadd.hwh**.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **sadd.bit.** You should have both **sadd.tcl** and **sadd.bit.**
+You should have both **sadd.bit** and **sadd.hwh**.
 
 You can close and exit from Vivado tool.
 
 3) Host program
 ---------------
 
-In this section we use python to test our design
+In this section we use Python to test our design.
 
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **sadd.tcl** and **sadd.bit** into it.
+Create a new folder in your PYNQ board and move both **sadd.bit** and **sadd.hwh** into it.
 
 3.2) Python code
 ################

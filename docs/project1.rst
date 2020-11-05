@@ -1,4 +1,4 @@
-Project: FIR Filter Design
+Project 1: FIR Filter Design
 ============================
 
 1) Introduction
@@ -19,8 +19,7 @@ You should start this assignment by understanding the 11 tap FIR filter, and imp
 2) Preparation
 --------------
 
-Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files at `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_
-
+Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. We will refer to these labs collectively as Lab 0.
 
 3) Materials
 ------------
@@ -28,6 +27,8 @@ Before you start, we strongly suggest that you go through these high-level synth
 You can download the project files here:
 
 * `project1.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project1.zip?raw=true>`_
+
+This contains:
 
 * fir11 folder: 11 tap fir filter
 
@@ -123,7 +124,7 @@ Questions:
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
 
-* **Note**: You should use ap_int or ap_fixed types if necessary for required bit width. You can read about ap_int and ap_fixed from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis .pdf>`_. 
+* **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=74>`_ or from section 2.10 of the `textbook<http://kastner.ucsd.edu/hlsbook/>`_. 
 
 7) PYNQ Demo
 ---------------
@@ -134,7 +135,7 @@ The specific things you must do in this section are:
 
 * Download an appropriate image for your board from `PYNQ.io <http://www.pynq.io/>`_ and write it to your SDCard (`instructions <https://pynq.readthedocs.io/en/latest/getting_started.html>`_).
 
-* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
+* Go through :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
 * Implement your 11-tap FIR design on PYNQ board.
 
@@ -256,5 +257,7 @@ Place your code on your private Bitbucket or GitHub repository. Give collaborato
 ------------------
 
 Your grade will be determined by your answers to the questions. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+
+If you are submitting a report made in LaTeX, you might find `this link that generates tables from spreadsheets <https://www.tablesgenerator.com/>`_ helpful.
 
 The report comprises of 80% of your grade. The remaining 20% is for the performance of the best version of your fir128 filter. If your design achieves a throughput of greater than 0.5MHz but less than 1MHz then you will be awarded 10 points. If you achieve 1MHz and higher than you will get complete 20 points. Try to make resource usage as small as possible. The resource usage must be within the resources provided by the Pynq board. Similarly the timing has to be fulfilled, i.e. the clock achieved should be within 10ns (100 MHz).  

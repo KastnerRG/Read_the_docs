@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: Fast Fourier Transform (FFT)
+Project 4: Fast Fourier Transform (FFT)
 ==============================
 
 1) Introduction
@@ -11,15 +11,15 @@ Project: Fast Fourier Transform (FFT)
 
 In this project, you will work on the Fast Fourier Transform (FFT) The project guides you through the process of building an efficient FFT module one submodule at a time. It is an improvement of DFT in terms of computational efficiency. You will be implementing this with AXI4 burst mode.
 
-2) Goal
+2) Project Goal
 -------
 
- The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
+The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
 
 3) Materials
-------------	
+------------
 
-`download link <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/FFT.zip?raw=true>`_
+`Download <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/FFT.zip?raw=true>`_.
 
 You are given a zip file with four folders 0_Initial, 1_Subcomponents, 2_Skeleton_Restructured. Folder 0_Initial contains the files corresponding to the “software” version of the FFT. Folder 2_Skeleton_Restructured provides a framework for a more optimized FFT implementation. And folder 1_Subcomponents has a number of subfolders that allow you to create projects for individual functions that you will develop over the project. This is largely for your convenience for testing and development. All of the code developed here will eventually be placed into 0_Initial and 2_Skeleton_Restructured.
 
@@ -124,7 +124,7 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 5) PYNQ Demo
 ---------------
 
-For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab 3: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
 
 6) Submission Procedure
 -----------------------
@@ -148,7 +148,7 @@ Your repo must contain a folder named "fft" at the top-level. This folder must b
   - .bit and .hwh files
   - FFT.ipynb host file
 
-**Report :**
+**Report:**
 
 For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 

@@ -1,9 +1,11 @@
-Lab: Axistream Single DMA
+Lab 2a: Axistream Single DMA
 ===================
 
 Simple streaming example
 ************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create streaming interfaces for and IP.
+
+This class will not go too deep into AXI protocols and Vivado, but a nice tutorial of the AXI Direct Memory Access (DMA) exists `here. <https://www.fpgadeveloper.com/2014/08/using-the-axi-dma-in-vivado.html>`_
 
 1) Vivado HLS: Generating RTL code from C/C++ code
 -------------------------------------------------
@@ -109,13 +111,13 @@ Connect the following ports:
 
 Now you can leave the rest of the connections to the tool. There should be a highlighted strip on top of your diagram window.
 
-1- Click on **Run Block Automation**
+1. Click on **Run Block Automation**
 
-2- Click on **Run Connection Automation** and select all
+2. Click on **Run Connection Automation** and select all
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2236315451-pynq12.png
 
-3- **IMPORTANT!** you have to click again on **Run Connection Automation**
+3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/1550495145-pynq13.png
 
@@ -126,15 +128,15 @@ At this point your design should look like this:
 2.6) Generate bitstream
 #######################
 
-1- Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design.**
 
-2- Validate your design: **Tools > Validate Design**
+2. Validate your design: **Tools > Validate Design**
 
-3- In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
 
-4- Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
+4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-2.7) Note required addresses and export block design
+2.7) Note required addresses and copy generated files
 ####################################################
 
 After bitstream generating process is done, open **Address Editor** from **window** menu.
@@ -147,23 +149,23 @@ In sources, expand **design_1_wrapper::design_1::design_1::streamMul::smul::desi
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2224243640-pynq18.png
 
-Export your block design from **File > Export > Export Block Design** and name it **smul.tcl.** This file includes all of your hardware addresses and describes your design for our host program.
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** 
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/585052686-pynq19.png
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **smul.hwh**.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** You should have both **smul.tcl** and **smul.bit.**
+You should have both **smul.bit** and **smul.hwh**.
 
 You can close and exit from Vivado tool.
 
 3) Host program
 ---------------
 
-In this section we use python to test our design
+In this section we use Python to test our design.
 
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **smul.tcl** and **smul.bit** into it.
+Create a new folder in your PYNQ board and move both **smul.bit** and **smul.hwh** into it.
 
 3.2) Python code
 ################
