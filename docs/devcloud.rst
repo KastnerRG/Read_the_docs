@@ -63,7 +63,7 @@ This section walks through some example matrix multiplication code to illustrate
 
 		1) Select *Create a project*
 		
-		2) Select *cpp**
+		2) Select *cpp*
 		
 		3) Select *Matrix Multiplication* under *Get Started*
 		
@@ -134,10 +134,6 @@ Once your code is functionally correct, synthesize it to check your design's per
 
 Perform high level synthesis and create the report using *dpcpp*:
 
-Once your code is functionally correct, synthesize it to check your design's performance and resource utilization.
-
-Perform high level synthesis and create the report using *dpcpp*:
-
 .. code-block :: python
 
 	$ cd src
@@ -164,7 +160,7 @@ Add three classes in your code as follows:
 	class b_init;
 	class c_calc;
 	
-Now you can assign each class to one of your kernels. For example, a_init will be assigned to the kernel that initializes buffer *a* as follows:
+Now you can assign each class to one of your kernels. For example, *a_init* will be assigned to the kernel that initializes buffer *a* as follows:
 
 .. code-block :: c++
 
