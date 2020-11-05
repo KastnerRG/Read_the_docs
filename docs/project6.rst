@@ -67,7 +67,7 @@ Your goal is to change these *knobs* and observe their effects. After a few step
 
 You also have to show the result of each step in a throughput vs. hardware utilization plot. Data points in that plot with the maximum throughput and minimum resource utilization are your plateau points (red dots in the following example).
 
-.. image :: https://bitbucket.org/repo/gjdo4X/images/701572354-mm.png
+.. image :: https://i.imgur.com/l9a1mRh.png
 
 Requirements
 ###############
