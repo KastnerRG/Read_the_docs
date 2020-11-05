@@ -10,7 +10,7 @@ DevCloud provides several ways to access the software and hardware. We recommend
 
 * **JupyterLab** provides visual interfaces to navigate through your files and edit your code.
 
-* **SSH** gives a simple command-line interface to the resources. You also can use SSHFS and SCP to access and transfer your files to/from the cloud.
+* **SSH** gives a simple command-line interface to the resources. You also can use SSHFS and SCP to access and transfer your files to/from the cloud. We strongly recommend Linux for this lab.
 
 .. image :: https://bitbucket.org/repo/gjdo4X/images/887619150-getstarted.png
 
@@ -50,6 +50,7 @@ This section walks through some example matrix multiplication code to illustrate
 
 	.. image :: https://bitbucket.org/repo/gjdo4X/images/1093789907-launcher.png
 
+
 	* Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline matrix multiplication project.
 
 	* Open a *Terminal* and launch the tool:
@@ -78,13 +79,14 @@ The source file is in the *src folder* and the *README* provides instructions to
 
 		.. code-block :: python
 
-			cd matrix_mul
-			make all
-			make run
+			$ cd matrix_mul
+			$ make all
+			$ make run
 	
 The output should look like this:
-	\
+
 	.. code-block :: python
+	
 		$ ./matrix_mul_dpc
 		Device: Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz
 		Problem size: c(150,600) = a(150,300) * b(300,600)
@@ -102,14 +104,18 @@ Line 55 uses the default_selector for the hardware device. See Section 4.3.8 of 
 
 Modify the code to select a FPGA device. This can be accomplished in two steps:
 
-	* Include a header file by adding the line: #include "CL/sycl/INTEL/fpga_extensions.hpp"
+	* Include a header file by adding the line: 
+	
+		.. code-block :: c++
+
+			#include "CL/sycl/INTEL/fpga_extensions.hpp"
 	
 	* Modify the queue initialization: 
 
-.. code-block :: c++
+		.. code-block :: c++
 
-	INTEL::fpga_emulator_selector _device;
-	queue q(_device, dpc_common::exception_handler);
+			INTEL::fpga_emulator_selector _device;
+			queue q(_device, dpc_common::exception_handler);
 	
 Re-compile and re-run the code. The device should now be an FPGA emulator.
 
@@ -199,7 +205,7 @@ Details for the load operation **LD** is available by clicking on their *yellow*
 
 .. image :: https://i.imgur.com/IgN1CVJ.png
 
-The **Load Store Unit (LSU) Style** for the **LD** operations is shown as **Burst-coalesced cached**. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the *Burst/coalesced* LSU by default. In *Burst/coalesced* mode, the compiler optimizes for buffering contiguous memory requests for the *largest possible burst*. We can change the LSU type to achieve a lower latency for the load operations. More detail is available at `Intel® oneAPI DPC++ FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/download/oneapi-fpga-optimization-guide.html>`_
+The **Load Store Unit (LSU) Style** for the **LD** operations is shown as **Burst-coalesced cached**. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the *Burst/coalesced* LSU by default. In *Burst/coalesced* mode, the compiler optimizes for buffering contiguous memory requests for the *largest possible burst*. We can change the LSU type to achieve a lower latency for the load operations. More details are available at `Intel® oneAPI DPC++ FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/download/oneapi-fpga-optimization-guide.html>`_.
 
 
 
