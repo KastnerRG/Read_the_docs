@@ -64,7 +64,7 @@ This part is a wrapper in Python that calculates coefficients for an IIR filter 
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. Feel free to use these in your code.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variables defined in the header files for you convenience. Feel free to use these in your code.
 
 5) PYNQ Demo
 ------------
