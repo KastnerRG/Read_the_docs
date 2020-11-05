@@ -52,7 +52,7 @@ Manually unroll the loop by replicating the reductions into separate variables.
 
 References: 
 
-* The *Schedule Viewer* typically provides good insight about how the dpc++ synthesizes the code.
+* The *Schedule Viewer* typically provides good insight about how DPC++ synthesizes the code.
 
 * `oneAPI FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/documentation/oneapi-fpga-optimization-guide/top.html>`_
 
