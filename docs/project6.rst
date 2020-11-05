@@ -18,7 +18,7 @@ We use matrix multiplication as an example as it is relatively simple, yet funda
 Before we begin, please complete :doc:`Lab 6: DPC++ on Intel DevCloud<devcloud>`_. We will use this code as your baseline architecture.
 
 3) Tasks and Questions
----------------------
+---------------------_
 
 Optimize Load Transfers
 ##########################
@@ -120,7 +120,7 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
 For project 6, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
 
 6) Grading Rubric
------------
+-----------------
 
 **100 points:** Your grade will be determined by your answers to the questions. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
