@@ -23,7 +23,7 @@ Before we begin, please complete :doc:`Lab 6: DPC++ on Intel DevCloud<devcloud>`
 Optimize Load Transfers
 ##########################
 
-As discussed in the :doc:`lab<devcloud>`_, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the *c_calc* kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations.
+As discussed in the :doc:`lab<devcloud>`, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the *c_calc* kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations.
 
 * Modify the **LD** operation to a different LSU style to achieve a lower latency. This should bring the c_calc latency to less than 25 cycles.
 
