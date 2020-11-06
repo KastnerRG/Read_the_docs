@@ -40,7 +40,7 @@ is performing two separate operations. Breaking it down:
 .. code-block :: c++
 
 	*OUTPUT = cur1; // write the output struct to the address in OUTPUT
-	OUTPUT++;		// post-increment the address in OUTPUT for the next write operation
+	OUTPUT++;	// post-increment the address in OUTPUT for the next write operation
 	
 In this lab, since we are reusing an input struct *cur1* to generate an output struct, the last bit is handled for us. However, if you must construct your own *axis_t* struct, you must ensure you set *last* to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of *last* that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
 
@@ -236,7 +236,7 @@ Create a new Jupyter notebook and run the following code to test your design:
 	samples = random.sample(range(0, length), length)
 	np.copyto(in_buffer2, samples)
 
-	sadd_ip.write(0x10, length) # we got this address from vivado. Since we didn't do port=return, and we set a constant for ap_start, we only have to write length.
+	sadd_ip.write(0x10, length) # we got this address from Vivado source. Since we didn't do port=return, and we set a constant for ap_start, we only have to write length.
 	t_start = time.time()
 	dma1.sendchannel.transfer(in_buffer1)
 	dma2.sendchannel.transfer(in_buffer2)
