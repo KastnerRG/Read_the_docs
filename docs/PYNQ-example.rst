@@ -1,6 +1,6 @@
 
-Lab 1: Pynq Memory Mapped IO (AXI-Lite)
-===========================
+Lab: Pynq Memory Mapped IO (AXI-Lite)
+=====================================
 
 This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
 
@@ -135,7 +135,7 @@ In **Sources**, right click on **design_1** and select **Create HDL Wrapper**
 Under **Project Manager**, click on **Generate Bitstream** to build the .bit and .hwh files.
 
 2.5) Bitstream, .hwh, and addresses
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before closing Vivado, we need to note our IP and its ports addresses. 
 
@@ -167,7 +167,7 @@ Open a new Notebook and run the following code to test your IP
 	ol = Overlay("/home/xilinx/jupyter_notebooks/mul_test/design_1_wrapper.bit") # designate a bitstream to be flashed to the FPGA
 	ol.download() # flash the FPGA
 
-	mul_ip = MMIO(0x43C00000, 0x10000) # (IP_BASE_ADDRESS, ADDRESS_RANGE), told to us in Vivado's Address Editor
+	mul_ip = MMIO(0x43C00000, 0x10000) # (IP_BASE_ADDRESS, ADDRESS_RANGE), told to us in Vivado
 	inp = 5 # number we want to double
 
 	mul_ip.write(0x18, inp) # write input value to input address in fabric

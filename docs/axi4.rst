@@ -1,4 +1,4 @@
-Lab 3: AXI4-Burst Mode
+Lab: AXI4-Burst Mode
 =============================
 
 Simple example of AXI4-Burst Mode
@@ -7,14 +7,14 @@ Simple example of AXI4-Burst Mode
 This lab is an example of AXI4 data transfer in burst mode. It takes in a given sample of values and provides the square root. 
 
 1) Vivado HLS: Generating RTL code from C/C++ code
--------------------------------------------------
+--------------------------------------------------
 
 In this section you learn how to create a project in Vivado HLS, synthesis your code, and generate RTL.
 
 1.1) Download code and create a Vivado HLS project
-#################################################
+##################################################
 
-Download and unzip `axi4_burst.zip. <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_ Generate your project using the provided script.tcl file:
+Download and unzip `axi4_burst.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/axi4_burst.zip?raw=true>`_. Generate your project using the provided script.tcl file:
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 
@@ -28,7 +28,7 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq18.png
 
-*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 is a master (m_axi) based protocol, unlike AXI-Lite which is a slave (s_axilite) based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 which we are implementing is master-based and hence we use the high-performance ports for communication to the PS (just like DMA). We do not know the address to read and write and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
+*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 (*m_axi*) is a master-based protocol, unlike AXI-Lite (*s_axilite*) which is a slave-based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 is master-based and hence we use the high-performance ports for communication to the PS (just like in the DMA labs). We do not know the address to read from and write to, and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
 
 1.2) Generate RTL code and export it
 ####################################
@@ -83,7 +83,7 @@ Select and check **S AXI HP0 interface**:
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq21.png
 
-Add the axi4_sqrt IP to the design.
+Add the **axi4_sqrt** IP to the design.
 
 .. image :: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq22.png
 
@@ -108,11 +108,11 @@ This is how the final design should look
 2.5) Generate bitstream
 #######################
 
-1. Save your design **CTRL+S** or **File > Save Block Design.**
+1. Save your design **CTRL+S** or **File > Save Block Design**
 
 2. Validate your design: **Tools > Validate Design**
 
-3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper**
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Program and Debug**
 
@@ -125,9 +125,9 @@ In sources, expand **design_1_wrapper::design_1_i::design_1::axi4_sqrt_0::design
 
 You can close and exit from Vivado tool.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **axi4_sqrt.bit.**
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **axi4_sqrt.bit**
 
-Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh.**
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh**
 
 3) Host program
 ---------------

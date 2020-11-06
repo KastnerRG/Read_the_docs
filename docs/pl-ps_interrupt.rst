@@ -1,5 +1,5 @@
-Lab 4: Interrupts
-====================
+Lab: Interrupts
+==================
 
 Interrupt Controller
 ********************
@@ -7,12 +7,12 @@ Interrupt Controller
 In this example we implement :math:`f(x)=x!` as an IP for PYNQ with interrupt controller.
 
 1) Vivado HLS: C/C++ to RTL
---------------------------
+---------------------------
 
 In this section, you will write your code in C/C++ and convert it to RTL using Vivado HLS.
 
 1.1) Create a project
-####################
+#####################
 
 Open the Vivado HLS tool, create a new project, and name it **pynq_fact**.
 
@@ -27,7 +27,7 @@ Select **xc7z020clg400-1** as your part number.
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2893940654-fact3.png
 
 1.2) Write your code
-###################
+####################
 
 In **Explorer** section, right click on **Source**, and select new file. Create a **new file** and name it **fact_intrpt.cpp**. Complete your code as following:
 
@@ -142,21 +142,23 @@ Save your block diagram and check your design from **Tools > Validate Design**. 
 
 Now you can click on **Generate Bitstream** in **Flow Navigator** with default settings to generate your bitstream.
 
-2.6) Export .tcl file and addresses
-###################################
+2.6) Export .tcl file and note addresses
+########################################
 
-After finishing your bitstream generation, export your block design from **File > Export > Export Block Design**, and name it *fact_intrpt.tcl*:
+Exporting the block design is an optional step, Pynq seems to prefer .hwh over .tcl. After finishing your bitstream generation, you can export your block design from **File > Export > Export Block Design**, and name it *fact_intrpt.tcl*:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3372073042-fact16.png
 
-Copy **your_vivado_project_directory > project_1.runs > impl_1 > design_1_wrapper.bit** to **your_vivado_project_directory > fact_intrpt.bit** next to *fact_intrpt.tcl*.
+Copy **your_vivado_project_directory > project_1.runs > impl_1 > design_1_wrapper.bit** to **your_vivado_project_directory > fact_intrpt.bit** next to **fact_intrpt.tcl**. 
 
-In **Sources**, open **fact_intrpt_cntrl_io_s_axi.v** and note the port addresses. We need these addresses in our python code.
+Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it **fact_intrpt.hwh**.
+
+In **Sources**, open **fact_intrpt_cntrl_io_s_axi.v** and note the port addresses. We need these addresses in our Python code.
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2508179436-fact17.png
 
 3) Host program
---------------
+---------------
 
 In this section we use a Jupyter notebook to interact with our IP.
 

@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 5: WBFM Receiver
-==============================
+Project: WBFM Receiver
+=========================
 
 1) Introduction
 ---------------
@@ -36,7 +36,7 @@ The structure of each of these folders is largely the same.
 ----------------------
 The WBFM receiver implementation in GNU Radio has 4 main parts in its Python wrapper: fm_demod, audio_coeffs, audio_filter and deemph.
 
-.. image :: https://bitbucket-assetroot.s3.amazonaws.com/repository/gjdo4X/1122914715-p5_1.png?AWSAccessKeyId=AKIA6KOSE3BNJRRFUUX6&Expires=1604530703&Signature=gz6LLlxivZqW2h725G0JDNjN9Aw%3D
+.. image :: https://i.imgur.com/VbT7qDk.png
 
 You need to report each function’s throughput for this part. The number of optimizations will not affect your grade. However, each block’s throughput will effect your total throughput and thus will impact audio output quality.
 
@@ -64,10 +64,10 @@ This part is a wrapper in Python that calculates coefficients for an IIR filter 
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. Feel free to use these in your code.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variables defined in the header files for you convenience. Feel free to use these in your code.
 
 5) PYNQ Demo
----------------
+------------
 
 `How to set up WBFM in GNU Radio <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/WESProject5_student.zip>`_.
 
@@ -119,12 +119,10 @@ Your repo must contain a folder named "wbfm_receiver" at the top-level. This fol
   - .bit and .hwh files
   - WBFM.ipynb host file
 
-**Report:**
-
-For project 5, you need to submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (they pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final WBFM functions are functionally correct (they pass their test benches) and (2) your final WBFM design achieves the target performance. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
 7) Grading Rubric
------------
+-----------------
 
 **30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. All four functions must pass their test benches. You need to report your throughput for each function in your report.
 

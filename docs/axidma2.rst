@@ -1,12 +1,12 @@
-Lab 2b: Axistream Multiple DMAs
-===========
+Lab: Axistream Multiple DMAs (AXIS)
+===================================
 
 Simple streaming example with multiple inputs
 *********************************************
 In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create a design with two streaming inputs and one streaming output.
 
 1) Vivado HLS: Generating RTL code from C/C++ code
--------------------------------------------------
+--------------------------------------------------
 
 In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
 
@@ -27,7 +27,22 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/757890213-pynq1.png
 
-INPUT1,INPUT2 and OUTPUT ports are set to *axis* interfaces for streaming and *length* is set to *s_axilite* for a non-streaming interface. *axis_t* is a struct defined in the header file, the 1-bit *last* is required for *axis* interfaces.
+INPUT1, INPUT2 and OUTPUT ports are set to *axis* interfaces for streaming and *length* is set to *s_axilite* for a non-streaming interface. *axis_t* is a struct defined in the header file that is composed of an int *data* and an ap_uint<1> *last*. The 1-bit *last* is required for *axis* interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
+
+Note that 
+
+.. code-block :: c++
+
+	*OUTPUT++ = cur1;
+	
+is performing two separate operations. Breaking it down:
+
+.. code-block :: c++
+
+	*OUTPUT = cur1; // write the output struct to the address in OUTPUT
+	OUTPUT++;	// post-increment the address in OUTPUT for the next write operation
+	
+In this lab, since we are reusing an input struct *cur1* to generate an output struct, the last bit is handled for us. However, if you must construct your own *axis_t* struct, you must ensure you set *last* to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of *last* that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
 
 1.2) Generate RTL code and export it
 ####################################
@@ -136,7 +151,7 @@ At this point your design should look like this:
 2.6) Create a Hierarchy
 #######################
 
-Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized.
+Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized. This step is optional, but it is good to know how to do. Note that, in the Jupyter notebook, we will have to access the hierarchy before accessing the DMA or the IP. You can see this in the Python code at the bottom of the page. 
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2766584167-pynq15.png
 
@@ -156,7 +171,7 @@ Your design should look like this:
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
 2.8) Note required addresses and copy generated files
-####################################################
+#####################################################
 
 After bitstream generating process is done, open **Address Editor** from **window** menu.
 
@@ -203,8 +218,8 @@ Create a new Jupyter notebook and run the following code to test your design:
 
 	ol = Overlay('/home/xilinx/jupyter_notebooks/sadd/sadd.bit') # check this path
 	ol.download() # this downloads your bitstream into FPGA
-	dma1 = ol.streamAdd.sadd_dma1 # first dma
-	dma2 = ol.streamAdd.sadd_dma2 # second dma
+	dma1 = ol.streamAdd.sadd_dma1 # first DMA. Note that we had to access the hierarchy before accessing the DMA
+	dma2 = ol.streamAdd.sadd_dma2 # second DMA
 	sadd_ip = MMIO(0x43c00000, 0x10000) # we got this address from 
 	xlnk = Xlnk()
 
@@ -221,7 +236,7 @@ Create a new Jupyter notebook and run the following code to test your design:
 	samples = random.sample(range(0, length), length)
 	np.copyto(in_buffer2, samples)
 
-	sadd_ip.write(0x10, length) # we got this address from vivado
+	sadd_ip.write(0x10, length) # we got this address from Vivado source. Since we didn't do port=return, and we set a constant for ap_start, we only have to write length.
 	t_start = time.time()
 	dma1.sendchannel.transfer(in_buffer1)
 	dma2.sendchannel.transfer(in_buffer2)

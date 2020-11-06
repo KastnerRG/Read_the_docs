@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 4.5: OFDM Receiver
-==============================
+Project: OFDM Receiver
+=========================
 
 1) Introduction
 ---------------
@@ -12,12 +12,12 @@ Project 4.5: OFDM Receiver
 In this project, you will learn the basic idea behind an orthogonal frequency-division multiplexing (OFDM) system by implementing a simple OFDM receiver in programmable logic. A major part of OFDM is a Fast Fourier Transform (FFT), and thus you will be working with your FFT implementation from the previous project. You are given a set of test benches for the different submodules. You should design and test each individual submodule individually and integrate them into the FFT module. In the final part of the project, you will complete the OFDM receiver by combining the FFT module with a QPSK symbol decoder.
 
 2) Project Goal
-------
+---------------
 
 The OFDM receiver is divided into two parts -- the FFT and the QPSK decoder. You will be working with your FFT module from the FFT project. You must design and implement a QPSK decoder, and integrate it with the FFT to complete the receiver. While the major goal of this project is create a functional core, you will also perform optimizations on the code. 
 
 3) Materials
------------
+------------
 
 `Download <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project4.zip?raw=true>`_.
 
@@ -63,7 +63,7 @@ You should connect the FFT and the QPSK decoder together to form the complete OF
 * It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
 5) PYNQ Demo
----------------
+------------
 The final part is to integrate the receiver onto the PYNQ using a proper interface to transmit data to the OFDM receiver, and receive the decoded data back from your hardware implementation in the programmable logic.
 
 We provided the general framework for creating different PL-PS interfaces and Jupyter Notebook host applications in previous labs. You should use that to create this demo. We will not be providing you with anything more than what was given in previous labs.
@@ -102,10 +102,10 @@ Your repo must contain a folder named "ofdm_receiver" at the top-level. This fol
 
 **Report:**
 
-For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final OFDM design achieves the target performance. The report will help us to understand your design.
+For this project, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final OFDM design achieves the target performance. The report will help us to understand your design.
 
 7) Grading Rubric
------------	
+-----------------
 
 **50 points:** Functionally correct design
 

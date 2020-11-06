@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project 4: Fast Fourier Transform (FFT)
-==============================
+Project: Fast Fourier Transform (FFT)
+========================================
 
 1) Introduction
 ---------------
@@ -12,7 +12,7 @@ Project 4: Fast Fourier Transform (FFT)
 In this project, you will work on the Fast Fourier Transform (FFT) The project guides you through the process of building an efficient FFT module one submodule at a time. It is an improvement of DFT in terms of computational efficiency. You will be implementing this with AXI4 burst mode.
 
 2) Project Goal
--------
+---------------
 
 The FFT implementation is divided into multiple stages. The first stage of the FFT reorders the input data using a bit reversal scheme. This gets added into a “software” version of the code which we have provided for you (minus the bit reversal portion). After that, you will create a more hardware friendly FFT architecture. We have provided a set of testbenches for individual functions in addition to the testbenches for the overall FFT. While the major goal of this project is create a functional core, you will also perform optimizations on the code. **In particular, you have to achieve a target throughput in a final 1024-size FFT design that is less than 2000 clock cycles; therefore with a 10 ns clock period that is 50KHz**. This can be achieved by optimizing the submodules properly and using dataflow pragma across the submodules.
 
@@ -122,9 +122,9 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 * It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
 5) PYNQ Demo
----------------
+------------
 
-For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab 3: AXI4-Burst Mode<axi4>` example, with the only difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
+For this demo, your will create an IP for the FFT 1024, and run it from the Jupyter notebook using AXI4. You need to follow the :doc:`Lab: AXI4-Burst Mode<axi4>` example, with the major difference being you will have 2 inputs and 2 outputs instead of 1 input and 1 output.
 
 6) Submission Procedure
 -----------------------
@@ -150,10 +150,10 @@ Your repo must contain a folder named "fft" at the top-level. This folder must b
 
 **Report:**
 
-For project 4, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
+For this project, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final FFT design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
 7) Grading Rubric
------------
+-----------------
 
 **50 points:** Functionally correct design
 

@@ -1,5 +1,5 @@
-Project 1: FIR Filter Design
-============================
+Project: FIR Filter Design
+=============================
 
 1) Introduction
 ---------------
@@ -135,7 +135,7 @@ The specific things you must do in this section are:
 
 * Download an appropriate image for your board from `PYNQ.io <http://www.pynq.io/>`_ and write it to your SDCard (`instructions <https://pynq.readthedocs.io/en/latest/getting_started.html>`_).
 
-* Go through :doc:`Lab 1: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
+* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
 * Implement your 11-tap FIR design on PYNQ board.
 
@@ -216,7 +216,7 @@ Figure 1 shows an example graph of resource usage for 8 designs. Figure 2 shows 
 9) Submission Procedure
 -----------------------
 
-You should submit a report as described in the report instructions for project 1.
+You should submit a report as described in the report instructions for this project.
 
 You must also submit your code (*.cpp, *.h files, and *.tcl, but nothing else). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your fir.cpp/h file and directly synthesize it. You can assume that we have correctly set up the design environment (fir_test.cpp, etc.). **DO NOT SUBMIT THE ENTIRE HLS FOLDER.**
 
@@ -242,7 +242,7 @@ Your repo must contain a folder named "fir" at the top-level. This folder must b
 
 * Folder **fir128_best**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
 
-* Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh | results.[jpg|png]
+* Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
 * *fir128_optimizedN* corresponds to the architectures that you generated to answer the questions. You can have one or multiple, just make sure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
 

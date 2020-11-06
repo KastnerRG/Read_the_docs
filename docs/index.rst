@@ -32,11 +32,12 @@ Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook a
    project3
    project4
    project4.5
-   project5
+   project6
    PYNQ-example
    axidma
    axidma2
    axi4
    pl-ps_interrupt
    microblaze.ipynb
+   devcloud
 
