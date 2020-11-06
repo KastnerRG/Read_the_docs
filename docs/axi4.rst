@@ -26,7 +26,7 @@ Windows: open vivado_hls command line and run the following ::
 
 Now you can open your project in Vivado HLS. It should look like this:
 
-.. image :: https://i.imgur.com/LPSdHi3.png
+.. image :: https://i.imgur.com/iHkVmWE.png
 
 1.2) Generate RTL code and export it
 ####################################
