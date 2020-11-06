@@ -28,8 +28,6 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image :: https://i.imgur.com/LPSdHi3.png
 
-*in* and *out* are ports set to AXI4 interface. They are also set as AXI-Lite interfaces because the AXI4 interfaces are given the offsets as the corresponding slaves. AXI4 (*m_axi*) is a master-based protocol, unlike AXI-Lite (*s_axilite*) which is a slave-based protocol. Since it is slave-based, we know which address to write and read from using the general purpose port. But AXI4 is master-based and hence we use the high-performance ports for communication to the PS (just like in the DMA labs). We do not know the address to read from and write to, and setting the offset to slave allows us to control AXI4-Master just like an AXI-Lite slave. *len* and *return* (which are the number of samples and the control signals, respectively) are AXI-Lite.
-
 1.2) Generate RTL code and export it
 ####################################
 
