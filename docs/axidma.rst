@@ -29,7 +29,7 @@ Now can open you your project in Vivado HLS. **Your code is not complete!**, mod
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3975727536-pynq1.png
 
-INPUT and OUTPUT ports are set to *axis* interfaces for streaming and *length* is set to *s_axilite* for a non-streaming interface. *axis_t* is a struct defined in the header file that is composed of an int *data* and an ap_uint<1> *last*. The 1-bit *last* is required for *axis* interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of inputs we are streaming in and out of the fabric.
+INPUT and OUTPUT ports are set to *axis* interfaces for streaming and *length* is set to *s_axilite* for a non-streaming interface. *axis_t* is a struct defined in the header file that is composed of an int *data* and an ap_uint<1> *last*. The 1-bit *last* is required for *axis* interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
 
 Note that 
 
