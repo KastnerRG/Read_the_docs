@@ -125,7 +125,7 @@ In sources, expand **design_1_wrapper::design_1_i::design_1::axi4_sqrt_0::design
 
 You can close and exit from Vivado tool.
 
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **axi4_sqrt.bit**
+Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper.bit** to your **project directory > project_1** and rename it to **axi4_sqrt.bit**
 
 Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh**
 
