@@ -40,7 +40,7 @@ is performing two separate operations. Breaking it down:
 .. code-block :: c++
 
 	*OUTPUT = cur1; // write the output struct to the address in OUTPUT
-	OUTPUT++;		// increment the address in OUTPUT for the next write operation
+	OUTPUT++;		// post-increment the address in OUTPUT for the next write operation
 	
 In this lab, since we are reusing an input struct *cur1* to generate an output struct, the last bit is handled for us. However, if you must construct your own *axis_t* struct, you must ensure you set *last* to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of *last* that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
 
