@@ -4,10 +4,11 @@
    contain the root `toctree` directive.
 
 Project: Matrix Multiplication on Intel DevCloud Using DPC++
-===============================================================
+============================================================
 
 1) Introduction
 ---------------
+
 This project provides an introduction to hardware acceleration using Intel `DevCloud <https://devcloud.intel.com/>`_. DevCloud provides access to Intel `oneAPI <https://www.oneapi.com/>`_ - a set of hardware acceleration development tools. We focus on the Data Parallel C++ (DPC++) programming methodology that is a core part of oneAPI. DevCloud provides access to different Intel hardware platforms including multicore CPUs, GPUs, and FPGAs. DPC++ aims to provide a single source programming methodology that covers these different hardware accelerators. 
 
 2) Project Goal
@@ -21,7 +22,7 @@ Before we begin, please complete :doc:`Lab: DPC++ on Intel DevCloud<devcloud>`. 
 ----------------------
 
 Optimize Load Transfers
-##########################
+#######################
 
 As discussed in the :doc:`lab<devcloud>`, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the *c_calc* kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations.
 
@@ -36,17 +37,17 @@ References:
 * `oneAPI FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/documentation/oneapi-fpga-optimization-guide/top.html>`_
 
 Loop Unrolling
-#################
+##############
 
 Loop unrolling is a common optimization to expose parallelism across iterations of a loop.
 
-* Perform loop unrolling using **#pragma unroll**. Change the unroll factor by 2, 4, and 8.
+* Perform loop unrolling using **#pragma unroll**. Change the unroll factor by 2, 4, and 8. You will need to change the widths and heights of the matrices to be powers of two; the default values are multiples of 150, which are not cleanly divisible by every unroll factor stated.
 
 * Question 2: What are the effects and general trends of performing unrolling using the pragma? Are the results as expected?
 
-Manually unroll the loop by replicating the reductions into separate variables. 
+Manually unroll the loop by replicating the reductions into separate variables.
 
-* Perform loop unrolling manually. Change the unroll factor by 2, 4, and 8.
+* Perform loop unrolling manually. Change the unroll factor by 2, 4, and 8. You will need to use the same change as in the previous question.
 
 * Question 3: What are the effects and general trends of performing manual unrolling? Are the results as expected?
 
@@ -61,7 +62,7 @@ References:
 4) Block Matrix Multiplication (BMM)
 ------------------------------------
 
-Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the dessign to the problem at hand.
+Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the design to the problem at hand.
 
 Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments.
 
@@ -70,7 +71,7 @@ You also have to show the result of each step in a throughput vs. hardware utili
 .. image :: https://i.imgur.com/l9a1mRh.png
 
 Requirements
-###############
+############
 
 1. **Knobs**: You should define a set of variables (**knobs**) to change your optimizations for monitoring their effects on your design's performance and hardware utilization. You should use the following knobs:
 
@@ -85,7 +86,7 @@ Requirements
 References: Spector is a good example to start with DSE; sample codes are available `here <https://github.com/KastnerRG/spector/tree/master/mm>`_.
 
 Bonus
-########
+#####
 
 The `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_ is simpler than the matrix multiply implementation used in Spector. As a bonus, you can implement the matrix multiply implementation used in Spector, in DPC++. A functionally correct code is enough for this section.
 

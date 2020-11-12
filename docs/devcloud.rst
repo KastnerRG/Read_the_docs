@@ -75,7 +75,7 @@ This creates several files inside the *matrix_mul* folder:
 
 The source file is in the *src folder* and the *README* provides instructions to compile the code.
 
-	* Use the terminal to compile and run your code:
+	* Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
 
 		.. code-block :: python
 
@@ -121,7 +121,7 @@ Re-compile and re-run the code. The device should now be an FPGA emulator.
 
 .. code-block :: python
 
-	& ./matrix_mul_dpc
+	$ ./matrix_mul_dpc
 	Device: Intel(R) FPGA Emulation Device
 	Problem size: c(150,600) = a(150,300) * b(300,600)
 	Result of matrix multiplication using DPC++: Success - The results are correct!
