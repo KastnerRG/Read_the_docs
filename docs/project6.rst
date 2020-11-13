@@ -41,7 +41,7 @@ Loop Unrolling
 
 Loop unrolling is a common optimization to expose parallelism across iterations of a loop.
 
-* Perform loop unrolling using **#pragma unroll**. Change the unroll factor by 2, 4, and 8. You will need to change the widths and heights of the matrices to be powers of two; the default values are multiples of 150, which are not cleanly divisible by every unroll factor stated.
+* Perform loop unrolling using **#pragma unroll**. Change the unroll factor by 2, 4, and 8. You will need to change the widths and heights of the matrices to be powers of two; the default values are multiples of 150, which are not cleanly divisible by every unroll factor stated. Mention the matrix sizes in your report.
 
 * Question 2: What are the effects and general trends of performing unrolling using the pragma? Are the results as expected?
 
