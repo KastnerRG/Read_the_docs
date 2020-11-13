@@ -73,7 +73,7 @@ This creates several files inside the *matrix_mul* folder:
 
 .. image :: https://i.imgur.com/n2q6v8C.png
 
-The source file is in the *src folder* and the *README* provides instructions to compile the code.
+The source file is in the *src* folder and the *README* provides instructions to compile the code.
 
 	* Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
 
