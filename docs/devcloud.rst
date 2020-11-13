@@ -73,9 +73,9 @@ This creates several files inside the *matrix_mul* folder:
 
 .. image :: https://i.imgur.com/n2q6v8C.png
 
-The source file is in the *src folder* and the *README* provides instructions to compile the code.
+The source file is in the *src* folder and the *README* provides instructions to compile the code.
 
-	* Use the terminal to compile and run your code:
+	* Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
 
 		.. code-block :: python
 
@@ -121,7 +121,7 @@ Re-compile and re-run the code. The device should now be an FPGA emulator.
 
 .. code-block :: python
 
-	& ./matrix_mul_dpc
+	$ ./matrix_mul_dpc
 	Device: Intel(R) FPGA Emulation Device
 	Problem size: c(150,600) = a(150,300) * b(300,600)
 	Result of matrix multiplication using DPC++: Success - The results are correct!
@@ -142,7 +142,7 @@ Perform high level synthesis and create the report using *dpcpp*:
 	
 These commands do not perform a full synthesis, i.e., they do not create an FPGA bitstream. They perform high level synthesis and simulate the FPGA design on a processor. This enables estimations of the design performace and resource usage. To generate a bitstream, remove *-fsycl-link*. Note that generating a bitstream can take a *long* time and thus should only be done sparingly, i.e., when the design optimizations are finalized. 
 
-The *report* is an HTML file in *matrix_mul_dpcpp.prj/reports*. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the html. If they still do not render, use SCP or SSHFS to copy or mount your files to your local drive and open the report locally.
+The *report* is an HTML file in *matrix_mul_dpcpp.prj/reports*. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. Safari seems to have the best compatibility with this, with Firefox coming second, but neither is guaranteed to work. If they still do not render, use SCP or SSHFS to copy or mount your files (incuding the *lib* folder from which the report draws its components) to your local drive, then open the report locally.
 
 The *report* provides an overview of the design performance. Open *report.html*, click *Summary* button, click **Compile Estimated Kernel Resource Utilization Summary** in the *Summary Content* pane.
 
