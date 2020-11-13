@@ -49,10 +49,13 @@ In this lab, since we are reusing an input struct *cur* to generate an output st
 You can do so like this:
 
 .. code-block :: c++
+
 	axis_t curr;
 	curr.data = ...; // write data
 	curr.last = ...; // set to 1 if end of stream, else set to 0
 	*OUTPUT++ = curr; // make sure you only write to a particular address once, so do it after the struct is constructed
+	
+We must interact with them this way because we are dealing with an AXI stream, not an array.
 
 1.2) Generate RTL code and export it
 ####################################
