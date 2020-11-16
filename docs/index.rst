@@ -37,7 +37,7 @@ Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook a
    axidma
    axidma2
    axi4
-   pl-ps_interrupt
+   interrupts
    microblaze.ipynb
    devcloud
 
