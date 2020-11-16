@@ -26,7 +26,7 @@ Optimize Load Transfers
 
 As discussed in the :doc:`lab<devcloud>`, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the *c_calc* kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations. At this link, you can find `examples of LSU types being used in code <https://github.com/oneapi-src/oneAPI-samples/blob/master/DirectProgramming/DPC%2B%2BFPGA/Tutorials/Features/lsu_control/src/lsu_control.cpp>`_.
 
-* Modify the **LD** operation to a different LSU style to achieve a lower latency. This should bring the *c_calc* latency to less than 25 cycles.
+* Modify the **LD** operation to a different LSU style to achieve a lower latency. This should bring the *c_calc.B2* latency to less than 25 cycles.
 
 * Question 1: Describe your modification and discuss why it achieves a lower latency.
 
