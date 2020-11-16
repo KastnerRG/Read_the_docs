@@ -85,7 +85,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * **Question 2:** Rewrite the code to eliminate these math function calls (i.e. cos() and sin()) by utilizing a table lookup. How does this change the throughput and resource utilization? What happens to the table lookup when you change the size of your DFT?
 
-* **Question 3:** Modify the DFT function interface so that the input and outputs are stored in separate arrays. How does this affect the optimizations that you can perform? How does it change the performance? And how does the resource usage change? Modify your testbench to accommodate this change to DFT interface.**You should use this modified interface for the remaining questions.**
+* **Question 3:** Modify the DFT function interface so that the input and outputs are stored in separate arrays. How does this affect the optimizations that you can perform? How does it change the performance? And how does the resource usage change? Modify your testbench to accommodate this change to DFT interface. **You should use this modified interface for the remaining questions.**
 
 * **Question 4:** Study the effects of loop unrolling and array partitioning on the performance and resource utilization. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of DFT operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for resources (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases? Which design would you select? Why?
 
