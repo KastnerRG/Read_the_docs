@@ -64,9 +64,10 @@ References:
 
 Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the design to the problem at hand.
 
-Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments. You may want to adjust the LSU to something appropriate for the knobs you adjust, like you did for the previous questions.
+Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments. You may want to adjust the LSU to something appropriate for the knobs you adjust, like you did for the previous questions. By focusing on a particular knob, try to maximize throughput (while adjusting the other knobs as necessary to help achieve this maximum). After you've done this for a few designs for each knob, you should be able to gain an understanding of which knobs are important in this design, and how/why. With this knowledge, we ask you to find points on the Pareto frontier (if you didn't already find them from the experimentation earlier). However, you don't have to achieve the absolute best maximum throughput for any particular knob; this is a design-space exploration problem and the goal is to gain an understanding of what possibilities for improvements exist and what trade-offs come with them. Briefly discuss these trends you noticed and what your thought process was as you moved from one design to another in your report, and reference the chart.
 
-You also have to show the result of each step in a throughput vs. hardware utilization plot. Data points in that plot with the maximum throughput and minimum resource utilization are your plateau points (red dots in the following example).
+You also have to show the result of each knob adjustment in a throughput vs. hardware utilization plot. Data points in that plot with the maximum throughput and minimum resource utilization are your plateau points (red dots in the following example). At minimum, we ask for just 1 plot for all of the tuning experiments, preferably annotate each point with the knobs you used to produce that design (maybe even with color coding the points). You may, however, want to plot a separate chart for each knob that you adjust so you can identify the trends for yourself. But the idea of problem 4 is to compare every design you synthesize to find the Pareto frontier (in the example chart, draw a line between the red points), so ideally that would be by being able to compare every design on a single chart. Do whatever helps you best distinguish the trends.
+
 
 .. image :: https://i.imgur.com/l9a1mRh.png
 
@@ -116,7 +117,7 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
   - Source code (matrix_mul_dpcpp.cpp) and reports (screenshots).
 
 
-**Report:** For this project, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate.
+**Report:** For this project, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate. You can submit the synthesized report screenshots as image files or include them as figures in your report (properly labeled).
 
 6) Grading Rubric
 -----------------
