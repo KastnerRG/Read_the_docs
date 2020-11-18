@@ -65,8 +65,19 @@ The bit reverse function has the following prototype: void bit_reverse(DTYPE X_R
 
 You should perform the swapping “in place” on the data in both of the real and imaginary portions of the data. That is the input data in both X_R and X_I will be reordered when the function completes. Focus on how you modified your code in order to make it more “hardware friendly”.
 
-
 **Hint:** Logical operations map well to hardware. Calculating the indices of the arrays that should be swapped can be done with logical operations.
+
+* Here are samples for throughput results achieved by previous students for the FFT project: 
+
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| A                   | 1033             | 35        | 100      | 43      | 96       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| B                   | 1027             | 17        | 97       | 29      | 78       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Your name here :)   |                  |           |          |         |          |
+		+---------------------+------------------+-----------+----------+---------+----------+
 
 **Optimizing the “Software” Version of the FFT**
 ##################################################

@@ -64,7 +64,7 @@ References:
 
 Block matrix multiplication is a common way to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a BMM implementation in DPC++ `BMM_DPCPP.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/BMM_DPCPP.zip>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. The implementation has the ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the design to the problem at hand.
 
-Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments.
+Your goal is to change these *knobs* and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments. You may want to adjust the LSU to something appropriate for the knobs you adjust, like you did for the previous questions.
 
 You also have to show the result of each step in a throughput vs. hardware utilization plot. Data points in that plot with the maximum throughput and minimum resource utilization are your plateau points (red dots in the following example).
 
