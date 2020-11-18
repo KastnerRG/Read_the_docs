@@ -68,7 +68,6 @@ Your goal is to change these *knobs* and observe their effects. After a few step
 
 You also have to show the result of each knob adjustment in a throughput vs. hardware utilization plot. Data points in that plot with the maximum throughput and minimum resource utilization are your plateau points (red dots in the following example). At minimum, we ask for just 1 plot for all of the tuning experiments, preferably annotate each point with the knobs you used to produce that design (maybe even with color coding the points). You may, however, want to plot a separate chart for each knob that you adjust so you can identify the trends for yourself. But the idea of problem 4 is to compare every design you synthesize to find the Pareto frontier (in the example chart, draw a line between the red points), so ideally that would be by being able to compare every design on a single chart. Do whatever helps you best distinguish the trends.
 
-
 .. image :: https://i.imgur.com/l9a1mRh.png
 
 Requirements
