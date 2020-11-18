@@ -67,7 +67,7 @@ You should perform the swapping “in place” on the data in both of the real a
 
 **Hint:** Logical operations map well to hardware. Calculating the indices of the arrays that should be swapped can be done with logical operations.
 
-* Here are samples for throughput results achieved by previous students for the FFT project: 
+* Here are sample results achieved by previous students for the FFT project: 
 
 		+---------------------+------------------+-----------+----------+---------+----------+
 		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
