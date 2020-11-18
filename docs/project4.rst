@@ -108,7 +108,17 @@ The next task is to create code that can implement “generic” function, i.e.,
 
 Once you have a correctly functioning set of functions, you should copy and paste them in the 2_Skeleton_Restructured project and make sure that it passes the testbench. Since our testbenches on perform one check, which is far from comprehensive, it is possible, though hopefully unlikely, that you have some error that the 2_Skeleton_Restructured testbench exposes and was not exercised in the individual testbench. If your code passes the 2_Skeleton_Restructured project you can assume it is correct (though again since it is only one test, it may be wrong; you would need to perform significantly more testing in any “non-class” situation).
 
-Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles.
+Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles. Here are sample results achieved by previous students for the FFT project: 
+
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| A                   | 1033             | 35        | 100      | 43      | 96       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| B                   | 1027             | 17        | 97       | 29      | 78       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Your name here :)   |                  |           |          |         |          |
+		+---------------------+------------------+-----------+----------+---------+----------+
 
 **Optimization Guidelines**
 
@@ -120,17 +130,7 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 
 * It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
-* Here are sample results achieved by previous students for the FFT project: 
 
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| A                   | 1033             | 35        | 100      | 43      | 96       |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| B                   | 1027             | 17        | 97       | 29      | 78       |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| Your name here :)   |                  |           |          |         |          |
-		+---------------------+------------------+-----------+----------+---------+----------+
 
 5) PYNQ Demo
 ------------
