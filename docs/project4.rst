@@ -67,18 +67,6 @@ You should perform the swapping “in place” on the data in both of the real a
 
 **Hint:** Logical operations map well to hardware. Calculating the indices of the arrays that should be swapped can be done with logical operations.
 
-* Here are sample results achieved by previous students for the FFT project: 
-
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| A                   | 1033             | 35        | 100      | 43      | 96       |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| B                   | 1027             | 17        | 97       | 29      | 78       |
-		+---------------------+------------------+-----------+----------+---------+----------+
-		| Your name here :)   |                  |           |          |         |          |
-		+---------------------+------------------+-----------+----------+---------+----------+
-
 **Optimizing the “Software” Version of the FFT**
 ##################################################
 
@@ -130,7 +118,19 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
+
+* Here are sample results achieved by previous students for the FFT project: 
+
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| A                   | 1033             | 35        | 100      | 43      | 96       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| B                   | 1027             | 17        | 97       | 29      | 78       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Your name here :)   |                  |           |          |         |          |
+		+---------------------+------------------+-----------+----------+---------+----------+
 
 5) PYNQ Demo
 ------------
