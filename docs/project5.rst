@@ -35,11 +35,11 @@ You will have to build the entire project from scratch
 The FM Demodulator has 3 main parts: downsampler, linear filter and discriminator.
 
 **downsampler**
-##########
+###############
 This part consists of a straight forward downsampler. We have to downsample by a factor of N, i.e. keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
 
 **linear filter**
-################
+#################
 Build a linear filter whose function is implemented as a direct II transposed structure.
 
 This means that the filter implements:
@@ -48,7 +48,7 @@ This means that the filter implements:
  More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
 
 **discriminator**
-################
+#################
 To demodulate FM radio, we require a discriminator circuit which gives an output that is proportional to the input frequency deviation. 
 
 
@@ -67,13 +67,13 @@ To demodulate FM radio, we require a discriminator circuit which gives an output
    // normalize by the squared envelop acts as a limiter
    disdata = (xI*der_xQ-xQ*der_xI)./(xI^2+xQ^2)
    
-More information about the discriminator can be found `here <http://www.eas.uccs.edu/~mwickert/ece5625/lecture_notes/N5625_4.pdf>`_ in page 4-23.
+More information about the discriminator can be found `here <http://www.eas.uccs.edu/~mwickert/ece5625/lecture_notes/N5625_4.pdf#page=23>`_ in page 4-23.
 
 **Optimization Guidelines**
 
 * You must always use a clock period of 10 ns.
 
-* The output of the various architectures that you generate must match the golden output. We have broken down the project into subcomponents to allow you to develop and test them individually. You would be wise to do it in such a manner.
+* It is your task to ensure functional correctness in your synthesized design. Therefore, you must write each test bench carefully.
 
 
 5) PYNQ Demo
@@ -106,15 +106,15 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
   - .bit and .hwh files
   - FM.ipynb host file
 
-**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches). The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if your final FM Demodulation functions are functionally correct (they pass their test benches). The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
 7) Grading Rubric
 -----------------
 
-**30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. All four functions must pass their test benches. You need to report your throughput for each function in your report.
+**30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. All functions must pass their test benches, and the test benches must show some amount of careful thought. You need to report your throughput for each function in your report.
 
 **60 points:** Pynq Demo. You will get full credit for clear audio output.
 
 **10 points:** Report.
 
-**Bonus:** Base Overlay
+**Bonus:** Implement audio through the Pynq board. The Pynq board only plays audio through the FPGA fabric. If you are interested in this, you should look at the Pynq Base Overlay.
