@@ -83,7 +83,7 @@ This project is different from your previous projects in the sense that it has a
 6) Submission Procedure
 -----------------------
 
-You need to demonstrate your functional hardware implementation FM Demodulator in the class. We will post schedule of each team’s demonstration later on Piazza.
+You need to demonstrate your functional hardware implementation FM Demodulator in class. We will post schedule of each team’s demonstration later on Piazza.
 
 You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment. 
 
