@@ -36,7 +36,7 @@ The FM Demodulator has 3 main parts: downsampler, linear filter and discriminato
 
 **downsampler**
 ##########
-This part consists of a straight forward downsampler. We have to downsample by a factor of N, that is keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
+This part consists of a straight forward downsampler. We have to downsample by a factor of N, i.e. keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
 
 **linear filter**
 ################
@@ -49,7 +49,7 @@ This means that the filter implements:
 
 **discriminator**
 ################
-To demodulate FM we require a discriminator circuit, which gives an output which is proportional to the input frequency deviation. 
+To demodulate FM radio, we require a discriminator circuit which gives an output that is proportional to the input frequency deviation. 
 
 
 .. code-block :: python3
