@@ -20,7 +20,7 @@ In this project, you will use your knowledge from previous projects to implement
 
 `Download <https://bitbucket.org/akhodamoradiUCSD/237c_draft/downloads/fm.zip>`_.
 
-This contains a python notebook which explains the working of a Mono FM Demodulator.
+This contains a Python notebook which explains the working of a Mono FM Demodulator.
 
 For this project the following will not be provided:
 
@@ -80,11 +80,10 @@ More information about the discriminator can be found `here <http://www.eas.uccs
 
 This project is different from your previous projects in the sense that it has an immediate and observable impact on you. The effect of the latency and throughput of your implementation can be observed by listening to your audio output, and the feelings of frustration you obtain when a song keeps getting cut. You are highly encouraged to modify the code to achieve a better performance and observe the throughput by changing the way you transmit data between PS and PL. Make use of the "RTL 2832" USB tuner in-order to receive the input RF Samples.
 
-
 6) Submission Procedure
 -----------------------
 
-You need to demonstrate your functional hardware implementation FM Demodulator in the class. We will post schedule of each team’s demonstration later on piazza.
+You need to demonstrate your functional hardware implementation FM Demodulator in the class. We will post schedule of each team’s demonstration later on Piazza.
 
 You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment. 
 
@@ -116,4 +115,4 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
 
 **10 points:** Report.
 
-**Bonus:** Implement audio through the Pynq board. The Pynq board only plays audio through the FPGA fabric. If you are interested in this, you should look at the Pynq Base Overlay.
+**Bonus:** Implement audio output through the Pynq board's 3.5mm audio output. The Pynq board only plays audio through the FPGA fabric. If you are interested in this, you should look at the Pynq Base Overlay.
