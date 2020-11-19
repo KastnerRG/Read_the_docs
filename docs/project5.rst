@@ -104,7 +104,7 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
   - .bit and .hwh files
   - FM.ipynb host file
 
-**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if your final FM Demodulation functions are functionally correct (they pass their test benches). The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if your final FM Demodulation functions are functionally correct (they pass their test benches). The report will help us to understand your design. You also can use this report to explain your work for the bonus question if you choose to pursue it (check the grading section).
 
 7) Grading Rubric
 -----------------
