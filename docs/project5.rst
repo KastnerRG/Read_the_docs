@@ -8,12 +8,12 @@ Project: FM Demodulator
 
 1) Introduction
 ---------------
-In this project we will build an FM Demodulator and implement it on the Pynq Board.
+In this project we will build an FM Demodulator and implement it on the Pynq board.
 
 2) Project Goal
 ---------------
 
-In this project, you will use your knowledge from previous projects to implement a FM Demodulator in programmable logic. The project is divided into two parts. In the first part, you develop different functions for a FM Demodulator using HLS. A FM Demodulator consists of a linear filter, downsampler and a discriminator.The second part is to integrate the Demodulator onto the Pynq Board using "RTL2832" USB tuners. You should be able to listen to local FM radio channel using your MonoFM implementation in programmable logic. For more detail about the mono FM implementation have a look at it's source code `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py>`_.
+In this project, you will use your knowledge from previous projects to implement a FM Demodulator in programmable logic. The project is divided into two parts. In the first part, you develop different functions for a FM Demodulator using HLS. A FM Demodulator consists of a linear filter, downsampler and a discriminator. The second part is to integrate the Demodulator onto the Pynq Board using "RTL2832" USB tuners. You should be able to listen to local FM radio channel using your MonoFM implementation in programmable logic. For more detail about the mono FM implementation have a look at it's source code `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py>`_.
 
 3) Materials
 ------------
@@ -22,13 +22,13 @@ In this project, you will use your knowledge from previous projects to implement
 
 This contains a Python notebook which explains the working of a Mono FM Demodulator.
 
-For this project the following will not be provided:
+For this project the following will NOT be provided:
 
 * ~.cpp - The place where you write synthesizable code
 * ~.h - header file with various definitions that may be useful for developing the code 
 * ~test.cpp - testbench
 
-You will have to build the entire project from scratch
+You will have to build the entire project from scratch.
 
 4) Design Instructions
 ----------------------
