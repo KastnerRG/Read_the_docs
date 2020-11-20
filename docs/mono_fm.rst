@@ -23,7 +23,7 @@ The second part is to integrate the Demodulator onto the Pynq Board. You should 
 3) Materials
 ------------
 
-`Download <https://bitbucket.org/akhodamoradiUCSD/237c_draft/downloads/fm.zip>`_.
+`Download <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/mono_fm.zip>`_.
 
 This contains a python notebook which explains the working of a Mono FM Demodulator.
 
