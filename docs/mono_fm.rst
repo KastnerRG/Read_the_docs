@@ -1,4 +1,4 @@
-.. OFDM_Receiver documentation master file, created by
+.. FM_Receiver documentation master file, created by
    sphinx-quickstart on Sat Mar 23 13:02:50 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -8,7 +8,7 @@ Project: FM Demodulator
 
 1) Introduction
 ---------------
-In this project we will build an FM Demodulator and implement it on the Pynq Board.
+In this project we use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_. RF tuner to sample RF signals and will build a FM Demodulator and implement it on the Pynq Board.
 
 2) Project Goal
 ---------------
