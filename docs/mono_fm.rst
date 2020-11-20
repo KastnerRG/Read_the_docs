@@ -48,9 +48,13 @@ This part consists of a straight forward downsampler. We have to downsample by a
 Build a linear filter whose function is implemented as a direct II transposed structure.
 
 This means that the filter implements:
-   a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M] - a[1]*y[n-1] - ... - a[N]*y[n-N]
+
+.. math::
+
+   a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M] 
+                         - a[1]*y[n-1] - ... - a[N]*y[n-N]
    
- More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
+More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
 
 **discriminator**
 ################
