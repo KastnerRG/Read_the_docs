@@ -63,20 +63,39 @@ To demodulate FM we require a discriminator circuit, which gives an output which
 
 .. code-block :: python3
 
-   function disdata = discrim(x)
-   // x is the received signal in complex baseband form
-   // Mark Wickert
-   // xI is the real part of the received signal
-   // xQ is the imaginary part of the received signal
-   // N is the length of x
-   // b filter coefficients
-   // a for discrete derivative
-   der_xI = linear_filter(b,a,xI)
-   der_xQ = linear_filter(b,a,xQ)
-   // normalize by the squared envelop acts as a limiter
-   disdata = (xI*der_xQ-xQ*der_xI)./(xI^2+xQ^2)
-   
-More information about the discriminator can be found `here <http://www.eas.uccs.edu/~mwickert/ece5625/lecture_notes/N5625_4.pdf>`_ in page 4-23.
+   def discrim(x):
+    """
+    function disdata = discrim(x)
+    where x is an angle modulated signal in complex baseband form.
+    
+    Mark Wickert
+    """
+    X=np.real(x)        # X is the real part of the received signal
+    Y=np.imag(x)        # Y is the imaginary part of the received signal
+    b=np.array([1, -1]) # filter coefficients for discrete derivative
+    a=np.array([1, 0])  # filter coefficients for discrete derivative
+    derY=signal.lfilter(b,a,Y)  # derivative of Y, 
+    derX=signal.lfilter(b,a,X)  #    "          X,
+    disdata=(X*derY-Y*derX)/(X**2+Y**2)
+    return disdata
+
+The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1825>`_ of an FM baseband discriminator. 
+
+To understand the operation of *discrim()* start with a general FM modulated signal and obtain the complex envelope:
+
+.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/in_signal.png
+
+The complex envelope is:
+
+.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/complex_env.png
+
+A frequency discriminator obtains the derivative of the modulated angle:
+
+.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/phi.png
+
+And its derivative is:
+
+.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/dphi.png
 
 **Optimization Guidelines**
 
