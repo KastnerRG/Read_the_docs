@@ -113,9 +113,7 @@ This project is different from your previous projects in the sense that it has t
 6) Submission Procedure
 -----------------------
 
-You need to demonstrate your functional hardware implementation FM Demodulator in the class. We will post schedule of each team’s demonstration later on piazza.
-
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment. 
+You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it.
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
@@ -134,14 +132,14 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
   - .bit and .hwh files
   - FM.ipynb host file
 
-**Report:** For this project, you must submit a report the throughput with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches) and (2) achieves target latency. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For this project, you must submit a report with 1 page for each function from section 4. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. No questions; no answers. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches) and (2) achieves target latency. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
 7) Grading Rubric
 -----------------
 
 **30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. You need to report the throughput of the final design.
 
-**60 points:** Pynq Demo. You will get full credit for clear audio output.
+**60 points:** Pynq Demo. You will get full credit for clear audio output and an RMSE less than 1e-6.
 
 **10 points:** Report.
 
