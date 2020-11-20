@@ -107,7 +107,7 @@ And its derivative is:
 5) PYNQ Demo
 ------------
 
-This project is different from your previous projects in the sense that it works in real time. Effect of latency and throughput of your implementation can be observed by listening to your audio output. You are highly encouraged to modify the code to achieve a better performance and observe the throughput by changing the way you transmit data between PS and PL. Make use of the "RTL 2832" USB tuner in-order to receive the input RF Samples.
+This project is different from your previous projects in the sense that it has to achive a *real time* performance, with a processing time less than the sampling time. You are highly encouraged to modify the code to achieve a better performance and observe the throughput by changing the way you transmit data between PS and PL. Make use of the "RTL 2832" USB tuner in-order to receive the input RF Samples.
 
 
 6) Submission Procedure
