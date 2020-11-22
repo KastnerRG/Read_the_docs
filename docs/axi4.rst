@@ -14,7 +14,33 @@ In this section you learn how to create a project in Vivado HLS, synthesis your 
 1.1) Download code and create a Vivado HLS project
 ##################################################
 
-Download and unzip `axi4_burst.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/axi4_burst.zip>`_. Generate your project using the provided script.tcl file:
+This is the code we will be using:
+
+.. code-block :: c++
+
+	#include "axi4_sqrt.hpp"
+	#include <string.h>
+	#include <math.h>
+
+	void axi4_sqrt(float *in, float *out, int len)
+	{
+	#pragma HLS INTERFACE s_axilite port=return bundle=sqrt
+	#pragma HLS INTERFACE s_axilite port=len bundle=sqrt
+	#pragma HLS INTERFACE m_axi depth=50 port=out offset=slave bundle=output
+	#pragma HLS INTERFACE m_axi depth=50 port=in offset=slave bundle=input
+	#pragma HLS INTERFACE s_axilite port=in
+	#pragma HLS INTERFACE s_axilite port=out
+
+		float buff[100];
+		memcpy(buff, (const float*) in, len * sizeof(float));
+
+		for(int i = 0; i < len; i++)
+			buff[i] = sqrt(buff[i]);
+
+		memcpy(out, (const float*) buff, len * sizeof(float));
+	}
+
+Download and unzip `axi4_burst.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/axi4_burst.zip>`_ that contains the above code. Generate your project using the provided script.tcl file:
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 

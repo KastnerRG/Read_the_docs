@@ -29,7 +29,7 @@ Now can open you your project in Vivado HLS. **Your code is not complete!**, mod
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3975727536-pynq1.png
 
-INPUT and OUTPUT ports are set to *axis* interfaces for streaming and *length* is set to *s_axilite* for a non-streaming interface. *axis_t* is a struct defined in the header file that is composed of an int *data* and an ap_uint<1> *last*. The 1-bit *last* is required for *axis* interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
+INPUT and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
 
 Note that 
 
@@ -44,7 +44,7 @@ is performing two separate operations. Breaking it down:
 	*OUTPUT = cur;	// write the output struct to the address in OUTPUT
 	OUTPUT++;	// post-increment the address in OUTPUT for the next write operation
 
-In this lab, since we are reusing an input struct *cur* to generate an output struct, the last bit is handled for us. However, if you must construct your own *axis_t* struct, you must ensure you set *last* to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of *last* that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
+In this lab, since we are reusing an input struct `cur` to generate an output struct, the `last` bit is handled for us. However, if you must construct your own `axis_t` struct, you must ensure you set `last` to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of `last` that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
 
 You can do so like this:
 

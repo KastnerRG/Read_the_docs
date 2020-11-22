@@ -60,16 +60,15 @@ You should connect the FFT and the QPSK decoder together to form the complete OF
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include `SIZE = 1024`, `SIZE2 = 512`, and`M = 10` (i.e. log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The `tripcount` directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
 
 5) PYNQ Demo
 ------------
-The final part is to integrate the receiver onto the PYNQ using a proper interface to transmit data to the OFDM receiver, and receive the decoded data back from your hardware implementation in the programmable logic.
+The final part is to integrate the receiver onto the Zynq's processing system (PS) using a proper interface to transmit data to the OFDM receiver, and receive the decoded data back from your hardware implementation on the Zynq's programmable logic (PL).
 
-We provided the general framework for creating different PL-PS interfaces and Jupyter Notebook host applications in previous labs. You should use that to create this demo. We will not be providing you with anything more than what was given in previous labs.
+We provided the general framework for creating different PL-PS interfaces and Jupyter Notebook host applications in previous labs. You should use that to create this demo. We will not be providing you with anything more than what was given in previous labs. You are free to modify the function interface in Vivado HLS however you please, and to use whichever streaming method you like.
 
-**The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what was done in the previous project).
-
+**The end of your Jupyter notebook must contain code that verifies your output**. Your can either use the provided input/output, and plot the received data against the golden output, or compare custom signals against a software version of OFDM (similar to what was done in the FFT project).
 
 6) Submission Procedure
 -----------------------
@@ -102,13 +101,13 @@ Your repo must contain a folder named "ofdm_receiver" at the top-level. This fol
 
 **Report:**
 
-For this project, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final OFDM design achieves the target performance. The report will help us to understand your design.
+For this project, you need to submit an 1-page report to explain only your final architecture. You can add figures, diagrams, tables, or charts to describe your architecture with a short paragraph explaining them. A 2-page report at max is allowed if it is necessary. No questions; no answers. Just explain your design. We will check if (1) your final OFDM design is functionally correct and (2) your final FFT design achieves the target performance. The report will help us to understand your design.
 
 7) Grading Rubric
 -----------------
 
-**50 points:** Functionally correct design
+**50 points:** Functionally correct OFDM design
 
-**40 points:** Achieving target performance
+**40 points:** Achieving target performance of FFT (exactly the same performance benchmark suggested for the FFT project)
 
 **10 points:** Report

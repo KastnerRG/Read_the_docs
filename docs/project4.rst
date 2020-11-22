@@ -61,10 +61,9 @@ We have given you a set of files that allows you to develop and test this bit re
 
 This code is in subfolder 1_bit_reverse in the folder 1_Subcomponents. You should develop your code here to insure that it matches the expected result. Note that this testbench is exercising only one input/output result. In other words, even if it passes this, it may not pass all results. Feel free to add additional testbenches to insure your code is correct.
 
-The bit reverse function has the following prototype: void bit_reverse(DTYPE X_R[SIZE], DTYPE X_I[SIZE])
+The bit reverse function has the following prototype: `void bit_reverse(DTYPE X_R[SIZE], DTYPE X_I[SIZE])`
 
 You should perform the swapping “in place” on the data in both of the real and imaginary portions of the data. That is the input data in both X_R and X_I will be reordered when the function completes. Focus on how you modified your code in order to make it more “hardware friendly”.
-
 
 **Hint:** Logical operations map well to hardware. Calculating the indices of the arrays that should be swapped can be done with logical operations.
 
@@ -75,12 +74,12 @@ The next portion of this project performs optimization on a typical software imp
 
 You should optimize this code as much as possible. The results of the code will be poor; it will likely have > 250 million cycles. The throughput here is likely much worse than running this in software on a microprocessor. This often happens when we put the initial software versions of an application into a high level synthesis tool. And it should not be all that surprising. The code is optimized to run quickly in software, which runs largely in a sequential model of computation. The code must typically be carefully optimized with the final hardware architecture in mind to get good results. This involves exploiting parallelism and pipelining.
 
-You will also notice that the first loop has function calls to sine and cosine. This code will synthesize quickly with these function calls. However, you may wish to replace these function calls (which will synthesize into CORDIC cores), into table lookups. We have provided two tables in the header file, W_real and W_imag which contain the precomputed twiddle factors for our 1024 FFT, i.e., W_real[i] = cos(2.0 * pi * i/SIZE) and W_imag[i] = sin(2.0 * pi * i/SIZE) where i = [0,512).
+You will also notice that the first loop has function calls to sine and cosine. This code will synthesize quickly with these function calls. However, you may wish to replace these function calls (which will synthesize into CORDIC cores), into table lookups. We have provided two tables in the header file, `W_real` and `W_imag` which contain the precomputed twiddle factors for our 1024 FFT, i.e., `W_real[i] = cos(2.0 * pi * i/SIZE)` and `W_imag[i] = sin(2.0 * pi * i/SIZE)` where `i` is in [0,512).
 
 Some potential optimizations include:
 
 
-* Using the W_real and W_imag tables
+* Using the `W_real` and `W_imag` tables
 * Pipelining
 * Loop unrolling
 * Memory partitioning
@@ -109,7 +108,17 @@ The next task is to create code that can implement “generic” function, i.e.,
 
 Once you have a correctly functioning set of functions, you should copy and paste them in the 2_Skeleton_Restructured project and make sure that it passes the testbench. Since our testbenches on perform one check, which is far from comprehensive, it is possible, though hopefully unlikely, that you have some error that the 2_Skeleton_Restructured testbench exposes and was not exercised in the individual testbench. If your code passes the 2_Skeleton_Restructured project you can assume it is correct (though again since it is only one test, it may be wrong; you would need to perform significantly more testing in any “non-class” situation).
 
-Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles.
+Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles. Here are sample results achieved by previous students for the FFT project: 
+
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| A                   | 1027             | 17        | 97       | 29      | 78       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| B                   | 1033             | 35        | 100      | 43      | 96       |
+		+---------------------+------------------+-----------+----------+---------+----------+
+		| Your name here :)   |                  |           |          |         |          |
+		+---------------------+------------------+-----------+----------+---------+----------+
 
 **Optimization Guidelines**
 
@@ -119,7 +128,9 @@ Now onto the final part of the project, optimizing of this restructured code. Yo
 
 * You should not change the data types as given to you. You do not need to perform bitwidth optimization of this project.
 
-* It is ok to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variable defined in the header files for you convenience. These include SIZE = 1024, SIZE2 = 512, and M = 10 (log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The tripcount directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
+* It is OK to rewrite the code if it helps you with optimizations. For example, you can change the function interfaces. There are some variables defined in the header files for you convenience. These include `SIZE = 1024`, `SIZE2 = 512`, and `M = 10` (i.e. log SIZE). Feel free to use these in your code. They are defined in every header file across all of the different folders. The software version has a nested for loop structure that does not allow Vivado HLS to provide an exact number of cycles. The `tripcount` directive can help with this. You should be able to understand the reported results. For example, while Vivado may give you a best, worst and average case numbers, your algorithm for a fixed size FFT should be a fixed number of cycles.
+
+
 
 5) PYNQ Demo
 ------------

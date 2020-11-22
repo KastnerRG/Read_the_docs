@@ -19,7 +19,7 @@ You should start this assignment by understanding the 11 tap FIR filter, and imp
 2) Preparation
 --------------
 
-Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. We will refer to these labs collectively as Lab 0.
+Before you start, we strongly suggest that you go through these high-level synthesis tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. We will refer to these labs collectively as Lab 0 (with Parts 1, 2, and 3).
 
 3) Materials
 ------------
@@ -81,7 +81,7 @@ The first goal of this project is to generate a functionally correct HLS design 
 5) FIR11
 --------
 
-The first step for the project is to get a functionally correct design working for an 11 tap FIR filter. For this, you will need to use the Vivado HLS tool, and finish the function body of “void fir()” in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. **Use the provided script.tcl to create your project**.
+The first step for the project is to get a functionally correct design working for an 11 tap FIR filter. For this, you will need to use the Vivado HLS tool, and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. **Use the provided script.tcl to create your project**.
 
 6) FIR128 Instructions
 ----------------------
@@ -120,7 +120,9 @@ Questions:
 
   Compare the memory partitioning parameters: block, cyclic, and complete. What is the difference in performance and resource usage (particularly with respect to BRAMs and FFs)? Which one gives the best performance? Why?
 
-* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
+* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
+
+  In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). 
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
 
@@ -171,7 +173,7 @@ FIR128
 
   - Submit synthesis reports (.rpt **and** .xml)
 
-  -"Interesting" is imprecise, but it is often difficult to say definitively that one design is the best. Typically there are different designs that Pareto optimal. Any design that you discuss in answers to your questions should be submitted. Often one performs a lot of design space exploration by changing values, and this can lead to a lot of architectures, many of which are "bad" or "uninteresting". We don't need details on those. A good target is more than 5 and less than 20 "interesting" designs. Your report should only include the answer to the questions. Please clearly indicate where each question is answered in your report.
+  - "Interesting" is imprecise, but it is often difficult to say definitively that one design is the best. Typically there are different designs that Pareto optimal. Any design that you discuss in answers to your questions should be submitted. Often one performs a lot of design space exploration by changing values, and this can lead to a lot of architectures, many of which are "bad" or "uninteresting". We don't need details on those. A good target is more than 5 and less than 20 "interesting" designs. Your report should only include the answer to the questions. Please clearly indicate where each question is answered in your report.
 
 For each question, explicitly mention which design(s) you used in your answers. You are asked to discuss different performance and resource metrics. Make sure that the method used to calculate the performance and resource metrics is clear. Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles. For this reason, we **require** you to state the corresponding throughput for every design, instead of estimated clock period and latency.
 
