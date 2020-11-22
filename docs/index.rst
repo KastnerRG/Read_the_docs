@@ -33,6 +33,7 @@ Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook a
    project4
    project4.5
    project5
+   rtl2832
    project6
    PYNQ-example
    axidma
