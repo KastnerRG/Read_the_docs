@@ -44,7 +44,7 @@ The provided zip file has a number of subfolders and files related to implementi
 
         - script.tcl - Use this to create your project
 
-* Demo Folder: Demo folder for Cordic.
+* Demo folder:
 
         - Cordic.ipynb - Jupyter notebook host file
 
