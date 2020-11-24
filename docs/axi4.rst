@@ -39,6 +39,8 @@ This is the code we will be using:
 
 		memcpy(out, (const float*) buff, len * sizeof(float));
 	}
+	
+Note that we had to include `string.h` to be able to use `memcopy`. Additionally, we use `memcopy` instead of a for-loop (as used in AXI-streaming) to force Vivado HLS to infer an AXI4-Burst. Sometimes Vivado HLS will not infer this from a for-loop, but will for `memcopy`.
 
 Download and unzip `axi4_burst.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/axi4_burst.zip>`_ that contains the above code. Generate your project using the provided script.tcl file:
 
@@ -153,6 +155,8 @@ Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_w
 
 Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **axi4_sqrt.hwh**
 
+These files need to have the same name (except for their file extension).
+
 3) Host program
 ---------------
 
@@ -175,7 +179,7 @@ Create a new Jupyter notebook and run the following code to test your design:
 	import numpy as np
 
 	ol = Overlay('axi4_sqrt.bit')
-	sqrt_ip = ol.axi4_sqrt_0
+	sqrt_ip = ol.axi4_sqrt_0 // if you can't find the IP, type 'ol.' and hit Tab to see what options are available
 	
 .. code-block :: python3
 
