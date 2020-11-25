@@ -1,4 +1,4 @@
-Lab: Axistream Multiple DMAs (AXIS)
+Lab: Axistream Multiple DMAs (axis)
 ===================================
 
 Simple streaming example with multiple inputs

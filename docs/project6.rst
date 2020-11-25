@@ -9,7 +9,7 @@ Project: Matrix Multiplication on Intel DevCloud Using DPC++
 1) Introduction
 ---------------
 
-This project provides an introduction to hardware acceleration using Intel `DevCloud <https://devcloud.intel.com/>`_. DevCloud provides access to Intel `oneAPI <https://www.oneapi.com/>`_ - a set of hardware acceleration development tools. We focus on the Data Parallel C++ (DPC++) programming methodology that is a core part of oneAPI. DevCloud provides access to different Intel hardware platforms including multicore CPUs, GPUs, and FPGAs. DPC++ aims to provide a single source programming methodology that covers these different hardware accelerators. 
+This project provides an introduction to hardware acceleration using Intel `DevCloud <https://devcloud.intel.com/>`_. DevCloud provides access to Intel `oneAPI <https://www.oneapi.com/>`_ - a set of hardware acceleration development tools. We focus on the Data Parallel C++ (DPC++) programming methodology that is a core part of oneAPI. DevCloud provides access to different Intel hardware platforms including multicore CPUs, GPUs, and FPGAs. DPC++ aims to provide a single source programming methodology that covers these different hardware accelerators.
 
 2) Project Goal
 ---------------
@@ -24,13 +24,13 @@ Before we begin, please complete :doc:`Lab: DPC++ on Intel DevCloud<devcloud>`. 
 Optimize Load Transfers
 #######################
 
-As discussed in the :doc:`lab<devcloud>`, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the *c_calc* kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations. At this link, you can find `examples of LSU types being used in code <https://github.com/oneapi-src/oneAPI-samples/blob/master/DirectProgramming/DPC%2B%2BFPGA/Tutorials/Features/lsu_control/src/lsu_control.cpp>`_.
+As discussed in the :doc:`lab<devcloud>`, the load store unit (LSU) in the baseline implementation requires hundreds of cycles and is the major bottleneck in the `c_calc` kernel. DPC++ uses a Burst/Coalesced LSU by default. Burst/Coalesced buffers contiguous memory requests until it reaches the maximum burst size. Change the LSU type to lower the latency for the load operations. At this link, you can find `examples of LSU types being used in code <https://github.com/oneapi-src/oneAPI-samples/blob/master/DirectProgramming/DPC%2B%2BFPGA/Tutorials/Features/lsu_control/src/lsu_control.cpp>`_.
 
 * Modify the **LD** operation to a different LSU style to achieve a lower latency. This should bring the *c_calc.B2* latency to less than 25 cycles.
 
 * Question 1: Describe your modification and discuss why it achieves a lower latency.
 
-References:  
+References:
 
 * `oneAPI Samples <https://github.com/oneapi-src/oneAPI-samples>`_
 
@@ -51,7 +51,7 @@ Manually unroll the loop by replicating the reductions into separate variables.
 
 * Question 3: What are the effects and general trends of performing manual unrolling? Are the results as expected?
 
-References: 
+References:
 
 * The *Schedule Viewer* typically provides good insight about how DPC++ synthesizes the code.
 
@@ -70,7 +70,9 @@ You also have to show the result of each knob adjustment in a normalized through
 
 After you decide on a design you think is best, try this design with different matrix sizes: 128, 256, 512, 1024, 2048, 4096. Report the performance of your design on these input sizes. You can report additional sizes if you like.
 
-.. image :: https://i.imgur.com/l9a1mRh.png
+		.. image :: https://i.imgur.com/l9a1mRh.png
+
+Note: Notice that the provided code prints throughput in kb/s on the command line output. This number is dependent on the fact that the code is running on a server, sharing resources with other programs submitted by other users. Therefore, multiple runs of the same program will print different throughputs, depending on who is running what and when. To avoid this, there are a few strategies you can choose from. You could run the program multiple times and take the average of throughputs over runs, or (preferably) you can use the normalized 1/(loop latency) from the synthesis report as a proxy for throughput.
 
 Requirements
 ############
@@ -122,7 +124,7 @@ Your repo must contain a folder named "matrix_multiplication" at the top-level. 
   - Source code (matrix_mul_dpcpp.cpp) and reports (screenshots).
 
 
-**Report:** For this project, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate. You can submit the synthesized report screenshots as image files or include them as figures in your report (properly labeled).
+**Report:** For this project, you must submit a report that answers the questions on this page. You may add figures, diagrams, tables, or charts to describe your architectures with a sufficient explanation of how they were achieved and what they demonstrate. You can submit the synthesized report screenshots as image files or include them as (properly labeled) figures in your report.
 
 6) Grading Rubric
 -----------------
