@@ -70,7 +70,7 @@ You also have to show the result of each knob adjustment in a normalized through
 
 After you decide on a design you think is best, try this design with different matrix sizes: 128, 256, 512, 1024, 2048, 4096. Report the performance of your design on these input sizes. You can report additional sizes if you like.
 
-.. image :: https://i.imgur.com/l9a1mRh.png
+		.. image :: https://i.imgur.com/l9a1mRh.png
 
 Note: Notice that the provided code prints throughput in kb/s on the command line output. This number is dependent on the fact that the code is running on a server, sharing resources with other programs submitted by other users. Therefore, multiple runs of the same program will print different throughputs, depending on who is running what and when. To avoid this, there are a few strategies you can choose from. You could run the program multiple times and take the average of throughputs over runs, or (preferably) you can use the normalized 1/(loop latency) from the synthesis report as a proxy for throughput.
 
