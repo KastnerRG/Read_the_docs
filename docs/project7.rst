@@ -8,39 +8,40 @@ Project: FM Demodulator
 
 1) Introduction
 ---------------
-In this project we use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_ RF tuner to sample RF signals and will build a FM Demodulator and implement it on the Pynq board.
+In this project we use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_ RF tuner to sample RF signals and will build a FM Demodulator and implement it on the Pynq Board.
 
 2) Project Goal
 ---------------
 
-In this project, you will use your knowledge from previous projects to implement an FM Demodulator in programmable logic (PL). The project is divided into two parts.
+
+In this project, you will use your knowledge from previous projects to implement an FM Demodulator in programmable logic. The project is divided into two parts.
 
 In the first part, you develop different functions to implement the `scikit-dsp-comm mono_FM <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1842>`_ Demodulator in Vivado HLS. This FM Demodulator consists of a linear filter, downsampler, and a discriminator.
 
-The second part is to integrate the Demodulator onto the Pynq board. You should be able to listen to local FM radio channels using your Mono FM implementation in programmable logic.
+The second part is to integrate the Demodulator onto the Pynq Board. You should be able to listen to local FM radio channel using your MonoFM implementation in programmable logic.
 
 3) Materials
 ------------
 
 `Download <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/mono_fm.zip>`_.
 
-This contains a Python notebook which explains the workings of a Mono FM Demodulator. You can view the contents of the notebook :doc:`here<rtl2832>`.
+This contains a python notebook which explains the working of a Mono FM Demodulator.
 
-For this project the following will NOT be provided:
+For this project the following will not be provided:
 
 * ~.cpp - The place where you write synthesizable code
 * ~.h - header file with various definitions that may be useful for developing the code 
 * ~test.cpp - testbench
 
-You will have to build the entire project from scratch.
+You will have to build the entire project from scratch
 
 4) Design Instructions
 ----------------------
-The FM Demodulator has 3 main parts: downsampler, linear filter, and discriminator.
+The FM Demodulator has 3 main parts: downsampler, linear filter and discriminator.
 
 **downsampler**
 ##########
-This part consists of a straight forward downsampler. We have to downsample by a factor of N; that is: keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
+This part consists of a straight forward downsampler. We have to downsample by a factor of N, that is keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
 
 **linear filter**
 ################
@@ -138,8 +139,8 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
 
 **30 points:** Functionally correct design. You will get full credit if we are able to build your blocks without any effort. You need to report the throughput of the final design.
 
-**60 points:** Pynq demo. You will get full credit for clear audio output and an RMSE less than 1e-6.
+**60 points:** Pynq Demo. You will get full credit for clear audio output and an RMSE less than 1e-6.
 
 **10 points:** Report.
 
-**Bonus:** Integrate your design with the base overlay to make use of audio instance on the Pynq board. More information about the audio module on Pynq Z2 can be found `here <https://pynq.readthedocs.io/en/v2.3/pynq_libraries/audio.html>`_ and `here <https://pynq.readthedocs.io/en/v2.3/pynq_package/pynq.lib/pynq.lib.audio.html#pynq-lib-audio>`_. Detailed description of the BaseOverlay can be found  `here <https://pynq.readthedocs.io/en/v2.3/pynq_overlays/pynqz2/pynqz2_base_overlay.html>`_.
+**Bonus:** Integrate your design with the base overlay to make use of audio instance on the Pynq Board. More information about the audio module on Pynq Z2 can be found `here <https://pynq.readthedocs.io/en/v2.3/pynq_libraries/audio.html>`_ and `here <https://pynq.readthedocs.io/en/v2.3/pynq_package/pynq.lib/pynq.lib.audio.html#pynq-lib-audio>`_. Detailed description of the BaseOverlay can be found  `here <https://pynq.readthedocs.io/en/v2.3/pynq_overlays/pynqz2/pynqz2_base_overlay.html>`_.
