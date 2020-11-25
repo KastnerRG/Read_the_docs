@@ -24,7 +24,7 @@ The second part is to integrate the Demodulator onto the Pynq board. You should 
 
 `Download <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/mono_fm.zip>`_.
 
-This contains a Python notebook which explains the working of a Mono FM Demodulator. You can view the contents of the notebook :doc:`here<rtl2832>`.
+This contains a Python notebook which explains the workings of a Mono FM Demodulator. You can view the contents of the notebook :doc:`here<rtl2832>`.
 
 For this project the following will NOT be provided:
 
