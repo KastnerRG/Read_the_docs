@@ -13,11 +13,11 @@ In this project we use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_ RF 
 2) Project Goal
 ---------------
 
-In this project, you will use your knowledge from previous projects to implement an FM Demodulator in programmable logic. The project is divided into two parts.
+In this project, you will use your knowledge from previous projects to implement an FM Demodulator in programmable logic (PL). The project is divided into two parts.
 
 In the first part, you develop different functions to implement the `scikit-dsp-comm mono_FM <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1842>`_ Demodulator in Vivado HLS. This FM Demodulator consists of a linear filter, downsampler, and a discriminator.
 
-The second part is to integrate the Demodulator onto the Pynq Board. You should be able to listen to local FM radio channel using your MonoFM implementation in programmable logic.
+The second part is to integrate the Demodulator onto the Pynq Board. You should be able to listen to local FM radio channels using your Mono FM implementation in programmable logic.
 
 3) Materials
 ------------
@@ -26,13 +26,13 @@ The second part is to integrate the Demodulator onto the Pynq Board. You should 
 
 This contains a Python notebook which explains the working of a Mono FM Demodulator. You can view the contents of the notebook :doc:`here<rtl2832>`.
 
-For this project the following will not be provided:
+For this project the following will NOT be provided:
 
 * ~.cpp - The place where you write synthesizable code
 * ~.h - header file with various definitions that may be useful for developing the code 
 * ~test.cpp - testbench
 
-You will have to build the entire project from scratch
+You will have to build the entire project from scratch.
 
 4) Design Instructions
 ----------------------
