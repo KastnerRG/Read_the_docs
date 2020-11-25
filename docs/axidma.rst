@@ -1,4 +1,4 @@
-Lab: Axistream Single DMA (AXIS)
+Lab: Axistream Single DMA (axis)
 ================================
 
 Simple streaming example
