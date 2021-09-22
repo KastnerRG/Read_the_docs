@@ -10,7 +10,7 @@ Parallel Programming for FPGAs is an open-source book aimed at teaching hardware
 
 PYNQ Setup
 --------------
-Most of the projects and labs use the `PYNQ infrastructure <https://github.com/Xilinx/PYNQ>` to deploy HLS code onto the FPGA. 
+Most of the projects and labs use the `PYNQ infrastructure <https://github.com/Xilinx/PYNQ>`_ to deploy HLS code onto the FPGA. 
 Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup. 
 
 You may also need the following link to connect to the board if the above steps don't work: https://www.nengo.ai/nengo-pynq/connect.html#via-a-computer
