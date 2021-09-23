@@ -16,7 +16,7 @@ You may also need the following link to connect to the board if the above steps 
 
 Link to Book
 --------------
-Please follow this `link <http://kastner.ucsd.edu/hlsbook/>`_ for the textbook associated with these projects and labs.
+These projects and labs accompany the `Parallel Programming for FPGAs book <http://kastner.ucsd.edu/hlsbook/>`_. The projects and labs have a direct correspondance to the chapters in this book and were written to accompany each other.
 
 
 
