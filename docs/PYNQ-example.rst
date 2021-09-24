@@ -4,25 +4,29 @@ Lab: Pynq Memory Mapped IO (s_axilite)
 
 This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
 
-1) Vivado HLS: C/C++ to RTL
+1) Vitis HLS: C/C++ to RTL
 ---------------------------
 
-In this section, you will write your code in C/C++, test it, and convert it to RTL using Vivado HLS.
+In this section, you will write your code in C/C++, test it, and convert it to RTL using Vitis HLS.
 
 1.1) Write your code
 ~~~~~~~~~~~~~~~~~~~~
 
 Open Vivado HLS, create a new project, and name it **pynq_mul**
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq1.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq27.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq28.png
 
 Set top function name to **mul_test**
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq2.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq29.png
 
 Do not add any files to your project and proceed to **part selection** and select **xc7z020clg400-1**
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq3.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq30.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq31.png
 
 In **Explorer** section, right click on **Source**, select **New file** and create **mul_test.cpp**. Complete the body of **mul.cpp** as following:
 
@@ -31,6 +35,11 @@ In **Explorer** section, right click on **Source**, select **New file** and crea
   void mul_test(int* out, int in){
 	*out = 2*in;
   }
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq32.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq33.png
+
 
 Create a test bench file by right clicking on **Test Bench** in **Explorer** section and create a new file named **mul_tb.cpp**. Complete the body of this file as following:
 
@@ -54,26 +63,38 @@ Create a test bench file by right clicking on **Test Bench** in **Explorer** sec
 	return 0;
   }
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq4.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq34.png
 
 1.2) Test your code
 ~~~~~~~~~~~~~~~~~~~
 
-Run C simulation and make sure your code passes your test bench.
+Run C simulation and make sure your code passes your test bench. 
 
 1.3) Set port types
 ~~~~~~~~~~~~~~~~~~~
 
-Make sure that **mul_test.cpp** is open. Open **Directive** on right side and set all the ports to **s_axilite** by right clicking on available options in **Directive** window.
+Make sure that **mul_test.cpp** is open. Open **Directive** and right click on the options and select **Modify Directive** . In the drop down, select **INTERFACE** and set all the ports to **s_axilite** by right clicking on available options. Repeat the same for all the options.
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq5.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq36.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq37.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq38.png
 
 1.4) Synthesis and export your design
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run C Synthesis and after finished, click on **export RTL** and export your design.
+Run C Synthesis. After the synthesis is complete, you should see the following synthesis summary report-
 
-At this point, you can exit and close Vivado HLS.
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq35.png
+
+and after finished, click on **export RTL** and export your design.
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq39.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq40.png
+
+At this point, you can exit and close Vitis HLS.
 
 2) Vivado: RTL to bitstream
 ---------------------------
