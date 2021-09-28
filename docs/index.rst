@@ -6,19 +6,14 @@
 Parallel Programming for FPGAs: Projects and Labs
 ===================================================
 
-Parallel Programming for FPGAs is an open-source book aimed at teaching hardware and software developers how to efficiently program FPGAs using high-level synthesis (HLS). The goal is to train people to effectively use HLS tools. The book was developed over many years to serve as a primary reference for UCSD's 237C — a hardware design class targeting first-year graduate students and advanced undergraduate students. While writing the book, we developed projects and labs for the students to learn the HLS tools and to build real systems using FPGAs. This serves a general one stop shop for those projects and labs.
+`Parallel Programming for FPGAs book <http://kastner.ucsd.edu/hlsbook/>`_ is an open-source book aimed at teaching hardware and software developers how to efficiently program FPGAs using high-level synthesis (HLS). The goal is to train people to effectively use HLS tools. The book was developed over many years to serve as a primary reference for UCSD's 237C — a hardware design class targeting first-year graduate students and advanced undergraduate students. 
+
+While writing the book, we developed projects and labs for the students to learn the HLS tools and to build real systems using FPGAs. This serves a general one stop shop for those projects and labs. The projects and labs have a direct correspondance to the chapters in this book and were written to accompany each other.
+
 
 PYNQ Setup
 --------------
-Most of the projects and labs use the `PYNQ infrastructure <https://github.com/Xilinx/PYNQ>`_ to deploy HLS code onto the FPGA targeting the `PYNQ-Z2 board <http://www.pynq.io/board.html>`_. Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup. 
-
-You may also need the following link to connect to the board if the above steps don't work: https://www.nengo.ai/nengo-pynq/connect.html#via-a-computer
-
-Link to Book
---------------
-These projects and labs accompany the `Parallel Programming for FPGAs book <http://kastner.ucsd.edu/hlsbook/>`_. The projects and labs have a direct correspondance to the chapters in this book and were written to accompany each other.
-
-
+Most of the projects and labs use the `PYNQ infrastructure <https://github.com/Xilinx/PYNQ>`_ to deploy HLS code onto the FPGA targeting the `PYNQ-Z2 board <http://www.pynq.io/board.html>`_. Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup. If needed, it is possible `wirelessly access the Pynq-Z2 <https://www.nengo.ai/nengo-pynq/connect.html#via-a-computer>`_.
 
 .. toctree::
    :maxdepth: 2
