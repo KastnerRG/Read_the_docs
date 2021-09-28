@@ -31,5 +31,5 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    axi4
    interrupts
    microblaze.ipynb
-   .. _devcloud: devcloud
+   devcloud
 
