@@ -1,3 +1,5 @@
+. _devcloud:
+
 Lab: DPC++ on Intel DevCloud
 ====================
 
