@@ -9,17 +9,18 @@ Project: CORDIC
 1) Introduction
 --------------
 
-The primary goal of this project is to design a  COordinate Rotation DIgital Computer (CORDIC)
-This will likely take the majority of the time spent working on this project.
-A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions.
-CORDIC can do a lot of different functions; here we will specifically use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta).
+The primary goal of this project is to understand how to use arbitrary precision data types and their effects on accuracy, performance, and resource consumption. To do this, the project implements a Cartesian to Polar transform in two different ways: using a COordinate Rotation DIgital Computer (CORDIC) and as a lookup table (LUT).
+
+A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. The CORDIC control can be modified to perform different functions, e.g., the book describes how to use a CORDIC for calculating sine and cosine. This project focuses on using the CORDIC to translate between Cartesian coordinates (x, y) to the polar coordinates (r, theta).
+
+The lookup table architecture is a generic computational technique that instantiates a memory that holds the output results. The fucntion inputs are used to address into the memory to retrieve the appropriate result. A lookup table in the FPGA logic architecture is one such example that uses very small memories to compute an arbitrary N bit input logic function whose output is 1 bit. These LUTs are small -- a 4-LUT has 16 bits; a 5-LUT has 32 bits. This project has a LUT-based architecture to compute the Cartesian to Polar transform.
 
 2) Materials
 --------------
 
 You can download the project files here:
 
-* `CORDIC Project Repo<https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2>`_
+* `CORDIC Project Repo <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2>`_
 
 The repo has a number of subfolders and files related to the project. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using HLS. You can use the provided script.tcl to create your project.
 
@@ -51,9 +52,9 @@ The repo has a number of subfolders and files related to the project. This conta
 ---------
 1. Design and verify a functionally complete CORDIC IP core using HLS: **cordic_baseline**. You are provided a testbench that you can use though that the testbench does not cover all cases. You are encouraged to create a more extensive testbench to ensure that your code is correct.
 
-2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float variables. Once you have a functionally correct CORDIC, then change data types to fixed-point. This should result in your multiplications being synthesized into shifts and adds (you should verify that this is indeed happening). Do not change your function header/definition/interface (the input and output variables and their datatypes), only change variables inside the body of your `cordiccart2pol` function. You may use new typedefs if you wish. Try to perform as few operations with float as possible, meaning there will likely be a lot of typecasting involved.
+2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design a baseline using float variables. Once you have a functionally correct CORDIC, then start experimenting with arbitrary precision data types. This should result in your multiplications being synthesized into shifts and adds (you should verify that this is indeed happening). Do not change the function header/definition/interface (the input and output variables and their datatypes), only change variables inside the body of your `cordiccart2pol` function. You may use new typedefs if you wish. Try to perform as few operations with float as possible, meaning there will likely be a lot of typecasting involved.
 
-3. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed-point types is more performant, but may reduce the accuracy of the results. Perform design-space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs.
+3. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Fixed-point types provide better performance and resource usage, but may reduce the accuracy of the results. Perform design-space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs.
 
 4. Explore the architectural tradeoffs of a lookup table (LUT) architecture. We have provided a fully functional base implementation of this. You should read and understand this code. You should analyze the design-space of this lookup table IP core by changing the parameters of the look-up tables, e.g., by varying the data type of the input data and the output data types. This should allow you to find architectures with different resource usage, performance, and accuracy results.
 
