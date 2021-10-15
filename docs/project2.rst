@@ -20,7 +20,7 @@ CORDIC can do a lot of different functions; here we will specifically use it to 
 
 You can download the project files here:
 
-* `cordic.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/cordic.zip?raw=true>`_
+* `cordic.zip <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2>`_
 
 The provided zip file has a number of subfolders and files related to implementing the CORDIC. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using Vivado HLS. Use the provided script.tcl to create your project.
 
