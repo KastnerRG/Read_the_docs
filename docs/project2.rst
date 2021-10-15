@@ -9,8 +9,7 @@ Project: CORDIC
 1) Introduction
 --------------
 
-The goal of this project is to design a  COordinate Rotation DIgital Computer (CORDIC).
-You are tasked with building one version of the CORDIC from scratch.
+The primary goal of this project is to design a  COordinate Rotation DIgital Computer (CORDIC)
 This will likely take the majority of the time spent working on this project.
 A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions.
 CORDIC can do a lot of different functions; here we will specifically use it to convert Cartesian coordinates (x, y) to the polar coordinates (r, theta).
@@ -22,7 +21,7 @@ You can download the project files here:
 
 * `CORDIC Project Repo<https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2>`_
 
-The provided zip file has a number of subfolders and files related to implementing the CORDIC. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using Vivado HLS. Use the provided script.tcl to create your project.
+The repo has a number of subfolders and files related to the project. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using HLS. You can use the provided script.tcl to create your project.
 
 * HLS \ cordic folder:
 
@@ -52,12 +51,11 @@ The provided zip file has a number of subfolders and files related to implementi
 ---------
 1. Design and verify a functionally complete CORDIC IP core using HLS: **cordic_baseline**. You are provided a testbench that you can use though that the testbench does not cover all cases. You are encouraged to create a more extensive testbench to ensure that your code is correct.
 
-2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float variables. Once you have a functionally correct CORDIC, then change data types to fixed-point types incrementally while checking to see that the test-bench still passes. This should result in your multiplications being synthesized into shifts and adds (you should verify that this is indeed happening). Do not change your function header/definition/interface (the input and output variables and their datatypes), only change variables inside the body of your `cordiccart2pol` function. You may use new typedefs if you wish. Try to perform as few operations with float as possible, meaning there will likely be a lot of typecasting involved.
+2. The ultimate goal is to create an efficient CORDIC that only uses simple operations, i.e., add and shift. You should not be using divide, multiply, etc. in your CORDIC core. First design your code using float variables. Once you have a functionally correct CORDIC, then change data types to fixed-point. This should result in your multiplications being synthesized into shifts and adds (you should verify that this is indeed happening). Do not change your function header/definition/interface (the input and output variables and their datatypes), only change variables inside the body of your `cordiccart2pol` function. You may use new typedefs if you wish. Try to perform as few operations with float as possible, meaning there will likely be a lot of typecasting involved.
 
-3. Explore the architectural tradeoffs of a lookup table (LUT) architecture. We have provided a fully functional base implementation of this. You should read and understand this code. You should analyze the design-space of this lookup table IP core by changing the parameters of the look-up tables, e.g., by varying the data type of the input data and the output data types. This should allow you to find architectures with different resource usage, performance, and accuracy results.
+3. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed-point types is more performant, but may reduce the accuracy of the results. Perform design-space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs.
 
-4. A major design tradeoff for the CORDIC revolves around the precision or accuracy of the results. For example, changing the number of rotations effects the accuracy, performance, and resource usage. Another important tradeoff is the data type of the variables. Using large, complex data types (like floating point) is typically most accurate, but not good with respect to performance and resource usage. Using fixed-point types is more performant, but may reduce the accuracy of the results. Perform design-space exploration to create a wide range of implementations using various data types for different variables, modifying the number of rotations, and performing other optimizations to find the Pareto optimal designs.
-
+4. Explore the architectural tradeoffs of a lookup table (LUT) architecture. We have provided a fully functional base implementation of this. You should read and understand this code. You should analyze the design-space of this lookup table IP core by changing the parameters of the look-up tables, e.g., by varying the data type of the input data and the output data types. This should allow you to find architectures with different resource usage, performance, and accuracy results.
 
 4) PYNQ Demo
 ---------
