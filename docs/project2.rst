@@ -81,22 +81,18 @@ Your report should answer the following questions. Make it very clear where you 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
 
 
-* **Question 4:** These questions all refer to the LUT-based implementation of the Cartesian to Polar transformation: Summarize the design-space exploration that you performed as you modified the data types of the input variables and the LUT entries.
+* **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
 
-  - How does the input data type affect the size of the LUT? Precisely describe this relationship.
+  - How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
 
-  - How does the output data type affect the size of the LUT? Precisely describe this relationship.
+  - The testbench assumes that the inputs x, y are normalized between [-1,1]. What is the minimum number of integer bits required for x and y? What is the minimal number of integer bits for the output data type R and Theta?
 
-  - How does the precision of the input and output data types affect the accuracy (RMSE) results?
+  - Modify the number of fractional bits for the input and output data types. How does the precision of the input and output data types affect the accuracy (RMSE) results?
 
-  - The testbench assumes that the inputs will be normalized between [-1,1].
-
-  - What is the performance of the LUT implementation. How does this change as the input and output data types change?
+  - What is the performance (throughput, latency) of the LUT implementation. How does this change as the input and output data types change?
 
   - What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
 
-
-  In particular, what are the trends with regard to accuracy (measured as error)? How about resources? What about the performance? Is there a relationship between accuracy, resource usage, and performance?
 
 6) Submission Procedure
 -------------------------
