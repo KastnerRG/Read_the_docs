@@ -3,22 +3,20 @@
 
 #include <ap_fixed.h>
 
-#define NO_ITER 16
+#define DEBUG 0
+//#define SYNTHESIS // uncomment me for synthesis; comment me for simulation
 
-typedef float data_t; // Type of the input/output and LUT values. You can change the bitwidth.
+typedef ap_fixed<8,3> data_t; // Data type of a value in the LUT
 
-#define W			32 // Total size of fixed-point representation. Must be W >= (I+MAN_BITS)
-#define I			2  // Size of integer part of fixed-point (1 bit sign + 1 bit integer)
-#define MAN_BITS	5  // Size of fractional part. Vary this number to increase/decrease the resolution.
-#define LUT_SIZE	(1 << ((MAN_BITS+I) << 1)) // Size of the LUT. It is 2^(2*(MAN_BITS+I)).
+#define W			8  // Total size of fixed-point representation
+#define I			2  // Number of integer bits of fixed-point representation
+#define FRACTIONAL_BITS	W-I  // Number of fractional bits
+#define LUT_SIZE	(1 << (W << 1)) // Size of the LUT = 2^(2*W)
 
-#define ERROR		0.0001 // Used in test bench
-
-#ifdef TEST_BENCH
 extern data_t my_LUT_r[LUT_SIZE];
 extern data_t my_LUT_th[LUT_SIZE];
-#endif
 
 void cordiccart2pol(data_t x, data_t y, data_t * r,  data_t * theta);
+void init_cart2pol_LUTs(data_t my_LUT_th[LUT_SIZE], data_t my_LUT_r[LUT_SIZE]);
 
 #endif // CORDICCART2POL_H
