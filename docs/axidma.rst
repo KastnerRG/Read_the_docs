@@ -21,13 +21,13 @@ Linux: open a terminal, make sure your environment is set, navigate to streamMul
 
     $ vivado_hls script.tcl
 
-Windows: open vivado_hls command line and run the following ::
+Windows: Open Vitis and create a New Project and import **streamMul.cpp** and **streamMul.hpp** and set **smul** as the top function.
 
-    $ vivado_hls script.tcl
+**Your code is not complete!**, modify your code to become same as the following:
 
-Now can open you your project in Vivado HLS. **Your code is not complete!**, modify your code to become same as the following:
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma1.png
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3975727536-pynq1.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma2.png
 
 INPUT and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
 
@@ -62,13 +62,13 @@ We must interact with them this way because we are dealing with an AXI stream, n
 
 Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*length*) is a variable.
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/349020321-pynq2.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma3.png
 
 Now you can export your RTL code by clicking on **Export RTL**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/582121524-pynq3.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma4.png
 
-After exporting is done, you can close and exit from Vivado HLS.
+After exporting is done, you can close and exit from Vitis.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -111,11 +111,13 @@ Select and check **S AXI HP0 interface**:
 
 Add a **Smul** to your design and rename it to **smul**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2813328635-pynq9.png
+Add a **AXI Direct Memory Access** to your design and rename it to **smul_dma**. 
 
-Add a **AXI Direct Memory Access** to your design and rename it to **smul_dma**. Double click on your **AXI DMA** and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to 23:
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma5.png
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/816419694-pynq10.png
+Double click on your **AXI DMA** and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to 23:
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma6.png
 
 Add a **Constant** to your design
 
@@ -130,7 +132,7 @@ Connect the following ports:
 
 **xlconstant_0 to smul::ap_ctrl::ap_start**
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3242937011-pynq11.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma7.png
 
 2.5) Automatic connections
 ##########################
@@ -149,7 +151,7 @@ Now you can leave the rest of the connections to the tool. There should be a hig
 
 At this point your design should look like this:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/4144014292-pynq14.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma8.png
 
 2.6) Generate bitstream
 #######################
