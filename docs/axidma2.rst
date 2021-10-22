@@ -19,13 +19,13 @@ Linux: open a terminal, make sure your environment is set, navigate to streamMul
 
     $ vivado_hls script.tcl
 
-Windows: open vivado_hls command line and run the following ::
-
-    $ vivado_hls script.tcl
+Windows: Open Vitis and create a New Project and import **streamAdd.cpp** and **streamAdd.hpp** and set **sadd** as the top function.
 
 Now you can open your project in Vivado HLS. It should look like this:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/757890213-pynq1.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma1.png
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma2.png
 
 INPUT1, INPUT2 and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
 
@@ -61,13 +61,13 @@ We must interact with them this way because we are dealing with an AXI stream, n
 
 Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*length*) is a variable.
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/269252617-pynq2.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma3.png
 
 Now you can export your RTL code by clicking on **Export RTL**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/582121524-pynq3.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma4.png
 
-After exporting is done, you can close and exit from Vivado HLS.
+After exporting is done, you can close and exit from Vitis.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -110,8 +110,6 @@ Select and check **S AXI HP0 interface** and **S AXI HP1 Interface**:
 
 Add a **Sadd** to your design and rename it to **sadd**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1816926883-pynq9.png
-
 Add two **AXI Direct Memory Access** to your design and rename it to **sadd_dma1** and **sadd_dma2**.
 
 Double click on your **sadd_dma1** and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to 23:
@@ -139,7 +137,7 @@ Connect the following ports:
 
 **sadd_dma2::M_AXIS_MM2S** to **sadd::INPUT2**
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/261261680-pynq11.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma5.png
 
 2.5) Automatic connections
 ##########################
@@ -150,7 +148,7 @@ Now you can leave the rest of the connections to the tool. There should be a hig
 
 2. Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/175618043-pynq12.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma6.png
 
 3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
@@ -158,18 +156,18 @@ Now you can leave the rest of the connections to the tool. There should be a hig
 
 At this point your design should look like this:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/54325661-pynq14.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma7.png
 
 2.6) Create a Hierarchy
 #######################
 
 Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized. This step is optional, but it is good to know how to do. Note that, in the Jupyter notebook, we will have to access the hierarchy before accessing the DMA or the IP. You can see this in the Python code at the bottom of the page. 
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2766584167-pynq15.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma8.png
 
 Your design should look like this:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2344208927-pynq16.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma9.png
 
 2.7) Generate bitstream
 #######################
