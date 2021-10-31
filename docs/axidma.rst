@@ -25,12 +25,12 @@ Windows: Open Vitis and create a New Project and import **streamMul.cpp** and **
 
 **Your code is not complete!**, modify your code to become same as the following:
 
-.. code-block:: c++
+.. code-block :: c++
 
-#include "ap_axi_sdata.h"
-#include "hls_stream.h"
+	#include "ap_axi_sdata.h"
+	#include "hls_stream.h"
 
-typedef ap_axiu<32, 0, 0, 0> trans_pkt;
+	typedef ap_axiu<32, 0, 0, 0> trans_pkt;
 
 	void smul(hls::stream< trans_pkt > &INPUT, hls::stream< trans_pkt > &OUTPUT)
 	{
@@ -42,31 +42,6 @@ typedef ap_axiu<32, 0, 0, 0> trans_pkt;
 		data_p.data *= 2;
 		OUTPUT.write(data_p);
 	}
-.. comment::
-INPUT and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
-
-Note that 
-
-.. comment::
-	*OUTPUT++ = cur;
-.. comment::	
-is performing two separate operations. Breaking it down:
-
-.. comment::
-	*OUTPUT = cur;	// write the output struct to the address in OUTPUT
-	OUTPUT++;	// post-increment the address in OUTPUT for the next write operation
-.. comment::
-In this lab, since we are reusing an input struct cur to generate an output struct, the last bit is handled for us. However, if you must construct your own axis_t struct, you must ensure you set last to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of last that terminates your stream early, leaving you scratching your head about why the output error on Pynq’s Jupyter interface is so high).
-.. comment::
-You can do so like this:
-
-.. comment::
-
-axis_t curr;
-curr.data = ...; // write data
-curr.last = ...; // set to 1 if end of stream, else set to 0
-*OUTPUT++ = curr; // make sure you only write to a particular address once, so do it after the struct is constructed
-
 
 In this lab, since we are using an ap_axiu struct for out I/O variables, the `last` bit is handled for us. We must interact with them this way because we are dealing with an AXI stream, not an array.
 
