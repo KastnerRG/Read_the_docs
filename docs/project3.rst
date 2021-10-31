@@ -104,7 +104,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 6) PYNQ Demo
 ------------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs<axidma2>`' example, with the major difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs <axidma2>`' example, with the major difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
 
 You will additionally need to change the depth of your variable interface ports (you can read more about that `here <https://www.xilinx.com/html_docs/xilinx2017_4/sdaccel_doc/jit1504034365862.html>`_). For the single `s_axilite` port, you can either choose to do `port=length` like we did for the lab (in which case you will need to add a constant to your block diagram like we do in the lab, and you will need to write the length from Jupyter to the appropriate address), or you can choose to do `port=return` (in which case `ap_start` will not appear in your HLS IP, and you will need to write 1 to the appropriate address from Jupyter to start the process like in previous projects and labs).
 
