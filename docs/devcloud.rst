@@ -112,8 +112,6 @@ Modify the code to select a FPGA device. This can be accomplished in two steps:
 
 .. code-block :: python
 
-	$ ./matrix_mul_dpc
-	Device: Intel(R) FPGA Emulation Device
   ext::intel::fpga_emulator_selector _device;
   queue q(_device, dpc_common::exception_handler);
 
