@@ -110,7 +110,7 @@ Modify the code to select a FPGA device. This can be accomplished in two steps:
 
 #. Modify the queue initialization:
 
-.. code-block :: python
+.. code-block :: c++
 
   ext::intel::fpga_emulator_selector _device;
   queue q(_device, dpc_common::exception_handler);
