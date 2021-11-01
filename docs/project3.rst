@@ -144,7 +144,7 @@ Your repo must contain a folder named "dft" at the top-level. This folder must b
 
 * Folder **dft1024_best**
 
-* Folder **Demo**: DFT.ipynb | dft.bit | dft.hwh
+* Folder **Demo**: ``DFT.ipynb`` | ``dft.bit`` | ``dft.hwh``
 
 * **Note**: Provide every architecture that you used to answer the questions: make sure each folder contains the source code (*.cpp, *.h, *.tcl only) and the reports (.rpt and .xml).
 
