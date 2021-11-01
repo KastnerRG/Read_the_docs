@@ -108,14 +108,12 @@ Modify the code to select a FPGA device. This can be accomplished in two steps:
 
 	* Include a header file by adding the line:
 
-		.. code-block :: c++
-
-			#include "CL/sycl/INTEL/fpga_extensions.hpp"
+    .. code-block :: c++
+      #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
 	* Modify the queue initialization:
 
-		.. code-block :: c++
-
+    .. code-block :: c++
       ext::intel::fpga_emulator_selector _device;
       queue q(_device, dpc_common::exception_handler);
 
