@@ -106,12 +106,12 @@ Line 55 uses the default_selector for the hardware device. See Section 4.3.8 of 
 
 Modify the code to select a FPGA device. This can be accomplished in two steps:
 
-# Include a header file by adding the line:
+#. Include a header file by adding the line:
 
-    .. code-block :: c++
-      #include "CL/sycl/INTEL/fpga_extensions.hpp"
+.. code-block :: c++
+  #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
-# Modify the queue initialization:
+#. Modify the queue initialization:
 
     .. code-block :: c++
       ext::intel::fpga_emulator_selector _device;
