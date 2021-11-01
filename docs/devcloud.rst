@@ -106,13 +106,13 @@ Line 55 uses the default_selector for the hardware device. See Section 4.3.8 of 
 
 Modify the code to select a FPGA device. This can be accomplished in two steps:
 
-#. Include a header file by adding the line
+* Include a header file by adding the line
 
 .. code-block :: c++
 
   #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
-#. Modify the queue initialization:
+* Modify the queue initialization:
 
 .. code-block :: c++
 
@@ -179,7 +179,7 @@ Change the other kernels in a similar manner. Repeat the steps to generate a new
 
 This will make your report more readable:
 
-.. image :: https://i.imgur.com/u8rjftn.png
+.. image :: image/readable-gemm-resources.png
 
 2) Analyzing the Report
 ---------------------------
