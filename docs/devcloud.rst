@@ -110,9 +110,9 @@ Modify the code to select a FPGA device. This can be accomplished in two steps:
 
 #. Modify the queue initialization:
 
-    .. code-block :: c++
-      ext::intel::fpga_emulator_selector _device;
-      queue q(_device, dpc_common::exception_handler);
+.. code-block :: c++
+  ext::intel::fpga_emulator_selector _device;
+  queue q(_device, dpc_common::exception_handler);
 
 Re-compile and re-run the code. The device should now be an FPGA emulator.
 
