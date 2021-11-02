@@ -28,12 +28,12 @@ oneAPI and DPC++ are open source and there are many resources available online t
 * `SYCL Specifications <https://www.khronos.org/sycl/>`_
 
 
-1) Instructions
----------------
+Instructions
+************
 
 This section walks through some example matrix multiplication code to illustrate how to use dpc++ and the DevCloud environment. This requires access to DevCloud via JupyterLab.
 
-1.1) Create a Project in JupyterLab
+Create a Project in JupyterLab
 ####################
 
 Start a JupyterLab session and click the + sign to open the *Launcher*.
@@ -83,7 +83,7 @@ The output should look like this:
 It shows the device name used for the matrix multiplication, the matrices' size, and the testbench result.
 
 
-1.2) Modify the Project for FPGA
+Modify the Project for FPGA
 ###################
 
 Open the file *src/matrix_mul_dpcpp.cpp*.
