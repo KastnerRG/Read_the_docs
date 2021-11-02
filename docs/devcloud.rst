@@ -86,7 +86,7 @@ It shows the device name used for the matrix multiplication, the matrices' size,
 Modify the Project for FPGA
 ###################
 
-Open the file *src/matrix_mul_dpcpp.cpp*.
+Open the file ``src/matrix_mul_dpcpp.cpp``.
 
 Line 55 uses the default_selector for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
@@ -129,9 +129,9 @@ Perform high-level synthesis and create the report using ``dpcpp``:
 
 These commands do not perform a full synthesis, i.e., they do not create an FPGA bitstream. They perform high level synthesis and simulate the FPGA design on a processor. This enables estimations of the design performace and resource usage. To generate a bitstream, remove ``-fsycl-link*``. Note that generating a bitstream can take a *long* time and thus should only be done sparingly, i.e., when the design optimizations are finalized.
 
-The report is an HTML file in ``matrix_mul_dpcpp.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. Safari seems to have the best compatibility with this, with Firefox coming second, but neither is guaranteed to work. If they still do not render, use SCP or SSHFS to copy or mount your files (incuding the *lib* folder from which the report draws its components) to your local drive, then open the report locally.
+The report is an HTML file in ``matrix_mul_dpcpp.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. Safari seems to have the best compatibility with this, with Firefox coming second, but neither is guaranteed to work. If they still do not render, use SCP or SSHFS to copy or mount your files (including the ``lib`` folder from which the report draws its components) to your local drive, then open the report locally.
 
-The *report* provides an overview of the design performance. Open *report.html*, click *Summary* button, click **Compile Estimated Kernel Resource Utilization Summary** in the *Summary Content* pane.
+The report provides an overview of the design performance. Open ``report.html``, click ``Summary`` button, click ``Compile Estimated Kernel Resource Utilization Summary`` in the ``Summary Content`` pane.
 
 This shows the resource usages for the different kernels and other system resources.
 
@@ -172,7 +172,7 @@ Take a deeper look at the report. Under *Views*, open *System Viewer*. The ``Ker
 
 .. image :: image/mm-kernel-view.png
 
-Click the menu  *Throughput Analysis* and then the item *Loops Viewer*. This provides detailed information for each step of the process in the kernels:
+Click the menu  ``Throughput Analysis`` and then the item ``Loops Viewer``. This provides detailed information for each step of the process in the kernels:
 
 .. image :: image/mm-base-loop-viewer.png
 
