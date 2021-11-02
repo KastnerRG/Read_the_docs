@@ -90,13 +90,13 @@ Open the file *src/matrix_mul_dpcpp.cpp*.
 
 Line 55 uses the default_selector for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
-* Include a header file by adding the line
+Include a header file by adding the line
 
 .. code-block :: c++
 
   #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
-* Modify the queue initialization:
+Modify the queue initialization:
 
 .. code-block :: c++
 
