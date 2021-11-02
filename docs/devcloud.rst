@@ -184,16 +184,12 @@ This will make your report more readable:
 2) Analyzing the Report
 ---------------------------
 
-Let's take a deeper look at the report. Under *System Viewer*, open *Graph Viewer*. On the open page, select *System* under *Graph List*.
-
-This graph shows that your code has three kernels: *a_init* and *b_init* are simple kernels that store values into the global memory. *c_calc* has two blocks: B2 calculates the matrix multiply, and B1 stores the results in the global memory.
-
-Now let's explain the red arrows. Click on the red circle titled *LD (x2)* inside *c_calc.B2*. These two LD operations correspond to line 126 in the source code. They have a latency of 223 cycles to read from DDR memory, which is the bottleneck for the loop iteration.
+Take a deeper look at the report. Under *Views*, open *System Viewer*. The ``Kernel System`` has four items: ``Global memory`` is the interface to the off-chip memory. ``a_init``, ``b_init`` are the kernels that initiate the arrays in global memory. *``c_calc`` performs the matrix multiply. The load operations from arrays ``a`` and ``b`` occur in ``c_calc.B8``, the multiply-accumulate operations are in ``c_calc.B2``, and the store operation into array c is in ``c_calc.B7``. The load and multiply-accumulate operations are from line 125.
 
 .. image :: image/mm-kernel-view.png
 
-The *Loops Viewer* under *Throughput Analysis* provides detailed information for each step of the process in the kernels:
+Click the menu  *Throughput Analysis* and then the item *Loops Viewer*. This provides detailed information for each step of the process in the kernels:
 
 .. image :: image/mm-base-loop-viewer.png
 
-The **Load Store Unit (LSU) Style** for the **LD** operations is shown as **Burst-coalesced cached**. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the *Burst/coalesced* LSU by default. In *Burst/coalesced* mode, the compiler optimizes for buffering contiguous memory requests for the *largest possible burst*. We can change the LSU type to achieve a lower latency for the load operations. More details are available at `Intel® oneAPI DPC++ FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/download/oneapi-fpga-optimization-guide.html>`_.
+The **Load Store Unit (LSU) Style** for the **LD** operations is shown as **Burst-coalesced cached**. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the *Burst/coalesced* LSU by default. In *Burst/coalesced* mode, the compiler optimizes for buffering contiguous memory requests for the *largest possible burst*. We can change the LSU type to achieve a lower latency for the load operations. This and other optimizations are part of the doc:`Matrix Multiplication Project <project6> .
