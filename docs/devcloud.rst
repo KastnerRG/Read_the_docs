@@ -6,7 +6,7 @@ Lab: DPC++ on Intel DevCloud
 Getting Started
 ********************
 
-To complete this lab, you need access to Intel DevCloud. You can log into DevCloud using `JupyterLab <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/Welcome.ipynb?reset>`_ It is also possible to `access DevCloud using a command-line interface via ssh <https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/>`_. 
+To complete this lab, you need access to Intel DevCloud. You can log into DevCloud using `JupyterLab <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/Welcome.ipynb?reset>`_ It is also possible to `access DevCloud using a command-line interface via ssh <https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/>`_.
 
 Resources
 ************
@@ -36,22 +36,18 @@ This section walks through some example matrix multiplication code to illustrate
 1.1) Create a Project in JupyterLab
 ####################
 
-	* Start a JupyterLab session.
+Start a JupyterLab session and click the + sign to open the *Launcher*.
 
-	* Click the + sign to open the *Launcher*.
-
-	.. image :: https://i.imgur.com/UmK4kbY.png
+.. image :: https://i.imgur.com/UmK4kbY.png
 
 
-	* Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline matrix multiplication project.
+Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline matrix multiplication project. Open a Terminal and launch the tool:
 
-	* Open a *Terminal* and launch the tool:
+.. code-block :: python
 
-		.. code-block :: python
+ $ oneapi-cli
 
-			$ oneapi-cli
-
-	* This tool has a basic interface that allows you to choose a project based on its various templates. Perform the following:
+This tool has a basic interface that allows you to choose a project based on its various templates. Perform the following:
 
 		1) Select *Create a project*
 
@@ -67,13 +63,13 @@ This creates several files inside the *matrix_mul* folder:
 
 The source file is in the *src* folder and the *README* provides instructions to compile the code.
 
-	* Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
+Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
 
-		.. code-block :: python
+.. code-block :: python
 
-			$ cd matrix_mul
-			$ make all
-			$ make run
+ $ cd matrix_mul
+ $ make all
+ $ make run
 
 The output should look like this:
 
@@ -92,9 +88,7 @@ It shows the device name used for the matrix multiplication, the matrices' size,
 
 Open the file *src/matrix_mul_dpcpp.cpp*.
 
-Line 55 uses the default_selector for the hardware device. See Section 4.3.8 of the `Programming Guide <https://software.intel.com/sites/default/files/oneAPIProgrammingGuide_3.pdf>`_ for more details.
-
-Modify the code to select a FPGA device. This can be accomplished in two steps:
+Line 55 uses the default_selector for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
 * Include a header file by adding the line
 
@@ -125,7 +119,7 @@ Re-compile and re-run the code. The device should now be an FPGA emulator.
 
 Once your code is functionally correct, synthesize it to check your design's performance and resource utilization.
 
-Perform high level synthesis and create the report using *dpcpp*:
+Perform high-level synthesis and create the report using ``dpcpp``:
 
 .. code-block :: python
 
