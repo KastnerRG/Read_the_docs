@@ -116,8 +116,8 @@ Modify the code to select a FPGA device. This can be accomplished in two steps:
 
 .. code-block :: c++
 
-  ext::intel::fpga_emulator_selector _device;
-  queue q(_device, dpc_common::exception_handler);
+  ext::intel::fpga_emulator_selector device_selector;
+  queue q(device_selector, dpc_common::exception_handler);
 
 
 Re-compile and re-run the code. The device should now be an FPGA emulator.
@@ -190,7 +190,7 @@ This graph shows that your code has three kernels: *a_init* and *b_init* are sim
 
 Now let's explain the red arrows. Click on the red circle titled *LD (x2)* inside *c_calc.B2*. These two LD operations correspond to line 126 in the source code. They have a latency of 223 cycles to read from DDR memory, which is the bottleneck for the loop iteration.
 
-.. image :: https://i.imgur.com/F5Y9jYm.png
+.. image :: image/mm-kernel-view.png
 
 Check the results in *Loop Analysis*: under *Throughput Analysis*, select *Loop Analysis* and click on *c_calc.B2*:
 
