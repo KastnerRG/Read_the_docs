@@ -192,16 +192,8 @@ Now let's explain the red arrows. Click on the red circle titled *LD (x2)* insid
 
 .. image :: image/mm-kernel-view.png
 
-Check the results in *Loop Analysis*: under *Throughput Analysis*, select *Loop Analysis* and click on *c_calc.B2*:
+The *Loops Viewer* under *Throughput Analysis* provides detailed information for each step of the process in the kernels:
 
-.. image :: https://i.imgur.com/vXlEsMd.png
-
-The *Schedule Viewer* under *System Viewer* provides detailed information for each step of the process in the kernels:
-
-.. image :: https://i.imgur.com/cJmQUhZ.png
-
-Details for the load operation **LD** is available by clicking on their *yellow* bar.
-
-.. image :: https://i.imgur.com/IgN1CVJ.png
+.. image :: image/mm-base-loop-viewer.png
 
 The **Load Store Unit (LSU) Style** for the **LD** operations is shown as **Burst-coalesced cached**. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the *Burst/coalesced* LSU by default. In *Burst/coalesced* mode, the compiler optimizes for buffering contiguous memory requests for the *largest possible burst*. We can change the LSU type to achieve a lower latency for the load operations. More details are available at `Intel® oneAPI DPC++ FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/download/oneapi-fpga-optimization-guide.html>`_.
