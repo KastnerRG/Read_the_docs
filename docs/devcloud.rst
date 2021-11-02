@@ -114,7 +114,7 @@ Re-compile and re-run the code. The device should now be an FPGA emulator.
 	Result of matrix multiplication using DPC++: Success - The results are correct!
 
 
-1.3) Generate the FPGA Report
+Generate the FPGA Report
 ########################################
 
 Once your code is functionally correct, synthesize it to check your design's performance and resource utilization.
@@ -165,8 +165,8 @@ This will make your report more readable:
 
 .. image :: image/readable-gemm-resources.png
 
-2) Analyzing the Report
----------------------------
+Analyzing the Report
+########################################
 
 Take a deeper look at the report. Under *Views*, open *System Viewer*. The ``Kernel System`` has four items: ``Global memory`` is the interface to the off-chip memory. ``a_init`` and ``b_init`` are kernels that initiate the arrays in global memory. ``c_calc`` performs the matrix multiply. The load operations from arrays ``a`` and ``b`` occur in ``c_calc.B8``, the multiply-accumulate operations are in ``c_calc.B2``, and the store operation into array c is in ``c_calc.B7``. The load and multiply-accumulate operations are from line 125.
 
