@@ -49,15 +49,15 @@ Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline m
 
 This tool has a basic interface that allows you to choose a project based on its various templates. Perform the following:
 
-1) Select *Create a project*
+1) Select ``Create a project``
 
-2) Select *cpp*
+2) Select ``cpp``
 
-3) Select *Matrix Multiplication* under *Get Started*
+3) Select ``Matrix Multiplication`` under ``Get Started``
 
-4) Leave *Directory* and *Project Name* with their default paramaters and select *Create*
+4) Leave ``Directory`` and ``Project Name`` with their default paramaters and select ``Create``
 
-This creates several files inside the *matrix_mul* folder:
+This creates several files inside the ``matrix_mul`` folder:
 
 .. image :: https://i.imgur.com/n2q6v8C.png
 
