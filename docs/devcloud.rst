@@ -6,17 +6,7 @@ Lab: DPC++ on Intel DevCloud
 Getting Started
 ********************
 
-To complete this lab, you need access to Intel DevCloud. `Log in to DevCloud <https://devcloud.intel.com/oneapi/>`_ and navigate to Get Started.
-
-DevCloud provides several ways to access the software and hardware. We recommend setting up both JupyterLab and SSH since each has benefits:
-
-* **JupyterLab** provides visual interfaces to navigate through your files and edit your code.
-
-* **SSH** gives a simple command-line interface to the resources. You also can use SSHFS and SCP to access and transfer your files to/from the cloud. We strongly recommend Linux for this lab.
-
-.. image :: https://i.imgur.com/Z2bRl46.png
-
-We suggest reviewing modules 1, 2, and 3 of *Introduction to oneAPI* and *Essentials of Data-Parallel C++*, available on the *Get Started* page.
+To complete this lab, you need access to Intel DevCloud. You can log into DevCloud using `JupyterLab <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/Welcome.ipynb?reset>`_ It is also possible to `access DevCloud using a command-line interface via ssh <https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/>`_. 
 
 Resources
 ************
@@ -25,23 +15,23 @@ oneAPI and DPC++ are open source and there are many resources available online t
 
 * `oneAPI <https://www.oneapi.com/>`_
 
+* `Data Parallel C++ Essentials Jupyter Modules <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/oneAPI_Essentials/Welcome.ipynb?reset>`_
+
 * `Developer Reference <https://software.intel.com/en-us/oneapi>`_
 
-* `DPC++ book (chapters 1 - 4) <https://tinyurl.com/book-dpcpp>`_
+* `DPC++ book <https://tinyurl.com/book-dpcpp>`_
 
-* `oneAPI Programming Guide <https://software.intel.com/sites/default/files/oneAPIProgrammingGuide_3.pdf>`_
+* `oneAPI Programming Guide <https://www.intel.com/content/www/us/en/develop/documentation/oneapi-programming-guide/top.html>`_
 
 * `oneAPI FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/documentation/oneapi-fpga-optimization-guide/top.html>`_
 
-* `Example Codes <http://tinyurl.com/oneapimodule?1>`_
-
-* `SYCL Specifications <https://www.khronos.org/registry/SYCL/specs/sycl-1.2.1.pdf>`_
+* `SYCL Specifications <https://www.khronos.org/sycl/>`_
 
 
 1) Instructions
 ---------------
 
-This section walks through some example matrix multiplication code to illustrate how to use dpc++ and the DevCloud environment. This requires access to JupyterLab (on the cloud) and a SSH connection to your machine.
+This section walks through some example matrix multiplication code to illustrate how to use dpc++ and the DevCloud environment. This requires access to DevCloud via JupyterLab.
 
 1.1) Create a Project in JupyterLab
 ####################
@@ -184,7 +174,7 @@ This will make your report more readable:
 2) Analyzing the Report
 ---------------------------
 
-Take a deeper look at the report. Under *Views*, open *System Viewer*. The ``Kernel System`` has four items: ``Global memory`` is the interface to the off-chip memory. ``a_init``, ``b_init`` are the kernels that initiate the arrays in global memory. *``c_calc`` performs the matrix multiply. The load operations from arrays ``a`` and ``b`` occur in ``c_calc.B8``, the multiply-accumulate operations are in ``c_calc.B2``, and the store operation into array c is in ``c_calc.B7``. The load and multiply-accumulate operations are from line 125.
+Take a deeper look at the report. Under *Views*, open *System Viewer*. The ``Kernel System`` has four items: ``Global memory`` is the interface to the off-chip memory. ``a_init`` and ``b_init`` are kernels that initiate the arrays in global memory. ``c_calc`` performs the matrix multiply. The load operations from arrays ``a`` and ``b`` occur in ``c_calc.B8``, the multiply-accumulate operations are in ``c_calc.B2``, and the store operation into array c is in ``c_calc.B7``. The load and multiply-accumulate operations are from line 125.
 
 .. image :: image/mm-kernel-view.png
 
