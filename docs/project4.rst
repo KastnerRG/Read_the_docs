@@ -108,7 +108,7 @@ The next task is to create code that can implement “generic” function, i.e.,
 
 Once you have a correctly functioning set of functions, you should copy and paste them in the 2_Skeleton_Restructured project and make sure that it passes the testbench. Since our testbenches on perform one check, which is far from comprehensive, it is possible, though hopefully unlikely, that you have some error that the 2_Skeleton_Restructured testbench exposes and was not exercised in the individual testbench. If your code passes the 2_Skeleton_Restructured project you can assume it is correct (though again since it is only one test, it may be wrong; you would need to perform significantly more testing in any “non-class” situation).
 
-Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles. Here are sample results achieved by previous students for the FFT project: 
+Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles. Here are sample results achieved by previous students for the FFT project:
 
 		+---------------------+------------------+-----------+----------+---------+----------+
 		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
@@ -140,7 +140,7 @@ For this demo, your will create an IP for the FFT 1024, and run it from the Jupy
 6) Submission Procedure
 -----------------------
 
-You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (fft.cpp, fft.h, etc.). 
+You must also submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (``fft.cpp``, ```fft.h``, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
@@ -152,12 +152,13 @@ Your repo must contain a folder named "fft" at the top-level. This folder must b
 
 * Folder **fft1024_best**
 
-  - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
+  - Source code (``*.cpp``, ``*.h``, ``*.tcl`` only)
+  - Reports (``.rpt`` and ``.xml``).
 
 * Folder **Demo**
 
-  - .bit and .hwh files
-  - FFT.ipynb host file
+  - ``.bit`` and ``.hwh`` files
+  - ``FFT.ipynb`` host file
 
 **Report:**
 
@@ -166,7 +167,7 @@ For this project, you need to submit an 1-page report to explain only your final
 7) Grading Rubric
 -----------------
 
-**50 points:** Functionally correct design
+**50 points:** Functionally correct design including Pynq demo
 
 **40 points:** Achieving target performance
 
