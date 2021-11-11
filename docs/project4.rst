@@ -111,7 +111,7 @@ Once you have a correctly functioning set of functions, you should copy and past
 Now onto the final part of the project, optimizing of this restructured code. You should perform the typical tricks here: pipelining, memory partitioning, unrolling, etc. Some of these may not make sense depending on how you wrote your code. This final architecture should be orders of magnitude better than the 0_Initial project. Highly optimized FFT architectures can easily have less than 10000 cycles. Here are sample results achieved by previous students for the FFT project:
 
 		+---------------------+------------------+-----------+----------+---------+----------+
-		| Past bests: FFT1024 | Latency (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
+		| Past bests: FFT1024 | Interval (cycles) | BRAMs (%) | DSPs (%) | FFs (%) | LUTs (%) |
 		+---------------------+------------------+-----------+----------+---------+----------+
 		| A                   | 1027             | 17        | 97       | 29      | 78       |
 		+---------------------+------------------+-----------+----------+---------+----------+
