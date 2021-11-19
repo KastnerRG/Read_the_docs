@@ -32,6 +32,7 @@ Select **xc7z020clg400-1** as your part number.
 In **Explorer** section, right click on **Source**, and select new file. Create a **new file** and name it **fact_intrpt.cpp**and set **in**, **out**, and **return** ports as *s_axilite* interfaces. Your code should look like this:
 
 .. code-block :: c
+
 	#pragma HLS INTERFACE s_axilite port=in bundle=control
 	#pragma HLS INTERFACE s_axilite port=out bundle=control
 	#pragma HLS INTERFACE s_axilite port=return bundle=control
@@ -47,7 +48,9 @@ In **Explorer** section, right click on **Source**, and select new file. Create 
 If you run in to II violations (like Vitis 2021 always does) set II=2:
 
 .. code-block :: c
+
 	#pragma HLS pipeline II=2
+
 1.3) Synthesize your code and export RTL
 ########################################
 
@@ -126,7 +129,7 @@ In the **Diagram window**, in the highlighted are, click on **Run Block Automati
 
 Your design should look like the following:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_intrpt.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_intrpt.jpg
 
 2.5) Generating bitstream
 #########################
@@ -227,14 +230,15 @@ Connect to your PYNQ board and create a new folder. Copy fact_intrpt.hwh and fac
 	# Removing the IP task from the event loop.
 	ip_task.cancel()
 
-If you run into overlay issues run the following to display IP hierarchy in the overlay and select appropriately.
+If you run into overlay issues run the following to display IP hierarchy in the overlay and select appropriately:
 
 .. code-block :: python3
+
 	for i in ol.ip_dict:
     		print(i)
 
 You should see the following output:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_intrpt_op.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_interpt_op.png
 
 That's it for the lab.
