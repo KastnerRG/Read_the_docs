@@ -29,9 +29,12 @@ Select **xc7z020clg400-1** as your part number.
 1.2) Write your code
 ####################
 
-In **Explorer** section, right click on **Source**, and select new file. Create a **new file** and name it **fact_intrpt.cpp**. Complete your code as following:
+In **Explorer** section, right click on **Source**, and select new file. Create a **new file** and name it **fact_intrpt.cpp**and set **in**, **out**, and **return** ports as *s_axilite* interfaces. Your code should look like this:
 
 .. code-block :: c
+	#pragma HLS INTERFACE s_axilite port=in bundle=control
+	#pragma HLS INTERFACE s_axilite port=out bundle=control
+	#pragma HLS INTERFACE s_axilite port=return bundle=control
 
 	void fact_intrpt(int* out, int in){
 	    int i, k=1;
@@ -41,18 +44,15 @@ In **Explorer** section, right click on **Source**, and select new file. Create 
 	    *out = k;
 	}
 
-Open **Directive** tab and set **in**, **out**, and **return** ports as *s_axilite* interfaces. Your code should look like this:
+If you run in to II violations (like Vitis 2021 always does) set II=2:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1951382475-fact4.png
-
+.. code-block :: c
+	#pragma HLS pipeline II=2
 1.3) Synthesize your code and export RTL
 ########################################
 
-You can synthesize your code by clicking on **C Synthesis**. After finishing C synthesis, click on **Export RTL**.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1632797711-fact5.png
-
-Now that you exported your RTL, you can close Vivado HLS.
+You can synthesize your code by clicking on **C Synthesis**. After finishing C synthesis, click on **Export RTL** and select **Vivado IP (.zip)**.
+Now that you exported your RTL, you can close Vitis HLS.
 
 2) Vivado: RTL to Bitstream
 ---------------------------
@@ -62,7 +62,7 @@ In this section we generate a bitstream for our IP.
 2.1) Create a new project
 ########################
 
-Open Vivado tool and create a new project. Select an appropriate directory for your project and leave the project name as is, **project_1**.
+Open the Vivado tool and create a new project and name it **fact_pynq**.
 
 Select **RTL Project** and check **Do not specify sources** at this time.
 
@@ -76,10 +76,7 @@ Set your part number to **xc7z020clg400-1**:
 In **Flow Navigator**, under **Project Manager**, click on **IP Catalog**.
 
 On the newly opened window, right click and select **Add Repository**.
-
-Navigate to your Vivado HLS project directory and select **solution1 > impl > ip**.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1764593390-fact7.png
+Select your extracted Vivado IP that you exported from Vitis.
 
 2.3) Add blocks to your design
 ##############################
@@ -98,11 +95,7 @@ Double click on **ZYNQ7 IP** to customize it. Under page navigator, got to **int
 
 Add **fact_intrpt** and rename it to **fact_intrpt**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3779835952-fact9.png
-
 Add **AXI Interrupt Controller** and rename it to **axi_intc**:
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/4151956562-fact10.png
 
 Double click on **axi_intc** to customize it. Set **Interrupt Output Connection** to **Single**.
 
@@ -133,7 +126,7 @@ In the **Diagram window**, in the highlighted are, click on **Run Block Automati
 
 Your design should look like the following:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/68504461-fact15.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_intrpt.png
 
 2.5) Generating bitstream
 #########################
@@ -149,11 +142,8 @@ Exporting the block design is an optional step, Pynq seems to prefer .hwh over .
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3372073042-fact16.png
 
-Copy **your_vivado_project_directory > project_1.runs > impl_1 > design_1_wrapper.bit** to **your_vivado_project_directory > fact_intrpt.bit** next to **fact_intrpt.tcl**. 
-
-Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it **fact_intrpt.hwh**.
-
-In **Sources**, open **fact_intrpt_cntrl_io_s_axi.v** and note the port addresses. We need these addresses in our Python code.
+Navigate to your Vivado project folder and search for **.bit** and then for **.hwh**. Copy **design_1_wrapper.bit** (rename to **design_1.bit**) and **design_1.hwh**.
+In **Sources**, open **fact_intrpt_cntrl_io_s_axi.v** and copy the address info into a text file. We need these addresses to map our variables in the Python code.
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/2508179436-fact17.png
 
@@ -237,4 +227,14 @@ Connect to your PYNQ board and create a new folder. Copy fact_intrpt.hwh and fac
 	# Removing the IP task from the event loop.
 	ip_task.cancel()
 
+If you run into overlay issues run the following to display IP hierarchy in the overlay and select appropriately.
 
+.. code-block :: python3
+	for i in ol.ip_dict:
+    		print(i)
+
+You should see the following output:
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/fact_intrpt_op.png
+
+That's it for the lab.
