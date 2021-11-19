@@ -8,21 +8,22 @@ Project: FM Demodulator
 
 1) Introduction
 ---------------
-In this project we use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_ RF tuner to sample RF signals and will build a FM Demodulator and implement it on the Pynq Board.
+The project develops a mono FM receiver that can be used to listen to the radio through your Pynq board. We use the `RTL2832 <https://www.rtl-sdr.com/tag/rtl2832/>`_ software defined as to sample RF signals.
 
 2) Project Goal
 ---------------
+Your overall goal is to perform real-time demodulation. This means that the demodulation of 1 second of sampled data takes less than one second including the I/O time to transfer data to/from the demodulator on the programmable logic.
 
+The first goal is to use your knowledge from previous projects to implement an FM demodulator IP core. The second goal is to develop an interface between the hardware-accelerated FM demodulator and the Jupyter notebook. The end goal is to perform real-time FM demodulation which requires careful optimization in both the hardware implementation of the demodulator and the interfacing between the processing system (PS) and programmable logic (PL).
 
-In this project, you will use your knowledge from previous projects to implement an FM Demodulator in programmable logic. The project is divided into two parts.
+The project is divided into two parts.
 
-In the first part, you develop different functions to implement the `scikit-dsp-comm mono_FM <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1842>`_ Demodulator in Vivado HLS. This FM Demodulator consists of a linear filter, downsampler, and a discriminator.
+1) In the first part, you develop a hardware-accelerated version of the `scikit-dsp-comm mono_FM demodulator <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1842>`_ function using HLS. This FM demodulator consists of a linear filter, downsampler, and a discriminator.
 
-The second part is to integrate the Demodulator onto the Pynq Board. You should be able to listen to local FM radio channel using your MonoFM implementation in programmable logic.
+2) The second part integrates the demodulator IP core onto the Pynq Board. You should be able to listen to local FM radio channel using your M implementation in programmable logic.
 
 3) Materials
 ------------
-
 `Download <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/mono_fm.zip>`_.
 
 This contains a python notebook which explains the working of a Mono FM Demodulator.
@@ -30,7 +31,7 @@ This contains a python notebook which explains the working of a Mono FM Demodula
 For this project the following will not be provided:
 
 * ~.cpp - The place where you write synthesizable code
-* ~.h - header file with various definitions that may be useful for developing the code 
+* ~.h - header file with various definitions that may be useful for developing the code
 * ~test.cpp - testbench
 
 You will have to build the entire project from scratch
@@ -51,14 +52,14 @@ This means that the filter implements:
 
 .. math::
 
-   a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M] 
+   a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M]
                          - a[1]*y[n-1] - ... - a[N]*y[n-N]
-   
+
 More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
 
 **discriminator**
 ################
-To demodulate FM we require a discriminator circuit, which gives an output which is proportional to the input frequency deviation. 
+To demodulate FM we require a discriminator circuit, which gives an output which is proportional to the input frequency deviation.
 
 
 .. code-block :: python3
@@ -67,19 +68,19 @@ To demodulate FM we require a discriminator circuit, which gives an output which
     """
     function disdata = discrim(x)
     where x is an angle modulated signal in complex baseband form.
-    
+
     Mark Wickert
     """
     X=np.real(x)        # X is the real part of the received signal
     Y=np.imag(x)        # Y is the imaginary part of the received signal
     b=np.array([1, -1]) # filter coefficients for discrete derivative
     a=np.array([1, 0])  # filter coefficients for discrete derivative
-    derY=signal.lfilter(b,a,Y)  # derivative of Y, 
+    derY=signal.lfilter(b,a,Y)  # derivative of Y,
     derX=signal.lfilter(b,a,X)  #    "          X,
     disdata=(X*derY-Y*derX)/(X**2+Y**2)
     return disdata
 
-The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1825>`_ of an FM baseband discriminator. 
+The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1825>`_ of an FM baseband discriminator.
 
 To understand the operation of *discrim()* start with a general FM modulated signal and obtain the complex envelope:
 
@@ -126,7 +127,7 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
 * Folder **fm-demodulator**
 
   - Source code (*.cpp, *.h, *.tcl only) and reports (.rpt and .xml).
-  
+
 * Folder **Demo**
 
   - .bit and .hwh files
