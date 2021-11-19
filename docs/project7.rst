@@ -18,7 +18,7 @@ The first goal is to use your knowledge from previous projects to implement an F
 
 The project is divided into two parts.
 
-1) In the first part, you develop a hardware-accelerated version of the `scikit-dsp-comm mono_FM demodulator <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1842>`_ function using HLS. This FM demodulator consists of a linear filter, downsampler, and a discriminator.
+1) In the first part, you develop a hardware-accelerated version of the `scikit-dsp-comm mono_FM demodulator <https://github.com/scikit-dsp-comm/sdr_helper/blob/master/sk_dsp_comm/sdr_helper/sdr_helper.py#L24>`_ function using HLS. This FM demodulator consists of a linear filter, downsampler, and a discriminator.
 
 2) The second part integrates the demodulator IP core onto the Pynq Board. You should be able to listen to local FM radio channel using your M implementation in programmable logic.
 
