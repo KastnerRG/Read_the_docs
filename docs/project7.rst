@@ -80,21 +80,27 @@ To demodulate FM we require a discriminator circuit, which gives an output which
 
 The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1825>`_ of an FM baseband discriminator.
 
-To understand the operation of *discrim()* start with a general FM modulated signal and obtain the complex envelope:
+A frequency discriminator computes the derivative of the modulated phase.
 
-.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/in_signal.png
+Recall that the phase is calculated for a given complex sample ``S`` can be calculated as:
+.. math::
+  \phi(t) = \tan^{-1}\frac{S_I(t)}{S_R(t)}
 
-The complex envelope is:
+where :math:`S` is a sample that is a complex data type consisting of a real :math:`S_R(t)` and imaginary :math:`S_I(t)` values (or equivalently I and Q).
 
-.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/complex_env.png
+We can calculate the :math:`\phi'(t)`  as
+.. math::
+  \phi'(t) = \frac{S_R(t)S_I'(t)-S_R'(t)S_I(t)}{S_R^2(t)+S_I^2(t)}
 
-A frequency discriminator obtains the derivative of the modulated angle:
+``mono_fm`` uses a simple approximation for the derivative which simply calculates the difference between the current and previous samples.
+.. math::
+  S_R'(t) = S_R(t) - S_R(t-1)
+  S_I'(t) = S_I(t) - S_I(t-1)
 
-.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/phi.png
+This is done for both the real and imaginary parts. Substituting these equations yields the final computation that is done for the discriminator.
 
-And its derivative is:
-
-.. image:: https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/dphi.png
+.. math::
+  \phi'(t) = \frac{S_R(t)(S_I(t) - S_I(t-1))-(S_R(t) - S_R(t-1))S_I(t)}{S_R^2(t)+S_I^2(t)}
 
 **Optimization Guidelines**
 
