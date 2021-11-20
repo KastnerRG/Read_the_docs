@@ -154,7 +154,7 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
 
 **Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches) and (2) achieves target latency. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
-7) Grading Rubric
+8) Grading Rubric
 -----------------
 
 **30 points:** Functionally correct HLS design. You will get full credit if we are able to build and test your HLS code without any effort. You must provide testbenches that demonstrate the correct functionality of your code. You need to report the throughput of the final design.
