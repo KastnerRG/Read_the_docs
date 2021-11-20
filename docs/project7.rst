@@ -26,7 +26,8 @@ The project is divided into two parts.
 ------------
 The starter files for the project can be found at in `fm-demodulation <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/fm-demodulation>`_.
 
-This contains two Python notebooks
+This contains two Python notebooks:
+
 1) `mono-fm-demodulation-prerecorded-file.ipynb <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/fm-demodulation/mono-fm-demodulation-prerecorded-file.ipynb>`_ explains how the Mono FM Demodulator. It uses a prerecorded set of samples from the RTL SDR and can be run on any computer.
 
 2) `rtl2832.ipynb <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/fm-demodulation/rtl2832.ipynb>`_ provides a more comphrehensive discussion of the project. It includes code that can interface directly with the RTL SDR to sample live data and change the radio settings. It also provides some hints and discussion on how to develop the FM demodulator and interfacing it with the notebook.
