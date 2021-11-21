@@ -22,7 +22,45 @@ The project is divided into two parts.
 
 2) The second part integrates the demodulator IP core onto the Pynq Board. You should be able to listen to local FM radio channel using your M implementation in programmable logic.
 
-3) Materials
+3) Installation Instructions
+------------
+For this project you will need to install **rtlsdr** and **scikit-dsp-comm** onto your Pynq. If you have the Pynq connected to the internet:
+
+1) Go to Juptyer Notebook and on the **New dropdown** (on the right) select **Terminal**.
+
+2) In the new terminal window, run the following:
+
+.. code-block :: python3
+
+	pip install pyrtlsdr
+
+This will install the libsdr driver on the Pynq needed to connect the RTLSDR2832.
+
+3) Once installation completes run 
+
+.. code-block :: python3
+	
+	pip3 install scikit-dsp-comm
+
+This library is needed for demodulation.
+
+If the Pynq is not connected to the internet:
+
+1) Go to `pyrtlsdr <https://github.com/roger-/pyrtlsdr>`_ and download the source code as a **pyrtlsdr-master.zip** file.
+
+2) Open Jupyter on the Pynq and upload this .zip. Open a Terminal using the above instrucvtions and run the following:
+
+.. code-block :: python3
+ 
+	unzip pyrtlsdr-master.zip
+	cd pyrtlsdr-master
+	python setup.py install
+
+3) Setup should now have installed rtlsdr. Repeat the same for `scikit-dsp-comm <https://github.com/mwickert/scikit-dsp-comm>`_ downloading the .zip, and installing to the Pynq.
+
+4) Since this is a workaround, make sure that the import paths are properly specified.
+
+4) Materials
 ------------
 The starter files for the project can be found at in `fm-demodulation <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/fm-demodulation>`_.
 
@@ -34,7 +72,7 @@ This contains two Python notebooks:
 
 We will not provide skeleton, code, testbenches, or any other scaffolding as you have gotten in the previous projects. A major learning outcome for this project is for you to completely develop a hardware accelerated system given only functionally correct Python. You must develop testbenches, correct functionally correct HLS code, decide on the I/O strategy, and optimize the system to achieve real-time performance.
 
-4) Design Instructions
+5) Design Instructions
 ----------------------
 The FM Demodulator has three primary functions: ``downsampler``, ``linear filter`` and ``discriminator``.
 
@@ -109,7 +147,7 @@ Substituting these equations yields the final computation that is done for the d
 
 This is a fairly simple calculation that can be performed efficiently in hardware.
 
-5) PYNQ Demo
+6) PYNQ Demo
 ------------
 
 You should integrate your HLS code into a Jupyter notebook and demonstrate *real-time* performance, i.e., the total processing time less is less than the sampling time.
@@ -119,7 +157,7 @@ The provided Jupyter notebooks provide methods to sample real-data using the RTL
 You can use any method of interfacing as long as it performs the processing in real-time. This will require that the I/O between the PS and PL is efficient. This can very easily become a bottleneck and limit your ability to perform real-time processing. A real-time HLS IP core is useless if your cannot use it to the best of its performance. You are highly encouraged to modify the code to achieve a better performance and observe the throughput by changing the way you transmit data between PS and PL. Make use of the "RTL 2832" USB tuner in-order to receive the input RF Samples.
 
 
-6) Optimization Guidelines
+7) Optimization Guidelines
 ------------
 
 * **Hardware / Software Interface:** An important consideration in your overall design will be the way that you exchange data between the ``mono_fm`` IP core on the programmable logic (PL) and the Jupyter notebook running on the processing system (PS). This interface will define the interface to your IP core, so think carefully about the entire system design before diving into the HLS design process.
@@ -130,7 +168,7 @@ You can use any method of interfacing as long as it performs the processing in r
 
 * **System Design:** You are responsible for understanding the system constraints and delivering a system that meets those constraints. There are many ways to build a system. The best systems are the ones that work reliably. Always work first on developing a functional baseline implementation. Then optimize it to achieve real-time performance.
 
-7) Submission Procedure
+8) Submission Procedure
 -----------------------
 
 You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it.
@@ -154,7 +192,7 @@ Your repo must contain a folder named "mono_fm" at the top-level. This folder mu
 
 **Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches) and (2) achieves target latency. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
 
-8) Grading Rubric
+9) Grading Rubric
 -----------------
 
 **30 points:** Functionally correct HLS design. You will get full credit if we are able to build and test your HLS code without any effort. You must provide testbenches that demonstrate the correct functionality of your code. You need to report the throughput of the final design.
