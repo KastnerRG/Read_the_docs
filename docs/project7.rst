@@ -36,24 +36,49 @@ We will not provide skeleton, code, testbenches, or any other scaffolding as you
 
 4) Design Instructions
 ----------------------
-The FM Demodulator has three primary functions: ``downsampler``, ``linear filter`` and ``discriminator``.
+The Python code provides a functionally correct implementation of the FM demodulator written in Python.  The ``mono_fm`` function taken directly from the ``scikit-dsp-comm'' library is:
 
-**downsampler**
+.. code-block :: python3
+  def mono_fm(x, fs=2.4e6, file_name='test.wav'):
+    """
+    Decimate complex baseband input by 10
+    Design 1st decimation lowpass filter (f_c = 200 KHz)
+    """
+    b = signal.firwin(64, 2 * 200e3 / float(fs))
+    # Filter and decimate (should be polyphase)
+    y = signal.lfilter(b, 1, x)
+    z = ss.downsample(y, 10)
+    # Apply complex baseband discriminator
+    z_bb = discrim(z)
+    # Design 2nd decimation lowpass filter (fc = 12 KHz)
+    bb = signal.firwin(64, 2 * 12e3 / (float(fs) / 10))
+    # Filter and decimate
+    zz_bb = signal.lfilter(bb, 1, z_bb)
+    # Decimate by 5
+    z_out = ss.downsample(zz_bb, 5)
+    # Save to wave file
+    ss.to_wav(file_name, 48000, z_out / 2)
+    print('Done!')
+    return z_bb, z_out
+
+The FM Demodulator has three primary functions: ``downsample``, a linear filter ``lfilter``,  and a frequency discriminator ``discrim``.
+
+**downsample**
 ##########
-This part consists of a straight forward downsampler. We have to downsample by a factor of N, that is keep every Nth sample. The implementation of downsampler can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
+``downsample`` is a very straightforward operation. The function is given a factor ``N``, which indicates that the downsampler should pass on every Nth sample. The implementation of ``downsample`` can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
 
 **linear filter**
 ################
-Build a linear filter whose function is implemented as a direct II transposed structure.
+``lfilter`` is implemented as a direct II transposed structure.
 
-This means that the filter implements:
+This means that it can compute filters in the form:
 
 .. math::
 
    a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[M]*x[n-M]
                          - a[1]*y[n-1] - ... - a[N]*y[n-N]
 
-More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
+``lfilter`` takes three arguments, the ``a`` array, ``b`` array, and the input data to filter. ``a`` and ``b`` are fixed in this implementation. The hardware design can assume these fixed values, i.e., must only implement the exact required low pass filters and not the entire functionality of the ``lfilter`` function. More information about the linear filter implementation can be found `here <https://github.com/scipy/scipy/blob/v1.5.4/scipy/signal/signaltools.py#L1719-L1909>`_.
 
 **discriminator**
 ################
@@ -82,14 +107,34 @@ The above code is the `scikit-dsp-comm implementation <https://github.com/mwicke
 
 A frequency discriminator computes the derivative of the modulated phase.
 
-Recall that the phase is calculated for a given complex sample ``S`` can be calculated as
+The phase for a given complex sample ``S`` is calculated as
 
 .. math::
   \phi(t) = \tan^{-1}\frac{S_I(t)}{S_R(t)}
 
 where :math:`S` is a sample that is a complex data type consisting of a real :math:`S_R(t)` and imaginary :math:`S_I(t)` values (or equivalently I and Q).
 
-We can calculate the :math:`\phi'(t)`  as
+The time derivative of :math:`\tan^{-1}[x(t)]` is the trigonometric identity
+
+.. math::
+  \frac{\partial \tan^{-1} x(t)}{\partial t} = \frac{1}{1+x^2(t)} \frac{\partial x(t)}{\partial t}
+
+Here :math:`x(t) = \frac{S_I(t)}{S_R(t)}`. Substituting that into the :math:`\tan^{-1}` equation gives
+
+.. math::
+  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+\frac{S_I(t)}{S_R(t)}^2(t)} \frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}
+
+:math:`\frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}` can be rewritten using the calculus identity for the derivative of a ratio as
+
+.. math::
+  \frac{\partial\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{S_R(t)\frac{\partial S_I(t)}{\partial t}-S_I(t)\frac{\partial S_R(t)}{\partial t}}{S_R(t)^2}
+
+Plugging that into :math:`\frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t}` gives
+
+.. math::
+  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+\frac{S_I(t)}{S_R(t)}^2(t)}  \frac{S_R(t)\frac{\partial S_I(t)}{\partial t}-S_I(t)\frac{\partial S_R(t)}{\partial t}}{S_R(t)^2}
+
+Multiplying the numerator and denominator of the first ratio by :math:`S_R(t)^2`
 
 .. math::
   \phi'(t) = \frac{S_R(t)S_I'(t)-S_R'(t)S_I(t)}{S_R^2(t)+S_I^2(t)}
@@ -107,7 +152,7 @@ Substituting these equations yields the final computation that is done for the d
 .. math::
   \phi'(t) = \frac{S_R(t)(S_I(t) - S_I(t-1))-(S_R(t) - S_R(t-1))S_I(t)}{S_R^2(t)+S_I^2(t)}
 
-This is a fairly simple calculation that can be performed efficiently in hardware.
+Despite the somewhat involved derivation, the end results is a fairly simple calculation that can be performed efficiently in hardware.
 
 5) PYNQ Demo
 ------------
