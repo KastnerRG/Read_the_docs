@@ -160,17 +160,17 @@ The time derivative of :math:`\tan^{-1}[x(t)]` is the trigonometric identity
 Here :math:`x(t) = \frac{S_I(t)}{S_R(t)}`. Substituting that into the :math:`\tan^{-1}` equation gives
 
 .. math::
-  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+\frac{S_I(t)}{S_R(t)}^2(t)} \frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}
+  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+(\frac{S_I(t)}{S_R(t)})^2} \frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}
 
 :math:`\frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}` can be rewritten using the calculus identity for the derivative of a ratio as
 
 .. math::
   \frac{\partial\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{S_R(t)\frac{\partial S_I(t)}{\partial t}-S_I(t)\frac{\partial S_R(t)}{\partial t}}{S_R(t)^2}
 
-Plugging that into :math:`\frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t}` gives
+Substituting that into :math:`\frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t}` gives
 
 .. math::
-  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+\frac{S_I(t)}{S_R(t)}^2(t)}  \frac{S_R(t)\frac{\partial S_I(t)}{\partial t}-S_I(t)\frac{\partial S_R(t)}{\partial t}}{S_R(t)^2}
+  \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+(\frac{S_I(t)}{S_R(t)})^2}  \frac{S_R(t)\frac{\partial S_I(t)}{\partial t}-S_I(t)\frac{\partial S_R(t)}{\partial t}}{S_R(t)^2}
 
 Multiplying the numerator and denominator of the first ratio by :math:`S_R(t)^2`
 
