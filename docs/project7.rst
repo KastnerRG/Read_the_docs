@@ -36,10 +36,10 @@ For this project you will need to install **rtlsdr** and **scikit-dsp-comm** ont
 
 This will install the libsdr driver on the Pynq needed to connect the RTLSDR2832.
 
-3) Once installation completes run 
+3) Once installation completes run
 
 .. code-block :: python3
-	
+
 	pip3 install scikit-dsp-comm
 
 This library is needed for demodulation.
@@ -51,7 +51,7 @@ If the Pynq is not connected to the internet:
 2) Open Jupyter on the Pynq and upload this .zip. Open a Terminal using the above instrucvtions and run the following:
 
 .. code-block :: python3
- 
+
 	unzip pyrtlsdr-master.zip
 	cd pyrtlsdr-master
 	python setup.py install
@@ -190,7 +190,7 @@ Substituting these equations yields the final computation that is done for the d
 .. math::
   \phi'(t) = \frac{S_R(t)(S_I(t) - S_I(t-1))-(S_R(t) - S_R(t-1))S_I(t)}{S_R^2(t)+S_I^2(t)}
 
-Despite the somewhat involved derivation, the end results is a fairly simple calculation that can be performed efficiently in hardware.
+Despite the somewhat involved derivation, the end result is a fairly simple calculation that can be performed efficiently in hardware.
 
 6) PYNQ Demo
 ------------
