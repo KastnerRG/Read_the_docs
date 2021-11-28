@@ -102,12 +102,21 @@ To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 
 
 .. code-block :: c++
 
-  ext::intel::fpga_emulator_selector device_selector;
-  queue q(device_selector, dpc_common::exception_handler);
+  #if FPGA_EMULATOR
+    // DPC++ extension: FPGA emulator selector on systems without FPGA card.
+    ext::intel::fpga_emulator_selector device_selector;
+  #elif FPGA
+    // DPC++ extension: FPGA selector on systems with FPGA card.
+    ext::intel::fpga_selector device_selector;
+  #else
+    // The default device selector will select the most performant device.
+    default_selector device_selector;
+  #endif
+      queue q(device_selector, dpc_common::exception_handler);
 
-This specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description along with the associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing RTL simulation of the kernel.
+This allows the compiler to pick the correct device by passing in a compiler flag. ``ext::intel::fpga_emulator_selector`` specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description along with the associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing RTL simulation of the kernel.
 
-A `Makefile <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/matrix_mul_dpcpp/Makefile>`_ is available that has all the compilation commands required for the remainder of this exercise. Put this ``Makefile`` in the ``matrix_mul`` directory. 
+A `Makefile <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/matrix_mul_dpcpp/Makefile>`_ is available that has all the compilation commands required for the remainder of this exercise. Put this ``Makefile`` in the ``matrix_mul`` directory.
 
 It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your commands as different nodes are equipped with different accelerators. The default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
 
