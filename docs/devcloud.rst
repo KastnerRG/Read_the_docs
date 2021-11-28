@@ -43,7 +43,7 @@ Start a JupyterLab session and click the + sign to open the *Launcher*.
 
 Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline matrix multiplication project. Open a Terminal and launch the tool:
 
-.. code-block :: python
+.. code-block :: shell-session
 
  $ oneapi-cli
 
@@ -61,11 +61,11 @@ This creates several files inside the ``matrix_mul`` folder:
 
 .. image :: https://i.imgur.com/n2q6v8C.png
 
-The source file is in the *src* folder and the *README* provides instructions to compile the code.
+The source file is in the ``src`` folder and the ``README`` provides instructions to compile the code.
 
-Use the terminal to compile and run your code. Be sure to use the Jupyter terminal; SSH doesn't seem to work for this operation:
+Use the terminal to compile and run your code.
 
-.. code-block :: python
+.. code-block :: shell-session
 
  $ cd matrix_mul
  $ make all
@@ -73,7 +73,7 @@ Use the terminal to compile and run your code. Be sure to use the Jupyter termin
 
 The output should look like this:
 
-.. code-block :: python
+.. code-block :: shell-session
 
 	$ ./matrix_mul_dpc
 	Device: Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz
@@ -85,7 +85,7 @@ It shows the device name used for the matrix multiplication, the matrices' size,
 The code was run on a CPU. We need to make some modifications to run it on an FPGA.
 
 
-Compile to FPGA
+Compiling to FPGA
 ###################
 
 Synthesizing DPCPP code to FPGAs has similar design flows as other FPGA HLS tools. Since full FPGA compilation to bitstream can take hours, ideally all of the optimizations are done using an emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than full bitstream compilation. Once the emulator is compiled, it can be executed which is equivalent to executing the RTL model with the provided inputs. This is a similar process as C simulation in the Xilinx HLS tools.
@@ -107,6 +107,8 @@ To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 
 
 This specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description along with the associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing RTL simulation of the kernel.
 
+A ``Makefile`` is available that has all the compilation commands required for the remainder of this exercise. Grab that file and put it in your ``matrix_mul`` directory. 
+
 It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your commands as different nodes are equipped with different accelerators. The default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
 
 In order to use ``qsub``, you need to make a simple script in a new file ``build_fpga_emu.sh`` that performs the required ``make`` command.
@@ -127,9 +129,11 @@ You can submit jobs to ``qsub`` using the command
 
 ``qsub`` sends the job specified in ``build_fpga_emu.sh`` for scheduling. It will be scheduled on a node that is suited for ``fpga_compile`` using the current directory ``-d .``. You can use the command ``qstat`` to see the status of the job. Building the emulator does not take much time, but the process could be slowed if the FPGA nodes are busy.
 
-The results of the run will be an executable emulator file ``matrix_mul_dpcpp.fpga_emu``. Additionally, there will be two files ``build_fpga_emu.sh.o.XXXX`` and ``build_fpga_emu.sh.e.XXXX` where ``XXXX`` will be a number corresponding to the job ID. The ``.o`` file corresponds to the output and the ``.e`` file holds any error messages. These will appear in your directory once the job has completed.
+The results of the run will be an executable emulator file ``matrix_mul_dpcpp.fpga_emu``. Additionally, there will be two files ``build_fpga_emu.sh.o.XXXX`` and ``build_fpga_emu.sh.e.XXXX`` where ``XXXX`` will be a number corresponding to the job ID. The ``.o`` file corresponds to the output and the ``.e`` file holds any error messages. These will appear in your directory once the job has completed.
 
-The emulator can be executed to verify functional correctness of the design. It is best to test and debug using the emulator since its compilation is significantly faster than performing a full bitstream compilation. The emulator can be executed using ``qsub`` by:
+The emulator can be executed to verify functional correctness of the design. It is best to test and debug using the emulator since its compilation is significantly faster than performing a full bitstream compilation.
+
+The emulator can be executed using ``qsub`` by
 
 1. Creating the ``run_fpga_emu.sh`` script file with the proper commands
 
@@ -268,4 +272,4 @@ Note that this time we are requesting a different type of node -- one that conta
   Problem size: c(256,256) = a(256,256) * b(256,256)
   Result of matrix multiplication using DPC++: Success - The results are correct!
 
-This indicates that the code was run on an Intel Programmable Accelerator Card (PAC) with an Arria 10 FPGA. 
+This indicates that the code was run on an Intel Programmable Accelerator Card (PAC) with an Arria 10 FPGA.
