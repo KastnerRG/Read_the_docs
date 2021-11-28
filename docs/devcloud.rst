@@ -82,11 +82,13 @@ The output should look like this:
 
 It shows the device name used for the matrix multiplication, the matrices' size, and the testbench result.
 
+The code was run on a CPU. We need to make some modifications to run it on an FPGA.
 
-Modify the Project to compile and run on an FPGA
+
+Compile to FPGA
 ###################
 
-DPCPP for FPGAs has similar design flows as other FPGA HLS tools. Since full FPGA compilation to bitstream can take hours, it is important to first verify that your design is functionally correct. This can be done using an FPGA emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than full bitstream compilation. Once the emulator is compiled, it can be executed which is equivalent to executing the RTL model with the provided inputs. This is a similar process as C Simulation in the Xilinx HLS tools.
+Synthesizing DPCPP code to FPGAs has similar design flows as other FPGA HLS tools. Since full FPGA compilation to bitstream can take hours, ideally all of the optimizations are done using an emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than full bitstream compilation. Once the emulator is compiled, it can be executed which is equivalent to executing the RTL model with the provided inputs. This is a similar process as C simulation in the Xilinx HLS tools.
 
 To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
@@ -103,9 +105,11 @@ To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 
   ext::intel::fpga_emulator_selector device_selector;
   queue q(device_selector, dpc_common::exception_handler);
 
-It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your file as only certain machines have access to FPGA devices; the default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
+This specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description along with the associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing RTL simulation of the kernel.
 
-In order to use ``qsub``, you need to make a simple script in a new file ``run_fpga_emu.sh`` that performs the required ``make`` command.
+It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your commands as different nodes are equipped with different accelerators. The default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
+
+In order to use ``qsub``, you need to make a simple script in a new file ``build_fpga_emu.sh`` that performs the required ``make`` command.
 
 .. code-block :: shell-session
 
@@ -113,40 +117,69 @@ In order to use ``qsub``, you need to make a simple script in a new file ``run_f
   source /opt/intel/inteloneapi/setvars.sh
   make fpga_emulator
 
-You will need to make the script file executable, e.g., by running ``chmod 755 run_fpga_emu.sh``.
+Make the script file executable, e.g., by running ``chmod 755 build_fpga_emu.sh``.
 
-You can submit jobs to ``qsub`` using the command:
-
-.. code-block :: shell-session
-
-  qsub run_fpga_emu.sh -l nodes=2:fpga:ppn=2 -d .
-
-Re-compile and re-run the code. The device should now be an FPGA emulator.
+You can submit jobs to ``qsub`` using the command
 
 .. code-block :: shell-session
 
-	$ ./matrix_mul_dpc
-	Device: Intel(R) FPGA Emulation Device
-	Problem size: c(150,600) = a(150,300) * b(300,600)
-	Result of matrix multiplication using DPC++: Success - The results are correct!
+  qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_emu.sh
+
+``qsub`` sends the job specified in ``build_fpga_emu.sh`` for scheduling. It will be scheduled on a node that is suited for ``fpga_compile`` using the current directory ``-d .``. You can use the command ``qstat`` to see the status of the job. Building the emulator does not take much time, but the process could be slowed if the FPGA nodes are busy.
+
+The results of the run will be an executable emulator file ``matrix_mul_dpcpp.fpga_emu``. Additionally, there will be two files ``build_fpga_emu.sh.o.XXXX`` and ``build_fpga_emu.sh.e.XXXX` where ``XXXX`` will be a number corresponding to the job ID. The ``.o`` file corresponds to the output and the ``.e`` file holds any error messages. These will appear in your directory once the job has completed.
+
+The emulator can be executed to verify functional correctness of the design. It is best to test and debug using the emulator since its compilation is significantly faster than performing a full bitstream compilation. The emulator can be executed using ``qsub`` by:
+
+1. Creating the ``run_fpga_emu.sh`` script file with the proper commands
+
+.. code-block :: shell-session
+
+  #!/bin/bash
+  source /opt/intel/inteloneapi/setvars.sh
+  make run_fpga_emulator
+
+2. Submitting it for execution
+
+.. code-block :: shell-session
+
+  qsub -l nodes=1:fpga_compile:ppn=2 -d . run_fpga_emu.sh
+
+3. Check the ``.o`` and ``.e`` files. The results of the ``.o`` should include
+
+.. code-block :: shell-session
+
+  ./matrix_mul_dpcpp.fpga_emu
+  Device: Intel(R) FPGA Emulation Device
+  Problem size: c(256,256) = a(256,256) * b(256,256)
+  Result of matrix multiplication using DPC++: Success - The results are correct!
 
 
 Generate the FPGA Report
 ########################################
 
-Once your code is functionally correct, synthesize it to check your design's performance and resource utilization.
+Once your code is functionally correct, synthesize it to check your design's performance and resource utilization. The Intel HLS tools provide the ability to generate reports from the RTL design. These provide the designer insight into the FPGA architecture. They include information about throughput and area (resource usage). The reports contain different viewers that allow the designer to better understand performance bottlenecks and make better optimizations.
 
-Perform high-level synthesis and create the report using ``dpcpp``:
+The reports are generated as
 
-.. code-block :: python
+1. Create the ``build_fpga_report.sh`` script file with the proper commands and setting it as executable (``chmod 755``).
 
-	$ cd src
-	$ dpcpp -fintelfpga matrix_mul_dpcpp.cpp -c -o matrix_mul_dpcpp.o
-	$ dpcpp -fintelfpga matrix_mul_dpcpp.o -fsycl-link -Xshardware
+.. code-block :: shell-session
 
-These commands do not perform a full synthesis, i.e., they do not create an FPGA bitstream. They perform high level synthesis and simulate the FPGA design on a processor. This enables estimations of the design performace and resource usage. To generate a bitstream, remove ``-fsycl-link*``. Note that generating a bitstream can take a *long* time and thus should only be done sparingly, i.e., when the design optimizations are finalized.
+  #!/bin/bash
+  source /opt/intel/inteloneapi/setvars.sh
+  make fpga_report
 
-The report is an HTML file in ``matrix_mul_dpcpp.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. Safari seems to have the best compatibility with this, with Firefox coming second, but neither is guaranteed to work. If they still do not render, use SCP or SSHFS to copy or mount your files (including the ``lib`` folder from which the report draws its components) to your local drive, then open the report locally.
+
+2. Submit the script for execution
+
+.. code-block :: shell-session
+
+  qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_report.sh
+
+This do not perform a full bitstream synthesis. It provides an analysis of the RTL. This enables estimations of the design performance and resource usage.
+
+The report is an HTML file in ``fpga_compile_report.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. It may also be possible to open those ``.html`` files in a separate tab of the browser, i.e., not within Jupyter. If they still do not render, use SCP or SSHFS to copy or mount your files (including the ``lib`` folder from which the report draws its components) to your local drive, then open the report locally.
 
 The report provides an overview of the design performance. Open ``report.html``, click ``Summary`` button, click ``Compile Estimated Kernel Resource Utilization Summary`` in the ``Summary Content`` pane.
 
@@ -170,15 +203,7 @@ Now you can assign each class to one of your kernels. For example, *a_init* will
 
 	h.template parallel_for<a_init>(range(M, N), [=](auto index) {
 
-Change the other kernels in a similar manner. Repeat the steps to generate a new report. Do not forget to remove the old files before generating a new report:
-
-.. code-block :: python
-
-	$ rm -rf matrix_mul_dpcpp.prj/ matrix_mul_dpcpp.o matrix_mul_dpcpp.a
-	$ dpcpp -fintelfpga matrix_mul_dpcpp.cpp -c -o matrix_mul_dpcpp.o
-	$ dpcpp -fintelfpga matrix_mul_dpcpp.o -fsycl-link -Xshardware
-
-This will make your report more readable:
+Change the other kernels in a similar manner. Repeat the steps to generate a new report. Do not forget to remove the old files before generating a new report. This will make your report more readable:
 
 .. image :: image/readable-gemm-resources.png
 
@@ -194,3 +219,53 @@ Click the menu  ``Throughput Analysis`` and then the item ``Loops Viewer``. This
 .. image :: image/mm-base-loop-viewer.png
 
 The **Load Store Unit (LSU) Style** for the LD operations is shown as burst-coalesced cached. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the burst-coalesced LSU by default. In burst-coalesced mode, the compiler optimizes for buffering contiguous memory requests for the largest possible burst. We can change the LSU type to achieve a lower latency for the load operations. This and other optimizations are part of the :doc:`DPC++ Matrix Multiplication Project <project6>`.
+
+Executing on an FPGA
+####################
+
+Once you are satisfied with your optimizations, you can compile the design to a bitstream and subsequently use that bitstream to execute the hardware accelerated application that runs natively on an FPGA in DevCloud.
+
+The bitstream is generated by
+
+1. Creating the ``build_fpga_hardware.sh`` script file with the proper commands and setting it as executable (``chmod 755``).
+
+.. code-block :: shell-session
+
+  #!/bin/bash
+  source /opt/intel/inteloneapi/setvars.sh
+  make fpga_hardware
+
+2. Submit the script for execution
+
+.. code-block :: shell-session
+
+  qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_hardware.sh
+
+The output is an executable file ``matrix_mul_dpcpp.fpga``. This contains all of the information need to run the code across the host and an FPGA. It includes the binaries for the host and the bitstream to program the FPGA.
+
+The FPGA-accelerated application is executed by
+
+1. Creating the ``run_fpga_hw.sh`` script file with the proper commands and setting it as executable (``chmod 755``).
+
+.. code-block :: shell-session
+
+  #!/bin/bash
+  source /opt/intel/inteloneapi/setvars.sh
+  make run_fpga
+
+2. Submit the script for execution
+
+.. code-block :: shell-session
+
+  qsub -l nodes=1:fpga_runtime:arria10:ppn=2 -d . run_fpga_hw.sh
+
+Note that this time we are requesting a different type of node -- one that contains an Intel Arria 10 FPGA. The ``run_fpga_hw.sh.oXXXX`` file should contain the text
+
+.. code-block :: shell-session
+
+  ./matrix_mul_dpcpp.fpga
+  Device: pac_a10 : Intel PAC Platform (pac_ee00000)
+  Problem size: c(256,256) = a(256,256) * b(256,256)
+  Result of matrix multiplication using DPC++: Success - The results are correct!
+
+This indicates that the code was run on an Intel Programmable Accelerator Card (PAC) with an Arria 10 FPGA. 
