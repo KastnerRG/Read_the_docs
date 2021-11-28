@@ -90,13 +90,13 @@ DPCPP for FPGAs has similar design flows as other FPGA HLS tools. Since full FPG
 
 To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
-# Include a header file by adding the line
+1. Include a header file by adding the line
 
 .. code-block :: c++
 
   #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
-# Modify the queue initialization:
+2. Modify the queue initialization:
 
 .. code-block :: c++
 
@@ -108,6 +108,7 @@ It is best to submit jobs via the ``qsub`` command which allows DevCloud to shar
 In order to use ``qsub``, you need to make a simple script in a new file ``run_fpga_emu.sh`` that performs the required ``make`` command.
 
 .. code-block :: shell-session
+
   #!/bin/bash
   source /opt/intel/inteloneapi/setvars.sh
   make fpga_emulator
