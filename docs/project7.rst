@@ -157,7 +157,7 @@ The time derivative of :math:`\tan^{-1}[x(t)]` is the trigonometric identity
 .. math::
   \frac{\partial \tan^{-1} x(t)}{\partial t} = \frac{1}{1+x^2(t)} \frac{\partial x(t)}{\partial t}
 
-Here :math:`x(t) = \frac{S_I(t)}{S_R(t)}`. Substituting that into the :math:`\tan^{-1}` equation gives
+Here :math:`x(t) = \frac{S_I(t)}{S_R(t)}`. Substituting that into the equation gives
 
 .. math::
   \frac{\partial\tan^{-1}\frac{S_I(t)}{S_R(t)}}{\partial t} = \frac{1}{1+(\frac{S_I(t)}{S_R(t)})^2} \frac{\partial \frac{S_I(t)}{S_R(t)}}{\partial t}

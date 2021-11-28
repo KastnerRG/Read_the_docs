@@ -83,30 +83,46 @@ The output should look like this:
 It shows the device name used for the matrix multiplication, the matrices' size, and the testbench result.
 
 
-Modify the Project for FPGA
+Modify the Project to compile and run on an FPGA
 ###################
 
-Open the file ``src/matrix_mul_dpcpp.cpp``.
+DPCPP for FPGAs has similar design flows as other FPGA HLS tools. Since full FPGA compilation to bitstream can take hours, it is important to first verify that your design is functionally correct. This can be done using an FPGA emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than full bitstream compilation. Once the emulator is compiled, it can be executed which is equivalent to executing the RTL model with the provided inputs. This is a similar process as C Simulation in the Xilinx HLS tools.
 
-Line 55 uses the default_selector for the hardware device. Modify the code to use the FPGA emulator by performing the following:
+To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
-Include a header file by adding the line
+# Include a header file by adding the line
 
 .. code-block :: c++
 
   #include "CL/sycl/INTEL/fpga_extensions.hpp"
 
-Modify the queue initialization:
+# Modify the queue initialization:
 
 .. code-block :: c++
 
   ext::intel::fpga_emulator_selector device_selector;
   queue q(device_selector, dpc_common::exception_handler);
 
+It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your file as only certain machines have access to FPGA devices; the default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
+
+In order to use ``qsub``, you need to make a simple script in a new file ``run_fpga_emu.sh`` that performs the required ``make`` command.
+
+.. code-block :: shell-session
+  #!/bin/bash
+  source /opt/intel/inteloneapi/setvars.sh
+  make fpga_emulator
+
+You will need to make the script file executable, e.g., by running ``chmod 755 run_fpga_emu.sh``.
+
+You can submit jobs to ``qsub`` using the command:
+
+.. code-block :: shell-session
+
+  qsub run_fpga_emu.sh -l nodes=2:fpga:ppn=2 -d .
 
 Re-compile and re-run the code. The device should now be an FPGA emulator.
 
-.. code-block :: python
+.. code-block :: shell-session
 
 	$ ./matrix_mul_dpc
 	Device: Intel(R) FPGA Emulation Device
