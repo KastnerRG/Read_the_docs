@@ -25,7 +25,10 @@ Before you start, we strongly suggest that you get familiar with the high-level 
 
 * Vivado: Xilinx tool for RTL, SoC design (excluding firmware) and FPGA prototyping. Not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.xilinx.com/r/2022.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
-* Vivado HLS: The old Xilinx HLS tool before 2020. It is generally very similar to VitisHLS. A good option are the tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
+* Vivado HLS: The old Xilinx HLS tool before 2020. It is generally very similar to VitisHLS. A good option are the tutorials in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
+
+You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS enviroment setup.
+
 
 
 3) Materials
@@ -89,7 +92,7 @@ The first goal of this project is to generate a functionally correct HLS design 
 5) FIR11
 --------
 
-The first step for the project is to get a functionally correct design working for an 11 tap FIR filter. For this, you will need to use the Vivado HLS tool, and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. **Use the provided script.tcl to create your project**.
+The first step for the project is to get a functionally correct design working for an 11 tap FIR filter. For this, you will need to use the Vivado HLS tool, and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. **Use the provided script.tcl to create your project**, or manually add source & testbench files and set the top function.
 
 6) FIR128 Instructions
 ----------------------
