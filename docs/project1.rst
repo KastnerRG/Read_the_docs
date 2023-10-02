@@ -30,6 +30,7 @@ Before you start, we strongly suggest that you get familiar with the high-level 
 You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS enviroment setup.
 
 
+
 3) Materials
 ------------
 
@@ -74,7 +75,9 @@ This contains:
 
 
 Target Board: xc7z020clg400-1
+
 Software: Vitis HLS 2022.2 (recommended)
+
 Clock Period: 10 ns or 100MHz
 
 4) Project Goal
