@@ -12,7 +12,7 @@ In this section, you will write your code in C/C++, test it, and convert it to R
 1.1) Write your code
 ~~~~~~~~~~~~~~~~~~~~
 
-Open Vivado HLS, create a new project, and name it **pynq_mul**
+Open Vitis HLS, create a new project, and name it **pynq_mul**
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq27.png
 
