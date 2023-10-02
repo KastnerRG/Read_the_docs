@@ -25,7 +25,9 @@ Before you start, we strongly suggest that you get familiar with the high-level 
 
 * Vivado: Xilinx tool for RTL, SoC design (excluding firmware) and FPGA prototyping. Not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.xilinx.com/r/2022.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
-* Vivado HLS: The old Xilinx HLS tool before 2020. It is generally very similar to VitisHLS. A good option are the tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
+* Vivado HLS: The old Xilinx HLS tool before 2020. It is generally very similar to VitisHLS. A good option are the tutorials in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
+
+You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS enviroment setup.
 
 
 3) Materials
@@ -72,9 +74,7 @@ This contains:
 
 
 Target Board: xc7z020clg400-1
-
 Software: Vitis HLS 2022.2 (recommended)
-
 Clock Period: 10 ns or 100MHz
 
 4) Project Goal
