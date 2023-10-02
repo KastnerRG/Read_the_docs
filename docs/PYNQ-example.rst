@@ -4,6 +4,23 @@ Lab: Pynq Memory Mapped IO (s_axilite)
 
 This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
 
+0) Vivado Design suite installation
+---------------------------
+
+Check `here <https://kastner.ucsd.edu/ryan/vivado-installation/>`_ for installation and UCSD license server guide, though you probably would not need the license server for the projects in this course.
+
+We need Vitis HLS for C synthesis and generating the RTL, and Vivado for FPGA prototyping and generating the bitstream. Vitis is primarily for firmware design, thus not required.
+
+.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install0.png
+
+Select Standard edition.
+
+.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install1.png
+
+To save disk space, you do not need to install the simulation dependencies for all supported devices since we are only using PYNQ-Z2.
+
+.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install2.png
+
 1) Vitis HLS: C/C++ to RTL
 ---------------------------
 
