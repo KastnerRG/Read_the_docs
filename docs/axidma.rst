@@ -23,6 +23,8 @@ Linux: open a terminal, make sure your environment is set, navigate to streamMul
 
 Windows: Open Vitis and create a New Project and import **streamMul.cpp** and **streamMul.hpp** and set **smul** as the top function.
 
+.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/manual_add.png
+
 **Your code is not complete!**, modify your code to become same as the following:
 
 .. code-block :: c++
