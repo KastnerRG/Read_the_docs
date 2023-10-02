@@ -11,15 +11,15 @@ Check `here <https://kastner.ucsd.edu/ryan/vivado-installation/>`_ for installat
 
 We need Vitis HLS for C synthesis and generating the RTL, and Vivado for FPGA prototyping and generating the bitstream. Vitis is primarily for firmware design, thus not required.
 
-.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install0.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install0.png
 
 Select Standard edition.
 
-.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install1.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install1.png
 
 To save disk space, you do not need to install the simulation dependencies for all supported devices since we are only using PYNQ-Z2.
 
-.. image:: https://github.com/KastnerRG/Read_the_docs/blob/master/docs/image/install2.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install2.png
 
 1) Vitis HLS: C/C++ to RTL
 ---------------------------
