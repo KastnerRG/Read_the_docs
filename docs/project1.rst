@@ -12,7 +12,7 @@ The project is divided into three parts:
 
 * Design an 11 tap FIR filter
 * Design and optimize a 128 tap FIR filter
-* Prototype an FIR filter architectures on a Zynq FPGA
+* Prototype an FIR filter architectures on a Zynq FPGA (Optional for this project)
 
 You should start this assignment by understanding the 11 tap FIR filter, and implementing a functionally correct design. Next, you modify the code and experiment different optimizations which are specified in the questions. Note that the 128 FIR filter is more complex and may have different trade-offs, and in the final report you need to answer the questions with regard to the 128 tap filter. Your answers should demonstrate your understanding of different optimization and their effects on throughput, latency and area. Finally, you will take one of your FIR filter designs, program that on a Zynq FPGA, and demonstrate its functionality with the Pynq infrastructure.
 
@@ -21,9 +21,11 @@ You should start this assignment by understanding the 11 tap FIR filter, and imp
 
 Before you start, we strongly suggest that you get familiar with the high-level synthesis tool.
 
-* Vivado HLS: A good option are the tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
+* Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.xilinx.com/r/2022.2-English/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps though that does provide a good preview of the optimizations that you will find in future projects.
 
-* Vitis HLS: A good option is this `Vitis Tutorials <https://xilinx.github.io/Vitis-Tutorials/master/docs/docs/Getting_Started/Vitis_HLS/Getting_Started_Vitis_HLS.html>`_. You do not need to go through the optimization steps though that does provide a good preview of the optimizations that you will find in future projects.
+* Vivado: Xilinx tool for RTL, SoC design (excluding firmware) and FPGA prototyping. Not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.xilinx.com/r/2022.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
+
+* Vivado HLS: The old Xilinx HLS tool before 2020. It is generally very similar to VitisHLS. A good option are the tutorials: Lab 1, Lab 2 and Lab 3 in this document: *ug871-vivado-high-level-synthesis-tutorial.pdf*. You can find this document and lab files `here <https://github.com/KastnerRG/pp4fpgas/blob/master/Vivado_HLS_Tutorial_2019.zip?raw=true>`_. 
 
 
 3) Materials
@@ -68,11 +70,12 @@ This contains:
 
   - input.dat - input chirp signal
 
-* Target Board: xc7z020clg400-1
 
-* Software: Vivado 2019.1
+Target Board: xc7z020clg400-1
 
-* Time Period: 10 ns or 100MHz
+Software: Vitis HLS 2022.2 (recommended)
+
+Clock Period: 10 ns or 100MHz
 
 4) Project Goal
 ---------------
@@ -131,16 +134,16 @@ Questions:
 
 It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
 
-* **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=74>`_ or from section 2.10 of the `textbook<http://kastner.ucsd.edu/hlsbook/>`_. 
+* **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=74>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
-7) PYNQ Demo
+7) PYNQ Demo (Optional)
 ---------------
 
 Following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook, and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
 
 The specific things you must do in this section are:
 
-* Download an appropriate image for your board from `PYNQ.io <http://www.pynq.io/>`_ and write it to your SDCard (`instructions <https://pynq.readthedocs.io/en/latest/getting_started.html>`_).
+* Download an appropriate image for your board from `here <http://www.pynq.io/board.html>`_ and write it to your SDCard (`PYNQ-Z2 instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_).
 
 * Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
@@ -149,6 +152,8 @@ The specific things you must do in this section are:
 * Write a host program *host_fir.ipynb*. The expected output is as shown below:
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
+
+Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
 
 8) Report Guidelines
 --------------------
