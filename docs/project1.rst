@@ -199,13 +199,11 @@ The throughput in Hertz can be calculated as:
 
 .. math::
   \text{Throughput (Hz)} = 1/(\text{Clock Period (s)} * \# \text{Clock Cycles})
-  :label:
 
 The throughput in Mhz can be calculated as:
 
 .. math::
   \text{Throughput (MHz)} = 1000/(\text{Clock Period(ns)} * \# \text{Clock Cycles})
-  :label:
 
 You should always present your results using units (Hz, KHz, MHz, etc.) that make “sense”. For example, you should not do 10000 Hz rather 10 KHz. Or not 0.02 MHz rather 20 KHz
 
