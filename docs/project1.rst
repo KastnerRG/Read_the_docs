@@ -198,13 +198,13 @@ The throughput is reported in Hz using the formula from Equation 2. Note that yo
 The throughput in Hertz can be calculated as:
 
 .. math::
-  Throughput (Hz) = 1/(Clock Period (s) * #Clock Cycles)
+  Throughput (Hz) = 1/(Clock Period (s) * \#Clock Cycles)
   :label:
 
 The throughput in Mhz can be calculated as:
 
 .. math::
-  Throughput (Mhz) = 1000/(Clock Period(ns) * #Clock Cycles)
+  Throughput (MHz) = 1000/(Clock Period(ns) * \#Clock Cycles)
   :label:
 
 You should always present your results using units (Hz, KHz, MHz, etc.) that make “sense”. For example, you should not do 10000 Hz rather 10 KHz. Or not 0.02 MHz rather 20 KHz
