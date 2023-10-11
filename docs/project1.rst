@@ -152,7 +152,7 @@ The specific things you must do in this section are:
 
 * Write a host program *host_fir.ipynb*. The expected output is as shown below:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/demo1_waveform.png
 
 Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
 
