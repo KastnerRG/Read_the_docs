@@ -164,7 +164,7 @@ FIR11
 
 * Submit your code (only source code for synthesis) and tcl script.
 
-* Submit synthesis reports (.rpt file **and** .xml document files, located in a "/syn/report" folder).
+* Submit synthesis reports (fir_csynth.rpt file **and** fir_csynth.xml document files, you can find them in "<your solution folder>/syn/report").
 
 Demo
 ~~~~
