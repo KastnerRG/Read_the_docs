@@ -20,11 +20,11 @@ The lookup table architecture is a generic computational technique that instanti
 
 You can download the project files here:
 
-* `CORDIC Project Repo <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2>`_
+* `CORDIC Project Repo <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project2/cordic>`_
 
 The repo has a number of subfolders and files related to the project. This contains the documents necessary to build the project. You will start from HLS folder to design a CORDIC using HLS. You can use the provided script.tcl to create your project.
 
-* HLS \ cordic folder:
+* HLS/cordic folder:
 
         - cordiccart2pol.cpp - The place where you write your synthesizable code. Currently, it only contains the function prototype.
 
@@ -34,7 +34,7 @@ The repo has a number of subfolders and files related to the project. This conta
 
         - script.tcl - Use this to create your project
 
-* HLS \ cordic_LUT folder:
+* HLS/cordic_LUT folder:
 
         - cordiccart2pol.cpp - The place where you can find the synthesizable code. Currently, it contains a simple implementation.
 
