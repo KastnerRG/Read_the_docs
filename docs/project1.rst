@@ -148,11 +148,11 @@ The specific things you must do in this section are:
 
 * Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
-* Implement your 11-tap FIR design on PYNQ board.
+* Implement your **11-tap** FIR design on PYNQ board.
 
 * Write a host program *host_fir.ipynb*. The expected output is as shown below:
 
-.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/demo1_waveform.png
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
 
 Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
 
