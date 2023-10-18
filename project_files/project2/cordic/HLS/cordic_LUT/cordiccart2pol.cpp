@@ -3,13 +3,6 @@
 
 void init_cart2pol_LUTs(data_t my_LUT_th[LUT_SIZE], data_t my_LUT_r[LUT_SIZE])
 {
-	// Fill the LUT with appropriate values
-	float step = 0.5/FRACTIONAL_BITS; //
-	int num_steps = (int) 2/step; // x and y are normalized between -1 and 1
-
-	float min_theta, max_theta = 0;
-	float min_r, max_r = 0;
-
 	// Fill the LUT values with their appropriate R and theta values
 	for(int i=0; i<LUT_SIZE; i++){
 		ap_uint<2*W> index = i;
