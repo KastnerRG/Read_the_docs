@@ -98,6 +98,11 @@ Make sure that **mul_test.cpp** is open. Open **Directive** and right click on t
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/2.png
 
+Also add the below pragma inside the function body to get the **ap_ctrl** to be included in the **s_axilite**. This is not available (as of Vitis HLS 2023.1) in the Insert Directive GUI.
+
+.. code-block:: c++
+	#pragma HLS INTERFACE mode=s_axilite port=return
+
 1.4) Synthesis and export your design
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
