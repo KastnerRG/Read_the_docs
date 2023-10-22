@@ -90,13 +90,26 @@ Run C simulation and make sure your code passes your test bench.
 1.3) Set port types
 ~~~~~~~~~~~~~~~~~~~
 
-Make sure that **mul_test.cpp** is open. Open **Directive** and right click on the options and select **Modify Directive** (or **Insert Directive**) . In the drop down, select **INTERFACE** and set all the ports to **s_axilite** by right clicking on available options. Repeat the same for all the ports (**out** and **in**).
+You can set the ports with GUI. Make sure that **mul_test.cpp** is open. Open **Directive**. In the directive window, right click on the the testbench module itself (in our case, mul_test), and select **Modify Directive** (or **Insert Directive**). In the drop down, select **INTERFACE** and set all the ports to **s_axilite** by right clicking on available options. Repeat the same for all its ports (right click on **out** and **in**). In this example, you should configure the ports for 3 times. 
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/0.png
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/1.png
 
+Carefully check your directive tab with the picture below after setting your ports. Make sure that **return**, **out** and **in** ports are all set to s_axilite.
+
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/2.png
+
+An alternate (and better) way of setting the ports is by making HLS pragma declerations in mul_test.cpp. Simply add 3 lines of commands, and you don't have to go through the steps with GUI above.
+
+.. code-block:: c++
+
+  void mul_test(int* out, int in){
+	#pragma HLS INTERFACE mode=s_axilite port=return
+	#pragma HLS INTERFACE mode=s_axilite port=in
+	#pragma HLS INTERFACE mode=s_axilite port=out
+	*out = 2*in;
+  }
 
 1.4) Synthesis and export your design
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
