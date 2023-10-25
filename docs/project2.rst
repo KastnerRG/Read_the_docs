@@ -13,7 +13,7 @@ The primary goal of this project is to understand how to use arbitrary precision
 
 A CORDIC is an efficient method for calculating trigonometric and hyperbolic functions. The CORDIC control can be modified to perform different functions, e.g., the book describes how to use a CORDIC for calculating sine and cosine. This project focuses on using the CORDIC to translate between Cartesian coordinates (x, y) to the polar coordinates (r, theta).
 
-The lookup table architecture is a generic computational technique that instantiates a memory that holds the output results. The fucntion inputs are used to address into the memory to retrieve the appropriate result. A lookup table in the FPGA logic architecture is one such example that uses very small memories to compute an arbitrary N bit input logic function whose output is 1 bit. These LUTs are small -- a 4-LUT has 16 bits; a 5-LUT has 32 bits. This project has a LUT-based architecture to compute the Cartesian to Polar transform.
+The lookup table architecture is a generic computational technique that instantiates a memory that holds the output results. The function inputs are used to address into the memory to retrieve the appropriate result. A lookup table in the FPGA logic architecture is one such example that uses very small memories to compute an arbitrary N bit input logic function whose output is 1 bit. These LUTs are small -- a 4-LUT has 16 bits; a 5-LUT has 32 bits. This project has a LUT-based architecture to compute the Cartesian to Polar transform.
 
 2) Materials
 --------------
