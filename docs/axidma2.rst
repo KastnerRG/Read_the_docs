@@ -195,7 +195,7 @@ In sources, expand **design_1_wrapper::design_1::design_1::streamAdd::sadd::desi
 
 Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **sadd.bit.** 
 
-Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **sadd.hwh**.
+Copy your **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **sadd.hwh**.
 
 You should have both **sadd.bit** and **sadd.hwh**.
 
