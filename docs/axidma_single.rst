@@ -19,7 +19,7 @@ Download and unzip `streamMul.zip. <https://bitbucket.org/akhodamoradi/pynq_inte
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 
-    $ vivado_hls script.tcl
+    $ vitis_hls script.tcl
 
 Windows: Open Vitis and create a New Project and import **streamMul.cpp** and **streamMul.hpp** and set **smul** as the top function.
 
