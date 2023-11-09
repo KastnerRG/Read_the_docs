@@ -53,9 +53,14 @@ In this lab, since we are using an ap_axiu struct for out I/O variables, the `la
 1.2) Generate RTL code and export it
 ####################################
 
-Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*length*) is a variable.
+Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. 
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma3.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/hls1.png
+
+Check your hardware interface as follows: 
+
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/hls2.png
+
 
 Now you can export your RTL code by clicking on **Export RTL**:
 
