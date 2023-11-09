@@ -28,6 +28,7 @@ Windows: Open Vitis and create a New Project and import **streamMul.cpp** and **
 **Your code is not complete!**, modify your code to become same as the following:
 
 .. code-block :: c++
+
 	#include "ap_axi_sdata.h"
 	#include "hls_stream.h"
 
