@@ -64,7 +64,7 @@ Check your hardware interface as follows:
 
 Now you can export your RTL code by clicking on **Export RTL**:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma4.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/hls3.png
 
 After exporting is done, you can close and exit from Vitis.
 
@@ -82,14 +82,14 @@ Select **RTL Project** and check **Do specify not sources** at this time.
 
 Select **xc7z020clg400-1** for your part:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3090594305-pynq4.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado2.png
 
 2.2) Import RTL code
 ####################
 
 Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado HLS project > solution1 > impl > ip** and select it:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3508043996-pynq5.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado3.png
 
 2.3) Add IPs to your design
 ###########################
@@ -117,7 +117,7 @@ Double click on your **AXI DMA** and change the following parameters: 1) uncheck
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma6.png
 
-Add a **Constant** to your design
+
 
 2.4) Manual connections
 #######################
@@ -128,9 +128,9 @@ Connect the following ports:
 
 **smul_dma::M_AXIS_MM2S to smul::INPUT_r**
 
-**xlconstant_0 to smul::ap_ctrl::ap_start**
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma7.png
+
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado5.png
 
 2.5) Automatic connections
 ##########################
@@ -141,15 +141,15 @@ Now you can leave the rest of the connections to the tool. There should be a hig
 
 2. Click on **Run Connection Automation** and select all
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2236315451-pynq12.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado6.png
 
 3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/1550495145-pynq13.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado7.png
 
 At this point your design should look like this:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/dma8.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/axi_single_dma/vivado8.png
 
 2.6) Generate bitstream
 #######################
@@ -158,26 +158,16 @@ At this point your design should look like this:
 
 2. Validate your design: **Tools > Validate Design**
 
-3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. (use default options) Now you should have **design_1_wrapper.**
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-2.7) Note required addresses and copy generated files
-####################################################
-
-After bitstream generating process is done, open **Address Editor** from **window** menu.
-
-Note that **smul address** is **0x43C00000**, we need this address in our host program for sending **length** data.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3507230747-pynq17.png
-
-In sources, expand **design_1_wrapper::design_1::design_1::streamMul::smul::design_1_smul_0_0::inst : smul**, double click on **smul_CTRL_s_axi_U**, and note the address for **length_r** is **0x10**. We need this address in our host program.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2224243640-pynq18.png
 
 Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **smul.bit.** 
-
+In my case, axi_single_dma > axi_single_dma.runs >impl_1 > design_1_wrapper.bit** 
+ 
 Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **smul.hwh**.
+aadddddddasfasdfadsfsdafaddeeedddafadsf
 
 You should have both **smul.bit** and **smul.hwh**.
 
@@ -199,41 +189,68 @@ Create a new folder in your PYNQ board and move both **smul.bit** and **smul.hwh
 Create a new Jupyter notebook and run the following code to test your design:
 
 .. code-block :: python3
-
-	import time
+    
+    import time
 	from pynq import Overlay
 	import pynq.lib.dma
-	from pynq import Xlnk
 	import numpy as np
 	from pynq import MMIO
 	import random
 
-	ol = Overlay('/home/xilinx/jupyter_notebooks/smul/smul.bit') # check your path
+	print("Programming the FPGA")
+	ol = Overlay('./smul.bit') # check your path
 	ol.download() # it downloads your bit to FPGA
-	dma = ol.streamMul.smul_dma # creating a dma instance. Note that we packed smul and smul_dma into streamMul
-	sadd_ip = MMIO(0x43c00000, 0x10000) # we got this IP from Address Editor
-	xlnk = Xlnk()
+	
+	print("Inspect all the IP names")
+	ol.ip_dict.keys()
 
 .. code-block :: python3
 
-	length = 11
+	print("Inspect the HLS IP registers")
+	hls_ip = ol.smul
+	print(hls_ip)
+	# hls_ip.register_map
 
-	in_buffer = xlnk.cma_array(shape=(length,), dtype=np.int32) # input buffer
-	out_buffer = xlnk.cma_array(shape=(length,), dtype=np.int32) # output buffer
 
-	samples = random.sample(range(0, length), length)
-	np.copyto(in_buffer, samples) # copy samples to inout buffer
+	# Setup recv/send DMA 
+	dma = ol.smul_dma
+	dma_send = ol.smul_dma.sendchannel
+	dma_recv = ol.smul_dma.recvchannel
 
-	sadd_ip.write(0x10, length) # we got this address from Vivado source
-	t_start = time.time()
-	dma.sendchannel.transfer(in_buffer)
-	dma.recvchannel.transfer(out_buffer)
-	dma.sendchannel.wait() # wait for send channel
-	dma.recvchannel.wait() # wait for recv channel
-	t_stop = time.time()
-	in_buffer.close()
-	out_buffer.close()
-	print('Hardware execution time: ', t_stop-t_start)
-	for i in range(0, length):
-	    print('{}*2 = {}'.format(in_buffer[i], out_buffer[i]))
+	#dma = ol.axi_dma_0
+	#dma_send = ol.axi_dma_0.sendchannel
+	#dma_recv = ol.axi_dma_0.recvchannel
 
+	print("Starting HLS IP")
+	hls_ip.register_map
+	CONTROL_REGISTER = 0x0
+	hls_ip.write(CONTROL_REGISTER, 0x81) # 0x81 will set bit 0
+	# hls_ip.register_map
+
+	# Prepare data to send 
+	from pynq import allocate
+	import numpy as np
+
+	data_size = 20
+	input_buffer = allocate(shape=(data_size,), dtype=np.uint32)
+	output_buffer = allocate(shape=(data_size,), dtype=np.uint32)
+
+	for i in range(data_size):
+		input_buffer[i] = i
+
+	print("Starting DMA transfer")
+	dma_recv.transfer(output_buffer)
+	dma_send.transfer(input_buffer)
+
+	dma_send.wait()
+	dma_recv.wait()
+
+	# Print the data 
+	for i in range(data_size):
+		#print('0x' + format(output_buffer[i], '02x'))
+		print(i, input_buffer[i], output_buffer[i])
+
+	del input_buffer
+	del output_buffer
+	del ol
+	print("Finished!")
