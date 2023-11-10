@@ -13,7 +13,7 @@ The first section is to create a project in Vitis HLS, synthesize your code, and
 1.1) Download code and create a Vivado HLS project
 #################################################
 
-Download the code from `here <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamAdd.zip>`_ 
+Download the code from `here <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp>`_ 
 
 Follow the same procedure of creating a Vitis HLS project as `lab 1: MMIO <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ You can either use .tcl script or manually add the source files and specify top function.
 
@@ -23,33 +23,20 @@ Now you can open your project in Vivado HLS. It should look like this:
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/1_dut.jpg
 
-INPUT1, INPUT2 and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
+Check `here <https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/AXI4-Stream-Interfaces>`_ for the AXI4-Stream interface and how the AXI4-Stream protocol works. In this example, we conform to the more formal version of AXIS interface required by Vitis, which requires a special data type ``hls::axis``. We define our custom data type ``ap_axis<32,2,5,6>`` as ``transPkt``. 32 means we the data we are sending is of 32 bit wide, the rest are for side channels and is not very useful for this project, it is safe to set them to other numbers, e.g. 1,1,1.
 
-Note that 
+However the ``ap_axis`` struct requires the data gets transferred to be signed intergers (and ``ap_axiu`` requires unsigned integers). Since we are using floating points, we use ``union`` data type to allow the tool to interpret our data as integers when interacting with AXIS interfaces, without corrupting our floating point data. Read more about the union data type `here <https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Unions>`_ from the Xilinx user manual. `Here <https://support.xilinx.com/s/question/0D52E00007DnHxuSAF/streaming-floats-with-tlast?language=en_US>`_ is an example design that uses AXI4-Stream with floating point data.
 
-.. code-block :: c++
+Using the union data type improperly can lead to various problems. Keep in mind that the union data type does not do type casting, it simply interprete the same bits with differet protocols. In this lab, we do all the arithmetics in floating point, and the "integer version" of the data is used for interaction with the AXIS only, and make no sense if used for arithmetic operations.
 
-	*OUTPUT++ = cur1;
-	
-is performing two separate operations. Breaking it down:
+Another issue worth noticing is that we are reusing the input AXIS ``transPkt`` for output. The ``transPkt`` contains not only the data but also the necessary side channels. In other projects, you might choose not to reuse the packets, in these cases, you have to manually take care of the side channels, especially ``last``, ``strb`` and ``strb``. Here is an example from another project,
 
 .. code-block :: c++
 
-	*OUTPUT = cur1; // write the output struct to the address in OUTPUT
-	OUTPUT++;	// post-increment the address in OUTPUT for the next write operation
-	
-In this lab, since we are reusing an input struct `cur1` to generate an output struct, the last bit is handled for us. However, if you must construct your own `axis_t` struct, you must ensure you set `last` to 1 when the struct is the last one to be streamed out, else explicitly set it to 0 (otherwise there may be garbage data in the memory address of `last` that terminates your stream early, leaving you scratching your head about why the output error on Pynq's Jupyter interface is so high).
-
-You can do so like this:
-
-.. code-block :: c++
-
-	axis_t curr;
-	curr.data = ...; // write data
-	curr.last = ...; // set to 1 if end of stream, else set to 0
-	*OUTPUT++ = curr; // make sure you only write to a particular address once, so do it after the struct is constructed
-
-We must interact with them this way because we are dealing with an AXI stream, not an array. 
+	out_pkt.data = out_imag_buffer.idata;
+	out_pkt.keep = in_Pkt.keep;
+	out_pkt.strb = in_Pkt.strb;
+	out_pkt.last = (i==LEN-1)?1:0;
 
 
 1.2) Generate RTL code and export it
