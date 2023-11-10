@@ -1,31 +1,27 @@
-Lab: Axistream Multiple DMAs (axis)
+Lab: Axistream Multiple DMAs (axis) (update in progress)
 ===================================
 
 Simple streaming example with multiple inputs
 *********************************************
-In this example we learn how to use `Xilinx AXI_DMA <https://www.xilinx.com/products/intellectual-property/axi_dma.htm>`_ to create a design with two streaming inputs and one streaming output.
+In this example we learn how to use `Xilinx AXI_DMA <https://docs.xilinx.com/r/en-US/pg021_axi_dma>`_ to create a simple floating point adder with two streaming inputs and one streaming output.
 
-1) Vivado HLS: Generating RTL code from C/C++ code
+1) Vitis HLS: Generating RTL code from C/C++ code
 --------------------------------------------------
 
-In this section you learn how to create a project in Vivado HLS, synthesize your code, and generate RTL.
+The first section is to create a project in Vitis HLS, synthesize your code, and generate RTL.
 
 1.1) Download code and create a Vivado HLS project
 #################################################
 
-Download and unzip `streamAdd.zip. <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamAdd.zip>`_ Generate your project using the provided script.tcl file:
+Download the code from `here <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamAdd.zip>`_ 
 
-Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
-
-    $ vivado_hls script.tcl
-
-Windows: Open Vitis and create a New Project and import **streamAdd.cpp** and **streamAdd.hpp** and set **sadd** as the top function.
+Follow the same procedure of creating a Vitis HLS project as `lab 1: MMIO <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ You can either use .tcl script or manually add the source files and specify top function.
 
 Now you can open your project in Vivado HLS. It should look like this:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma1.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/0_header.jpg
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma2.png
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/1_dut.jpg
 
 INPUT1, INPUT2 and OUTPUT ports are set to `axis` interfaces for streaming and `length` is set to `s_axilite` for a non-streaming interface. `axis_t` is a struct defined in the header file that is composed of an `int data` and an `ap_uint<1> last`. The 1-bit `last` is required for `axis` interfaces, and signals the last struct of the stream, ending the stream. In the pragmas, depth is set to 50 because that's the maximum number of values we are streaming in and out of the fabric.
 
