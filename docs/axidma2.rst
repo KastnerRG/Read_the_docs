@@ -1,4 +1,4 @@
-Lab: Axistream Multiple DMAs (axis) (update in progress)
+Lab: Axistream Multiple DMAs (axis)
 ===================================
 
 Simple streaming example with multiple inputs
@@ -29,7 +29,7 @@ However the ``ap_axis`` struct requires the data gets transferred to be signed i
 
 Using the union data type improperly can lead to various problems. Keep in mind that the union data type does not do type casting, it simply interprete the same bits with differet protocols. In this lab, we do all the arithmetics in floating point, and the "integer version" of the data is used for interaction with the AXIS only, and make no sense if used for arithmetic operations.
 
-Another issue worth noticing is that we are reusing the input AXIS ``transPkt`` for output. The ``transPkt`` contains not only the data but also the necessary side channels. In other projects, you might choose not to reuse the packets, in these cases, you have to manually take care of the side channels, especially ``last``, ``strb`` and ``strb``. Here is an example from another project,
+Another issue worth noticing is that we are reusing the input AXIS ``transPkt`` for output. The ``transPkt`` contains not only the data but also the necessary side channels. In other projects, you might choose not to reuse the packets, in these cases, you have to manually take care of the side channels, especially ``last``, ``strb`` and ``keep``. Here is an example from another project,
 
 .. code-block :: c++
 
@@ -42,44 +42,31 @@ Another issue worth noticing is that we are reusing the input AXIS ``transPkt`` 
 1.2) Generate RTL code and export it
 ####################################
 
-Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*length*) is a variable.
-
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma3.png
-
-Now you can export your RTL code by clicking on **Export RTL**:
-
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma4.png
-
-After exporting is done, you can close and exit from Vitis.
+Follow the same step of running C synthesis and exporting RTL as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_.
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
 
 In this section we import our RTL code from last section, add some required IPs, and generate our bitstream
 
-2.1) Create a new Vivado project
+2.1) Create a new Vivado project and import RTL code
 ################################
+
+Follow the same steps for creating a Vivado project and add the ip folder in the Vitis HLS project to Vivado IP catalog as in `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_.
 
 Open your Vivado tool and create a new project. Select an appropriate location for your project and leave the default project name as is (**project_1**).
 
 Select **RTL Project** and check **Do specify not sources** at this time.
 
-Select **xc7z020clg400-1** for your part:
+Select **xc7z020clg400-1** for your part
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3090594305-pynq4.png
-
-2.2) Import RTL code
-####################
-
-Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vivado HLS project > solution1 > impl > ip** and select it:
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3379362706-pynq5.png
+Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vitis HLS project > solution1 > impl > ip** and select it:
 
 2.3) Add IPs to your design
 ###########################
 Under **Flow Navigator**, click on **Create Block Design**. Leave the design name as is (*design_1*). In the newly opened window you can add IPs by clicking on the plus sign.
 
-Add **ZYNQ7 Processing System** to your design:
+Add **ZYNQ7 Processing System** and our HLS ip core to your design:
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/3814633603-pynq6.png
 
@@ -87,73 +74,62 @@ Double click on **ZYNQ7 IP** to customize it. In the opened window, double click
 
 .. image :: https://bitbucket.org/repo/x8q9Ed8/images/148617913-pynq7.png
 
-Select and check **S AXI HP0 interface** and **S AXI HP1 Interface**:
+Select and check **S AXI HP0 interface**:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/2203030501-pynq8.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/2_zynq.jpg
 
-Add a **Sadd** to your design and rename it to **sadd**:
+Add **AXI Direct Memory Access** to your design, you can rename the IPs if you prefer,
 
-Add two **AXI Direct Memory Access** to your design and rename it to **sadd_dma1** and **sadd_dma2**.
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/3_add_dma.jpg
 
-Double click on your **sadd_dma1** and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to 23:
+Double click the DMA and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to the maximum:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3641178343-pynq10.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/4_dma_config0.jpg
 
-Double click on sadd_dma2 and change the following parameters: 1) uncheck **Enable Scatter Gather Engine**. 2) Change **Width** of **Buffer Length Register** to 23. 3) uncheck **Enable Write Channel:**
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/385498319-pynq10_2.png
-
-The first DMA will be connected to one input port and one output port, but the second DMA only connects to one input port and that is why we disabled the write channel for the second DMA.
-
-Add a **Constant** to your design
+Create another DMA, disable Scatter Gather Engine, and disable the write channel. The first DMA will be used for both read and write, but the second DMA will be used for read only, as there are 2 read ports but only 1 write port in our HLS IP.
 
 2.4) Manual connections
 #######################
 
-Connect the following ports:
-
-**xlconstant_0** to **sadd::ap_ctrl::ap_start**
+Maunally connect the following ports:
  
-**sadd::OUTPUT_r** to **sadd_dma1::S_AXIS_S2MM** 
+**example_0::A** to **axi_dma_0::M_AXIS_MM2S**
 
-**sadd_dma1::M_AXIS_MM2S** to **sadd::INPUT1** 
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/5_connect_axis.jpg
 
-**sadd_dma2::M_AXIS_MM2S** to **sadd::INPUT2**
+**example_0::B** to **axi_dma_1::M_AXIS_MM2S**
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma5.png
+**example_0::C** to **axi_dma_0::S_AXIS_S2MM**
+
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/6_connect_axis.jpg
 
 2.5) Automatic connections
 ##########################
 
 Now you can leave the rest of the connections to the tool. There should be a highlighted strip on top of your diagram window.
 
-1. Click on **Run Block Automation**
+1. Click on **Run Block Automation** to enable the external FIXED_IO and DDR interfaces:
 
-2. Click on **Run Connection Automation** and select all. Click on **S_AXI_HP1** and select **sadd_dma2/M_AXI_MM2S** as master:
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/7_block_auto.jpg
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma6.png
+2. Click on **Run Connection Automation** and select all.
+
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/8_connect_auto.jpg
 
 3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/938036616-pynq13.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/9_connect_auto2.jpg
 
-At this point your design should look like this:
+At this point, your design should contain 2 AXI-interconnects. One of them connects the M_AXI port of the PS with the S_AXI_LITE ports of the 2 DMAs and our HLS IP. This enables the PS to configure these IPs:
 
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma7.png
+.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/10_axi_inter0.jpg
 
-2.6) Create a Hierarchy
+The other connect the M_AXI ports of the DMAs to the high performance S_AXI port(s) of the PS. DMAs use this channel to perform read and write with the memory.
+
+2.6) Generate bitstream
 #######################
 
-Select **sadd**, **sadd_dma1**, and **sadd_dma2**, right click on one of them, and select **Create Hierarchy**. Name it **streamAdd**. This will make our host code more organized. This step is optional, but it is good to know how to do. Note that, in the Jupyter notebook, we will have to access the hierarchy before accessing the DMA or the IP. You can see this in the Python code at the bottom of the page. 
-
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma8.png
-
-Your design should look like this:
-
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/mdma9.png
-
-2.7) Generate bitstream
-#######################
+Follow the same step as as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_.
 
 1. Save your design **CTRL+S** or **File > Save Block Design.**
 
@@ -163,24 +139,7 @@ Your design should look like this:
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-2.8) Note required addresses and copy generated files
-#####################################################
-
-After bitstream generating process is done, open **Address Editor** from **window** menu.
-
-Note that **sadd address** is **0x43C00000**, we need this address in our host program for sending **length** data.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/17188271-pynq17.png
-
-In sources, expand **design_1_wrapper::design_1::design_1::streamAdd::sadd::design_1_sadd_0_0::inst : sadd**, double click on **sadd_CTRL_s_axi_U**, and note the address for **length_r** is **0x10**. We need this address in our host program.
-
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3619837071-pynq18.png
-
-Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper** to your **project directory > project_1** and rename it to **sadd.bit.** 
-
-Copy your **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **sadd.hwh**.
-
-You should have both **sadd.bit** and **sadd.hwh**.
+Keep your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper.bit** and **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** for Pynq implementation. You should make sure that the bitstream and the hardware handoff files have the same name.
 
 You can close and exit from Vivado tool.
 
@@ -192,55 +151,41 @@ In this section we use Python to test our design.
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **sadd.bit** and **sadd.hwh** into it.
+Create a new folder in your PYNQ board and move both bitstream and hardware handoff into it.
 
 3.2) Python code
 ################
 
-Create a new Jupyter notebook and run the following code to test your design:
+Create a new Jupyter notebook and run code in ``./simple_add_float.ipynb`` under the `source code folder <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp>`_ to test your design.
+
+You should be able to see all the components of the overlay by checking its IP dictionary
+.. code-block :: python3
+
+	ol = Overlay("./design_1_demofp.bit")
+	ol.ip_dict
+
+In this lab, we are only using ``axi_dma_0``, ``axi_dma_1`` and ``example_0``, our HLS IP.
+
+You can check the register map of the HLS IP, and start the IP by writing to the corresponding register:
+.. code-block :: python3
+
+	CONTROL_REGISTER = 0x0
+	hls_ip.write(CONTROL_REGISTER, 0x1) # 0x81 will set bit 0
+	hls_ip.register_map
+
+It is recommended to start the receive process first.
 
 .. code-block :: python3
 
-	import time
-	from pynq import Overlay
-	import pynq.lib.dma
-	from pynq import Xlnk
-	import numpy as np
-	from pynq import MMIO
-	import random
+	dma0_recv.transfer(output_buffer)
+	dma0_send.transfer(input_buffer0)
+	dma1_send.transfer(input_buffer1)
+	dma0_send.wait()
+	dma1_send.wait()
+	dma0_recv.wait()
 
-	ol = Overlay('/home/xilinx/jupyter_notebooks/sadd/sadd.bit') # check this path
-	ol.download() # this downloads your bitstream into FPGA
-	dma1 = ol.streamAdd.sadd_dma1 # first DMA. Note that we had to access the hierarchy before accessing the DMA
-	dma2 = ol.streamAdd.sadd_dma2 # second DMA
-	sadd_ip = MMIO(0x43c00000, 0x10000) # we got this address from 
-	xlnk = Xlnk()
+Check the register map of DMAs to find out whether the transfer has finished without error, which is very useful in debugging.
 
 .. code-block :: python3
 
-	length = 8
-
-	in_buffer1 = xlnk.cma_array(shape=(length,), dtype=np.int32) # input buffer 1
-	in_buffer2 = xlnk.cma_array(shape=(length,), dtype=np.int32) # input buffer 2
-	out_buffer = xlnk.cma_array(shape=(length,), dtype=np.int32) # output buffer
-
-	samples = random.sample(range(0, length), length)
-	np.copyto(in_buffer1, samples)
-	samples = random.sample(range(0, length), length)
-	np.copyto(in_buffer2, samples)
-
-	sadd_ip.write(0x10, length) # we got this address from Vivado source. Since we didn't do port=return, and we set a constant for ap_start, we only have to write length.
-	t_start = time.time()
-	dma1.sendchannel.transfer(in_buffer1)
-	dma2.sendchannel.transfer(in_buffer2)
-	dma1.recvchannel.transfer(out_buffer)
-	dma1.sendchannel.wait()
-	dma2.sendchannel.wait()
-	dma1.recvchannel.wait()
-	t_stop = time.time()
-	in_buffer1.close()
-	in_buffer2.close()
-	out_buffer.close()
-	print('Hardware execution time: ', t_stop-t_start)
-	for i in range(0, length):
-	    print('{}+{} = {}'.format(in_buffer1[i], in_buffer2[i], out_buffer[i]))
+	dma0.register_map
