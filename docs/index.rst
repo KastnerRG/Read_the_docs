@@ -26,9 +26,8 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    project6
    project7
    PYNQ-example
-   axidma
-   axidma2
    axidma_single
+   axidma2
    axi4
    interrupts
    microblaze.ipynb
