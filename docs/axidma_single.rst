@@ -15,7 +15,7 @@ In this section you learn how to create a project in Vivado HLS, synthesize your
 1.1) Download code and create a Vivado HLS project
 #################################################
 
-Download and unzip `streamMul.zip. <https://bitbucket.org/akhodamoradi/pynq_interface/downloads/streamMul.zip>`_ Generate your project using the provided script.tcl file:
+Download and unzip `axi_single_dma_files.zip. <https://github.com/KastnerRG/Read_the_docs/raw/master/project_files/axi_single_dma_files.zip>`_ Generate your project using the provided script.tcl file:
 
 Linux: open a terminal, make sure your environment is set, navigate to streamMul folder, and run the following ::
 
