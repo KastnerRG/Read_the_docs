@@ -167,7 +167,6 @@ Copy your **project directory > project_1 > project_1.runs > impl_1 > design_1_w
 In my case, axi_single_dma > axi_single_dma.runs >impl_1 > design_1_wrapper.bit** 
  
 Copy your **project directory > project_1 > project_1.srcs > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** to your **project directory > project_1** and rename it to **smul.hwh**.
-aadddddddasfasdfadsfsdafaddeeedddafadsf
 
 You should have both **smul.bit** and **smul.hwh**.
 
@@ -181,7 +180,7 @@ In this section we use Python to test our design.
 3.1) Move your files
 ####################
 
-Create a new folder in your PYNQ board and move both **smul.bit** and **smul.hwh** into it.
+Create a new folder (lab2_single_dma) in your PYNQ board and move both **smul.bit** and **smul.hwh** into it. Also create a notebook named smul_axi_single_dma.ipynb.
 
 3.2) Python code
 ################
