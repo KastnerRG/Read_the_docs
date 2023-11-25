@@ -1,6 +1,6 @@
 .. _devcloud:
 
-Lab: DPC++ on Intel DevCloud
+Lab: SYCL on Intel DevCloud
 ====================
 
 Getting Started
@@ -11,7 +11,7 @@ To complete this lab, you need access to Intel DevCloud. You can log into DevClo
 Resources
 ************
 
-oneAPI and DPC++ are open source and there are many resources available online to help you start your project:
+oneAPI, SYCL, and DPC++ are open source and there are many resources available online to help you start your project:
 
 * `oneAPI <https://www.oneapi.com/>`_
 
@@ -19,7 +19,7 @@ oneAPI and DPC++ are open source and there are many resources available online t
 
 * `Developer Reference <https://software.intel.com/en-us/oneapi>`_
 
-* `DPC++ book <https://tinyurl.com/book-dpcpp>`_
+* `DPC++ book <https://link.springer.com/content/pdf/10.1007/978-1-4842-5574-2.pdf>`_
 
 * `oneAPI Programming Guide <https://www.intel.com/content/www/us/en/develop/documentation/oneapi-programming-guide/top.html>`_
 
@@ -47,7 +47,7 @@ Use `oneapi-cli <https://github.com/intel/oneapi-cli>`_ to create the baseline m
 
  $ oneapi-cli
 
-This tool has a basic interface that allows you to choose a project based on its various templates. Perform the following:
+This tool has a basic interface allowing you to choose a project based on its templates. Perform the following:
 
 1) Select ``Create a project``
 
@@ -55,13 +55,13 @@ This tool has a basic interface that allows you to choose a project based on its
 
 3) Select ``Matrix Multiplication`` under ``Get Started``
 
-4) Leave ``Directory`` and ``Project Name`` with their default paramaters and select ``Create``
+4) Leave ``Directory`` and ``Project Name`` with their default parameters and select ``Create``
 
 This creates several files inside the ``matrix_mul`` folder:
 
 .. image :: https://i.imgur.com/n2q6v8C.png
 
-The source file is in the ``src`` folder and the ``README`` provides instructions to compile the code.
+The source file is in the ``src`` folder, and the ``README`` provides instructions to compile the code.
 
 Use the terminal to compile and run your code.
 
@@ -88,7 +88,7 @@ The code was run on a CPU. We need to make some modifications to run it on an FP
 Compiling to FPGA
 ###################
 
-Synthesizing DPCPP code to FPGAs has similar design flows as other FPGA HLS tools. Since full FPGA compilation to bitstream can take hours, ideally all of the optimizations are done using an emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than full bitstream compilation. Once the emulator is compiled, it can be executed which is equivalent to executing the RTL model with the provided inputs. This is a similar process as C simulation in the Xilinx HLS tools.
+Synthesizing the SYCL code to FPGAs has design flows similar to other FPGA HLS tools. Since complete FPGA compilation to bitstream can take hours, ideally, all optimizations are done using an emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than complete bitstream compilation. Once the emulator is compiled, it can be executed, which is equivalent to executing the RTL model with the provided inputs. This is a similar process to C simulation in the other HLS tools.
 
 To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
@@ -96,36 +96,32 @@ To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 
 
 .. code-block :: c++
 
-  #include "CL/sycl/INTEL/fpga_extensions.hpp"
+  #include <sycl/ext/intel/fpga_extensions.hpp>"
 
 2. Modify the queue initialization:
 
 .. code-block :: c++
 
-  #if FPGA_EMULATOR
-    // DPC++ extension: FPGA emulator selector on systems without FPGA card.
-    ext::intel::fpga_emulator_selector device_selector;
-  #elif FPGA
-    // DPC++ extension: FPGA selector on systems with FPGA card.
-    ext::intel::fpga_selector device_selector;
-  #else
-    // The default device selector will select the most performant device.
-    default_selector device_selector;
-  #endif
-      queue q(device_selector, dpc_common::exception_handler);
+	#if FPGA_SIMULATOR
+	  auto selector = sycl::ext::intel::fpga_simulator_selector_v;
+	#elif FPGA_HARDWARE
+	  auto selector = sycl::ext::intel::fpga_selector_v;
+	#else // #if FPGA_EMULATOR
+	  auto selector = sycl::ext::intel::fpga_emulator_selector_v;
+	#endif
+	    sycl::queue q(selector, dpc_common::exception_handler);
 
-This allows the compiler to pick the correct device by passing in a compiler flag. ``ext::intel::fpga_emulator_selector`` specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description along with the associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing RTL simulation of the kernel.
+This allows the compiler to pick the correct device by passing in a compiler flag. ``sycl::ext::intel::fpga_emulator_selector`` specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description and associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing an RTL kernel simulation.
 
 A `Makefile <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/matrix_mul_dpcpp/Makefile>`_ is available that has all the compilation commands required for the remainder of this exercise. Put this ``Makefile`` in the ``matrix_mul`` directory.
 
-It is best to submit jobs via the ``qsub`` command which allows DevCloud to share the resources. This is especially important for longer running jobs, e.g., FPGA bitstream compilation. It also may be required to run your commands as different nodes are equipped with different accelerators. The default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
+It is best to submit jobs via the ``qsub`` command, which allows DevCloud to share the resources amongst users. This is especially important for longer-running jobs, e.g., FPGA bitstream compilation. It also may be required to run your commands as different nodes are equipped with different accelerators. For example, the default login machine likely does not have an FPGA. Thus, it is good practice to always submit your jobs via ``qsub``.
 
-In order to use ``qsub``, you need to make a simple script in a new file ``build_fpga_emu.sh`` that performs the required ``make`` command.
+To use ``qsub``, you must make a simple script in a new file ``build_fpga_emu.sh`` that performs the required ``make`` command.
 
 .. code-block :: shell-session
 
   #!/bin/bash
-  source /opt/intel/inteloneapi/setvars.sh
   make fpga_emulator
 
 Make the script file executable, e.g., by running ``chmod 755 build_fpga_emu.sh``.
@@ -136,11 +132,11 @@ You can submit jobs to ``qsub`` using the command
 
   qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_emu.sh
 
-``qsub`` sends the job specified in ``build_fpga_emu.sh`` for scheduling. It will be scheduled on a node that is suited for ``fpga_compile`` using the current directory ``-d .``. You can use the command ``qstat`` to see the status of the job. Building the emulator does not take much time, but the process could be slowed if the FPGA nodes are busy.
+``qsub`` sends the job specified in ``build_fpga_emu.sh`` for scheduling. It will be scheduled on a node suited for ``fpga_compile`` using the current directory ``-d .``. You can use the command ``qstat`` to see the job status. Building the emulator takes a little time, but the process could be slowed if the FPGA nodes are busy.
 
-The results of the run will be an executable emulator file ``matrix_mul_dpcpp.fpga_emu``. Additionally, there will be two files ``build_fpga_emu.sh.o.XXXX`` and ``build_fpga_emu.sh.e.XXXX`` where ``XXXX`` will be a number corresponding to the job ID. The ``.o`` file corresponds to the output and the ``.e`` file holds any error messages. These will appear in your directory once the job has completed.
+The run results will be an executable emulator file ``matrix_mul_dpcpp.fpga_emu``. Additionally, there will be two files, ``build_fpga_emu.sh.o.XXXX`` and ``build_fpga_emu.sh.e.XXXX``, where ``XXXX`` will be a number corresponding to the job ID. The ``.o`` file corresponds to the output, and the ``.e`` file holds error messages. These will appear in your directory once the job has been completed.
 
-The emulator can be executed to verify functional correctness of the design. It is best to test and debug using the emulator since its compilation is significantly faster than performing a full bitstream compilation.
+The emulator can be executed to verify the functional correctness of the design. It is best to test and debug using the emulator since its compilation is significantly faster than a complete bitstream compilation.
 
 The emulator can be executed using ``qsub`` by
 
@@ -149,7 +145,6 @@ The emulator can be executed using ``qsub`` by
 .. code-block :: shell-session
 
   #!/bin/bash
-  source /opt/intel/inteloneapi/setvars.sh
   make run_fpga_emulator
 
 2. Submitting it for execution
@@ -171,16 +166,15 @@ The emulator can be executed using ``qsub`` by
 Generate the FPGA Report
 ########################################
 
-Once your code is functionally correct, synthesize it to check your design's performance and resource utilization. The Intel HLS tools provide the ability to generate reports from the RTL design. These provide the designer insight into the FPGA architecture. They include information about throughput and area (resource usage). The reports contain different viewers that allow the designer to better understand performance bottlenecks and make better optimizations.
+Once your code is functionally correct, synthesize it to check your design's performance and resource utilization. The Intel HLS tools provide the ability to generate reports from the RTL design. These give the designer insight into the FPGA architecture. They include information about throughput and area (resource usage). The reports contain different viewers that allow the designer to understand performance bottlenecks better and make better optimizations.
 
 The reports are generated as
 
-1. Create the ``build_fpga_report.sh`` script file with the proper commands and setting it as executable (``chmod 755``).
+1. Create the ``build_fpga_report.sh`` script file with the proper commands and set it as executable (``chmod 755``).
 
 .. code-block :: shell-session
 
   #!/bin/bash
-  source /opt/intel/inteloneapi/setvars.sh
   make fpga_report
 
 
@@ -190,17 +184,17 @@ The reports are generated as
 
   qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_report.sh
 
-This do not perform a full bitstream synthesis. It provides an analysis of the RTL. This enables estimations of the design performance and resource usage.
+This does not perform a full bitstream synthesis. It provides an analysis of the RTL. This enables estimations of the design performance and resource usage.
 
-The report is an HTML file in ``fpga_compile_report.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, make sure to "Trust" the HTML. It may also be possible to open those ``.html`` files in a separate tab of the browser, i.e., not within Jupyter. If they still do not render, use SCP or SSHFS to copy or mount your files (including the ``lib`` folder from which the report draws its components) to your local drive, then open the report locally.
+The report is an HTML file in ``fpga_compile_report.prj/reports``. At the time of writing this tutorial, JupyterLab has issues with some combinations of operating systems and web browsers. If the reports are not rendering, "Trust" the HTML. It may also be possible to open those ``.html`` files in a separate browser tab, i.e., not within Jupyter. If they still do not render, use SCP or SSHFS to copy or mount your files (including the ``lib`` folder from which the report draws its components) to your local drive, then open the report locally.
 
-The report provides an overview of the design performance. Open ``report.html``, click ``Summary`` button, click ``Compile Estimated Kernel Resource Utilization Summary`` in the ``Summary Content`` pane.
+The report provides an overview of the design performance. Open ``report.html``, click ``Summary`` button, and click ``Compile Estimated Kernel Resource Utilization Summary`` in the ``Summary Content`` pane.
 
-This shows the resource usages for the different kernels and other system resources.
+This shows the resource usage for the different kernels and other system resources.
 
 .. image :: image/dpcpp-gemm-resources.png
 
-The kernel names look almost random as these compiler generated. To make the report readable modify the code to name to the kernels:
+The kernel names look almost random as these compiler generated. To make the report readable, modify the code to name the kernels:
 
 Add three classes in your code as follows:
 
@@ -210,7 +204,7 @@ Add three classes in your code as follows:
 	class b_init;
 	class c_calc;
 
-Now you can assign each class to one of your kernels. For example, *a_init* will be assigned to the kernel that initializes buffer *a* as follows:
+Now, you can assign each class to one of your kernels. For example, *a_init* will be assigned to the kernel that initializes buffer *a* as follows:
 
 .. code-block :: c++
 
@@ -231,12 +225,12 @@ Click the menu  ``Throughput Analysis`` and then the item ``Loops Viewer``. This
 
 .. image :: image/mm-base-loop-viewer.png
 
-The **Load Store Unit (LSU) Style** for the LD operations is shown as burst-coalesced cached. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between device and host. The compiler uses the burst-coalesced LSU by default. In burst-coalesced mode, the compiler optimizes for buffering contiguous memory requests for the largest possible burst. We can change the LSU type to achieve a lower latency for the load operations. This and other optimizations are part of the :doc:`DPC++ Matrix Multiplication Project <project6>`.
+The **Load Store Unit (LSU) Style** for the LD operations is shown as burst-coalesced cached. Intel oneAPI DPC++ compiler generates different types of LSUs to manage data transfer between the device and host. The compiler uses the burst-coalesced LSU by default. In burst-coalesced mode, the compiler optimizes for buffering contiguous memory requests for the largest possible burst. We can change the LSU type to achieve a lower latency for the load operations. This and other optimizations are part of the :doc:`DPC++ Matrix Multiplication Project <project6>`.
 
 Executing on an FPGA
 ####################
 
-Once you are satisfied with your optimizations, you can compile the design to a bitstream and subsequently use that bitstream to execute the hardware accelerated application that runs natively on an FPGA in DevCloud.
+Once you are satisfied with your optimizations, you can compile the design to a bitstream and subsequently use that bitstream to execute the hardware-accelerated application that runs natively on an FPGA in DevCloud.
 
 The bitstream is generated by
 
@@ -245,7 +239,6 @@ The bitstream is generated by
 .. code-block :: shell-session
 
   #!/bin/bash
-  source /opt/intel/inteloneapi/setvars.sh
   make fpga_hardware
 
 2. Submit the script for execution
@@ -254,7 +247,7 @@ The bitstream is generated by
 
   qsub -l nodes=1:fpga_compile:ppn=2 -d . build_fpga_hardware.sh
 
-The output is an executable file ``matrix_mul_dpcpp.fpga``. This contains all of the information need to run the code across the host and an FPGA. It includes the binaries for the host and the bitstream to program the FPGA.
+The output is an executable file ``matrix_mul_dpcpp.fpga``. This contains all of the information needed to run the code across the host and an FPGA. It includes the binaries for the host and the bitstream to program the FPGA.
 
 The FPGA-accelerated application is executed by
 
@@ -263,7 +256,6 @@ The FPGA-accelerated application is executed by
 .. code-block :: shell-session
 
   #!/bin/bash
-  source /opt/intel/inteloneapi/setvars.sh
   make run_fpga
 
 2. Submit the script for execution
