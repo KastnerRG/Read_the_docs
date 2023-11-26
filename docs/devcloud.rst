@@ -90,13 +90,13 @@ Compiling to FPGA
 
 Synthesizing the SYCL code to FPGAs has design flows similar to other FPGA HLS tools. Since complete FPGA compilation to bitstream can take hours, ideally, all optimizations are done using an emulator. The FPGA emulator compiles the design to RTL. RTL compilation is much faster than complete bitstream compilation. Once the emulator is compiled, it can be executed, which is equivalent to executing the RTL model with the provided inputs. This is a similar process to C simulation in the other HLS tools.
 
-To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
+To build the FPGA emulator, open the file ``src/matrix_mul_sycl.cpp``. Line 55 uses the ``default_selector`` for the hardware device. Modify the code to use the FPGA emulator by performing the following:
 
 1. Include a header file by adding the line
 
 .. code-block :: c++
 
-  #include <sycl/ext/intel/fpga_extensions.hpp>"
+  #include <sycl/ext/intel/fpga_extensions.hpp>
 
 2. Modify the queue initialization:
 
@@ -111,7 +111,7 @@ To build the FPGA emulator, open the file ``src/matrix_mul_dpcpp.cpp``. Line 55 
 	#endif
 	    sycl::queue q(selector, dpc_common::exception_handler);
 
-This allows the compiler to pick the correct device by passing in a compiler flag. ``sycl::ext::intel::fpga_emulator_selector`` specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target. This performs HLS and generates the RTL description and associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing an RTL kernel simulation.
+This allows the compiler to pick the correct device by passing in a compiler flag. ``sycl::ext::intel::fpga_emulator_selector`` specifies the device as an ``fpga_emulator`` allowing the code to be compiled with the FPGA emulator as the target (don't forget to change ``default_selector_v`` to ``selector`` in Line 55, which matches our variable name). This performs HLS and generates the RTL description and associated infrastructure to simulate that RTL. The emulator can then be run, which is equivalent to performing an RTL kernel simulation.
 
 A `Makefile <https://github.com/KastnerRG/Read_the_docs/blob/master/project_files/matrix_mul_dpcpp/Makefile>`_ is available that has all the compilation commands required for the remainder of this exercise. Put this ``Makefile`` in the ``matrix_mul`` directory.
 
