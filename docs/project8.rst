@@ -14,8 +14,7 @@ In this project, we develop binary neural network for MNIST digit classification
 ------------
 The starter files for the project can be found at in `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
 In the bnn_project folder contains:
- - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning
- how BNN works in python. To run the python code, we only need to use numpy.
+ - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning how BNN works in python. To run the python code, we only need to use numpy.
  - hls: hls testbench  ==> This is where you are going to write your code 
  - README.md and also use the 
 
