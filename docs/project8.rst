@@ -8,11 +8,15 @@ Project: Binary Neural Network
 
 1) Introduction
 ---------------
-In this project, we develop binary neural network for MNIST digit classification. 
+
+In this project, we develop a binary neural network for MNIST digit classification. Binary neural networks only use 0s or 1s (or -1s or 1s).
+The main goal of this project is to implement a neural network using XNOR and popcount operators instead of multiplications.  
+
+
 
 2) Materials
 ------------
-The starter files for the project can be found at in `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
+The starter files for the project can be found at `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
 In the bnn_project folder contains:
  - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning how BNN works in python. To run the python code, we only need to use numpy.
  - hls: hls testbench  ==> This is where you are going to write your code 
@@ -67,15 +71,12 @@ and it runs the BNN based on XNOR.
 4) Specific tasks for the project
 ------------
 
-* Desdign the binary neural network using XNOR and popcount.
-
-* Optimize your design using dataflow or using optimizations such as unroll or pipeline 
-
+* Design the binary neural network using XNOR and popcount.
+* Optimize your design using dataflow or using optimizations such as unroll or pipeline
 * Your HLS design must match the golden outputs given in the testbench
+* Demo the project on pyqn board. We do not provide jupyter notebooks. You are supposed to create necessary python jupyter notebooks for the demo.
 
-* Demo the project on pyqn board. We do not provide jupyter notebooks. You are supposed to use create necessery python jupyter notebooks for the demo. 
-
-  
+Note: For the demo, feel free to change the interface of the top level HLS code.   
 
 5) Submission Procedure
 -----------------------
