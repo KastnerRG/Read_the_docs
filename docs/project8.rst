@@ -47,6 +47,7 @@ To run the python code, we only need to use numpy.
     return disdata
 	
 .. code-block :: python3
+
     def feed_forward_quantized(self, input):
         """This function does BNN
 
