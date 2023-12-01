@@ -12,11 +12,11 @@ In this project, we develop binary neural network for MNIST digit classification
 
 2) Materials
 ------------
-The starter files for the project can be found at in `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/fm-demodulation>`_.
+The starter files for the project can be found at in `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
 In the bnn_project folder contains:
  - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning
  how BNN works in python. To run the python code, we only need to use numpy.  
- - hls: hls testbench 
+ - hls: hls testbench  ==> This is where you are going to write your code 
  - README.md and also use the 
 
 
@@ -59,38 +59,48 @@ and it runs the BNN based on XNOR.
 .. code-block :: python3
 
 	# After running the code, we should get an accuracy as follows: 
-	Runnign test!
-	(10000, 784)
-	89.39
+	Running BNN which uses XNOR
+	The shape of the input: (10000, 784)
+	Accuracy: 89.39
+
 	
 
-4) Optimization Guidelines
+4) Specific tasks for the project
 ------------
 
-* Desdign the network using XNOR and popcount
+* Desdign the binary neural network using XNOR and popcount.
 
-* if necessery design it using  
+* Optimize your design using dataflow or using optimizations such as unroll or pipeline 
+
+* Your HLS design must match the golden outputs given in the testbench
+
+* Demo the project on pyqn board. We do not provide jupyter notebooks. You are supposed to use create necessery python jupyter notebooks for the demo. 
+
+  
 
 5) Submission Procedure
 -----------------------
 
-You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it.
+You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. 
+This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it.
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "mono_fm" at the top-level. This folder must be organized as follows (similar to previous projects):
+Your repo must contain a folder named "bnn_project" at the top-level. This folder must be organized as follows (similar to previous projects):
 
 **Contents:**
 
 * **Report.pdf**
 
-* Folder **fm-demodulator**
+* Folder **bnn_project**
 
   - Source code (``*.cpp``, ``*.h``, ``*.tcl``) and reports (``.rpt`` and ``.xml``).
 
 * Folder **Demo**
 
   - ``.bit`` and ``.hwh`` files
-  - ``FM.ipynb`` host file
+  - ``bnn.ipynb`` host file
 
-**Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. We will check if (1) your final FM Demodulation functions are functionally correct (they pass their test benches) and (2) achieves target latency. The report will help us to understand your design. You also can use this report to explain your work for bonus part (check the grading section).
+**Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your 
+architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. 
+We will check if (1) your final bnn project functions are functionally correct (they pass their test benches) and (2) uses XNOR. 
