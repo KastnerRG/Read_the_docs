@@ -30,31 +30,31 @@ To run the python code, we only need to use numpy.
 	
 .. code-block :: python3
 	def feed_forward_quantized(self, input):
-	"""This function does BNN
+		"""This function does BNN
 
-	:param input: MNIST sample input
-	:return:
-	"""
-	# layer 1
-	X0_input = self.quantize(self.sign(self.adj(input)))
-	layer1_output = self.matmul_xnor(X0_input, self.fc1w_qntz.T)
-	layer1_activations = (layer1_output * 2 - 784)
+		:param input: MNIST sample input
+		:return:
+		"""
+		# layer 1
+		X0_input = self.quantize(self.sign(self.adj(input)))
+		layer1_output = self.matmul_xnor(X0_input, self.fc1w_qntz.T)
+		layer1_activations = (layer1_output * 2 - 784)
 
-	# layer 2
-	layer2_input = self.sign(layer1_activations)
-	layer2_quantized = self.quantize(layer2_input)
-	layer2_output = self.matmul_xnor(layer2_quantized, self.fc2w_qntz.T)
-	layer2_activations = (layer2_output * 2 - 128)
+		# layer 2
+		layer2_input = self.sign(layer1_activations)
+		layer2_quantized = self.quantize(layer2_input)
+		layer2_output = self.matmul_xnor(layer2_quantized, self.fc2w_qntz.T)
+		layer2_activations = (layer2_output * 2 - 128)
 
-	# layer 3
-	layer3_input = self.sign(layer2_activations)
-	layer3_quantized = self.quantize(layer3_input)
-	layer3_output = self.matmul_xnor(layer3_quantized, self.fc3w_qntz.T)
+		# layer 3
+		layer3_input = self.sign(layer2_activations)
+		layer3_quantized = self.quantize(layer3_input)
+		layer3_output = self.matmul_xnor(layer3_quantized, self.fc3w_qntz.T)
 
-	final_output = (layer3_output * 2 - 64)
-	A = np.array([final_output], np.int32)
+		final_output = (layer3_output * 2 - 64)
+		A = np.array([final_output], np.int32)
 
-	return A
+		return A
 
 4) Optimization Guidelines
 ------------
