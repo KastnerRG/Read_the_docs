@@ -23,7 +23,13 @@ The Python code provides a functionally correct implementation of the FM demodul
 To run the python code, we only need to use numpy.  
 
 .. code-block :: python3
-  def feed_forward_quantized(self, input):
+
+	unzip pyrtlsdr-master.zip
+	cd pyrtlsdr-master
+	python setup.py install
+	
+.. code-block :: python3
+	def feed_forward_quantized(self, input):
 	"""This function does BNN
 
 	:param input: MNIST sample input
