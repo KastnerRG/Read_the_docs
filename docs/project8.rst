@@ -12,39 +12,20 @@ In this project, we develop binary neural network for MNIST digit classification
 
 2) Materials
 ------------
-The starter files for the project can be found at in `fm-demodulation <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/fm-demodulation>`_.
+The starter files for the project can be found at in `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/fm-demodulation>`_.
+In the bnn_project folder contains:
+ - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning
+ how BNN works in python. To run the python code, we only need to use numpy.  
+ - hls: hls testbench 
+ - README.md and also use the 
 
-Read the README.md 
 
 
 3) Design Instructions
 ----------------------
-The Python code provides a functionally correct implementation of the FM demodulator written in Python.  The ``mono_fm`` function taken directly from the ``scikit-dsp-comm'' library is:
-To run the python code, we only need to use numpy.  
+The Python code provides a functionally correct implementation of the BNN written in Python.  The ``feed_forward_quantized`` function takes input (see the python code for details), 
+and it runs the BNN based on XNOR. 
 
-.. code-block :: python3
-
-	unzip pyrtlsdr-master.zip
-	cd pyrtlsdr-master
-	python setup.py install
-
-.. code-block :: python3
-
-   def discrim(x):
-    """
-    function disdata = discrim(x)
-    where x is an angle modulated signal in complex baseband form.
-
-    Mark Wickert
-    """
-    X=np.real(x)        # X is the real part of the received signal
-    Y=np.imag(x)        # Y is the imaginary part of the received signal
-    b=np.array([1, -1]) # filter coefficients for discrete derivative
-    a=np.array([1, 0])  # filter coefficients for discrete derivative
-    derY=signal.lfilter(b,a,Y)  # derivative of Y,
-    derX=signal.lfilter(b,a,X)  #    "          X,
-    disdata=(X*derY-Y*derX)/(X**2+Y**2)
-    return disdata
 	
 .. code-block :: python3
 
@@ -75,6 +56,10 @@ To run the python code, we only need to use numpy.
 
         return A
 
+.. code-block :: python3
+
+	pip3 install scikit-dsp-comm
+	
 Runnign test!
 (10000, 784)
 89.39
