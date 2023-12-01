@@ -58,12 +58,11 @@ and it runs the BNN based on XNOR.
 
 .. code-block :: python3
 
-	pip3 install scikit-dsp-comm
+	# After running the code, we should get an accuracy as follows: 
+	Runnign test!
+	(10000, 784)
+	89.39
 	
-Runnign test!
-(10000, 784)
-89.39
-89.39
 
 4) Optimization Guidelines
 ------------
