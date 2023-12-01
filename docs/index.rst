@@ -25,6 +25,7 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    project4.5
    project6
    project7
+   project8
    PYNQ-example
    axidma_single
    axidma2
