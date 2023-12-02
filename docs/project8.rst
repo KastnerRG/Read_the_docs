@@ -72,11 +72,12 @@ and it runs the BNN based on XNOR.
 ------------
 
 * Design the binary neural network using XNOR and popcount.
-* Optimize your design using dataflow or using optimizations such as unroll or pipeline
+* Optimize your design using dataflow or using optimizations such as unroll or pipeline and provide details and trade-off of different design optimizations in your report.
 * Your HLS design must match the golden outputs given in the testbench
 * Demo the project on pyqn board. We do not provide jupyter notebooks. You are supposed to create necessary python jupyter notebooks for the demo.
+* Provide a report (2-3 pages) that explains 1) your designs, your demo details, and different designs you have created. 
 
-Note: For the demo, feel free to change the interface of the top level HLS code.   
+Note: For the demo, feel free to change the interface of the top level HLS code, but explain your decisions in your report. 
 
 5) Submission Procedure
 -----------------------
