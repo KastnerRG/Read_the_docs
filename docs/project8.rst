@@ -3,33 +3,32 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Project: Binary Neural Network 
+Project: Binary Neural Network (BNN) 
 =========================
 
 1) Introduction
 ---------------
 
-In this project, we develop a binary neural network for MNIST digit classification. Binary neural networks only use 0s or 1s (or -1s or 1s).
-The main goal of this project is to implement a neural network using XNOR and popcount operators instead of multiplications.  
+In this project, we develop a binary neural network for MNIST digit classification. Binary neural networks only use -1s or 1s.
+The main goal of this project is to implement a neural network using XNOR and popcount operators instead of multiplication and summation.  
 
 
 
 2) Materials
 ------------
 The starter files for the project can be found at `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
-In the bnn_project folder contains:
- - python: this folder contains dataset, weights and python file for running BNN in python. The python file implements BNN_MNIST class which can be used for learning how BNN works in python. To run the python code, we only need to use numpy.
+The bnn_project folder contains:
+ - python: this folder contains dataset, weights, and Python code that implements a BNN. The Python file implements the BNN_MNIST class, which is useful to understand how a BNN works. 
  - hls: hls testbench  ==> This is where you are going to write your code 
- - README.md and also use the 
+ - README.md 
 
 
 
 3) Design Instructions
 ----------------------
-The Python code provides a functionally correct implementation of the BNN written in Python.  The ``feed_forward_quantized`` function takes input (see the python code for details), 
-and it runs the BNN based on XNOR. 
+The Python code provides a functionally correct implementation of the BNN.  The ``feed_forward_quantized`` function takes as input an MNIST image, executes the BNN, and outputs the classified result (a digit between 0 and 9. 
 
-	
+The function that you must replicate in HLS is:	
 .. code-block :: python3
 
     def feed_forward_quantized(self, input):
@@ -61,33 +60,33 @@ and it runs the BNN based on XNOR.
 
 .. code-block :: python3
 
-	# After running the code, we should get an accuracy as follows: 
+	# Executing the Python file will run 10000 MNIST images, each of size 28*28=784, and return a classification. The accuracy is the percentage of correct classifications. 
 	Running BNN which uses XNOR
 	The shape of the input: (10000, 784)
 	Accuracy: 89.39
 
 	
 
-4) Specific tasks for the project
+4) Project Tasks
 ------------
 
-* Design the binary neural network using XNOR and popcount.
-* Optimize your design using dataflow or using optimizations such as unroll or pipeline and provide details and trade-off of different design optimizations in your report.
-* Your HLS design must match the golden outputs given in the testbench
-* Demo the project on pyqn board. We do not provide jupyter notebooks. You are supposed to create necessary python jupyter notebooks for the demo.
-* Provide a report (2-3 pages) that explains 1) your designs, your demo details, and different designs you have created. 
+* Design the binary neural network using XNOR and popcount in HLS.
+* Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
+* Your HLS design must match the golden outputs given in the testbench.
+* Demo the project on pynq board. This project does not provide an example Jupyter notebook. You should create to create a notebook that demos your result.
+* Provide a report that explains: 1) your different optimizations, describes how you decided to interface your HLS IP core, and provides details of your notebook demo. 
 
-Note: For the demo, feel free to change the interface of the top level HLS code, but explain your decisions in your report. 
+Note: You can change the interface of the top-level HLS code. If you do, you should explain the rationale for these changes in your report. 
 
 5) Submission Procedure
 -----------------------
 
-You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so that we can synthesize it directly. 
-This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to only import your source file and directly synthesize it.
+You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so we can synthesize it directly. 
+This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to import your source file and directly synthesize it.
 
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure they correspond to the instructions.
 
-Your repo must contain a folder named "bnn_project" at the top-level. This folder must be organized as follows (similar to previous projects):
+Your repo must contain a folder named "bnn_project" at the top level. This folder must be organized as follows (similar to previous projects):
 
 **Contents:**
 
@@ -104,4 +103,4 @@ Your repo must contain a folder named "bnn_project" at the top-level. This folde
 
 **Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your 
 architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. 
-We will check if (1) your final bnn project functions are functionally correct (they pass their test benches) and (2) uses XNOR. 
+We will check if (1) your final BNN project functions are functionally correct (they pass their test benches) and (2) they use XNOR. 
