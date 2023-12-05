@@ -1,0 +1,119 @@
+INFO: [HLS 200-10] Running 'C:/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/win64.o/vitis_hls.exe'
+INFO: [HLS 200-10] For user 'matai' on host 'janarbek' (Windows NT_amd64 version 6.2) on Sun Nov 26 21:26:06 -0800 2023
+INFO: [HLS 200-10] In directory 'C:/repos/bnn/hls'
+Sourcing Tcl script 'C:/repos/bnn/hls/bnn/solution1/csim.tcl'
+INFO: [HLS 200-1510] Running: source C:/repos/bnn/hls/bnn/solution1/csim.tcl
+INFO: [HLS 200-1510] Running: open_project bnn 
+INFO: [HLS 200-10] Opening project 'C:/repos/bnn/hls/bnn'.
+INFO: [HLS 200-1510] Running: set_top bnn 
+INFO: [HLS 200-1510] Running: add_files bnn.h 
+INFO: [HLS 200-10] Adding design file 'bnn.h' to the project
+INFO: [HLS 200-1510] Running: add_files bnn.cpp 
+INFO: [HLS 200-10] Adding design file 'bnn.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb bnn_test.cpp -cflags -Wno-unknown-pragmas -csimflags -Wno-unknown-pragmas 
+INFO: [HLS 200-10] Adding test bench file 'bnn_test.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution1 -flow_target vivado 
+INFO: [HLS 200-10] Opening solution 'C:/repos/bnn/hls/bnn/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg400-1'
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-1464] Running solution command: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xc7z020-clg400-1 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: config_interface -m_axi_latency 0 
+INFO: [HLS 200-1510] Running: csim_design -clean -quiet 
+Running Dispatch Server on port: 55790
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../bnn_test.cpp in debug mode
+   Compiling ../../../../bnn.cpp in debug mode
+   Generating csim.exe
+In file included from C:/Xilinx/Vitis_HLS/2022.2/include/floating_point_v7_1_bitacc_cmodel.h:149:0,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_fpo.h:143,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half_fpo.h:18,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half.h:25,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/etc/ap_private.h:52,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_common.h:666,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_int.h:10,
+                 from ../../../../bnn.h:7,
+                 from ../../../../bnn_test.cpp:1:
+C:/Xilinx/Vitis_HLS/2022.2/include/gmp.h:58:0: warning: "__GMP_LIBGMP_DLL" redefined
+ #define __GMP_LIBGMP_DLL  0
+ 
+In file included from C:/Xilinx/Vitis_HLS/2022.2/include/hls_fpo.h:143:0,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half_fpo.h:18,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half.h:25,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/etc/ap_private.h:52,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_common.h:666,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_int.h:10,
+                 from ../../../../bnn.h:7,
+                 from ../../../../bnn_test.cpp:1:
+C:/Xilinx/Vitis_HLS/2022.2/include/floating_point_v7_1_bitacc_cmodel.h:141:0: note: this is the location of the previous definition
+ #define __GMP_LIBGMP_DLL 1
+ 
+In file included from C:/Xilinx/Vitis_HLS/2022.2/include/floating_point_v7_1_bitacc_cmodel.h:149:0,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_fpo.h:143,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half_fpo.h:18,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half.h:25,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/etc/ap_private.h:52,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_common.h:666,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_int.h:10,
+                 from ../../../../bnn.h:7,
+                 from ../../../../bnn.cpp:1:
+C:/Xilinx/Vitis_HLS/2022.2/include/gmp.h:58:0: warning: "__GMP_LIBGMP_DLL" redefined
+ #define __GMP_LIBGMP_DLL  0
+ 
+In file included from C:/Xilinx/Vitis_HLS/2022.2/include/hls_fpo.h:143:0,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half_fpo.h:18,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/hls_half.h:25,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/etc/ap_private.h:52,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_common.h:666,
+                 from C:/Xilinx/Vitis_HLS/2022.2/include/ap_int.h:10,
+                 from ../../../../bnn.h:7,
+                 from ../../../../bnn.cpp:1:
+C:/Xilinx/Vitis_HLS/2022.2/include/floating_point_v7_1_bitacc_cmodel.h:141:0: note: this is the location of the previous definition
+ #define __GMP_LIBGMP_DLL 1
+ 
+-----------------------------------------------------------
+Verifying the sample: Sample 1
+Wrong output: Expected: -2 Obtained: 0
+Wrong output: Expected: 4 Obtained: 1
+Wrong output: Expected: -8 Obtained: 2
+Wrong output: Expected: 14 Obtained: 3
+Wrong output: Expected: -4 Obtained: 4
+Wrong output: Expected: 0 Obtained: 5
+Wrong output: Expected: -42 Obtained: 6
+Wrong output: Expected: 48 Obtained: 7
+Wrong output: Expected: -4 Obtained: 8
+Wrong output: Expected: 2 Obtained: 9
+Sample: Sample 1 FAILED
+-----------------------------------------------------------
+Verifying the sample: Sample 1
+Wrong output: Expected: 2 Obtained: 0
+Wrong output: Expected: 0 Obtained: 1
+Wrong output: Expected: 48 Obtained: 2
+Wrong output: Expected: 10 Obtained: 3
+Wrong output: Expected: -20 Obtained: 4
+Wrong output: Expected: 4 Obtained: 5
+Wrong output: Expected: 2 Obtained: 6
+Wrong output: Expected: -16 Obtained: 7
+Wrong output: Expected: 4 Obtained: 8
+Wrong output: Expected: -14 Obtained: 9
+Sample: Sample 1 FAILED
+-----------------------------------------------------------
+Verifying the sample: Sample 1
+Wrong output: Expected: -16 Obtained: 0
+Wrong output: Expected: 42 Obtained: 1
+Wrong output: Expected: 4 Obtained: 3
+Wrong output: Expected: -2 Obtained: 4
+Wrong output: Expected: -14 Obtained: 5
+Wrong output: Expected: 8 Obtained: 6
+Wrong output: Expected: 2 Obtained: 7
+Wrong output: Expected: 14 Obtained: 8
+Wrong output: Expected: -8 Obtained: 9
+Sample: Sample 1 FAILED
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.586 seconds; current allocated memory: 0.324 MB.
+INFO: [HLS 200-112] Total CPU user time: 1 seconds. Total CPU system time: 0 seconds. Total elapsed time: 12.643 seconds; peak allocated memory: 95.516 MB.
