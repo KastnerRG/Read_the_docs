@@ -16,7 +16,7 @@ The main goal of this project is to implement a neural network using XNOR and po
 
 2) Materials
 ------------
-The starter files for the project can be found at `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/bnn_project.zip>`_.
+The starter files for the project can be found at `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project5_bnn>`_.
 The bnn_project folder contains:
  - python: this folder contains dataset, weights, and Python code that implements a BNN. The Python file implements the BNN_MNIST class, which is useful to understand how a BNN works. 
  - hls: hls testbench  ==> This is where you are going to write your code 
