@@ -42,7 +42,7 @@ This is the code we will be using:
 	
 Note that we had to include `string.h` to be able to use `memcpy`. Additionally, we use `memcpy` instead of a for-loop (as used in AXI-streaming) to force Vitis HLS to infer an AXI4-Burst. Sometimes Vitis HLS will not infer this from a for-loop, but will for `memcpy`.
 
-Also note that we had to set the bundles of `s_axilite` ports for `in` and `out` to the same bundle as the `return` port. This is required since Vitis HLS will otherwise assign the `m_axi` ports to a separate interface (instead of a single interface for all variables, which is easier to handle in Jupyter). Please see [this Xilinx docs](https://docs.xilinx.com/r/2020.2-English/ug1399-vitis-hls/Controlling-the-Address-Offset-in-an-AXI4-Interface) page for more information.
+Also note that we had to set the bundles of `s_axilite` ports for `in` and `out` to the same bundle as the `return` port. This is required since Vitis HLS will otherwise assign the `m_axi` ports to a separate interface (instead of a single interface for all variables, which is easier to handle in Jupyter). Please see `this Xilinx docs <https://docs.xilinx.com/r/2020.2-English/ug1399-vitis-hls/Controlling-the-Address-Offset-in-an-AXI4-Interface>`_ page for more information.
 
 Download and unzip `axi4_burst.zip <https://bitbucket.org/akhodamoradiUCSD/237c_data_files/downloads/axi4_burst.zip>`_ that contains the above code. The `.cpp` file in the zip file actually does not match with above code, so please update it with the above code. Generate your project using the provided script.tcl file:
 
@@ -61,7 +61,9 @@ Now you can open your project in Vitis HLS. It should look like this:
 1.2) Generate RTL code and export it
 ####################################
 
-Before running C Synthesis, in Vitis HLS, go to the **Solution > Solution Settings**, then under the "General" tab, in `config_interface`, de-select the `m_axi_addr64` option. This is required because 64-bit addresses are used by default when `m_axi`` is used in the pragmas. And in Jupyter with Pynq, it is not clear how to write the values to 64 bit addresses. So de-selecting this option will ensure that 32-bit addresses are used.
+Before running C Synthesis, in Vitis HLS, go to the **Solution > Solution Settings**, then under the "General" tab, in `config_interface`, de-select the `m_axi_addr64` option (see screenshot below, specifically the row with the red cross). This is required because 64-bit addresses are used by default when `m_axi`` is used in the pragmas. And in Jupyter with Pynq, it is not clear how to write the values to 64 bit addresses. So de-selecting this option will ensure that 32-bit addresses are used.
+
+.. image :: https://imgur.com/a/auoDPWS
 
 Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*len*) is a variable.
 
