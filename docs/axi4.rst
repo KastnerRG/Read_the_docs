@@ -63,7 +63,7 @@ Now you can open your project in Vitis HLS. It should look like this:
 
 Before running C Synthesis, in Vitis HLS, go to the **Solution > Solution Settings**, then under the "General" tab, in `config_interface`, de-select the `m_axi_addr64` option (see screenshot below, specifically the row with the red cross). This is required because 64-bit addresses are used by default when `m_axi`` is used in the pragmas. And in Jupyter with Pynq, it is not clear how to write the values to 64 bit addresses. So de-selecting this option will ensure that 32-bit addresses are used.
 
-.. image :: https://imgur.com/a/auoDPWS
+.. image :: https://i.imgur.com/o6gpaSv.png
 
 Click on Run **C Synthesis** to generate RTL code. After it is done, you can check your resource utilization and timing report. Your latency is unknown (?) because your loop size (*len*) is a variable.
 
