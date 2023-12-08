@@ -45,7 +45,7 @@ Do not add any files to your project and proceed to **part selection** and selec
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/pynq31.png
 
-In **Explorer** section, right click on **Source**, select **New file** and create **mul_test.cpp**. Complete the body of **mul.cpp** as following:
+In **Explorer** section, right click on **Source**, select **New file** and create **mul_test.cpp**. Complete the body of **mul_test.cpp** as following:
 
 .. code-block:: c++
 
