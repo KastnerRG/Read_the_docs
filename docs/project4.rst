@@ -19,9 +19,9 @@ The FFT implementation is divided into multiple stages. The first stage of the F
 3) Materials
 ------------
 
-`Download <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/FFT.zip?raw=true>`_.
+Check `here <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project4/FFT/HLS>`_.
 
-You are given a zip file with four folders 0_Initial, 1_Subcomponents, 2_Skeleton_Restructured. Folder 0_Initial contains the files corresponding to the “software” version of the FFT. Folder 2_Skeleton_Restructured provides a framework for a more optimized FFT implementation. And folder 1_Subcomponents has a number of subfolders that allow you to create projects for individual functions that you will develop over the project. This is largely for your convenience for testing and development. All of the code developed here will eventually be placed into 0_Initial and 2_Skeleton_Restructured.
+You are given 3 folders 0_Initial, 1_Subcomponents, 2_Skeleton_Restructured. Folder 0_Initial contains the files corresponding to the “software” version of the FFT. Folder 2_Skeleton_Restructured provides a framework for a more optimized FFT implementation. And folder 1_Subcomponents has a number of subfolders that allow you to create projects for individual functions that you will develop over the project. This is largely for your convenience for testing and development. All of the code developed here will eventually be placed into 0_Initial and 2_Skeleton_Restructured.
 
 The structure of each of these folders is largely the same.
 
