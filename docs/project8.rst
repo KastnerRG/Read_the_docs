@@ -9,26 +9,51 @@ Project: Binary Neural Network (BNN)
 1) Introduction
 ---------------
 
-In this project, we develop a binary neural network for MNIST digit classification. Binary neural networks only use -1s or 1s.
-The main goal of this project is to implement a neural network using XNOR and popcount operators instead of multiplication and summation.  
+In this project, we develop a binary neural network for MNIST digit classification. Binary neural networks use only -1s or 1s for model weights and activations.
+The main goal of this project is to implement a binary neural network using XNOR and popcount operators instead of multiplication and summation and optimize the design.  
 
 
 
 2) Materials
 ------------
 The starter files for the project can be found at `bnn_project <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project5_bnn>`_.
+
 The bnn_project folder contains:
- - python: this folder contains dataset, weights, and Python code that implements a BNN. The Python file implements the BNN_MNIST class, which is useful to understand how a BNN works. 
- - hls: hls testbench  ==> This is where you are going to write your code 
- - README.md 
+
+* python folder: Python example implementation
+
+  - dataset
+
+  - weights
+
+  - bnn_mnist.ipynb - This is example code that implements a BNN in Python and is useful for understanding how a BNN works. 
+
+* hls folder:
+
+  - bnn.cpp - The place where you write your BNN code. Currently, it only contains helper functions to help you unpack the input samples and model weights.
+ 
+  - bnn.h - header file
+ 
+  - bnn_test.cpp - test bench for each layer and final output
+ 
+  - script.tcl - Use this to create your project
+ 
+* README.md 
+
+Target Board: xc7z020clg400-1
+
+Software: Vitis HLS 2022.2 (recommended)
+
+Clock Period: 10 ns or 100MHz
 
 
 
 3) Design Instructions
 ----------------------
-The Python code provides a functionally correct implementation of the BNN.  The ``feed_forward_quantized`` function takes as input an MNIST image, executes the BNN, and outputs the classified result (a digit between 0 and 9. 
+The Python code provides a functionally correct implementation of the BNN.  The ``feed_forward_quantized`` function takes as input an MNIST image, executes the BNN, and outputs the classified result (a digit between 0 and 9). 
 
 The function that you must replicate in HLS is:	
+
 .. code-block :: python3
 
     def feed_forward_quantized(self, input):
@@ -70,18 +95,17 @@ The function that you must replicate in HLS is:
 4) Project Tasks
 ------------
 
-* Design the binary neural network using XNOR and popcount in HLS.
-* Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
-* Your HLS design must match the golden outputs given in the testbench.
-* Demo the project on pynq board. This project does not provide an example Jupyter notebook. You should create to create a notebook that demos your result.
-* Provide a report that explains: 1) your different optimizations, describes how you decided to interface your HLS IP core, and provides details of your notebook demo. 
+1. Design and implement a functionally correct ``feed_forward_quantized`` function for a binary neural network in HLS. Make sure to use XNOR and popcount operations. You are provided a testbench that you can use to test your design along the way which checks the output of each layer of your network. Your HLS design must match the golden outputs given in the testbench.
+2. Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
+3. Demo the project on the pynq board. This project does not provide an example Jupyter notebook so you should create a notebook that demos your result.
+4. Provide a report that: (1) explains your different optimizations, (2) describes how you decided to interface your HLS IP core, and (3) provides details regarding your notebook demo. 
 
 Note: You can change the interface of the top-level HLS code. If you do, you should explain the rationale for these changes in your report. 
 
 5) Submission Procedure
 -----------------------
 
-You have to submit your code (and only your code, not other files, not HLS project files). Your code should have everything in it so we can synthesize it directly. 
+You have to submit your code (and only your code, not other files nor HLS project files). Your code should have everything in it so we can synthesize it directly. 
 This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to import your source file and directly synthesize it.
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure they correspond to the instructions.
@@ -103,4 +127,4 @@ Your repo must contain a folder named "bnn_project" at the top level. This folde
 
 **Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your 
 architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. 
-We will check if (1) your final BNN project functions are functionally correct (they pass their test benches) and (2) they use XNOR. 
+We will check if (1) your final BNN project functions are functionally correct (they pass their test benches) and (2) they use XNOR and popcount operations. 
