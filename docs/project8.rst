@@ -79,6 +79,7 @@ The function that you must replicate in HLS is:
     	layer3_quantized = self.quantize(layer3_input)
     	layer3_output = self.matmul_xnor(layer3_quantized, self.fc3w_qntz.T)
 	final_output = (layer3_output * 2 - 64)
+	
 	A = np.array([final_output], np.int32)
 	return A
 
