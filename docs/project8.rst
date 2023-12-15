@@ -53,6 +53,7 @@ Clock Period: 10 ns or 100MHz
 The Python code provides a functionally correct implementation of the BNN.  The ``feed_forward_quantized`` function takes as input an MNIST image, executes the BNN, and outputs the classified result (a digit between 0 and 9). 
 
 The function that you must replicate in HLS is:	
+
 .. code-block :: python3
 def feed_forward_quantized(self, input):
 	"""
