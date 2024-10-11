@@ -99,41 +99,41 @@ You must complete the following tasks:
 
 1. Implement a functionally correct, but not optimized, 128-tap FIR filter. This is your baseline implementation. Use the provided script.tcl to create your project. As you attempt each optimization according to the questions below, think about what other optimizations would work well in conjunction with them.
 
-2. Next, generate one or multiple designs to help you answer your report's questions. You should reference the design you generated for your experiment in your answers. You can reference the same design from multiple answers. Your resulting code must always be functionally correct (i.e., match the golden output). In your report, you will need to explain the effect of the following optimizations on your design. You can test other optimizations as you'd like, but you don't need to include these in your report. For every design you include in your report, you can report the corresponding throughput instead of the estimated clock period and latency.
+2. Next, generate one or multiple designs to help you answer your report's questions. You should reference the design you generated for your experiment in your answers. You can reference the same design from multiple answers. Your resulting code must always be functionally correct (i.e., match the golden output). In your report, you must explain the effect of the following optimizations on your design. You can test other optimizations as you'd like, but you can leave these out of your report. For every design you include in your report, you can report the corresponding throughput instead of the estimated clock period and latency.
 
 3. Finally, for Q6, generate your best architecture by combining any number of optimizations that you wish. You can use what you learned from your designs for Q1-Q5.
 
 4. Your report should only include the answers to the following questions.
 
-You must reference a design or multiple designs for each of the following questions. The source code in your design should have all the necessary pragmas. Please refer to Chapter 2 in the pp4fpga textbook before starting this assignment.
+You must reference a design or multiple designs for the following questions. The source code in your design should have all the necessary pragmas. Please refer to Chapter 2 in the pp4fpga textbook before starting this assignment.
 
 Questions:
 
-* **Question 1 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. The number of different data types is extensive: floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
+* **Question 1 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. There many different data types including floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
 
   Change the bitwidth of the variables inside the function body (do not change the bitwidth of the parameters). How does the bitwidth affect the performance? How does it affect the resource usage? What minimum data size can you use without losing accuracy (i.e., your results still match the golden output)?
 
-* **Question 2 - Pipelining:** Pipelining increases the throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
+* **Question 2 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
 
-  Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle. How does increasing the II affect the loop latency? What are the trends? At some point setting the II to a larger value does not make sense. What is that value in this example? How would you calculate that value for a general for loop?
+  Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle. How does increasing the II affect the loop latency? What are the trends? At some point, setting the II to a larger value does not make sense. What is that value in this example? How would you calculate that value for a general for loop?
 
 * **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. Rewriting the code to remove them can make the resulting design more efficient. This is known as code hoisting.
 
   Rewrite the code to remove any conditional statements. Compare the designs with and without if/else condition. Is there a difference in performance and/or resource utilization? Does the presence of the conditional branch have any effect when the design is pipelined? If so, how and why?
 
-* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop level pipelining, or provide other benefits. This may increase the performance and the resource usage.
+* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop-level pipelining, or provide other benefits. This may increase performance and resource usage.
 
-  Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How do the number of resources change? Why?
+  Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How does the number of resources change? Why?
 
-* **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each of the variables as its own register, which allows simultaneous access to all of the variables at every clock cycle.
+* **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
 
   Compare the memory partitioning parameters: block, cyclic, and complete. What is the difference in performance and resource usage (particularly with respect to BRAMs and FFs)? Which one gives the best performance? Why?
 
-* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design that has small resource usage likely will have lower performance, but that could still be the best depending the application goals.
+* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be the best depending the application goals.
 
   In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). 
 
-It is possible that some optimizations may not have a big (or any effect). Some optimizations may only work when you use them in combination with others. This is what makes the design space exploration process difficult.
+It is possible that some optimizations have little (or no effect). Some optimizations may only work when used in combination with others. This is what makes the design space exploration process difficult.
 
 * **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=74>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
@@ -188,7 +188,7 @@ FIR128
 
 For each question, explicitly mention which design(s) you used in your answers. You are asked to discuss different performance and resource metrics. Ensure the method used to calculate the performance and resource metrics is described. Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles. For this reason, we **require** you to state the corresponding throughput for every design instead of the estimated clock period and latency.
 
-You are strongly encouraged to use figures and tables to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These are not the best figures and can certainly be made better, but they serve as a reference that can relatively easily be generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your design space exploration process).
+You are strongly encouraged to use figures and tables to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These can be made better, but they serve as a reference that can be relatively easily generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your design space exploration process).
 
 Throughput Calculation
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -205,12 +205,12 @@ The throughput in Mhz can be calculated as:
 .. math::
   \text{Throughput (MHz)} = 1000/(\text{Clock Period(ns)} * \# \text{Clock Cycles})
 
-You should always present your results using units (Hz, KHz, MHz, etc.) that make “sense”. For example, you should not do 10000 Hz instead 10 KHz. Or not 0.02 MHz but rather 20 KHz
+You should always present your results using units (Hz, KHz, MHz, etc.) that make “sense.” For example, you should not do 10000 Hz instead 10 KHz. Or not 0.02 MHz but rather 20 KHz
 
 Example Figures
 ~~~~~~~~~~~~~~~
 
-Figure 1 shows an example graph of resource usage for eight designs. Figure 2 shows the performance of these 8 designs in terms of throughput.
+Figure 1 shows an example graph of resource usage for eight designs. Figure 2 shows their throughput performance.
 
 .. image:: FIRArea.svg
     :width: 640px
@@ -229,11 +229,11 @@ Figure 1 shows an example graph of resource usage for eight designs. Figure 2 sh
 
 You should submit a report as described in the report instructions.
 
-You must also submit your code (\*.cpp, \*.h files, and \*.tcl, but nothing else). Your code should have everything in it so we can synthesize it directly. This means that you should use pragmas in your code and not use the GUI to insert optimization directives. We must be able to only import your fir.cpp/h file and directly synthesize it. You can assume we have correctly set up the design environment (fir_test.cpp, etc.). **DO NOT SUBMIT THE ENTIRE HLS FOLDER.**
+You must also submit your code (\*.cpp, \*.h files, and \*.tcl, but nothing else). Your code should have everything in it so we can synthesize it directly. This means you should use pragmas in your code and not use the GUI to insert optimization directives. We must be able to only import your fir.cpp/h file and directly synthesize it. You can assume we have correctly set up the design environment (fir_test.cpp, etc.). **DO NOT SUBMIT THE ENTIRE HLS FOLDER.**
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to ensure they correspond to the instructions.
 
-Your repo must contain a folder named "fir" at the top level. This folder must be organized as follows:
+Your repo must contain a "fir" folder at the top level. This folder must be organized as follows:
 
 * **Report.pdf**
 
@@ -255,9 +255,11 @@ Your repo must contain a folder named "fir" at the top level. This folder must b
 
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
-* *fir128_optimizedN* corresponds to the architectures you generated to answer the questions. You can have one or multiple, just ensure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
+* *fir128_optimizedN* corresponds to the architectures you generated to answer the questions. You can have one or multiple. Ensure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
 
 * *fir128_best* is the folder containing your best architecture.
+
+You are not restricted to five optimized folders; for example, you could submit 10. A good rule of thumb is that if you refer to an architecture in your report, you should include a folder of that architecture. 
 
 Submission
 ~~~~~~~~~~
@@ -267,7 +269,7 @@ Place your code on your private Bitbucket or GitHub repository. Give the instruc
 10) Grading Rubric
 ------------------
 
-Your grade will be determined by your answers to the questions. Your answers should be well-written and clearly delineated (for example, by copying the questions into the report before answering them or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and answers that are hard to understand. Example issues include spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage using tables to state results and the changes that produced them and figures to draw comparisons between different designs. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the directory naming and file structure instructions.
+Your answers to the questions will determine your grade. Your answers should be well-written and clearly delineated (for example, copying the questions into the report before answering them or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and answers that are hard to understand. Example issues include spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage using tables to state results, figures to draw comparisons between different designs, and short summaries about how the different architectures were generated. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions for the directory naming and file structure.
 
 If you submit a report made in LaTeX, you might find `this link that generates tables from spreadsheets <https://www.tablesgenerator.com/>`_ helpful.
 
