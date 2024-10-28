@@ -21,7 +21,7 @@ To save disk space, you do not need to install the simulation dependencies for a
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install2.png
 
-The following tutorials are for pynq-z2 board. The steps are very relatable, though not exactly the same, for Kria boards. Please refer to section 3 if you are using a Kria board.
+The following tutorials are for pynq-z2 board. The steps are very relatable, though not exactly the same, for Kria boards. Please refer to section 4 for the additional steps.
 
 1) Vitis HLS: C/C++ to RTL
 ---------------------------
@@ -266,6 +266,8 @@ Then follow the green designer assistance and let the tool do "block automation"
 Note that there should be no ports named x, y, r, theta, as they all become some address in the s_axi_control bus.
 
 You should also be able to find the module named control_s_axi_U under the file tree, and locate the address as the lab tutorial.
+
+Setting up a Kria board for pynq is different, and a bit more complex. Please refer to the following resources: `Pynq-supporting boards (find KV260) <https://www.pynq.io/boards.html/>`_ , `Basic steps <https://discuss.pynq.io/t/kria-pynq-v3-0-release-now-with-kr260-support/4865>`_, `Kria pynq repo <https://github.com/Xilinx/Kria-PYNQ>`_ 
 
 Basics of FPGA & PS-PL interaction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
