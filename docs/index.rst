@@ -33,4 +33,5 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    interrupts
    microblaze.ipynb
    devcloud
+   project_aie
 
