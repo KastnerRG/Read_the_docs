@@ -72,14 +72,12 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * You do not need to report your optimizations for your 8 point and 32 point DFT; these folders are provided for your convenience. Since these will very likely synthesize much faster than larger point DFT functions, it may be useful to use these to debug your code or in your initial design space exploration.
 
-* Your report must explicitly state how you calculated the throughput results. Note that this is often not simply a function of the latency and the clock period, and involves using the initiation interval (II). Hint: Think about how many outputs you obtain from one run of your DFT operation.
+* Your report must explicitly state how you calculated the throughput results.
 
 * Here are samples for throughput results achieved by previous students for the DFT project:
 
 		+-----------------------------+--------+---------+
 		| Examples of max throughput: | DFT256 | DFT1024 |
-		+-----------------------------+--------+---------+
-		| DFT/second                  | 1247   | 79      |
 		+-----------------------------+--------+---------+
 		| Hz                          | 1370   | 89      |
 		+-----------------------------+--------+---------+
