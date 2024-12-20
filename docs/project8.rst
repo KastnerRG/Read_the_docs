@@ -103,13 +103,21 @@ The function that you must replicate in HLS is:
 
 Note: You can change the interface of the top-level HLS code. If you do, you should explain the rationale for these changes in your report. 
 
-5) Submission Procedure
+5) Optimization Hints
+-----------------------
+* The inputs and weights are packed into 32-bit values to ease the transfer of data. The weights are padded when necessary so that the weights corresponding to neuron are aligned at 32-bit boundaries. The Python code has all the functions used for this packing.
+
+* You are free to treat the intermediate values however you wish. You can keep them as 32-bit values, typecast them into 32 1-bit values, or ... 
+
+* Here are some `popcount implementations <https://nimrod.blog/posts/algorithms-behind-popcount/>`_. Note that these target processor implementations and might not be translate well into hardware, but they should provide some insight.
+
+6) Submission Procedure
 -----------------------
 
 You have to submit your code (and only your code, not other files nor HLS project files). Your code should have everything in it so we can synthesize it directly. 
 This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to import your source file and directly synthesize it.
 
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure they correspond to the instructions.
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to ensure they correspond to the instructions.
 
 Your repo must contain a folder named "bnn_project" at the top level. This folder must be organized as follows (similar to previous projects):
 
@@ -126,6 +134,6 @@ Your repo must contain a folder named "bnn_project" at the top level. This folde
   - ``.bit`` and ``.hwh`` files
   - ``bnn.ipynb`` host file
 
-**Report:** For this project, you must submit a report that describes the implementation of your design. You may add figures, diagrams, tables, or charts to describe your 
+**Report:** For this project, you must submit a report describing your design's implementation. You may add figures, diagrams, tables, or charts to describe your 
 architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. 
 We will check if (1) your final BNN project functions are functionally correct (they pass their test benches) and (2) they use XNOR and popcount operations. 
