@@ -81,17 +81,20 @@ Line 34 of the ``Makefile`` reference the  scripts folder. You might need to cha
 Vitis HLS will then read the generated ``.tcl`` scripts to create project components and run C simulation and synthesis.
 
 Your first step should be to run the C synthesis, this simply checks the functional correctness of your code. You can do this by:
+   
    ``cd <your fir11 or fir128 folder>``
 
    ``make test``
 
 
 To run C synthesis, do:
+   
    ``make hls``
   
 
 
 This will create the HLS project folder. The synthesized RTL and reports will be generated. You can run this command:
+   
    ``make report``
 
 to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting.
