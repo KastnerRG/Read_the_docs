@@ -81,27 +81,24 @@ Line 34 of the ``Makefile`` reference the  scripts folder. You might need to cha
 Vitis HLS will then read the generated ``.tcl`` scripts to create project components and run C simulation and synthesis.
 
 Your first step should be to run the C synthesis, this simply checks the functional correctness of your code. You can do this by:
-.. code-block:: sh
+   ``cd <your fir11 or fir128 folder>``
 
-   cd <your fir11 or fir128 folder>
-   make test
+   ``make test``
+
 
 To run C synthesis, do:
-.. code-block:: sh
+   ``make hls``
+  
 
-   make hls
 
 This will create the HLS project folder. The synthesized RTL and reports will be generated. You can run this command:
-.. code-block:: sh
-
-   make report
+   ``make report``
 
 to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting.
 
 To delete the generated files for a clean start, do:
-.. code-block:: sh
 
-   make clean
+   ``make clean``
 
 5) Project Goal
 ---------------
@@ -126,13 +123,14 @@ You will complete the following tasks:
 
 2. Next, generate one or multiple designs to help you answer your report's questions. You should reference the design you generated for your experiment in your answers. You can reference the same design from multiple answers. Your resulting code must always be functionally correct (i.e., match the golden output). In your report, you must explain the effect of the following optimizations on your design. You can test other optimizations as you'd like, but you can leave these out of your report. For every design you include in your report, you can report the corresponding throughput instead of the estimated clock period and latency.
 
-3. Finally, for Q6, generate your best architecture by combining any number of optimizations that you wish. You can use what you learned from your designs for Q1-Q5.
+3. Finally, for Q7, generate your best architecture by combining any number of optimizations that you wish. You can use what you learned from your designs for Q2-Q6.
 
 4. Your report should only include the answers to the following questions.
 
-You must reference a design or multiple designs for the following questions. The source code in your design should have all the necessary pragmas. Please refer to Chapter 2 in the pp4fpga textbook before starting this assignment.
+Please refer to Chapter 2 in the pp4fpga textbook before starting this assignment.
 
-Questions:
+7) Questions
+--------------
 
 * **Question 1 - FIR11 Baseline:** Implement a functionally correct 11-tap FIR filter. Do not apply pragmas or other optimizations. You can take reference from the textbook.
 
@@ -160,8 +158,8 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
 
   Rewrite the code to remove any conditional statements. 
   
-  - **(a)** Compare the latency, II, and resource usage of the automatically pipelined design with / without conditional statements.
-  - **(b)** Compare the latency, II, and resource usage of the non-pipelined design with / without conditional statements.
+  - **(a)** Report the numbers in a table: Compare the latency, II, and resource usage of the automatically pipelined design with / without conditional statements.
+  - **(b)** Report the numbers in a table: Compare the latency, II, and resource usage of the non-pipelined design with / without conditional statements.
 
 * **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop-level pipelining, or provide other benefits. This may increase performance and resource usage.
   
@@ -169,8 +167,6 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(b)** Compare the latency, II, and resource usage of the design with / without loop partitioning.
   - **(c)** Apply loop unrolling to the design with loop partitioning. Report the latency, II, and resource usage of this design.
   - **(d)** What is the relationship between loop unrolling and pipelining? Can they be applied together and benefit the design? Justify you answer with experiments / references to past questions.
-
-  Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How does the number of resources change? Why?
 
 * **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
 
@@ -188,7 +184,7 @@ It is possible that some optimizations have little (or no effect). Some optimiza
 
 * **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Overview-of-Arbitrary-Precision-Integer-Data-Types>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
-7) PYNQ Demo (Optional)
+7) PYNQ Demo
 ------------------------
 
 The following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
@@ -210,36 +206,11 @@ Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
 8) Report Guidelines
 --------------------
 
-FIR11
-~~~~~
+You only have to answer the questions in the report. The report should be concise and well-written. Answers to each sub-questions should be cleary marked (e.g., Q1.(a)). You do not need to include any code in the report. Explanation of the code / design is also not required unless the questions explicitly requires so. Report should be submitted to Canvas as a PDF file.
 
-* Submit your code (only source code for synthesis) and tcl script.
+Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles. For this reason, we **require** you to state the corresponding throughput for every design instead of the estimated clock period and latency.
 
-* Submit synthesis reports (fir_csynth.rpt file **and** fir_csynth.xml document files, you can find them in "<your solution folder>/syn/report").
-
-Demo
-~~~~
-
-* Submit your code (only host code)
-
-* Submit a screenshot of the results
-
-* Submit your bitstream
-
-FIR128
-~~~~~~
-
-* For each "interesting" architecture:
-
-  - Submit your code and tcl script
-
-  - Submit synthesis reports (.rpt **and** .xml)
-
-  - "Interesting" is imprecise, but it is often difficult to say definitively that one design is the best. Typically, there are different designs that Pareto optimal. Submit any design that you discuss in the answers to your questions. Often, one performs a lot of design space exploration by changing values, leading to many architectures, many of which are "bad" or "uninteresting". We don't need details on those. A good target is more than five and less than twenty "interesting" designs. Your report should only include the answers to the questions. Please clearly indicate where each question is answered in your report.
-
-For each question, explicitly mention which design(s) you used in your answers. You are asked to discuss different performance and resource metrics. Ensure the method used to calculate the performance and resource metrics is described. Throughput calculation methods are described below. It is typically best to report performance metrics in terms of seconds (or frequency = 1/seconds) rather than some other interval, e.g., clock cycles. For this reason, we **require** you to state the corresponding throughput for every design instead of the estimated clock period and latency.
-
-You are strongly encouraged to use figures and tables to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These can be made better, but they serve as a reference that can be relatively easily generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your design space exploration process).
+You are encouraged to use figures and tables to explain an answer. Figure 1 and Figure 2 provide a typical way to compare different architectures. These can be made better, but they serve as a reference that can be relatively easily generated. You can also consider different figures, e.g., to provide an overview of a particular architecture or help explain how you determined the "best design" (i.e., your design space exploration process).
 
 Throughput Calculation
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -275,53 +246,67 @@ Figure 1 shows an example graph of resource usage for eight designs. Figure 2 sh
 
 *Figure 2. Example throughput results for different FIR designs. Note that these are only for reference and do not correspond exactly to the results you can/should obtain.*
 
-9) Submission Procedure
------------------------
 
-You should submit a report as described in the report instructions.
+9) Code Submission
+------------------------------
 
-You must also submit your code (\*.cpp, \*.h files, and \*.tcl, but nothing else). Your code should have everything in it so we can synthesize it directly. This means you should use pragmas in your code and not use the GUI to insert optimization directives. We must be able to only import your fir.cpp/h file and directly synthesize it. You can assume we have correctly set up the design environment (fir_test.cpp, etc.). **DO NOT SUBMIT THE ENTIRE HLS FOLDER.**
+You must also submit your code. We should be able to run your code and re-produce the results. 
 
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to ensure they correspond to the instructions.
+You will need to submit one folder per question. Also, please keep a copy of the report in the repo.
+
+ - **Report.pdf**
+ - Folder **Q1**: A functional correct fir11 design.
+ - Folder **Baseline**: A functional correct fir128 design without any optimization / pragmas.
+ - Folder **Q2**: The design with minimal bitwidth of ``coef_t`` and ``acc_t``, which is your answer to Q2.(b).
+ - Folder **Q3**: The design with pipeline turned off, which is your answer to Q3.(b).
+ - Folder **Q4**: The automatically pipelined design without conditional statements, which is your answer to Q4.(a).
+ - Folder **Q5**: The design with loop partitioning, unrolling and array partitioning, which is your answer to Q5.(a).
+ - Folder **Q6**: Your design with the highest throughput.
+
+**Each folder** should contain the following files (and these files only), do **not** push the HLS project folder:
+
+ - fir.h
+ - fir.cpp
+ - fir_test.cpp
+ - Makefile
+ - __hls_config__.ini
+ - fir_test.log # Generated by ``make test``
+ - fir_csynth.rpt # Generated by ``make report``
+ - fir.tcl # Generated by ``make hls``
+ 
+You must follow the file structure below. We may use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to ensure they correspond to the instructions.
 
 Your repo must contain a "fir" folder at the top level. This folder must be organized as follows:
 
 * **Report.pdf**
 
-* Folder **fir11_baseline**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q1**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_baseline**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Baseline**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_optimized1**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q2**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_optimized2**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q3**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_optimized3**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q4**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_optimized4**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q5**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **fir128_optimized5**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
-
-* Folder **fir128_best**: fir.h | fir.cpp | script.tcl | fir_csynth.rpt | fir_csynth.xml
+* Folder **Q6**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
-* *fir128_optimizedN* corresponds to the architectures you generated to answer the questions. You can have one or multiple. Ensure the code is readable (i.e., do not put multiple optimizations commented out in the same file).
-
-* *fir128_best* is the folder containing your best architecture.
-
-You are not restricted to five optimized folders; for example, you could submit 10. A good rule of thumb is that if you refer to an architecture in your report, you should include a folder of that architecture. 
 
 Submission
 ~~~~~~~~~~
 
-Place your code on your private Bitbucket or GitHub repository. Give the instructors collaborator or read-only access. Put separate assignments in separate folders; name each folder according to the project. Place your report directly under your project folder.
+Place your repo on your private Bitbucket or GitHub repository. Give the instructors collaborator or read-only access. Put separate assignments in separate folders; name each folder according to the project. Place your report directly under your project folder.
 
 10) Grading Rubric
 ------------------
 
-Your answers to the questions will determine your grade. Your answers should be well-written and clearly delineated (for example, copying the questions into the report before answering them or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and answers that are hard to understand. Example issues include spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report throughput and resource usage for each design you discuss in your report, and include the files for these designs in your submission. We encourage using tables to state results, figures to draw comparisons between different designs, and short summaries about how the different architectures were generated. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions for the directory naming and file structure.
+Your answers to the questions will determine your grade. Your answers should be concise and clearly delineated. Additional points (up to 20) will be subtracted for poor formatting and answers that are hard to understand. We encourage using tables to state results, figures to draw comparisons between different designs, and short summaries about how the different architectures were generated, if asked in the question. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions for the directory naming and file structure.
 
 If you submit a report made in LaTeX, you might find `this link that generates tables from spreadsheets <https://www.tablesgenerator.com/>`_ helpful.
 
-The report comprises 80% of your grade. The remaining 20% is for the performance of the best version of your fir128 filter. If your design achieves a throughput greater than 0.5MHz but less than 1MHz, then you will be awarded 10 points. If you achieve 1MHz and higher, you will get full credit. Try to make resource usage as small as possible. The resource usage must be within the resources provided by the Pynq board. Similarly the timing has to be fulfilled, i.e. the clock achieved should be within 10ns (100 MHz).  
+The report comprises 90% of your grade. The remaining 10% is for the performance of the best version of your fir128 filter. If your design achieves a throughput greater than 1MHz but less than 5MHz, then you will be awarded 5 points. If you achieve 5MHz and higher, you will get full credit. The resource usage must be within the resources provided by the Pynq board. Similarly the timing has to be fulfilled, i.e. the clock achieved should be within 10ns (100 MHz).
