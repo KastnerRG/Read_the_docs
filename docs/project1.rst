@@ -21,7 +21,7 @@ You should start this assignment by understanding the 11-tap FIR filter and impl
 
 Before you start, we strongly suggest you familiarize yourself with the high-level synthesis tool.
 
-* Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.xilinx.com/r/2022.2-English/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps, though they provide a good preview of the optimizations you will find in future projects.
+* Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps, though they provide a good preview of the optimizations you will find in future projects.
 
 * Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.xilinx.com/r/2022.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
@@ -32,9 +32,9 @@ You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYN
 3) Materials
 ------------
 
-You can download the project files here:
+Starter code for this project is available at:
 
-* `project1.zip <https://github.com/KastnerRG/pp4fpgas/blob/master/labs/project1.zip?raw=true>`_
+* `project1 <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project1>`_
 
 This contains:
 
@@ -50,35 +50,60 @@ This contains:
 
   - out.gold.dat - “Golden” output. When the testbench (from fir_test.cpp) is run through the file fir.cpp it should generate this result. If it does not, you did something wrong.
 
+  - __hls_config__.ini - Record important HLS project settings including target clock period and board part. Also specify the name of the top function.
+
+  - Makefile - Makefile to run the HLS tool from the command line.
+
 
 * fir128 folder: 128 tap fir filter
 
-  - fir.cpp - Implements top-level function
+  - Contain the same starter code.
 
-  - fir.h - header file
+Target Board Part: xc7z020clg400-1 (Pynq-Z2 board), or xck26-sfvc784-2lv-c (Kria KV260 board).
 
-  - fir_test.cpp - test bench
-
-  - input.dat - input chirp signal
-
-  - out.gold.dat - “Golden” output. When the testbench (from fir_test.cpp) is run through the file fir.cpp it should generate this result. If it does not, you did something wrong.
-
-* Tutorial folder:
-
-  - ug871-vivado-high-level-synthesis-tutorial.pdf - Various tutorials for Vivado HLS
-
-* demo folder: Demo folder for 11-tap filter
-
-  - input.dat - input chirp signal
-
-
-Target Board: xc7z020clg400-1
-
-Software: Vitis HLS 2022.2 (recommended)
+Software: Vitis HLS 2024.1 or 2024.2 
 
 Clock Period: 10 ns or 100MHz
 
-4) Project Goal
+
+
+
+4) How to Run the project
+--------------------------
+Vitis HLS is the EDA tool that allows you to write C/C++ program and generate optimized RTL module. Vitis HLS can be used in two ways: GUI and command line. For simplicity and portability, we will use command line in this project. 
+
+We have provided a Makefile and config.ini file to facilitate the C simulation and synthesis.
+
+It is necessary to have the `scripts <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/scripts>`_ folder ready. 
+
+Line 34 of the ``Makefile`` reference the  scripts folder. You might need to change it to your local path. The scripts will read the ``__hls_config__.ini`` file to generate the .tcl script for Vitis HLS.
+
+Vitis HLS will then read the generated ``.tcl`` scripts to create project components and run C simulation and synthesis.
+
+Your first step should be to run the C synthesis, this simply checks the functional correctness of your code. You can do this by:
+.. code-block:: sh
+
+   cd <your fir11 or fir128 folder>
+   make test
+
+To run C synthesis, do:
+.. code-block:: sh
+
+   make hls
+
+This will create the HLS project folder. The synthesized RTL and reports will be generated. You can run this command:
+.. code-block:: sh
+
+   make report
+
+to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting.
+
+To delete the generated files for a clean start, do:
+.. code-block:: sh
+
+   make clean
+
+5) Project Goal
 ---------------
 
 The first goal of this project is to generate a functionally correct HLS design for an 11-tap FIR filter. Also, you should start to gain an understanding of different HLS optimizations. For FIR128, you should modify the code to generate several optimized designs. Your goal is to create designs that provide tradeoffs between resource usage and execution time. This will require you to rewrite the code and insert pragmas. More specifically, you must do the following:
@@ -90,14 +115,14 @@ The first goal of this project is to generate a functionally correct HLS design 
 5) FIR11
 --------
 
-The first step for the project is to get a functionally correct design working for an 11-tap FIR filter. For this, you must use the Vivado HLS tool and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. **Use the provided script.tcl to create your project**, or manually add source & testbench files and set the top function.
+The first step for the project is to get a functionally correct design working for an 11-tap FIR filter. For this, you must use the Vivado HLS tool and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. Use the provided ``Makefile`` to create your project.
 
 6) FIR128 Instructions
 ----------------------
 
-You must complete the following tasks:
+You will complete the following tasks:
 
-1. Implement a functionally correct, but not optimized, 128-tap FIR filter. This is your baseline implementation. Use the provided script.tcl to create your project. As you attempt each optimization according to the questions below, think about what other optimizations would work well in conjunction with them.
+1. Implement a functionally correct, but not optimized, 128-tap FIR filter. This is your baseline implementation. Use the provided ``Makefile`` to create your project. As you attempt each optimization according to the questions below, think about what other optimizations would work well in conjunction with them.
 
 2. Next, generate one or multiple designs to help you answer your report's questions. You should reference the design you generated for your experiment in your answers. You can reference the same design from multiple answers. Your resulting code must always be functionally correct (i.e., match the golden output). In your report, you must explain the effect of the following optimizations on your design. You can test other optimizations as you'd like, but you can leave these out of your report. For every design you include in your report, you can report the corresponding throughput instead of the estimated clock period and latency.
 
@@ -109,36 +134,62 @@ You must reference a design or multiple designs for the following questions. The
 
 Questions:
 
-* **Question 1 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. There many different data types including floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
+* **Question 1 - FIR11 Baseline:** Implement a functionally correct 11-tap FIR filter. Do not apply pragmas or other optimizations. You can take reference from the textbook.
 
-  Change the bitwidth of the variables inside the function body (do not change the bitwidth of the parameters). How does the bitwidth affect the performance? How does it affect the resource usage? What minimum data size can you use without losing accuracy (i.e., your results still match the golden output)?
+  - **(a)** Report latency, initiation interval (II), in clock cycles.
+  - **(b)** Report the number of BRAM, DSP, LUT and FFs used.
 
-* **Question 2 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
+Questions 2-7 refers to FIR128. You should have a functionally correct design before starting these questions.
 
-  Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle. How does increasing the II affect the loop latency? What are the trends? At some point, setting the II to a larger value does not make sense. What is that value in this example? How would you calculate that value for a general for loop?
+* **Question 2 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. There many different data types including floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
 
-* **Question 3 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. Rewriting the code to remove them can make the resulting design more efficient. This is known as code hoisting.
+  Change the bitwidth of the variables inside the function body (namely ``coef_t`` and ``acc_t``) using the ``ap_int<>`` datatype.
 
-  Rewrite the code to remove any conditional statements. Compare the designs with and without if/else condition. Is there a difference in performance and/or resource utilization? Does the presence of the conditional branch have any effect when the design is pipelined? If so, how and why?
+  - **(a)** Try 3 combinations of variable bitwidths of your choice. Report the latency, II, and resource usage (BRAM, DSP, LUT, and FF) for each design in a table.
+  - **(b)** What is the minimum bitwidth of ``coef_t`` and ``acc_t`` you can use without losing accuracy (i.e., your results still match the golden output)?
+
+* **Question 3 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
+
+  - **(a)** Report the latency, II, and resource usage of your baseline FIR128 design.
+  - **(b)** Turn off the automatic pipelining by using ``#pragma HLS pipeline off``. Report the latency, II, and resource usage of this design.
+  - **(c)** Manually pipeline the design using ``#pragma HLS pipeline II=<value>``. Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle until the throughput stays unchanged. Report the latency, II, and resource usage of each design in a table.
+  - **(d)** At some point setting the II to a larger value does not make sense. What is that value in this example? 
+  - **(e)** Vitis HLS may automatically pipeline a loop without any specific pragma. Based on your observation, what is the default II for a pipelined loop used in this case? 
+
+* **Question 4 - Removing Conditional Statements:** If/else statements and other conditionals can limit the possible parallelism and often require additional resources. Rewriting the code to remove them can make the resulting design more efficient. This is known as code hoisting.
+
+  Rewrite the code to remove any conditional statements. 
+  
+  - **(a)** Compare the latency, II, and resource usage of the automatically pipelined design with / without conditional statements.
+  - **(b)** Compare the latency, II, and resource usage of the non-pipelined design with / without conditional statements.
 
 * **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop-level pipelining, or provide other benefits. This may increase performance and resource usage.
+  
+  - **(a)** Briefly describe the opportunity for loop partitioning in FIR128. Re-write the code to apply your idea.
+  - **(b)** Compare the latency, II, and resource usage of the design with / without loop partitioning.
+  - **(c)** Apply loop unrolling to the design with loop partitioning. Report the latency, II, and resource usage of this design.
+  - **(d)** What is the relationship between loop unrolling and pipelining? Can they be applied together and benefit the design? Justify you answer with experiments / references to past questions.
 
   Is there an opportunity for loop partitioning in FIR filters? Compare your hardware designs before and after loop partitioning. What is the difference in performance? How does the number of resources change? Why?
 
 * **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
 
-  Compare the memory partitioning parameters: block, cyclic, and complete. What is the difference in performance and resource usage (particularly with respect to BRAMs and FFs)? Which one gives the best performance? Why?
+  Read the textbook about the memory partitioning parameters: block, cyclic, and complete. 
 
-* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be the best depending the application goals.
+  - **(a)** Explore array partitioning options for both arrays in your design from Question 4. Report the latency, II and resource usage. Which partition gives the best performance?
+  - **(b)** Loop unrolling and memory partitioning are often used together. Try disabling loop unrolling or array partitioning. Report the effects.
 
-  In what way is it the best? What optimizations did you use to obtain this result? It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock). 
+* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be good enough depending the application goals.
 
-It is possible that some optimizations have little (or no effect). Some optimizations may only work when used in combination with others. This is what makes the design space exploration process difficult.
+  - **(a)** Combine any number of optimizations to get your best throughput. What optimizations did you use to obtain this result? Report the latency, II, throughput (in MHz). It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock).
+  - **(b)** Report the resource usage of your design with the best throughput. Explain why the resource usage is high compared with the baseline in Question 2.
+  
+It is possible that some optimizations have little (or no effect). Some optimizations may only work when used in combination with others. This is what makes the design space exploration process difficult (and interesting).
 
-* **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_1/ug902-vivado-high-level-synthesis.pdf#page=74>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
+* **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Overview-of-Arbitrary-Precision-Integer-Data-Types>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
-7) PYNQ Demo
----------------
+7) PYNQ Demo (Optional)
+------------------------
 
 The following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
 
