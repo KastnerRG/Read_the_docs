@@ -10,7 +10,9 @@ This lab will guide you through the basics of using Pynq to develop an applicati
 
 To simplify the steps and increase reproducibility, we will replace most GUI operations with command line scripts (so you can simple run one command instead of clicking 100 buttons).
 
-If you're curious about GUI-based methods, check `here <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example-legacy.html>`_ for a the legacy version of this lab using GUI with Xilinx Vivado and Vitis HLS 2022.2.
+You do have the option to use the GUI of Vitis Unified IDE. We'll cover it later.
+
+If you're curious about GUI-based classic Vitis HLS, check `here <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example-legacy.html>`_ for a the legacy version of this lab using GUI with Xilinx Vivado and Vitis HLS 2022.2.
 
 0) Vivado Design suite installation
 ------------------------------------
