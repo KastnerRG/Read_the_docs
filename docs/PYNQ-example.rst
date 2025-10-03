@@ -10,7 +10,7 @@ This lab will guide you through the basics of using Pynq to develop an applicati
 
 To simplify the steps and increase reproducibility, we will replace most GUI operations with command line scripts (so you can simple run one command instead of clicking 100 buttons).
 
-You do have the option to use the GUI of Vitis Unified IDE. We'll cover it later.
+You do have the option to use the GUI of Vitis Unified IDE. We'll cover it `here <https://pp4fpgas.readthedocs.io/en/latest/vitis_unified.html>`_.
 
 If you're curious about GUI-based classic Vitis HLS, check `here <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example-legacy.html>`_ for a the legacy version of this lab using GUI with Xilinx Vivado and Vitis HLS 2022.2.
 
@@ -46,36 +46,6 @@ Add the following lines to your **~/.bashrc** file, these include loading AMD to
    ``export LD_LIBRARY_PATH=~/xlnx_compat_fix/:$LD_LIBRARY_PATH``
 
 Remember to ``source ~/.bashrc`` for the changes to take effect.
-
-Licensing (Optional)
-~~~~~~~~~~~~~~~~~~~~~
-No license is required for C simulation and C synthesis. However, if you wish to use some helpful visualization tools provided by Vitis (GUI), you do need a free Vitis HLS license.
-
-Check how can you obtain a free Vitis HLS license `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Obtaining-a-Vitis-HLS-License>`_. You need to log in to you AMD account.
-
-Select **Vitis HLS License** and click Generate Node-Locked License. Note that this license is only good for one machine. However you can change the machine it is tied to by modifying the license.
-
-.. image:: ./image/lab1/license.png
-
-You will be asked to select a host. The ieng6 is Linux 64 bit. You have to use the ethernet MAC address as the identifier. Simply run ``ifconfig``:
-
-.. image:: ./image/lab1/ethernet.png
-
-You will get an email with the license file ``.lic`` attached. If you need to transfer it from your laptop to ieng6, you can simply use ``scp``.
-
-	``scp /path/to/license username@ieng6.ucsd.edu:~/path/to/license``
-
-Add this line to your **~/.bashrc** file so that Vitis is aware of the license:
-
-   ``export XILINXD_LICENSE_FILE=2100@cselm2.ucsd.edu:~/path/to/license``
-
-You can also convenientely log in to ieng6 using ssh.
-
-Note that if you log off and log in to a different machine (e.g., log off from ``ieng6-240.ucsd.edu`` and log in to ``ieng6-241.ucsd.edu``), the ethernet address will be different and the license may not work. You need to log in to Xilinx licensing manager and modify the existing license. It's recommended for each group to use a dedicated remote desktop.
-
-Your home directory is persistent and is shared by all ieng6 machines.
-
-Using advanced GUI features in Vitis HLS is optional. You can still complete the lab without a license.
 
 
 1) Vitis HLS: C/C++ to RTL

@@ -27,6 +27,7 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    project7
    project8
    PYNQ-example
+   vitis_unified
    PYNQ-example-legacy
    axidma_single
    axidma2

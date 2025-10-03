@@ -103,6 +103,8 @@ To delete the generated files for a clean start, do:
 
    ``make clean``
 
+Though not required, you can also run the project using the GUI of Vitis Unified IDE. The advanced visualization tools might help you better understand your optimizations. The steps are `here <https://pp4fpgas.readthedocs.io/en/latest/vitis_unified.html>`_. Note that submission should still be done in command line, as described in Sections 10 and 11.
+
 5) Project Goal
 ---------------
 
@@ -112,12 +114,12 @@ The first goal of this project is to generate a functionally correct HLS design 
 
 * Design a 128-tap FIR filter with HLS and optimize it. We call this subtask FIR128.
 
-5) FIR11
+6) FIR11
 --------
 
 The first step for the project is to get a functionally correct design working for an 11-tap FIR filter. For this, you must use the Vivado HLS tool and finish the function body of `void fir()` in the file fir.cpp to implement the filter. You can test the correctness of your code by using the provided testbench. This code does not need to be highly optimized; you will work on creating optimized code later. It just needs to work correctly. Use the provided ``Makefile`` to create your project.
 
-6) FIR128 Instructions
+7) FIR128 Instructions
 ----------------------
 
 You will complete the following tasks:
@@ -132,7 +134,7 @@ You will complete the following tasks:
 
 Please refer to Chapter 2 in the pp4fpga textbook before starting this assignment.
 
-7) Questions
+8) Questions
 --------------
 
 * **Question 1 - FIR11 Baseline:** Implement a functionally correct 11-tap FIR filter. Do not apply pragmas or other optimizations. You can take reference from the textbook.
@@ -187,8 +189,10 @@ It is possible that some optimizations have little (or no effect). Some optimiza
 
 * **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Overview-of-Arbitrary-Precision-Integer-Data-Types>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
-7) PYNQ Demo
+9) PYNQ Demo
 ------------------------
+
+**UCSD students: this part is optional for project 1**.
 
 The following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
 
@@ -206,8 +210,8 @@ The specific things you must do in this section are:
 
 Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
 
-8) Report Guidelines
---------------------
+10) Report Guidelines
+------------------------
 
 You only have to answer the questions in the report. The report should be concise and well-written. Answers to each sub-questions should be cleary marked (e.g., Q1.(a)). You do not need to include any code in the report. Explanation of the code / design is also not required unless the questions explicitly requires so. Report should be submitted to Canvas as a PDF file.
 
@@ -250,7 +254,7 @@ Figure 1 shows an example graph of resource usage for eight designs. Figure 2 sh
 *Figure 2. Example throughput results for different FIR designs. Note that these are only for reference and do not correspond exactly to the results you can/should obtain.*
 
 
-9) Code Submission
+11) Code Submission
 ------------------------------
 
 You must also submit your code. We should be able to run your code and re-produce the results. 
@@ -305,7 +309,7 @@ Submission
 
 Place your repo on your private Bitbucket or GitHub repository. Give the instructors collaborator or read-only access. Put separate assignments in separate folders; name each folder according to the project. Place your report directly under your project folder.
 
-10) Grading Rubric
+12) Grading Rubric
 ------------------
 
 Your answers to the questions will determine your grade. Your answers should be concise and clearly delineated. Additional points (up to 20) will be subtracted for poor formatting and answers that are hard to understand. We encourage using tables to state results, figures to draw comparisons between different designs, and short summaries about how the different architectures were generated, if asked in the question. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions for the directory naming and file structure.
