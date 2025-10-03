@@ -166,21 +166,21 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(a)** Report the numbers in a table: Compare the latency, II, and resource usage of the automatically pipelined design with / without conditional statements.
   - **(b)** Report the numbers in a table: Compare the latency, II, and resource usage of the non-pipelined design with / without conditional statements.
 
-* **Question 4 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop-level pipelining, or provide other benefits. This may increase performance and resource usage.
+* **Question 5 - Loop Partitioning:** Dividing the loop into two or more separate loops may allow for each of those loops to be executed in parallel (via unrolling), enable loop-level pipelining, or provide other benefits. This may increase performance and resource usage.
   
   - **(a)** Briefly describe the opportunity for loop partitioning in FIR128. Re-write the code to apply your idea.
   - **(b)** Compare the latency, II, and resource usage of the design with / without loop partitioning.
   - **(c)** Apply loop unrolling to the design with loop partitioning. Report the latency, II, and resource usage of this design.
   - **(d)** What is the relationship between loop unrolling and pipelining? Can they be applied together and benefit the design? Justify you answer with experiments / references to past questions.
 
-* **Question 5 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
+* **Question 6 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
 
   Read the textbook about the memory partitioning parameters: block, cyclic, and complete. 
 
   - **(a)** Explore array partitioning options for both arrays in your design from Question 4. Report the latency, II and resource usage. Which partition gives the best performance?
   - **(b)** Loop unrolling and memory partitioning are often used together. Try disabling loop unrolling or array partitioning. Report the effects.
 
-* **Question 6 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be good enough depending the application goals.
+* **Question 7 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be good enough depending the application goals.
 
   - **(a)** Combine any number of optimizations to get your best throughput. What optimizations did you use to obtain this result? Report the latency, II, throughput (in MHz). It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock).
   - **(b)** Report the resource usage of your design with the best throughput. Explain why the resource usage is high compared with the baseline in Question 2.
