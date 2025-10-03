@@ -6,3 +6,4 @@
 *.tcl
 *.log
 out.dat
+workspace/

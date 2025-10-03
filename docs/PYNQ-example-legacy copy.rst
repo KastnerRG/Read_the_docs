@@ -1,80 +1,27 @@
 
-Lab: Pynq Memory Mapped IO (s_axilite)
+Lab (Legacy): Pynq Memory Mapped IO (s_axilite)
 =====================================
 
-
-This tutorial is still under active development. Please check back later for updates.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This lab will guide you through the basics of using Pynq to develop an application on the Zynq / Ultrascale SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
-
-To simplify the steps and increase reproducibility, we will replace most GUI operations with command line scripts (so you can simple run one command instead of clicking 100 buttons).
-
-If you're curious about GUI-based methods, check `here <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example-legacy.html>`_ for a the legacy version of this lab using GUI with Xilinx Vivado and Vitis HLS 2022.2.
+This lab describes how to use Pynq to develop an application on the Zynq SoC. The application performs a simple hardware accelerated function on the programmable logic. We first create the IP core that performs the function :math:`f(x) = 2x` using high level synthesis. We synthesize it to the programmable logic using the Vivado tools.  Using the PYNQ infrastructure, we talk to the IP core from ARM processor using memory mapped I/O. We develop a Pynq notebook that sends data to the IP core, executes the core, and receives the computed results. 
 
 0) Vivado Design suite installation
 ------------------------------------
 
 Check `here <https://kastner.ucsd.edu/ryan/vivado-installation/>`_ for installation and UCSD license server guide, though you probably would not need the license server for the projects in this course.
 
-We provide a docker for you in case your machine is not supported by AMD FPGA tools. Check `here <https://github.com/KastnerRG/vitis_docker/>`_ for the docker image and instructions.
+We need Vitis HLS for C synthesis and generating the RTL, and Vivado for FPGA prototyping and generating the bitstream. Vitis is primarily for firmware design, thus not required.
 
-If you wish to use the download the software yourself, please refer to the official AMD guide `here <https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2024-2.html>`_. For export control compliance, you will need to create an account if you do not already have one.
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install0.png
 
-Both Vivado and Vitis are needed for the class. You should select the Vitis as the product to install, which includes Vivado design suite. AMD provides an installtion guide `here <https://docs.amd.com/r/2024.2-English/ug973-vivado-release-notes-install-license/Download-and-Installation>`_.
+Select Standard edition.
 
-UCSD students
-~~~~~~~~~~~~~~
-Campus provides UCSD Linux cloud to run AMD tools. Log in using your AD username and password `here <https://linuxcloud.ucsd.edu/>`_. You can select a machine under **ieng6 Linux Mint Remote Desktops**. One server corresponds to a physical machine.
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install1.png
 
-To solve some current package issues on ieng6 machines, run these commands (you only need to run this once, no need to run this every time you log in):
+To save disk space, you do not need to install the simulation dependencies for all supported devices since we are only using PYNQ-Z2.
 
-   ``mkdir -p ~/xlnx_compat_fix``
-   
-   ``ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 ~/xlnx_compat_fix/libtinfo.so.5``
+.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/install2.png
 
-Add the following lines to your **~/.bashrc** file, these include loading AMD tools, a quick path to resolve some package issues, and beautify your terminal.
-
-   ``force_color_prompt=yes``
-
-   ``PS1='\e[33;1m\u@\h: \e[31m\W\e[0m\$ '``
-
-   ``module load xilinx-vitis``
-
-   ``export LD_LIBRARY_PATH=~/xlnx_compat_fix/:$LD_LIBRARY_PATH``
-
-Remember to ``source ~/.bashrc`` for the changes to take effect.
-
-Licensing (Optional)
-~~~~~~~~~~~~~~~~~~~~~
-No license is required for C simulation and C synthesis. However, if you wish to use some helpful visualization tools provided by Vitis (GUI), you do need a free Vitis HLS license.
-
-Check how can you obtain a free Vitis HLS license `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Obtaining-a-Vitis-HLS-License>`_. You need to log in to you AMD account.
-
-Select **Vitis HLS License** and click Generate Node-Locked License. Note that this license is only good for one machine. However you can change the machine it is tied to by modifying the license.
-
-.. image:: ./image/lab1/license.png
-
-You will be asked to select a host. The ieng6 is Linux 64 bit. You have to use the ethernet MAC address as the identifier. Simply run ``ifconfig``:
-
-.. image:: ./image/lab1/ethernet.png
-
-You will get an email with the license file ``.lic`` attached. If you need to transfer it from your laptop to ieng6, you can simply use ``scp``.
-
-	``scp /path/to/license username@ieng6.ucsd.edu:~/path/to/license``
-
-Add this line to your **~/.bashrc** file so that Vitis is aware of the license:
-
-   ``export XILINXD_LICENSE_FILE=2100@cselm2.ucsd.edu:~/path/to/license``
-
-You can also convenientely log in to ieng6 using ssh.
-
-Note that if you log off and log in to a different machine (e.g., log off from ``ieng6-240.ucsd.edu`` and log in to ``ieng6-241.ucsd.edu``), the ethernet address will be different and the license may not work. You need to log in to Xilinx licensing manager and modify the existing license. It's recommended for each group to use a dedicated remote desktop.
-
-Your home directory is persistent and is shared by all ieng6 machines.
-
-Using advanced GUI features in Vitis HLS is optional. You can still complete the lab without a license.
-
+The following tutorials are for pynq-z2 board. The steps are very relatable, though not exactly the same, for Kria boards. Please refer to section 4 for the additional steps.
 
 1) Vitis HLS: C/C++ to RTL
 ---------------------------
