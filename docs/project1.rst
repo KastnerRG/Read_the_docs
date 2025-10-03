@@ -23,7 +23,7 @@ Before you start, we strongly suggest you familiarize yourself with the high-lev
 
 * Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps, though they provide a good preview of the optimizations you will find in future projects.
 
-* Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.xilinx.com/r/2022.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
+* Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.amd.com/r/en-US/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
 You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS enviroment setup.
 
