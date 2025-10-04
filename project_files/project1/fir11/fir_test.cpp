@@ -6,6 +6,8 @@
 		Compares the output from fir() with out.gold.dat
 */
 
+// Editted by maykumar
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
