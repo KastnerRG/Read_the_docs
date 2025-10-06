@@ -151,7 +151,7 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(a)** Try 3 combinations of variable bitwidths of your choice. Report the latency, II, and resource usage (BRAM, DSP, LUT, and FF) for each design in a table.
   - **(b)** What is the minimum bitwidth of ``coef_t`` and ``acc_t`` you can use without losing accuracy (i.e., your results still match the golden output)?
 
-* **Question 3 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
+* **Question 3 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage. **Hint**: In this project, pipelining should be applied to the ``for`` loop instead of the entire function.
 
   - **(a)** Report the latency, II, and resource usage of your baseline FIR128 design.
   - **(b)** Turn off the automatic pipelining by using ``#pragma HLS pipeline off``. Report the latency, II, and resource usage of this design.
