@@ -97,7 +97,7 @@ This will create the HLS project folder. The synthesized RTL and reports will be
    
    ``make report``
 
-to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting.
+to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting. Note that you only need to report the top level performance and resource consumption. For performance metrics, report the numbers under "Latency: Summary". You should report the max value (worst case scenario) if the min and max values are different. For resource consumption, only report the line "Used" under "Utilization Estimates:Summary".
 
 To delete the generated files for a clean start, do:
 
@@ -155,7 +155,7 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
 
   - **(a)** Report the latency, II, and resource usage of your baseline FIR128 design.
   - **(b)** Turn off the automatic pipelining by using ``#pragma HLS pipeline off``. Report the latency, II, and resource usage of this design.
-  - **(c)** Manually pipeline the design using ``#pragma HLS pipeline II=<value>``. Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle until the throughput stays unchanged. Report the latency, II, and resource usage of each design in a table.
+  - **(c)** Manually pipeline the design using ``#pragma HLS pipeline II=<value>``. Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle until the throughput stays unchanged (and/or, reaches the same value of a non-pipelined design). Report the latency, II, and resource usage of each design in a table.
   - **(d)** At some point setting the II to a larger value does not make sense. What is that value in this example? 
   - **(e)** Vitis HLS may automatically pipeline a loop without any specific pragma. Based on your observation, what is the default II for a pipelined loop used in this case? 
 
