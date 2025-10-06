@@ -177,7 +177,7 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
 
   Read the textbook about the memory partitioning parameters: block, cyclic, and complete. 
 
-  - **(a)** Explore array partitioning options for both arrays in your design from Question 4. Report the latency, II and resource usage. Which partition gives the best performance?
+  - **(a)** Explore array partitioning options for both arrays in your design from Question 5. Report the latency, II and resource usage. Which partition gives the best performance?
   - **(b)** Loop unrolling and memory partitioning are often used together. Try disabling loop unrolling or array partitioning. Report the effects.
 
 * **Question 7 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be good enough depending the application goals.
@@ -267,8 +267,8 @@ You will need to submit one folder per question. Also, please keep a copy of the
  - Folder **Q2**: The design with minimal bitwidth of ``coef_t`` and ``acc_t``, which is your answer to Q2.(b).
  - Folder **Q3**: The design with pipeline turned off, which is your answer to Q3.(b).
  - Folder **Q4**: The automatically pipelined design without conditional statements, which is your answer to Q4.(a).
- - Folder **Q5**: The design with loop partitioning, unrolling and array partitioning, which is your answer to Q5.(a).
- - Folder **Q6**: Your design with the highest throughput.
+ - Folder **Q5&6**: The design with loop partitioning, unrolling and array partitioning, which is your answer to Q6.(a).
+ - Folder **Q7**: Your design with the highest throughput.
 
 **Each folder** should contain the following files (and these files only), do **not** push the HLS project folder:
 
@@ -297,9 +297,9 @@ Your repo must contain a "fir" folder at the top level. This folder must be orga
 
 * Folder **Q4**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **Q5**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
+* Folder **Q5&6**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **Q6**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
+* Folder **Q7**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
