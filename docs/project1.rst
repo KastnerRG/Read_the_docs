@@ -97,7 +97,7 @@ This will create the HLS project folder. The synthesized RTL and reports will be
    
    ``make report``
 
-to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting.
+to copy the synthesis report to your source code directory. This file will contain the performance and resource usage that you will be reporting. Note that you only need to report the top level performance and resource consumption. For performance metrics, report the numbers under "Latency: Summary". You should report the max value (worst case scenario) if the min and max values are different. For resource consumption, only report the line "Used" under "Utilization Estimates:Summary".
 
 To delete the generated files for a clean start, do:
 
@@ -151,11 +151,11 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(a)** Try 3 combinations of variable bitwidths of your choice. Report the latency, II, and resource usage (BRAM, DSP, LUT, and FF) for each design in a table.
   - **(b)** What is the minimum bitwidth of ``coef_t`` and ``acc_t`` you can use without losing accuracy (i.e., your results still match the golden output)?
 
-* **Question 3 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage.
+* **Question 3 - Pipelining:** Pipelining increases throughput, typically at the cost of additional resources. The initiation interval (II) is an important design parameter that affects performance and resource usage. **Hint**: In this project, pipelining should be applied to the ``for`` loop instead of the entire function.
 
   - **(a)** Report the latency, II, and resource usage of your baseline FIR128 design.
   - **(b)** Turn off the automatic pipelining by using ``#pragma HLS pipeline off``. Report the latency, II, and resource usage of this design.
-  - **(c)** Manually pipeline the design using ``#pragma HLS pipeline II=<value>``. Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle until the throughput stays unchanged. Report the latency, II, and resource usage of each design in a table.
+  - **(c)** Manually pipeline the design using ``#pragma HLS pipeline II=<value>``. Explicitly set the loop initiation interval (II) starting at 1 and increasing in increments of 1 cycle until the throughput stays unchanged (and/or, reaches the same value of a non-pipelined design). Report the latency, II, and resource usage of each design in a table.
   - **(d)** At some point setting the II to a larger value does not make sense. What is that value in this example? 
   - **(e)** Vitis HLS may automatically pipeline a loop without any specific pragma. Based on your observation, what is the default II for a pipelined loop used in this case? 
 
@@ -177,7 +177,7 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
 
   Read the textbook about the memory partitioning parameters: block, cyclic, and complete. 
 
-  - **(a)** Explore array partitioning options for both arrays in your design from Question 4. Report the latency, II and resource usage. Which partition gives the best performance?
+  - **(a)** Explore array partitioning options for both arrays in your design from Question 5. Report the latency, II and resource usage. Which partition gives the best performance?
   - **(b)** Loop unrolling and memory partitioning are often used together. Try disabling loop unrolling or array partitioning. Report the effects.
 
 * **Question 7 - Best Design:** Combine any number of optimizations to get your best architecture. A design with high throughput will likely take a lot of resources. A design with small resource usage likely will have lower performance, but that could still be good enough depending the application goals.
@@ -267,8 +267,8 @@ You will need to submit one folder per question. Also, please keep a copy of the
  - Folder **Q2**: The design with minimal bitwidth of ``coef_t`` and ``acc_t``, which is your answer to Q2.(b).
  - Folder **Q3**: The design with pipeline turned off, which is your answer to Q3.(b).
  - Folder **Q4**: The automatically pipelined design without conditional statements, which is your answer to Q4.(a).
- - Folder **Q5**: The design with loop partitioning, unrolling and array partitioning, which is your answer to Q5.(a).
- - Folder **Q6**: Your design with the highest throughput.
+ - Folder **Q5&6**: The design with loop partitioning, unrolling and array partitioning, which is your answer to Q6.(a).
+ - Folder **Q7**: Your design with the highest throughput.
 
 **Each folder** should contain the following files (and these files only), do **not** push the HLS project folder:
 
@@ -297,9 +297,9 @@ Your repo must contain a "fir" folder at the top level. This folder must be orga
 
 * Folder **Q4**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **Q5**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
+* Folder **Q5&6**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
-* Folder **Q6**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
+* Folder **Q7**: fir.h | fir.cpp | fir_test.cpp| Makefile| __hls_config__.ini | fir_test.log | fir_csynth.rpt | fir.tcl
 
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
