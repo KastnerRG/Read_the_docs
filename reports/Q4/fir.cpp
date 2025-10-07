@@ -25,32 +25,28 @@ void fir (
 	// Write your code here
 	static
 		data_t shift_reg[N];
-		acc_t acc1;
-		acc_t acc2;
+		acc_t acc;
 		int i;
 
-	acc1 = 0;
-	acc2 = 0;
-	Shift_Accum_Loop1:
-	for (i = N - 1; i > (N - 1) / 2; i--){
-		#pragma HLS unroll factor=4
+	acc = 0;
+	// Q4a start
+	Shift_Accum_Loop:
+	for (i = N - 1; i >= 1; i--){
+		//#pragma HLS pipeline II=7
+		// if (i == 0) {
+		// 	acc += x * c[0];
+		// 	shift_reg[0] = x;
+		// } else {
 		shift_reg[i] = shift_reg[i - 1];
-		acc1 += shift_reg[i] * c[i];
+		acc += shift_reg[i] * c[i];
+		//}
 	}
 
-	Shift_Accum_Loop2:
-	for (i = (N - 1)/2; i >= 0; i--){
-		#pragma HLS unroll factor=4
-		if (i == 0) {
-		 	acc2 += x * c[0];
-		 	shift_reg[0] = x;
-		} else {
-		shift_reg[i] = shift_reg[i - 1];
-		acc2 += shift_reg[i] * c[i];
-		}
-	}
+	// Last iteration moved outside the loop
+	acc += x * c[0];
+	shift_reg[0] = x;
+	// Q4a end
 
-
-	*y = acc1+acc2;
+	*y = acc;
 }
 
