@@ -67,26 +67,32 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses.
 
-* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20 and describe the trends. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after some number of iterations? Can you precisely state when that occurs?
+For all questions below, use a CORDIC implementation using the data in `cordic/cordiccart2pol.cpp`.
 
+* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20.
+
+        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of rotations. Use 10, 12, 14, 16, 18, and 20 rotations.
+        * **b)** Plot throughput, resource usage, and RMSE as a function of the number of rotations. Clearly label your axes and each datapoint.
+        * **c)** At what number of rotations does the accuracy stop noticeably improving in the plot?
 
 * **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type(s)?
 
+        * **a)** We will use the `ap_fixed` arbitrary precision data type for each variable. At most how many integer bits are required for each variable? Remember that this is a signed type. (Hint: consider the range of values that each variable can take on. You can use the float implementation to help you determine this. Think of the range of values of the variables `r`, `x`, `y`, and `theta`). Give an answer for each variable. The testbench assumes that `x` and `y` are normalized between [-1, 1].
+        * **b)** Now that you have fixed the number of integer bits (use the largest number of integer bits determined in **2a**), experiment with the number of total bits for each variable. Use the same number of total bits for each variable. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of total bits. Use 8, 12, 16, 20, 24, and 32 total bits.
+        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of all internal values of your function (i.e. everything except for input variables `x`, `y` and output variables `r`, `theta`). At the start of the function, declare new variables `new_x` and `new_y` that are initialized to the inputs with these new datatypes and replace all occurrences of `x` and `y` with `new_x` and `new_y`. Also change the datatype of `x_initial`. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different types for the internal variables. Use 8, 12, 16, 20, 24, and 32 total bits.
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
-
+  
+        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of total bits. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
+        * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
 
 * **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
 
-  - How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
-
-  - The testbench assumes that the inputs x, y are normalized between [-1,1]. What is the minimum number of integer bits required for x and y? What is the minimal number of integer bits for the output data type R and Theta?
-
-  - Modify the number of fractional bits for the input and output data types. How does the precision of the input and output data types affect the accuracy (RMSE) results?
-
-  - What is the performance (throughput, latency) of the LUT implementation. How does this change as the input and output data types change?
-
-  - What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
+        * **a)** How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
+        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**).
+        * **c)** Plot all types of resource usage (LUTs, FFs, DSPs) as a function of the total number of bits for the data types. Make one plot for resource utilization
+        * **d)** Plot RMSE as a function of the total number of bits for the data types.
+        * **e)** What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
 
 
 6) Submission Procedure
