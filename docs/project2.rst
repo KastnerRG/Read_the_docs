@@ -32,7 +32,9 @@ The repo has a number of subfolders and files related to the project. This conta
 
         - cordiccart2pol_test.cpp - test bench
 
-        - script.tcl - Use this to create your project
+        - Makefile - Use this just like in Project 1
+          
+        - __hls_config\__.ini - HLS configuration file
 
 * HLS\/cordic_LUT folder:
 
@@ -42,7 +44,9 @@ The repo has a number of subfolders and files related to the project. This conta
 
         - cordiccart2pol_test.cpp - test bench
 
-        - script.tcl - Use this to create your project
+        - Makefile - Use this just like in Project 1
+          
+        - __hls_config\__.ini - HLS configuration file
 
 * Demo folder:
 
