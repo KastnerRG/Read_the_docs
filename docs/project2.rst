@@ -69,7 +69,7 @@ Your report should answer the following questions. Make it very clear where you 
 
 For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` unless otherwise indicated.
 
-* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20.
+* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
         * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of rotations. Use 10, 12, 14, 16, 18, and 20 rotations.
         * **b)** Plot throughput, resource usage, and RMSE as a function of the number of rotations. Clearly label your axes and each datapoint.
@@ -89,7 +89,7 @@ For all questions below, use a CORDIC implementation using the starter code in `
 * **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
 
         * **a)** How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
-        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**).
+        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**). Use 5, 6, 7, 8, 9, and 10 total bits.
         * **c)** Plot all types of resource usage (LUTs, FFs, DSPs) as a function of the total number of bits for the data types. Make one plot for resource utilization
         * **d)** Plot RMSE as a function of the total number of bits for the data types.
         * **e)** What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
@@ -102,21 +102,23 @@ You must submit your code (and only your code, not other files). Your code shoul
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to the structure in other projects):
+Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows
 
 * **Report.pdf**
 
-* Folder **cordic_baseline**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
 
-* Folder **cordic_optimized1**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_optimized2**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* ...
+* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 8.rpt)
 
 * Folder **Demo**: Cordic.ipynb | .bit | .hwh
+
+* **Note**: The names should be self explanatory, they correspond to the question you are answering. **1a** should be a FP implementation, **2b** should be a fixed point implementation with all variables sharing one type, **2b** should be a fixed point implementation with two separate types, **3a** should be a fixed point implementation without multiplication or division.
 
 * **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
 
