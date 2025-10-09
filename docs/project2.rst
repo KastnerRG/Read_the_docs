@@ -110,21 +110,21 @@ Your repo must contain a folder named "cordic" at the top-level. This folder mus
 
 * **Report.pdf**
 
-* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
+* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
 
-* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt and .xml files (name them based on the number of total bits e.g. 8.rpt)
+* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 8.rpt)
 
 * Folder **Demo**: Cordic.ipynb | .bit | .hwh
 
 * **Note**: The names should be self explanatory, they correspond to the question you are answering. **1a** should be a FP implementation, **2b** should be a fixed point implementation with all variables sharing one type, **2b** should be a fixed point implementation with two separate types, **3a** should be a fixed point implementation without multiplication or division.
 
-* **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
+* **Note**: <report rpt> references the .rpt files in the /syn/report folder.
 
 * **Note**: Provide the architectures that you used to answer the questions.
 
@@ -137,6 +137,6 @@ Efficient solutions are generally important, the project is not focused on perfo
 
 In this project and in future projects, you may want to edit the testbench. If you make any edits, please **submit the altered testbench file** too, and explicitly state in your report what changes you made and why.
 
-**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput, resource usage, and accuracy for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput, resource usage, and accuracy for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
 
 **50 points:** Correct working project on PYNQ.
