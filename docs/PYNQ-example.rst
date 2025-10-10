@@ -115,13 +115,11 @@ Under **IP Integrator**, click on **Create Block Design**
 2.2) Import your design
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Under **Project Manager**, click on **IP Catalog**. Right click inside the newly open 'IP Catalog' tab and select **Add Repository**. In the open window navigate to your Vivado HLS project folder and select **<path_to_vivado_hls_folder>/hls/impl/ip/**
+Under **Project Manager**, click on **IP Catalog**. Right click inside the newly open 'IP Catalog' tab and select **Add Repository**. In the open window navigate to your Vitis HLS project folder and select **<path_to_vivado_hls_folder>/hls/impl/ip/**
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/14.png
 
-.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/15.png
-
-You can see **Mul_test** under **IP Catalog**.
+You can see **Mul** under **IP Catalog**.
 
 .. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/lab0_screenshot/16.png
 
