@@ -129,7 +129,7 @@ Click **Open block design**, then click **+**, add **Mul_test** IP block into ou
 
 The IP block will appear in the block diagram:
 
-..image:: ./image/lab0_screenshot/hls_ip.png
+.. image:: ./image/lab0_screenshot/hls_ip.png
 
 Note that there are no more wires called "in" or "out". Instead, there is a bus port named ``s_axi_control`` and `in` and `out` become addressable registers, as we set the interface through HLS pragmas. This AXI-Lite bus include all the hand-shaking signals and the actual data channels. You can expand the bus to see all the ports. 
 
