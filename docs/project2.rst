@@ -69,21 +69,21 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 5) Report
 ----------
 
-Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses.
+Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X.(a/b/c/...)** before your answer). Your report will be graded based on your responses.
 
 For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` unless otherwise indicated.
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
         * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 10, 12, 14, 16, 18, and 20 rotations.
-        * **b)** Plot throughput, resource usage, and RMSE as a function of the number of rotations. Clearly label your axes and each datapoint.
+        * **b)** Plot throughput, resource usage, and RMSE (theta and r on the same plot) as a function of the number of rotations. Clearly label your axes and each datapoint.
         * **c)** At what number of rotations does the accuracy stop noticeably improving in the plot?
 
 * **Question 2:** Another important design parameter is the data type of the variables.
 
         * **a)** We will use the `ap_fixed` arbitrary precision data type for each variable. At most how many integer bits are required for each variable? Remember that this is a signed type. (Hint: consider the range of values that each variable can take on. You can use the float implementation to help you determine this. Think of the range of values of the variables `r`, `x`, `y`, and `theta`). Give an answer for each variable. The testbench assumes that `x` and `y` are normalized between [-1, 1].
         * **b)** Now that you have fixed the number of integer bits (use the largest number of integer bits determined in **2a**), experiment with the number of total bits for each variable. Use the datatype for each variable. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Create one plot each for resource utilization and RMSE vs total bits. Use 8, 12, 16, 20, 24, and 32 total bits.
-        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of **only** the CORDIC rotation tables (`Kvalues` and angles). Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 4, 8, 12, 16, 20, and 32 total bits. Also plot RMSE as a function of the total number of bits for the data type.
+        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of **only** the CORDIC rotation tables (`Kvalues` and angles). Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 4, 8, 12, 16, 20, and 32 total bits. Also plot RMSE (one plot) as a function of the total number of bits for the data type.
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide?
   
