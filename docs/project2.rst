@@ -141,4 +141,4 @@ In this project and in future projects, you may want to edit the testbench. If y
 
 **50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure. In all plots clearly label your axes and each datapoint.
 
-**50 points:** Correct working project on PYNQ.
+**50 points:** Correct working project on PYNQ & video with date/time and showing your logged in GitHub account.
