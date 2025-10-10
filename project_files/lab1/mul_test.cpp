@@ -23,6 +23,7 @@ int main(
   mul(&y, x);
   if(y!=2*x){
     cout << "Test Failed: output(" << y << ") is not equal to 2x" << x << endl;
+    return 1;
   }else{
           cout << "Test Passed" << endl;
   }
