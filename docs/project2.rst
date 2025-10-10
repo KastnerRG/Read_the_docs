@@ -75,20 +75,20 @@ For all questions below, use a CORDIC implementation using the starter code in `
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
-        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of rotations. Use 10, 12, 14, 16, 18, and 20 rotations.
+        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 10, 12, 14, 16, 18, and 20 rotations.
         * **b)** Plot throughput, resource usage, and RMSE as a function of the number of rotations. Clearly label your axes and each datapoint.
         * **c)** At what number of rotations does the accuracy stop noticeably improving in the plot?
 
 * **Question 2:** Another important design parameter is the data type of the variables.
 
         * **a)** We will use the `ap_fixed` arbitrary precision data type for each variable. At most how many integer bits are required for each variable? Remember that this is a signed type. (Hint: consider the range of values that each variable can take on. You can use the float implementation to help you determine this. Think of the range of values of the variables `r`, `x`, `y`, and `theta`). Give an answer for each variable. The testbench assumes that `x` and `y` are normalized between [-1, 1].
-        * **b)** Now that you have fixed the number of integer bits (use the largest number of integer bits determined in **2a**), experiment with the number of total bits for each variable. Use the same number of total bits for each variable. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of total bits. Use 8, 12, 16, 20, 24, and 32 total bits.
-        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of all internal values of your function (i.e. everything except for input variables `x`, `y` and output variables `r`, `theta`). At the start of the function, declare new variables `new_x` and `new_y` that are initialized to the inputs with these new datatypes and replace all occurrences of `x` and `y` with `new_x` and `new_y`. Also change the datatype of `x_initial`. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different types for the internal variables. Use 8, 12, 16, 20, 24, and 32 total bits.
+        * **b)** Now that you have fixed the number of integer bits (use the largest number of integer bits determined in **2a**), experiment with the number of total bits for each variable. Use the datatype for each variable. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Create one plot each for resource utilization and RMSE vs total bits. Use 8, 12, 16, 20, 24, and 32 total bits.
+        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of **only** the CORDIC rotation tables (`Kvalues` and angles). Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 4, 8, 12, 16, 20, and 32 total bits. Also plot RMSE as a function of the total number of bits for the data type.
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide?
   
-        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. You should have at least 6 different designs with different numbers of total bits. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
-        * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
+        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
+        * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation that compares these results to the results from **2b**. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
 
 * **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
 
@@ -102,11 +102,13 @@ For all questions below, use a CORDIC implementation using the starter code in `
 6) Submission Procedure
 -------------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and *.tcl) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and Makefile/*.ini files) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
 Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows
+
+For the PYNQ demo, you must submit a short video of the demo running on the PYNQ board. The video should show your Jupyter notebook running along with some window on the computer screen that identifies the date and time (e.g. system tray) and something that identifies you (e.g. proving you are logged into your GitHub account). You can use any screen recording software you wish (or even a phone camera). The video doesn't need to be longer than 1 minute. You may upload the video to Youtube (unlisted or not) or Google Drive/OneDrive with a link that is viewable by @ucsd.edu email address. Provide a link to that youtube video in your README.md file in the GitHub repo.
 
 * **Report.pdf**
 
@@ -137,6 +139,6 @@ Efficient solutions are generally important, the project is not focused on perfo
 
 In this project and in future projects, you may want to edit the testbench. If you make any edits, please **submit the altered testbench file** too, and explicitly state in your report what changes you made and why.
 
-**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput, resource usage, and accuracy for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure. In all plots clearly label your axes and each datapoint.
 
 **50 points:** Correct working project on PYNQ.
