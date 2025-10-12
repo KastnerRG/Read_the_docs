@@ -33,24 +33,24 @@ void fir (
 	// #pragma HLS array_partition variable=shift_reg factor=2 block
 	// #pragma HLS array_partition variable=y factor=2 block
 
-	// #pragma HLS array_partition variable=shift_reg factor=2 cyclic
-	// #pragma HLS array_partition variable=y factor=2 cyclic
-	// #pragma HLS pipeline II=1
-	#pragma HLS array_partition variable=shift_reg complete
-	#pragma HLS array_partition variable=y complete
+	#pragma HLS array_partition variable=shift_reg factor=2 cyclic
+	#pragma HLS array_partition variable=y factor=2 cyclic
+
+	// #pragma HLS array_partition variable=shift_reg complete
+	// #pragma HLS array_partition variable=y complete
 	acc = 0;
 	// Q5)
 	Shift_Loop:
-	for (i = N - 1; i > 0; i--){
-		// #pragma HLS pipeline II=1
-		#pragma HLS unroll 
+	for (i = N - 1; i >= 1; i--){
+		//#pragma HLS pipeline II=1
+		//#pragma HLS unroll factor=4
 		shift_reg[i] = shift_reg[i - 1];
 	}
 
 	Accum_Loop:
-	for (i = N - 1; i > 0; i--){
-		// #pragma HLS pipeline II=1
-		#pragma HLS unroll 
+	for (i = N - 1; i >= 1; i--){
+		//#pragma HLS pipeline II=1
+		//#pragma HLS unroll factor=4
 		acc += shift_reg[i] * c[i];
 	}
 

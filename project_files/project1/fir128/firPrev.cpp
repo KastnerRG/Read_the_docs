@@ -23,41 +23,34 @@ void fir (
 	coef_t c[N] = {10, 11, 11, 8, 3, -3, -8, -11, -11, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -10, -11, -11, -8, -3, 3, 8, 11, 11, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 8, 3, -3, -8, -11, -11, -10, -10, -10, -10, -10, -10, -10, -10, -11, -11, -8, -3, 3, 8, 11, 11, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 8, 3, -3, -8, -11, -11, -10, -10, -10, -10, -10, -10, -10, -10, -11, -11, -8, -3, 3, 8, 11, 11, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 	
 	// Write your code here
-	
 	static
-	data_t shift_reg[N];
-	acc_t acc;
-	int i;
-	
-	// Q6
-	// #pragma HLS array_partition variable=shift_reg factor=2 block
-	// #pragma HLS array_partition variable=y factor=2 block
+		data_t shift_reg[N];
+		acc_t acc1;
+		acc_t acc2;
+		int i;
 
-	// #pragma HLS array_partition variable=shift_reg factor=2 cyclic
-	// #pragma HLS array_partition variable=y factor=2 cyclic
-	// #pragma HLS pipeline II=1
-	#pragma HLS array_partition variable=shift_reg complete
-	#pragma HLS array_partition variable=y complete
-	acc = 0;
-	// Q5)
-	Shift_Loop:
-	for (i = N - 1; i > 0; i--){
-		// #pragma HLS pipeline II=1
-		#pragma HLS unroll 
+	acc1 = 0;
+	acc2 = 0;
+	Shift_Accum_Loop1:
+	for (i = N - 1; i > (N - 1) / 2; i--){
+		#pragma HLS unroll factor=4
 		shift_reg[i] = shift_reg[i - 1];
+		acc1 += shift_reg[i] * c[i];
 	}
 
-	Accum_Loop:
-	for (i = N - 1; i > 0; i--){
-		// #pragma HLS pipeline II=1
-		#pragma HLS unroll 
-		acc += shift_reg[i] * c[i];
+	Shift_Accum_Loop2:
+	for (i = (N - 1)/2; i >= 0; i--){
+		#pragma HLS unroll factor=4
+		if (i == 0) {
+		 	acc2 += x * c[0];
+		 	shift_reg[0] = x;
+		} else {
+		shift_reg[i] = shift_reg[i - 1];
+		acc2 += shift_reg[i] * c[i];
+		}
 	}
 
-	// Q4a) Last iteration moved outside the loop
-	acc += x * c[0];
-	shift_reg[0] = x;
 
-	*y = acc;
+	*y = acc1+acc2;
 }
 
