@@ -30,14 +30,14 @@ void fir (
 	int i;
 	
 	// Q6
-	#pragma HLS array_partition variable=shift_reg factor=2 block
-	#pragma HLS array_partition variable=c factor=2 block
+	// #pragma HLS array_partition variable=shift_reg factor=2 block
+	// #pragma HLS array_partition variable=y factor=2 block
 
 	// #pragma HLS array_partition variable=shift_reg factor=2 cyclic
-	// #pragma HLS array_partition variable=c factor=2 cyclic
+	// #pragma HLS array_partition variable=y factor=2 cyclic
 	// #pragma HLS pipeline II=1
 	//#pragma HLS array_partition variable=shift_reg complete
-	//#pragma HLS array_partition variable=c complete
+	//#pragma HLS array_partition variable=y complete
 	acc = 0;
 	// Q5)
 	Shift_Loop:
@@ -53,10 +53,6 @@ void fir (
 		#pragma HLS unroll 
 		acc += shift_reg[i] * c[i];
 	}
-
-	//Try shift reg complete since need read and write same cycle?
-	// C can be whatever?
-
 
 	// Q4a) Last iteration moved outside the loop
 	acc += x * c[0];
