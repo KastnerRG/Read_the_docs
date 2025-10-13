@@ -48,9 +48,25 @@ def parse_fir_report(file_path):
 
     return results
 
+def calculate_throughput(est_clock_ns, interval_cycles):
+    if est_clock_ns and interval_cycles:
+        return 1000 / (est_clock_ns * interval_cycles)
+    return None
+
 if __name__ == "__main__":
     report_path = "fir_csynth.rpt"  # Replace with actual path if needed
     parsed = parse_fir_report(report_path)
     print("\n")
     for key, value in parsed.items():
         print(f"{key}: {value}")
+
+    # Compute and print throughput
+    est_clk = parsed.get("Estimated Clock Period (ns)")
+    interval = parsed.get("Interval max (cycles)")
+    throughput = calculate_throughput(est_clk, interval)
+
+    print("=== Throughput Estimate ===")
+    if throughput:
+        print(f"Throughput: {throughput:.2f} MHz")
+    else:
+        print("Throughput: Could not compute (missing data)")
