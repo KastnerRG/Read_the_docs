@@ -71,7 +71,7 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X.(a/b/c/...)** before your answer). Your report will be graded based on your responses.
 
-For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` (which contains skeleton code, refer to Chapter 3 to implement the CORDIC algorithm) unless otherwise indicated.
+For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` (which contains skeleton code, refer to Chapter 3 to implement the CORDIC algorithm) unless otherwise indicated (Question 4).
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
@@ -90,7 +90,7 @@ For all questions below, use a CORDIC implementation using the starter code in `
         * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
         * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation that compares these results to the results from **2b**. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
 
-* **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
+* **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation. This is in `cordic_LUT/cordiccart2pol.cpp`.
 
         * **a)** How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
         * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**). Use 5, 6, 7, 8, 9, and 10 total bits.
