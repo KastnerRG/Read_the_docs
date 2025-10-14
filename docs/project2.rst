@@ -71,11 +71,11 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 
 Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X.(a/b/c/...)** before your answer). Your report will be graded based on your responses.
 
-For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` unless otherwise indicated.
+For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` (which contains skeleton code, refer to Chapter 3 to implement the CORDIC algorithm) unless otherwise indicated.
 
 * **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
-        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 10, 12, 14, 16, 18, and 20 rotations.
+        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 10, 12, 14, 16, 18, and 20 rotations. You will need to add additional values to the table for 18 and 20 rotations. Chapter 3 has enough information to help you derive the additional angles and Kvalues.
         * **b)** Plot throughput, resource usage, and RMSE (theta and r on the same plot) as a function of the number of rotations. Clearly label your axes and each datapoint.
         * **c)** At what number of rotations does the accuracy stop noticeably improving in the plot?
 
