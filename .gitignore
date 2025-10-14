@@ -2,8 +2,8 @@
 **/*.proj/
 **/*.comp/
 **/logs/
-*.rpt
-*.tcl
-*.log
+project_files/*/*/*.rpt
+project_files/*/*/*.tcl
+project_files/*/*/*.log
 out.dat
 workspace/

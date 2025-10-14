@@ -28,34 +28,31 @@ void fir (
 	data_t shift_reg[N];
 	acc_t acc;
 	int i;
-	#pragma HLS pipeline II=1
+	
 	// Q6
 	// #pragma HLS array_partition variable=shift_reg factor=2 block
 	// #pragma HLS array_partition variable=c factor=2 block
 
 	// #pragma HLS array_partition variable=shift_reg factor=2 cyclic
 	// #pragma HLS array_partition variable=c factor=2 cyclic
-	
+	// #pragma HLS pipeline II=1
 	#pragma HLS array_partition variable=shift_reg complete
 	#pragma HLS array_partition variable=c complete
 	acc = 0;
-	// Q5) Loop partitioning
+	// Q5)
 	Shift_Loop:
 	for (i = N - 1; i > 0; i--){
 		// #pragma HLS pipeline II=1
-		// #pragma HLS unroll // Q5c) Loop unrolling
-		#pragma HLS unroll factor=64
+		#pragma HLS unroll 
 		shift_reg[i] = shift_reg[i - 1];
-		acc += shift_reg[i] * c[i];
 	}
 
-	// Accum_Loop:
-	// for (i = N - 1; i > 0; i--){
-	// 	// #pragma HLS pipeline 
-	// 	// #pragma HLS unroll // Q5c) Loop unrolling
-	// 	#pragma HLS unroll factor=64
-	// 	acc += shift_reg[i] * c[i];
-	// }
+	Accum_Loop:
+	for (i = N - 1; i > 0; i--){
+		// #pragma HLS pipeline II=1
+		#pragma HLS unroll 
+		acc += shift_reg[i] * c[i];
+	}
 
 	//Try shift reg complete since need read and write same cycle?
 	// C can be whatever?

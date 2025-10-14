@@ -86,6 +86,7 @@ report: hls
 clean:
 	rm -rf *.o *.log *.bin *.tcl *.comp *.rpt logs hls out.dat
 
+
 .PHONY: clean hls test report
 
 # Prevent make from deleting the .bin intermediate files
