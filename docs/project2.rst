@@ -32,7 +32,9 @@ The repo has a number of subfolders and files related to the project. This conta
 
         - cordiccart2pol_test.cpp - test bench
 
-        - script.tcl - Use this to create your project
+        - Makefile - Use this just like in Project 1
+          
+        - __hls_config\__.ini - HLS configuration file
 
 * HLS\/cordic_LUT folder:
 
@@ -42,7 +44,9 @@ The repo has a number of subfolders and files related to the project. This conta
 
         - cordiccart2pol_test.cpp - test bench
 
-        - script.tcl - Use this to create your project
+        - Makefile - Use this just like in Project 1
+          
+        - __hls_config\__.ini - HLS configuration file
 
 * Demo folder:
 
@@ -65,54 +69,64 @@ The final task integrates a CORDIC IP core onto the programmable logic (PL) usin
 5) Report
 ----------
 
-Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X** before your answer). Your report will be graded based on your responses.
+Your report should answer the following questions. Make it very clear where you are answering each of these questions (e.g., make each question a header or separate section or copy/paste the questions in your report and add your answer or simply put a bold or emphasized **Question X.(a/b/c/...)** before your answer). Your report will be graded based on your responses.
 
-* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20 and describe the trends. What happens to performance? Resource usage? Accuracy of the results? Why does the accuracy stop improving after some number of iterations? Can you precisely state when that occurs?
+For all questions below, use a CORDIC implementation using the starter code in `cordic/cordiccart2pol.cpp` (which contains skeleton code, refer to Chapter 3 to implement the CORDIC algorithm) unless otherwise indicated (Question 4).
 
+* **Question 1:** One important design parameter is the number of rotations. Change that number to numbers between 10 and 20. This question should use a floating point implementation of CORDIC.
 
-* **Question 2:** Another important design parameter is the data type of the variables. Is one data type sufficient for every variable or is it better for each variable to have a different type? Does the best data type depend on the input data?  What is the best technique for the designer to determine the data type(s)?
+        * **a)** Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 10, 12, 14, 16, 18, and 20 rotations. You will need to add additional values to the table for 18 and 20 rotations. Chapter 3 has enough information to help you derive the additional angles and Kvalues.
+        * **b)** Plot throughput, resource usage, and RMSE (theta and r on the same plot) as a function of the number of rotations. Clearly label your axes and each datapoint.
+        * **c)** At what number of rotations does the accuracy stop noticeably improving in the plot?
 
+* **Question 2:** Another important design parameter is the data type of the variables.
 
-* **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide? How does the resource usage change? Performance? Accuracy?
+        * **a)** We will use the `ap_fixed` arbitrary precision data type for each variable. At most how many integer bits are required for each variable? Remember that this is a signed type. (Hint: consider the range of values that each variable can take on. You can use the float implementation to help you determine this. Think of the range of values of the variables `r`, `x`, `y`, and `theta`). Give an answer for each variable. The testbench assumes that `x` and `y` are normalized between [-1, 1].
+        * **b)** Now that you have fixed the number of integer bits (use the largest number of integer bits determined in **2a**), experiment with the number of total bits for each variable. Use the datatype for each variable. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Create one plot each for resource utilization and RMSE vs total bits. Use 8, 12, 16, 20, 24, and 32 total bits.
+        * **c)** Use `ap_fixed<16,3>` for all variables. Now experiment with changing the type of **only** the CORDIC rotation tables (`Kvalues` and angles). Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 4, 8, 12, 16, 20, and 32 total bits. Also plot RMSE (one plot) as a function of the total number of bits for the data type.
 
+* **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide?
+  
+        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
+        * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation that compares these results to the results from **2b**. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
 
-* **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation.
+* **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation. This is in `cordic_LUT/cordiccart2pol.cpp`.
 
-  - How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
-
-  - The testbench assumes that the inputs x, y are normalized between [-1,1]. What is the minimum number of integer bits required for x and y? What is the minimal number of integer bits for the output data type R and Theta?
-
-  - Modify the number of fractional bits for the input and output data types. How does the precision of the input and output data types affect the accuracy (RMSE) results?
-
-  - What is the performance (throughput, latency) of the LUT implementation. How does this change as the input and output data types change?
-
-  - What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
+        * **a)** How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
+        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**). Use 5, 6, 7, 8, 9, and 10 total bits.
+        * **c)** Plot all types of resource usage (LUTs, FFs, DSPs) as a function of the total number of bits for the data types. Make one plot for resource utilization
+        * **d)** Plot RMSE as a function of the total number of bits for the data types.
+        * **e)** What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
 
 
 6) Submission Procedure
 -------------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and *.tcl) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
+You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (*.cpp, *.h files, and Makefile/*.ini files) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well. You can assume that we have correctly set up the design environment (cordic_test.cpp, cordic.h, etc.).
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
-Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows (similar to the structure in other projects):
+Your repo must contain a folder named "cordic" at the top-level. This folder must be organized as follows
+
+For the PYNQ demo, you must submit a short video of the demo running on the PYNQ board. The video should show your Jupyter notebook running along with some window on the computer screen that identifies the date and time (e.g. system tray) and something that identifies you (e.g. proving you are logged into your GitHub account). You can use any screen recording software you wish (or even a phone camera). The video doesn't need to be longer than 1 minute. You may upload the video to Youtube (unlisted or not) or Google Drive/OneDrive with a link that is viewable by @ucsd.edu email address. Provide a link to that youtube video in your README.md file in the GitHub repo.
 
 * **Report.pdf**
 
-* Folder **cordic_baseline**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
 
-* Folder **cordic_optimized1**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_optimized2**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* ...
+* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | <report rpt/xml>
+* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 8.rpt)
 
 * Folder **Demo**: Cordic.ipynb | .bit | .hwh
 
-* **Note**: <report rpt/xml> references both the .rpt and the .xml files in the /syn/report folder. Please include both.
+* **Note**: The names should be self explanatory, they correspond to the question you are answering. **1a** should be a FP implementation, **2b** should be a fixed point implementation with all variables sharing one type, **2b** should be a fixed point implementation with two separate types, **3a** should be a fixed point implementation without multiplication or division.
+
+* **Note**: <report rpt> references the .rpt files in the /syn/report folder.
 
 * **Note**: Provide the architectures that you used to answer the questions.
 
@@ -125,6 +139,6 @@ Efficient solutions are generally important, the project is not focused on perfo
 
 In this project and in future projects, you may want to edit the testbench. If you make any edits, please **submit the altered testbench file** too, and explicitly state in your report what changes you made and why.
 
-**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: by copying the questions into the report before answering them, or placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. Report the throughput, resource usage, and accuracy for each design you discuss in your report, and include the files for these designs in your submission. We encourage the use of tables for stating results and the changes that produced them, and figures to draw comparisons between different designs. Use these figures and tables in your discussion. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure.
+**50 points:** Response to the questions in your report. Your answers should be well written and clearly delineated (for example: placing each question under a separate subheading). Additional points (up to 20) will be subtracted for poor formatting and/or answers that are hard to understand. Examples of issues include any spelling errors, multiple/egregious grammar errors, poor presentation of results, lack of written comparison of the results, etc. A well-written report is informative but not overly verbose. You will be deducted points if you do not follow the instructions on directory naming and file structure. In all plots clearly label your axes and each datapoint.
 
-**50 points:** Correct working project on PYNQ.
+**50 points:** Correct working project on PYNQ & video with date/time and showing your logged in GitHub account.

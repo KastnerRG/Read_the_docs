@@ -76,7 +76,7 @@ We have provided a Makefile and config.ini file to facilitate the C simulation a
 
 It is necessary to have the `scripts <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/scripts>`_ folder ready. 
 
-Line 34 of the ``Makefile`` reference the  scripts folder. You might need to change it to your local path. The scripts will read the ``__hls_config__.ini`` file to generate the .tcl script for Vitis HLS.
+Line 44 of the ``Makefile`` reference the  scripts folder. You might need to change it to your local path. The scripts will read the ``__hls_config__.ini`` file to generate the .tcl script for Vitis HLS.
 
 Vitis HLS will then read the generated ``.tcl`` scripts to create project components and run C simulation and synthesis.
 

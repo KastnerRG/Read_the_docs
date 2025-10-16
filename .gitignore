@@ -7,3 +7,4 @@ project_files/*/*/*.tcl
 project_files/*/*/*.log
 out.dat
 workspace/
+project_*/
