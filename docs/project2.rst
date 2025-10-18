@@ -87,7 +87,7 @@ For all questions below, use a CORDIC implementation using the starter code in `
 
 * **Question 3:** What is the effect of using simple operations (add and shift) in the CORDIC as opposed to multiply and divide?
   
-        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison.
+        * **a)** Now that you are using `ap_fixed` for all variables, change your implementation to use simple operations like add and shift instead of multiply and divide. Create a table that shows resource usage, throughput, latency, and RMSE for each design you create. Use 8, 12, 16, 20, 24, and 32 total bits. Use the implementation from **2b** as a baseline for comparison. **You may keep the final multiplication to account for gain**.
         * **b)** Create 3 separate plots for LUTs, DSPs, and FFs for each of these data types and each implementation that compares these results to the results from **2b**. Clearly label your axes and each datapoint. Use a different color/line style for each implementation.
 
 * **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation. This is in `cordic_LUT/cordiccart2pol.cpp`.
