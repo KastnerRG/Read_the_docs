@@ -8,15 +8,25 @@ TOP = cordiccart2pol
 
 USE_VITIS=1
 
-ifeq ($(USE_VITIS),1)
-VITIS_COMPILER := $(shell dirname $(shell which vitis_hls))
-
-VHLS = $(VITIS_COMPILER)/../../../Vitis_HLS/2024.1
-HLS_COMPILER=vitis-run --mode hls --tcl 
-else
-VHLS := $(shell vivado_hls -r)
-HLS_COMPILER=vivado_hls -f
-endif
+ ifeq ($(USE_VITIS),1)
+ 
+ VITIS_HLS_PATH := $(shell which vitis_hls 2>/dev/null)
+ ifeq ($(strip $(VITIS_HLS_PATH)),)
+   $(error Could not find "vitis_hls" on PATH.)
+ endif
+ VITIS_COMPILER := $(shell dirname "$(VITIS_HLS_PATH)")
+ 
+ ifneq (,$(findstring 2024.2,$(VITIS_HLS_PATH)))
+   VHLS := $(VITIS_COMPILER)/../../../Vitis/2024.2
+ else
+   VHLS := $(VITIS_COMPILER)/../../../Vitis_HLS/2024.1
+ endif
+ 
+ HLS_COMPILER=vitis-run --mode hls --tcl 
+ else
+ VHLS := $(shell vivado_hls -r)
+ HLS_COMPILER=vivado_hls -f
+ endif
 
 
 EXAMPLES_CPP = $(shell ls *_test.cpp)

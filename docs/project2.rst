@@ -112,21 +112,21 @@ For the PYNQ demo, you must submit a short video of the demo running on the PYNQ
 
 * **Report.pdf**
 
-* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
+* Folder **cordic_1a**: cordiccart2pol.h | cordiccart2pol.cpp | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of rotations e.g. 10.rpt, 12.rpt, etc.)
 
-* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_2b**: cordiccart2pol.h | cordiccart2pol.cpp | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_2c**: cordiccart2pol.h | cordiccart2pol.cpp | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
+* Folder **cordic_3a**: cordiccart2pol.h | cordiccart2pol.cpp | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 16.rpt, 18.rpt, etc.)
 
-* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | script.tcl | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 8.rpt)
+* Folder **cordic_LUT**: cordiccart2pol.h | cordiccart2pol.cpp | cordiccart2pol_test.cpp | Makefile | __hls_config\__.ini | subfolder reports with clearly named .rpt files (name them based on the number of total bits e.g. 8.rpt)
 
 * Folder **Demo**: Cordic.ipynb | .bit | .hwh
 
 * **Note**: The names should be self explanatory, they correspond to the question you are answering. **1a** should be a FP implementation, **2b** should be a fixed point implementation with all variables sharing one type, **2b** should be a fixed point implementation with two separate types, **3a** should be a fixed point implementation without multiplication or division.
 
-* **Note**: <report rpt> references the .rpt files in the /syn/report folder.
+* **Note**: <report rpt> references the output of `Make report`. You will have to rename it.
 
 * **Note**: Provide the architectures that you used to answer the questions.
 
