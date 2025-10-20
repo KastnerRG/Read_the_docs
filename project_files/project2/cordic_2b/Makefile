@@ -83,14 +83,12 @@ test: $(EXAMPLES_LOG)
 report: hls
 	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR) || true
 	python parse.py 
-	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR)/../../../cordic_3a/reports/
+	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR)/../../../cordic_2b/reports/
 
 clean:
 	rm -rf *.o *.log *.bin *.tcl *.comp *.rpt logs hls out.dat
 
 run: clean test hls report
-
-run2: hls report
 
 
 .PHONY: clean hls test report

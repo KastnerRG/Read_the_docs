@@ -3,7 +3,7 @@
 #include "ap_fixed.h"
 
 #define NO_ITER 16
-#define NUM_BITS 32 // 2b and 3a
+#define NUM_BITS 16 // 2b
 #define ROT_BITS 16 // 2c
 
 typedef int   coef_t;

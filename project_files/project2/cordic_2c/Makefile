@@ -83,7 +83,7 @@ test: $(EXAMPLES_LOG)
 report: hls
 	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR) || true
 	python parse.py 
-	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR)/../../../cordic_3a/reports/
+	cp -f $(TOP).comp/hls/syn/report/$(TOP)_csynth.rpt $(CURDIR)/../../../cordic_2c/reports/
 
 clean:
 	rm -rf *.o *.log *.bin *.tcl *.comp *.rpt logs hls out.dat
