@@ -31,10 +31,9 @@ void init_cart2pol_LUTs(data_t my_LUT_th[LUT_SIZE], data_t my_LUT_r[LUT_SIZE])
 
 void cordiccart2pol(data_t x, data_t y, data_t * r,  data_t * theta)
 {
-#ifdef SYNTHESIS
-	data_t my_LUT_th[LUT_SIZE] = {0}; //  use dummy values to get synthesis results (major hack). Would need to explicitly set these to pass co-sim
-	data_t my_LUT_r[LUT_SIZE] = {0};  // I'm sure there is a better way to do this. 
-#endif
+	static data_t my_LUT_th[LUT_SIZE];
+	static data_t my_LUT_r[LUT_SIZE];
+	init_cart2pol_LUTs(my_LUT_th, my_LUT_r);
 
 	// Convert the inputs to internal fixed point representation
 	ap_fixed<W, I, AP_RND, AP_WRAP, 1> fixed_x = x;
