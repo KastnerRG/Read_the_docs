@@ -93,7 +93,7 @@ For all questions below, use a CORDIC implementation using the starter code in `
 * **Question 4:** These questions all refer to the lookup table (LUT) implementation of the Cartesian to Polar transformation. This is in `cordic_LUT/cordiccart2pol.cpp`.
 
         * **a)** How does the input data type affect the size of the LUT? How does the output data type affect the size of the LUT? Precisely describe the relationship between input/output data types and the number of bits required for the LUT.
-        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**). Use 5, 6, 7, 8, 9, and 10 total bits.
+        * **b)** Create a table of resource usage, throughput, latency, and error vs number of total bits. Use the same number of integer bits for all data types (as in **2b**). Use 4, 5, 6, 7, 8 total bits (8 bits will take some time to synthesize).
         * **c)** Plot all types of resource usage (LUTs, FFs, DSPs) as a function of the total number of bits for the data types. Make one plot for resource utilization
         * **d)** Plot RMSE as a function of the total number of bits for the data types.
         * **e)** What advantages/disadvantages of the CORDIC implementation compared to the LUT-based implementation?
