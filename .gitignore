@@ -8,3 +8,4 @@
 out.dat
 workspace/
 project_*/
+!project_files/

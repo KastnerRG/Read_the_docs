@@ -4,7 +4,7 @@
 #
 
 # select the HLS compiler to use (vivado_hls or vitis)
-TOP = mul
+TOP = axis_fp_example
 # -------------------------------------------------------
 
 USE_VITIS=1
@@ -89,7 +89,7 @@ report: hls
 $(CURDIR)/export_$(TOP).tcl:
 	@{ \
 	    echo "open_component $(TOP).comp"; \
-		echo "export_design -format ip_catalog -rtl verilog -version 1.0 -ipname mul "; \
+		echo "export_design -format ip_catalog -rtl verilog -version 1.0 -ipname $(TOP) "; \
 		echo "exit"; \
 	} > $(CURDIR)/export_$(TOP).tcl
 
