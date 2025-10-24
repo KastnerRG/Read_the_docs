@@ -1,48 +1,66 @@
 Lab: Axistream Multiple DMAs (axis)
 ===================================
 
-Simple streaming example with multiple inputs
+Simple streaming example with multiple inputs & outputs
 *********************************************
-In this example we learn how to use `Xilinx AXI_DMA <https://docs.xilinx.com/r/en-US/pg021_axi_dma>`_ to create a simple floating point adder with two streaming inputs and one streaming output.
+In this example we learn how to use `Xilinx AXI_DMA <https://docs.xilinx.com/r/en-US/pg021_axi_dma>`_ to create a simple floating point adder with two streaming inputs and two streaming outputs.
 
 1) Vitis HLS: Generating RTL code from C/C++ code
 --------------------------------------------------
 
-The first section is to create a project in Vitis HLS, synthesize your code, and generate RTL.
 
-1.1) Download code and create a Vivado HLS project
-#################################################
+Find the code `here <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp>`_. The main body of our design is a simple floating point adder and subtractor. 
 
-Download the code from `here <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp>`_ 
+We use AXI-Stream, the most common on-chip communication protocol for high performance accelerator design in SoC environments. Unlike the AXI-Lite interfaces, AXI-Stream interfaces do not have address channels, and are designed for high throughput data transfer. 
 
-Follow the same procedure of creating a Vitis HLS project as `lab 1: MMIO <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ You can either use .tcl script or manually add the source files and specify top function.
-
-Now you can open your project in Vivado HLS. It should look like this:
-
-.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/0_header.jpg
-
-.. image:: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/1_dut.jpg
-
-Check `here <https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/AXI4-Stream-Interfaces>`_ for the AXI4-Stream interface and how the AXI4-Stream protocol works. In this example, we conform to the more formal version of AXIS interface required by Vitis, which requires a special data type ``hls::axis``. We define our custom data type ``ap_axis<32,2,5,6>`` as ``transPkt``. 32 means we the data we are sending is of 32 bit wide, the rest are for side channels and is not very useful for this project, it is safe to set them to other numbers, e.g. 1,1,1.
-
-However the ``ap_axis`` struct requires the data gets transferred to be signed intergers (and ``ap_axiu`` requires unsigned integers). Since we are using floating points, we use ``union`` data type to allow the tool to interpret our data as integers when interacting with AXIS interfaces, without corrupting our floating point data. Read more about the union data type `here <https://docs.xilinx.com/r/en-US/ug1399-vitis-hls/Unions>`_ from the Xilinx user manual. `Here <https://support.xilinx.com/s/question/0D52E00007DnHxuSAF/streaming-floats-with-tlast?language=en_US>`_ is an example design that uses AXI4-Stream with floating point data.
-
-Using the union data type improperly can lead to various problems. Keep in mind that the union data type does not do type casting, it simply interprete the same bits with differet protocols. In this lab, we do all the arithmetics in floating point, and the "integer version" of the data is used for interaction with the AXIS only, and make no sense if used for arithmetic operations.
-
-Another issue worth noticing is that we are reusing the input AXIS ``transPkt`` for output. The ``transPkt`` contains not only the data but also the necessary side channels. In other projects, you might choose not to reuse the packets, in these cases, you have to manually take care of the side channels, especially ``last``, ``strb`` and ``keep``. Here is an example from another project,
+Defining the interfaces is a bit more complicated here. First we have to define a transaction packet that can be understood by AXI-Stream protocol,
 
 .. code-block :: c++
 
-	out_pkt.data = out_imag_buffer.idata;
-	out_pkt.keep = in_Pkt.keep;
-	out_pkt.strb = in_Pkt.strb;
-	out_pkt.last = (i==LEN-1)?1:0;
+	typedef hls::axis<float, 0,0,0> transPkt;
 
 
-1.2) Generate RTL code and export it
-####################################
+``float`` is our data type, the other parameters are for side channels, it's safe to just leave them as 0 for this lab.
 
-Follow the same step of running C synthesis and exporting RTL as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_.
+
+The interfaces to our top function must be defined as AXI-Stream channels:
+
+.. code-block :: c++
+
+	void axis_fp_example(
+		hls::stream<transPkt>&A, 
+		hls::stream<transPkt>&B, 
+		hls::stream<transPkt>&C,
+		hls::stream<transPkt>&D
+	);
+
+From a software perspective, you can think of these interfaces as FIFO queues with unkown depth. You can read from an input stream when there is a packet available, and write to an output stream when you have the data ready. For example,
+
+.. code-block :: c++
+
+	Apkt = A.read();
+	Bpkt = B.read();
+	Adata = Apkt.data;
+	Bdata = Bpkt.data;
+
+
+.. code-block :: c++
+
+	Apkt.data = Cdata;
+	Bpkt.data = Ddata;
+	// Re-use the input packets to preserve side channel signals
+	C.write(Apkt);
+	D.write(Bpkt);
+
+
+The most important optional side channel signal is ``last`` (named ``TLAST`` in actual hardware). This indicates the end of a stream of data. In most cases people hope the accelerator to keep processing data until the end of the input stream. In this lab, we set the program ``for`` loop to run indefinitely until it receive the last input packet, which comes with a high ``last`` signal.
+
+It's important to handle the side channels properly to prevent DMAs from hanging. One easy way is to just re-use the input packets for output as shown above.
+
+``axis_fp_example_test.cpp`` is a simple software testbench. Note that since both ``read()`` and ``write()`` functions are blocking, we have to write all the input data to the input stream before calling the function. This is different from hardware execution.
+
+As we did in lab1, use command ``make ip`` to run C simulation, C synthesis, and export RTL as an IP core for Vivado.
+
 
 2) Vivado: Generating bitstream from RTL code
 ---------------------------------------------
@@ -60,15 +78,17 @@ Select **RTL Project** and check **Do specify not sources** at this time.
 
 Select **xc7z020clg400-1** for your part
 
-Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vitis HLS project > solution1 > impl > ip** and select it:
+Under **Flow Navigator**, click on **IP Catalog**. Right click on the opened window and select **Add Repository**. Navigate to your **Vitis HLS Component > hls > impl > ip** and select it:
 
-2.3) Add IPs to your design
+2.2) Add IPs to your design
 ###########################
 Under **Flow Navigator**, click on **Create Block Design**. Leave the design name as is (*design_1*). In the newly opened window you can add IPs by clicking on the plus sign.
 
 Add **ZYNQ7 Processing System** and our HLS ip core to your design:
 
-.. image :: https://bitbucket.org/repo/x8q9Ed8/images/3814633603-pynq6.png
+.. image :: image/axi_fp/ip.png
+
+Note that the input and output ports of our HLS IP are all AXI-Stream ports.
 
 Double click on **ZYNQ7 IP** to customize it. In the opened window, double click on **High Performance AXI 32b/64b Slave Parts**:
 
@@ -78,30 +98,27 @@ Select and check **S AXI HP0 interface**:
 
 .. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/2_zynq.jpg
 
-Add **AXI Direct Memory Access** to your design, you can rename the IPs if you prefer,
+Since AXI-Stream ports do not have address channels, we need to use AXI DMAs to tranfer data between our HLS IP and the DDR memory. One DMA can handle one read and one write channel. Therefore, we need to add 2 DMAs to our design. 
 
 .. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/3_add_dma.jpg
 
-Double click the DMA and change the following parameters: 1) uncheck **Enable Scatter Gather** Engine. 2) Change **Width of Buffer Length Register** to the maximum:
+Double click the DMA to configure: uncheck **Enable Scatter Gather** Engine. Both DMAs will need read and write channels.
 
-.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/4_dma_config0.jpg
+.. image :: image/axi_fp/dma.png
 
-Create another DMA, disable Scatter Gather Engine, and disable the write channel. The first DMA will be used for both read and write, but the second DMA will be used for read only, as there are 2 read ports but only 1 write port in our HLS IP.
 
 2.4) Manual connections
 #######################
 
-Maunally connect the following ports:
- 
-**example_0::A** to **axi_dma_0::M_AXIS_MM2S**
+AXI Stream ports need to be connected manually. We start from the ``M_AXIS_MM2S`` port of ``axi_dma_0``. This channel will **read** data from DDR memory and **send** to our HLS IP. Vivado will automatically show you the elegible ports to be connected to.
 
-.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/5_connect_axis.jpg
+.. image :: image/axi_fp/connecting.png
 
-**example_0::B** to **axi_dma_1::M_AXIS_MM2S**
+The ``S_AXIS_S2MM`` channels will **receive** data from our HLS IP and **write** to DDR memory. They should connected to the output ports. 
 
-**example_0::C** to **axi_dma_0::S_AXIS_S2MM**
+Complete all AXI-Stream connections as below:
 
-.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/6_connect_axis.jpg
+.. image :: image/axi_fp/connected.png
 
 2.5) Automatic connections
 ##########################
@@ -118,16 +135,16 @@ Now you can leave the rest of the connections to the tool. There should be a hig
 
 3. **IMPORTANT!** you have to click again on **Run Connection Automation**
 
-.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/9_connect_auto2.jpg
+.. image :: image/axi_fp/auto2.png
 
-At this point, your design should contain 2 AXI-interconnects. One of them connects the M_AXI port of the PS with the S_AXI_LITE ports of the 2 DMAs and our HLS IP. This enables the PS to configure these IPs:
+At this point, your design should contain 2 AXI-interconnects. One of them connects the M_AXI port of the PS with the S_AXI_LITE ports of the 2 DMAs and our HLS IP. This enables the PS to configure these IPs. Your entire block diagram should look like this:
 
-.. image :: https://github.com/KastnerRG/Read_the_docs/raw/master/docs/image/dma2/10_axi_inter0.jpg
+.. image :: image/axi_fp/bd.png
 
 The other connect the M_AXI ports of the DMAs to the high performance S_AXI port(s) of the PS. DMAs use this channel to perform read and write with the memory.
 
 2.6) Generate bitstream
-#######################
+#########################
 
 Follow the same step as as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_.
 
@@ -135,16 +152,16 @@ Follow the same step as as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYN
 
 2. Validate your design: **Tools > Validate Design**
 
-3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.**
+3. In Sources, right click on **design_1**, and **Create HDL Wrapper**. Now you should have **design_1_wrapper.v**
 
 4. Generate bitstream by clicking on **Generate Bitstream** in **Flow Navigator**
 
-Keep your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper.bit** and **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** for Pynq implementation. You should make sure that the bitstream and the hardware handoff files have the same name.
+After the above steps finish, keep your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper.bit** and **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** for Pynq implementation. You should make sure that the bitstream and the hardware handoff files have the same name.
 
 You can close and exit from Vivado tool.
 
 3) Host program
----------------
+------------------
 
 In this section we use Python to test our design.
 
@@ -156,15 +173,15 @@ Create a new folder in your PYNQ board and move both bitstream and hardware hand
 3.2) Python code
 ################
 
-Create a new Jupyter notebook and run code in ``./simple_add_float.ipynb`` under the `source code folder <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp>`_ to test your design.
+Create a new Jupyter notebook and run code in ``./simple_add_float.ipynb`` under the `source code folder <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp/demo>`_ to test your design.
 
 You should be able to see all the components of the overlay by checking its IP dictionary
 .. code-block :: python3
 
-	ol = Overlay("./design_1_demofp.bit")
+	ol = Overlay("./design_1.bit")
 	ol.ip_dict
 
-In this lab, we are only using ``axi_dma_0``, ``axi_dma_1`` and ``example_0``, our HLS IP.
+In this lab, we are only using ``axi_dma_0``, ``axi_dma_1`` and our HLS IP.
 
 You can check the register map of the HLS IP, and start the IP by writing to the corresponding register:
 .. code-block :: python3
@@ -177,12 +194,14 @@ It is recommended to start the receive process first.
 
 .. code-block :: python3
 
-	dma0_recv.transfer(output_buffer)
+	dma0_recv.transfer(output_buffer0)
+	dma1_recv.transfer(output_buffer1)
 	dma0_send.transfer(input_buffer0)
 	dma1_send.transfer(input_buffer1)
 	dma0_send.wait()
 	dma1_send.wait()
 	dma0_recv.wait()
+	dma1_recv.wait()
 
 Check the register map of DMAs to find out whether the transfer has finished without error, which is very useful in debugging.
 
