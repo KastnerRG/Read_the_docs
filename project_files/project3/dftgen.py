@@ -48,7 +48,8 @@ if __name__ == "__main__":
     header_string = dft_coefficients_to_c(cos_coeff, sin_coeff)
     print(header_string)
     
-    filename = f"coefficients{args.size}.h"
+    filename = f"coefficients{args.size}_2D.h"
     filepath = f"{args.directory}/{filename}"
     os.makedirs(args.directory, exist_ok=True)
-    
+    with open(filepath, "w") as f:
+        f.write(header_string)
