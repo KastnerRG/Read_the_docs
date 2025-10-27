@@ -176,6 +176,7 @@ Create a new folder in your PYNQ board and move both bitstream and hardware hand
 Create a new Jupyter notebook and run code in ``./simple_add_float.ipynb`` under the `source code folder <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/axis_fp/demo>`_ to test your design.
 
 You should be able to see all the components of the overlay by checking its IP dictionary
+
 .. code-block :: python3
 
 	ol = Overlay("./design_1.bit")
@@ -184,6 +185,7 @@ You should be able to see all the components of the overlay by checking its IP d
 In this lab, we are only using ``axi_dma_0``, ``axi_dma_1`` and our HLS IP.
 
 You can check the register map of the HLS IP, and start the IP by writing to the corresponding register:
+
 .. code-block :: python3
 
 	CONTROL_REGISTER = 0x0
