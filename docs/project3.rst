@@ -6,6 +6,9 @@
 Project: Discrete Fourier Transform (DFT)
 ============================================
 
+This assignment is not yet released
+------------------------------------
+
 1) Introduction
 ---------------
 
