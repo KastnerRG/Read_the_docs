@@ -1,17 +1,5 @@
 Project: AMD AI-Engine (AIE) Accelerator
-=====================================
-
-0) Setup
----------------
-
-1. Login to `waiter.ucsd.edu` via RDP (Remote Desktop). Make sure you are in "UCSD Protected" network or connected to UCSD VPN.
-2. Open the browser and go to `http://149.199.80.97:8002`
-3. Type your username, select `mlir-aie` from the dropdown, and click `Start`.
-4. Open a terminal, navigate to `mlir-aie/programming_examples/basic/matrix_multiplication/whole_array/` and run `make run` to run the example.
-
-
-1) Introduction to AI Engine (AIE)
-----------------------------------
+=========================================
 
 AIE is a new kind of accelerator architecture developed by AMD that is distinct from CPUs, GPUs and FPGAs. It is designed to be a highly efficient and flexible architecture for accelerating a wide range of workloads. The AIE architecture is based on a dataflow model of computation, where data flows through a network of processing elements (PEs) that are connected by a network-on-chip (NoC). 
 
@@ -21,30 +9,88 @@ An AI Engine has 24 tiles arranged as 6 rows and 4 columns as shown. Each column
 
 There are three main components to programming an AI Engine:
 
-1. **Host code (test.cpp):** This runs on the host CPU outside the AI Engine and is responsible for setting up the AI Engine, creating example data, transferring data & instructions to and from the AI Engine, and verifying the results.
-2. **Dataflow description (aie.py):** This Python script describes the dataflow within the AI engine. This is acheived by configuring high level primitives such as object fifos, to move data between tiles of the AI Engine. This script also points to the kernel function that will be executed in the VLIW processors of each tile.
-3. **Kernel functions (aie_kernels/aie2/mm.cc):** These are C++ functions that are compiled to run in the VLIW processors that make the compute tiles of the AI Engine.
+1. **Host code:** This runs on the host CPU outside the AI Engine and is responsible for setting up the AI Engine, creating example data, transferring data & instructions to and from the AI Engine, and verifying the results.
+2. **Graph code:** This Python script describes the dataflow within the AI engine. This is acheived by configuring high level primitives such as object fifos, to move data between tiles of the AI Engine. This script also points to the kernel function that will be executed in the VLIW processors of each tile.
+3. **Kernel functions:** These are functions that are compiled to run in the VLIW processors that make the compute tiles of the AI Engine.
 
-`Quick Reference to architecture manual, programming guide, API & intrinsic documentation. <https://www.xilinx.com/htmldocs/xilinx2022_2/aiengine_programming_guide/aie_programming_guide.html>`_
+`Quick Reference to architecture manual, programming guide, API & intrinsic documentation. <https://docs.amd.com/r/en-US/ug1079-ai-engine-kernel-coding>`_
+
+There are multiple ways to specify the host, graph and kernel codes. 
+
+1. C++ for host, graph and kernel code - legacy flow found in some `AIE documentation <https://docs.amd.com/r/en-US/ug1079-ai-engine-kernel-coding>`_
+2. C++ for host and kernel code, Python for graph code - older MLIR-AIE/IRON flow. You may see this in some of the examples in this repository.
+3. Python for host and graph code, C++/Python for kernel code - new IRON flow. 
+
+The new IRON flow aims to increase developer productivity by providing high level abstractions in Python to control the data movement between tiles of the AI engines. A single-source IRON program has the following parts:
 
 
+0) Setup
+---------------
 
-2) Matrix Multiplication Tutorial
+1. Make sure you are connected to the campus network in one of the following ways:
+
+  * On-campus ethernet
+  * On-campus WiFi: **UCSD_PROTECTED** (not UCSD_GUEST)
+  * UCSD VPN using Cisco Secure Client `[More Info] <https://support.eng.ucsd.edu/how-to-guides/new-cisco-secure-client>`_
+
+2. Open a browser and visit `aupcloud.io/aipc-13 <https://aupcloud.io/aipc-13>`_
+3. Sign in with the unique token given to you
+4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
+
+
+1) Mini Tutorial
 ------------------------------------
 
-Read and understand the following:
+Complete the `mini tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_guide/mini_tutorial>`_ to get familiar with the IRON programming flow. The tutorial can be summarized as follows:
 
-0. `Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/whole_array>`_
-1. `Host code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
-2. `Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/aie2.py>`_
-3. `Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L42>`_
+1. Routing data through shim tiles & mem tiles: 
 
-4) Further Explanation of Whole Array Matrix Multiplication
-------------------------------------------------------------
+  1. Worker -> DDR
+  2. DDR -> Worker -> DDR
+  3. DDR -> Mem tile -> DDR (of.forward())
+  4. DDR -> Mem tile -> Worker -> DDR
+  5. DDR -> Mem tile -> Worker -> Mem tile -> DDR
 
-.. image:: image/whole_array_design.png
+2. Splitting and joining object fifos. 
 
-The above image describes the whole array matrix multiplication design for the Ryzen AI device. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C. 
+  1. DDR -> Worker -> DDR
+  2. DDR -> OF -> 3x(OFs -> Workers -> OFs) -> OF -> DDR
+
+3. Processing multiple inputs and outputs
+
+  1. DDR (A) -> Worker (C=A) -> DDR (A)
+  2. DDR (A,B) -> Worker (C=A+B) -> DDR (C)
+
+4. Runtime Parameters & synchronization
+
+5. TensorAccessPatterns (TAPs)
+
+  0. DDR -> Worker -> DDR
+  1. Write a TensorAccessPattern (TAP) on ``.fill()`` such that the output matches the ref
+  2. replace tap with ``simple_tiler()``
+  3. Observe a new pattern
+
+
+2) Single Core Matrix Multiplication
+------------------------------------
+
+0. `Single core Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/single_core>`_
+1. `Single core Test code (C++) <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
+2. `Single core Host + Dataflow code (IRON) <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/single_core/single_core_iron.py>`_
+3. `Single core Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L27>`_
+
+The following image shows the dataflow for the single core matrix multiplication:
+
+.. image:: image/single_core.png
+
+
+To run the example
+   ``cd /notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/single_core``
+
+   ``make clean && make run use_iron=True``
+
+
+The dataflow in the Matrix Multiplication design is as follows. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C.
 
 
 +---------------+---------------+---------------------+---------------------------+
@@ -62,9 +108,7 @@ The above image describes the whole array matrix multiplication design for the R
 
 We first specify the dimensions `M`, `K`, `N` for the input matrices `A` (`MxK`), and `B` (`KxN`), and the output matrix `C` (`MxN`), as well as their data type. To enable efficient computation, our design will split large input matrices into smaller sub-matrix blocks on two levels; we thus also define the sizes of those sub-matrices. 
 
-At the first level, the constants `m`, `k`, and `n` define the size of the submatrices processed by each AIE core. This is done in the `dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/aie2.py>`_, especially in the `aie.runtime_sequence()` operation, which describes the host-to-memory-tile transfer.
-
-At the second level, we further subdivide using smaller sizes `r`, `s` and `t` -- these are the sizes of required by the vector computation intrinsics of the AIEs. We leverage the multidimensional DMAs available in AIEs, through a higher level abstraction (object fifo), to automatically tile and load at this level. 
+At the first level, the constants `m`, `k`, and `n` define the size of the submatrices processed by each AIE core. This is done in the dataflow code.At the second level, we further subdivide using smaller sizes `r`, `s` and `t` -- these are the sizes of required by the vector computation intrinsics of the AIEs. We leverage the multidimensional DMAs available in AIEs, through a higher level abstraction (object fifo), to automatically tile and load at this level. 
 
 The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
@@ -84,7 +128,6 @@ For matrix A (`memA_fifos`), this transformation is expressed using the followin
 (Note that `//` denotes integer floor-division in Python.)
 
     
-
 * (m // r, r * k),   # Pair 1
 * (k // s, s),       # Pair 2
 * (r, k),            # Pair 3
@@ -116,40 +159,35 @@ The following image describes the pattern of the object fifos for matrix A:
 
 
 
-
-
-5) Single Core Matrix Multiplication
--------------------------------------
-
-This is a simplified version of the matrix multiplication example that uses only a single core of the AI Engine. The host code is the same. The kernel code is the naive matmul code in C++. This can be used to understand the concepts further.
-
-0. `Single core Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/single_core>`_
-1. `Single core Host code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
-2. `Single core Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/single_core/aie2.py>`_
-3. `Single core Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L27>`_
-
-The following image shows the dataflow for the single core matrix multiplication:
-
-.. image:: image/single_core.png
-
-
-
-6) Questions
+3) Questions
 -------------
 
-1. Explain the two levels of tiling used in the matrix multiplication design for the Ryzen AI device. Why are both levels of tiling necessary, and what advantages do they provide?
+1. In Exercise 5.3 of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
 
-2. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
+2. Explain the two levels of tiling used in the matrix multiplication design. Why are both levels of tiling necessary, and what advantages do they provide?
 
-3. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
+3. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
 
-4. Why are different tiling dimensions (r, s, t) chosen for vector intrinsic instructions? Explain how these values are related to the hardware requirements and how they enhance efficiency.
+4. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
 
-5. Change the parameters: (m, k, n, r, s, t) in the code, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Analyze your observations.
+5. Why are different tiling dimensions (r, s, t) chosen for vector intrinsic instructions? Explain how these values are related to the hardware requirements and how they enhance efficiency.
+
+6. Change the parameters: (m, k, n, r, s, t) in the code, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
+
+7. Move drain() above fill(). Does the code stall? Explain why.
 
 
-7) Project
--------------
+5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
+------------------------------------------------------------------------------
+
+0. `Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/whole_array>`_
+1. `Host code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
+2. `Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/aie2.py>`_
+3. `Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L42>`_
+
+.. image:: image/whole_array_design.png
+
+The above image describes the whole array matrix multiplication design for the Ryzen AI device. 
 
 The whole array design is efficient for matrices that are much bigger than the 4x4 AI Engine array. However, if the N dimension is small, it would be wasteful to pad the matrix with zeros. The following is a design that would be more efficient for small N dimensions:
 
