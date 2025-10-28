@@ -90,13 +90,22 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 Questions 1-5 refers to DFT 32.
 
-* **Question 1:** What changes would this code require if you were to use a custom CORDIC similar to what you designed for Project: CORDIC? Compared to a baseline code with HLS math functions for cos() and sin(), would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance? Note that you do not need to implement the CORDIC in your code, we are just asking you to discuss potential tradeoffs that would be possible if you used a CORDIC that you designed instead of the one from Xilinx.
-
-* **Question 2:** Rewrite the code to eliminate these math function calls (i.e. `cos()` and `sin()`) by utilizing a table lookup. How does this change the throughput and resource utilization? What happens to the table lookup when you change the size of your DFT?
-
-* **Question 3:** Modify the DFT function interface so that the input and outputs are stored in separate arrays. Modify the testbench to accommodate this change to DFT interface. How does this affect the optimizations that you can perform? How does it change the performance? And how does the resource usage change? **You should use this modified interface for the remaining questions.**
-
-* **Question 4: Loop Optimizations:** Examine the effects of loop unrolling and array partitioning on the performance and resource utilization. What is the relationship between array partitioning and loop unrolling? Does it help to perform one without the other? Plot the performance in terms of number of DFT operations per second (throughput) versus the unroll and array partitioning factor. Plot the same trend for resources (showing LUTs, FFs, DSP blocks, BRAMs). What is the general trend in both cases?  Which design would you select? Why?
+* **Question 1: DFT32 Baseline** Implement a baseline HLS implementation for `dft_32`. You may use the `cos()` and `sin()` functions from the math library.
+	* **(a)** Now think about if you were to use a custom CORDIC algorithm to calculate `cos()` and `sin()` (you don't have to implement this). Would changing the accuracy of your CORDIC core make the DFT hardware resource usage change? How would it affect the performance?
+* **Question 2: DFT32 Table Lookup** Rewrite the code to eliminate these math function calls (i.e. `cos()` and `sin()`) by utilizing a table lookup. Use the provided `*_2D.h` file.
+	* **(a)** Make a table that shows the change in resource utilization and performance with between Question 1 and 2.
+* **Question 3: DFT32 Interface Change** Modify the DFT function interface so that the input and outputs are stored in separate arrays. Modify the testbench to accommodate this change to DFT interface.
+	* **(a)** Why did we do this? Does it affect what optimizations you can perform?
+	* **(b)** Make a table that shows the resource utilization and performance from before and after this change.
+	* **(c)** Describe the results you see.
+* **Question 4: DFT32 Array Partitioning** Experiment with array partitioning. Partition all arrays in your implementation. For now, make sure that your loops are being pipelined with a target II of 1.
+	* **(a)** Use block partitioning. Try factors of 1 (i.e. without partitioning), 2, 4, 8, 16, and 32. Make a table showing the achieved II, resource utilization, and performance of each of these implementations.
+	* **(b)** Plot resource utilization vs the partition factor on one plot.
+	* **(c)** Plot throughput & latency vs the partition factor on separate plots.
+* **Question 5: DFT32 Loop Unrolling** Experiment with loop unrolling. Unroll the inner loop only. Use the best array partitioning from Question 4.
+	* **(a)** Try factors of 1 (i.e. without unrolling), 2, 4, 8, 16, and 32. Make a table showing the achieved II, resource utilization, and performance of each of these implementations.
+	* **(b)** Plot resource utilization vs the partition factor on one plot.
+	* **(c)** Plot throughput & latency vs the partition factor on separate plots.
 
 Questions 6-9 refers to DFT 1024.
 
