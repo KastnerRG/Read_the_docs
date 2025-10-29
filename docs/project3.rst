@@ -148,37 +148,37 @@ Your repo must contain a folder named "dft" at the top-level. This folder must b
 * **Report.pdf**
 
 * Folder **Q1**
-  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
-  * Reports subfolder
-    * .rpt files with intelligible naming (i.e. ``baseline.rpt``)
+  - coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat
+  - Reports subfolder
+    - .rpt files with intelligible naming (i.e. ``baseline.rpt``)
 
 * Folder **Q2**
-  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
-  * Reports subfolder
-    * .rpt files with intelligible naming (i.e. ``table_lookup.rpt``)
+  - coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat
+  - Reports subfolder
+    - .rpt files with intelligible naming (i.e. ``table_lookup.rpt``)
 
 * Folder **Q3**
-  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
-  * Reports subfolder
-    * .rpt files with intelligible naming (i.e. ``interface_change.rpt``)
+  - coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat
+  - Reports subfolder
+    - .rpt files with intelligible naming (i.e. ``interface_change.rpt``)
 
 * Folder **Q4**
-  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
-  * Reports subfolder
-    * .rpt files with intelligible naming (i.e. ``array_partition_1.rpt``)
+  - coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat
+  - Reports subfolder
+    - .rpt files with intelligible naming (i.e. ``array_partition_1.rpt``)
 
 * Folder **Q5**
-  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
-  * Reports subfolder
-    * .rpt files with intelligible naming (i.e. ``loop_unrolling_2.rpt``)
+  - coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat
+  - Reports subfolder
+    - .rpt files with intelligible naming (i.e. ``loop_unrolling_2.rpt``)
 
-* Folder **Q6b** Your answer to question **6.(b)**: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dtf.tcl | dft_csynth.rpt
+* Folder **Q6b** Your answer to question **6.(b)**: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft_csynth.rpt
 
-* Folder **Q7** Your answer to question **7**: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dtf.tcl | dft_csynth.rpt
+* Folder **Q7** Your answer to question **7**: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft_csynth.rpt
 
-* Folder **Q8** Your best DFT1024 design: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dtf.tcl | dft_csynth.rpt
+* Folder **Q8** Your best DFT1024 design: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft_csynth.rpt
 
-* Folder **Q9** Your DFT1024 with streaming interfaces and streaming testbench: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dtf.tcl | dft_csynth.rpt
+* Folder **Q9** Your DFT1024 with streaming interfaces and streaming testbench: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft_csynth.rpt
 
 * Folder **Demo**: ``DFT.ipynb`` | ``dft.bit`` | ``dft.hwh``
 
