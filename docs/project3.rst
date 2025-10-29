@@ -46,11 +46,11 @@ Demo folder contains one file:
 3) Project Goal
 ---------------
 
-You should modify the code to create a number of different architectures that perform tradeoffs between performance and resource utilization. For dft_256_precomputed and dft_1024_precomputed designs, you need to use precomputed values from coefficients256.h and coefficients1024.h
+You should modify the code to create a number of different architectures that perform tradeoffs between performance and resource utilization. For dft_32_precomputed and dft_1024_precomputed designs, you need to use precomputed values from coefficients32_2D.h and coefficients1024.h
 
-For 256-point and 1024-point DFTs, you will create a report describing how you generated these different architectures (code restructuring, pragmas utilized, etc.). For each architecture you should provide its results including the resource utilization (BRAMs, DSP48, LUT, FF), and performance in terms of throughput (number of DFT operations/second), latency, clock cycles, clock frequency (which is fixed to 10 ns). You can do most of the design space exploration on the 256 point DFT. You should pick your “best” 256 architecture and synthesize that as a 1024 DFT.
+For 32-point and 1024-point DFTs, you will create a report describing how you generated these different architectures (code restructuring, pragmas utilized, etc.). For each architecture you should provide its results including the resource utilization (BRAMs, DSP48, LUT, FF), and performance in terms of throughput (number of DFT operations/second), latency, clock cycles, clock frequency (which is fixed to 10 ns).
 
-The 8 and 32 point folders are provided for your convenience. If you would like, you can do some of your initial design space optimization on these smaller architectures. But it is not necessary to use these at all.
+The 8 and 256 point folders are provided for your convenience. If you would like, you can do some of your initial design space optimization on these smaller architectures. But it is not necessary to use these at all.
 
 The key in this project is to understand the tradeoffs between loop optimizations (unrolling and pipelining) and data partitioning. Therefore you should focus on these optimizations.
 
@@ -63,7 +63,7 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * You may want to start implementing DFT by using HLS math functions for cos() and sin(). Then you can optimize your code based on this baseline code.
 
-* There are many different ways to generate the DFT coefficients including using HLS math functions. These can be implemented as constants when the DFT size is fixed. We have given you the coefficients for both 256 (in coefficients256.h) and 1024 (in coefficients1024.h). They each have two constant arrays, sin_table and cos_table. You can use these coefficient arrays directly as memories in your architectures. You are also free to create your own arrays using a different structure (e.g., 2D array, reordering of elements in the given 1D arrays, etc.). Or you could dynamically generate the coefficients.
+* There are many different ways to generate the DFT coefficients including using HLS math functions. These can be implemented as constants when the DFT size is fixed. We have given you the coefficients for both 32 (in coefficients32_2D.h) and 1024 (in coefficients1024.h). They each have two constant arrays, sin_table and cos_table. You can use these coefficient arrays directly as memories in your architectures. You are also free to create your own arrays using a different structure (e.g., 2D array, reordering of elements in the given 1D arrays, etc.). Or you could dynamically generate the coefficients.
 
 * There is significant amount of parallelism that can be exploited by (partially) unrolling the for-loops. Pipelining these (partially) unrolled for-loops should lead to higher throughputs. However, you may find that pipelining does not make a difference once you have loop unrolling and array partitioning handled well. When you try to incorporate pipelining, the major issue you will face is data dependencies. You can read more about them `here <https://docs.xilinx.com/r/2022.2-English/ug1399-vitis-hls/Managing-Pipeline-Dependencies>`_. Since you have some data dependencies, accessing memory will be the major overhead. This is why your estimated clock period may go beyond 10ns; to perform some task within N clock cycles each clock cycle needs to be high for the task to be completed. For example, at clock cycle 1 you might write a[1] and at clock cycle 2 you will need to read a[1] which would not be ready as the operation might take 4 clock cycles. This is a data dependency issue which is very common in pipelining. This is why pipelining does not seem to work well even though your loop unrolling and partitioning is the best you can find. Another reason is that the overhead might not be because of the task (it might take only 1 clock cycle), but the memory it is stored in might have only 2 ports or 1 port and this would mean that the memory cannot be accessed in parallel. You can see the critical path in the Synthesis log itself. Otherwise you can open the Analysis view and view which operation(s) or data path is critical and causing this delay, which in turn limits the performance of pipelining. There is a slightly different conversation `here <https://support.xilinx.com/s/question/0D52E00006hpjyTSAQ/pipeline-and-unroll-in-the-for-loop-which-is-better?language=en_US>`_ that may be helpful to read through. This paragraph might make more sense after you complete the project, so be sure to read through it again when you're finalizing your report.
 
@@ -73,17 +73,17 @@ The key in this project is to understand the tradeoffs between loop optimization
 
 * There are more efficient methods for performing the DFT that exploit the symmetries of the Fourier constants, e.g., the Fast Fourier Transform (FFT). **Do not use these symmetries.** In other words, treat this like a matrix-vector multiply with unknown matrix values. The :doc:`Fast Fourier Transform (FFT) Project <project4>` uses an FFT architecture that provides substantial improvement to this DFT architecture.
 
-* You do not need to report your optimizations for your 8 point and 32 point DFT; these folders are provided for your convenience. Since these will very likely synthesize much faster than larger point DFT functions, it may be useful to use these to debug your code or in your initial design space exploration.
+* You do not need to report your optimizations for your 8 point and 256 point DFT; these folders are provided for your convenience. Since these will very likely synthesize much faster than larger point DFT functions, it may be useful to use these to debug your code or in your initial design space exploration.
 
 * Your report must explicitly state how you calculated the throughput results.
 
 * Here are samples for throughput results achieved by previous students for the DFT project:
 
-		+-----------------------------+--------+---------+
-		| Examples of max throughput: | DFT256 | DFT1024 |
-		+-----------------------------+--------+---------+
-		| Hz                          | 1370   | 89      |
-		+-----------------------------+--------+---------+
+		+-----------------------------+---------+
+		| Examples of max throughput: | DFT1024 |
+		+-----------------------------+---------+
+		| Hz                          | 89      |
+		+-----------------------------+---------+
 
 5) Questions
 ------------
@@ -137,7 +137,7 @@ High Performance (HP) AXI ports can be accessed by multiple manager/subordinates
 7) Submission Procedure
 -----------------------
 
-You must submit your code (and only your code, not other files). Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (``*.cpp``, ``*.h`` files, and ``*.tcl``) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well.
+You must submit your code and .rpt files for each question. Your code should have everything in it so that we can synthesize it directly. This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to use what is provided (``*.cpp``, ``*.h`` files, and ``*.ini`` and ``Makefile``) and directly synthesize it. We must be able to only import your source file and directly synthesize it. If you change test benches to answer questions, please submit them as well.
 
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
 
@@ -147,13 +147,30 @@ Your repo must contain a folder named "dft" at the top-level. This folder must b
 
 * **Report.pdf**
 
-* Folder **dft256_baseline**
+* Folder **Q1**
+  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
+  * Reports subfolder
+    * .rpt files with intelligible naming (i.e. ``baseline.rpt``)
 
-* Folder **dft256_optimized1**
+* Folder **Q2**
+  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
+  * Reports subfolder
+    * .rpt files with intelligible naming (i.e. ``table_lookup.rpt``)
 
-* Folder **dft256_optimized2**
+* Folder **Q3**
+  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
+  * Reports subfolder
+    * .rpt files with intelligible naming (i.e. ``interface_change.rpt``)
 
-* ...
+* Folder **Q4**
+  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
+  * Reports subfolder
+    * .rpt files with intelligible naming (i.e. ``array_partition_1.rpt``)
+
+* Folder **Q5**
+  * coefficients32_2D.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dft.tcl
+  * Reports subfolder
+    * .rpt files with intelligible naming (i.e. ``loop_unrolling_2.rpt``)
 
 * Folder **Q6b** Your answer to question **6.(b)**: coefficients1024.h | dft.h | dft.cpp | dft_test.cpp | Makefile | __hls_config.ini | output.gold.dat | dtf.tcl | dft_csynth.rpt
 
