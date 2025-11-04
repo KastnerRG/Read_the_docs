@@ -25,7 +25,7 @@ Before you start, we strongly suggest you familiarize yourself with the high-lev
 
 * Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.amd.com/r/en-US/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
-You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS enviroment setup.
+You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS environment setup.
 
 
 
@@ -144,7 +144,7 @@ Please refer to Chapter 2 in the pp4fpga textbook before starting this assignmen
 
 Questions 2-7 refers to FIR128. You should have a functionally correct design before starting these questions.
 
-* **Question 2 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. There many different data types including floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
+* **Question 2 - Variable Bitwidths:** You can specify a precise data type for each variable in your design. There are many different data types including floating point, integer, fixed point, all with varying bitwidths and options. The data type provides a tradeoff between accuracy, resource usage, and performance. 
 
   Change the bitwidth of the variables inside the function body (namely ``coef_t`` and ``acc_t``) using the ``ap_int<>`` datatype.
 
@@ -171,7 +171,7 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(a)** Briefly describe the opportunity for loop partitioning in FIR128. Re-write the code to apply your idea.
   - **(b)** Compare the latency, II, and resource usage of the design with / without loop partitioning.
   - **(c)** Apply loop unrolling to the design with loop partitioning. Report the latency, II, and resource usage of this design.
-  - **(d)** What is the relationship between loop unrolling and pipelining? Can they be applied together and benefit the design? Justify you answer with experiments / references to past questions.
+  - **(d)** What is the relationship between loop unrolling and pipelining? Can they be applied together and benefit the design? Justify your answer with experiments / references to past questions.
 
 * **Question 6 - Memory Partitioning:** The storage of the arrays in memory plays an important role in area and performance. On one hand, you could put an array entirely in one memory (e.g., BRAM). But this limits the number of read and write accesses per cycle. Or you can divide the array into two or more memories to increase the number of ports. Or you could instantiate each variable as a register allowing simultaneous access to all the variables at every clock cycle.
 
