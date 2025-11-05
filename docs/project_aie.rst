@@ -87,7 +87,7 @@ The following image shows the dataflow for the single core matrix multiplication
 To run the example
    ``cd /notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/single_core``
 
-   ``make clean && make run use_iron=True``
+   ``make clean && make run use_iron=1``
 
 
 The dataflow in the Matrix Multiplication design is as follows. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C.
