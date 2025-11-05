@@ -33,8 +33,8 @@ The new IRON flow aims to increase developer productivity by providing high leve
   * On-campus WiFi: **UCSD_PROTECTED** (not UCSD_GUEST)
   * UCSD VPN using Cisco Secure Client `[More Info] <https://support.eng.ucsd.edu/how-to-guides/new-cisco-secure-client>`_
 
-2. Open a browser and visit `aupcloud.io/aipc-13 <https://aupcloud.io/aipc-13>`_
-3. Sign in with the unique token given to you
+2. Check the `UCSD_2025_Tokens.xlsx` spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
+2. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
 4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
 
 
@@ -164,17 +164,15 @@ The following image describes the pattern of the object fifos for matrix A:
 
 1. In Exercise 5.3 of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
 
-2. Explain the two levels of tiling used in the matrix multiplication design. Why are both levels of tiling necessary, and what advantages do they provide?
+2. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
 
-3. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
+3. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
 
-4. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
+4. Why are different tiling dimensions (r, s, t) chosen for vector intrinsic instructions? Explain how these values are related to the hardware requirements and how they enhance efficiency.
 
-5. Why are different tiling dimensions (r, s, t) chosen for vector intrinsic instructions? Explain how these values are related to the hardware requirements and how they enhance efficiency.
+5. Change the parameters: (m, k, n, r, s, t) in the code, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
 
-6. Change the parameters: (m, k, n, r, s, t) in the code, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
-
-7. Move drain() above fill(). Does the code stall? Explain why.
+6. Move drain() above fill(). Does the code stall? Explain why.
 
 
 5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
