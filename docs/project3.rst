@@ -126,7 +126,7 @@ Questions 6-9 refers to DFT 1024.
 6) PYNQ Demo
 ------------
 
-For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You need to follow the :doc:`Lab: Axistream Multiple DMAs <axidma2>` example, with the major difference being that you will have 2 inputs and 2 outputs instead of 2 inputs and 1 output. Therefore you will have to enable read and write for both the DMAs, which is different from the lab instructions.
+For this demo, your will create an IP for the DFT 1024, and run it from the Jupyter notebook using two DMAs. You should follow the :doc:`Lab: Axistream Multiple DMAs <axidma2>` example.
 
 Another point worth discussing here is why we use pointers for inputs and outputs, and why we have to post-increment the pointer manually (like we did in the multiple DMA lab) when we stream inputs and outputs, but why it is a bad idea to use pointers in your code. You cannot use pointers in HLS; pointers are dynamic memory and Vivado HLS will not be able to synthesize it since it is not a deterministic thing (datapath could change depending on inputs). Arrays, on the other hand, are fixed memory locations and therefore they can be synthesized to vectors in RTL. You can use pointers only as ports and even then you have to specify axistream, otherwise that will lead to synthesis issues as well.
 
