@@ -36,6 +36,7 @@ The new IRON flow aims to increase developer productivity by providing high leve
 2. Check the `UCSD_2025_Tokens.xlsx` spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
 2. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
 4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
+5. Copy the files from `AIE Project Directory <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project1>`_ to `notebooks/mlir-aie/myproject` directory in your AIE instance.
 
 
 1) Mini Tutorial
@@ -74,46 +75,23 @@ Complete the `mini tutorial <https://github.com/Xilinx/mlir-aie/tree/main/progra
 2) Single Core Matrix Multiplication
 ------------------------------------
 
-0. `Single core Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/single_core>`_
-1. `Single core Test code (C++) <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
-2. `Single core Host + Dataflow code (IRON) <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/single_core/single_core_iron.py>`_
-3. `Single core Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L27>`_
+To run the basic matrix multiplication:
+   ``cd /notebooks/mlir-aie/myproject``
+
+   ``python basic_mm.py``
+
 
 The following image shows the dataflow for the single core matrix multiplication:
 
 .. image:: image/single_core.png
 
 
-To run the example
-   ``cd /notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/single_core``
+How it works:
 
-   ``make clean && make run use_iron=1``
-
-
-The dataflow in the Matrix Multiplication design is as follows. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C.
-
-
-+---------------+---------------+---------------------+---------------------------+
-| Matrix        | Size          | Submatrix Size (1.) | Vector Intrinsic Size (2.)|
-+===============+===============+=====================+===========================+
-| `A` (Input)   | `M` x `K`     | `m` x `k`           | `r` x `s`                 |
-+---------------+---------------+---------------------+---------------------------+
-| `B` (Input)   | `K` x `N`     | `k` x `n`           | `s` x `t`                 |
-+---------------+---------------+---------------------+---------------------------+
-| `C` (Output)  | `M` x `N`     | `m` x `n`           | `r` x `t`                 |
-+---------------+---------------+---------------------+---------------------------+
-
-
-**Multiple levels of tiling (M,K,N) -> (m,k,n) -> (r,s,t)**
-
-We first specify the dimensions `M`, `K`, `N` for the input matrices `A` (`MxK`), and `B` (`KxN`), and the output matrix `C` (`MxN`), as well as their data type. To enable efficient computation, our design will split large input matrices into smaller sub-matrix blocks on two levels; we thus also define the sizes of those sub-matrices. 
-
-At the first level, the constants `m`, `k`, and `n` define the size of the submatrices processed by each AIE core. This is done in the dataflow code.At the second level, we further subdivide using smaller sizes `r`, `s` and `t` -- these are the sizes of required by the vector computation intrinsics of the AIEs. We leverage the multidimensional DMAs available in AIEs, through a higher level abstraction (object fifo), to automatically tile and load at this level. 
-
-The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
-
-.. image:: image/tiling.png
-
+* `r=2, s=8, t=8` are the intrinsic dimensions for the `MMUL` API used in the kernel (C++) code.
+* `m, k, n` are the dimensions of the matrices we want to multiply. We mulitply matrix `A` of size `m x k` with matrix `B` of size `k x n` to get output matrix `C` of size `m x n`.
+* `main()` function generates random input matrices, and a reference output matrix. It then calls the `matrix_multiplication_single_core` function. This compiles just-in-time (JIT) during the first call and executes.
+* The `matrix_multiplication_single_core` function sets up the dataflow through the AI engines via `ObjectFIFOs`, defines the kernel function and compute tile, then performs the runtime operations to transfer data to/from the AI engines and execute the kernel.
 
 **Vector intrinsic size: (r,s,t)**
 
@@ -122,9 +100,9 @@ Each compute core of the AI Engine is a VLIW vector processor. That is, it can p
 
 **Loading 2nd level tiles using object fifos**
 
-The `memA_fifos` and `memB_fifos` receive sub-matrices of size `m` x `k` and `k` x `n`, respectively. The FIFOs translate those matrices from a row-major format (or, alternatively, column-major for `B` if `b_col_maj` is set) into the `r` x `s`-sized and `s` x `t`-sized blocks required by the hardware's vector instrinsics before sending them into the compute cores memory.
+The `fifo_A` and `fifo_B` receive sub-matrices of size `m` x `k` and `k` x `n`, respectively. The FIFOs translate those matrices from a row-major format into the `r` x `s`-sized and `s` x `t`-sized blocks required by the hardware's vector instrinsics before sending them into the compute cores memory.
 
-For matrix A (`memA_fifos`), this transformation is expressed using the following wraps and strides as a list of tuples `(wrap, stride)`, given as arguments to the `object_fifo()` operation:
+For matrix A (`fifo_A`), this transformation is expressed using the following wraps and strides as a list of tuples `(wrap, stride)`, given as arguments to the `object_fifo()` operation:
 (Note that `//` denotes integer floor-division in Python.)
 
     
@@ -158,8 +136,43 @@ The following image describes the pattern of the object fifos for matrix A:
 .. image:: image/object_fifo.png
 
 
+3) Whole Array Matrix Multiplication
+------------------------------------
 
-3) Questions
+To run the whole array matrix multiplication:
+   ``/notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/whole_array``
+
+   ``make run use_iron=1``
+
+
+The dataflow in the Matrix Multiplication design is as follows. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C.
+
+
++---------------+---------------+---------------------+---------------------------+
+| Matrix        | Size          | Submatrix Size (1.) | Vector Intrinsic Size (2.)|
++===============+===============+=====================+===========================+
+| `A` (Input)   | `M` x `K`     | `m` x `k`           | `r` x `s`                 |
++---------------+---------------+---------------------+---------------------------+
+| `B` (Input)   | `K` x `N`     | `k` x `n`           | `s` x `t`                 |
++---------------+---------------+---------------------+---------------------------+
+| `C` (Output)  | `M` x `N`     | `m` x `n`           | `r` x `t`                 |
++---------------+---------------+---------------------+---------------------------+
+
+
+**Multiple levels of tiling (M,K,N) -> (m,k,n) -> (r,s,t)**
+
+We first specify the dimensions `M`, `K`, `N` for the input matrices `A` (`MxK`), and `B` (`KxN`), and the output matrix `C` (`MxN`), as well as their data type. To enable efficient computation, our design will split large input matrices into smaller sub-matrix blocks on two levels; we thus also define the sizes of those sub-matrices. 
+
+At the first level, the constants `m`, `k`, and `n` define the size of the submatrices processed by each AIE core. This is done in the dataflow code.At the second level, we further subdivide using smaller sizes `r`, `s` and `t` -- these are the sizes of required by the vector computation intrinsics of the AIEs. We leverage the multidimensional DMAs available in AIEs, through a higher level abstraction (object fifo), to automatically tile and load at this level. 
+
+The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
+
+.. image:: image/tiling.png
+
+
+
+
+4) Questions
 -------------
 
 1. In Exercise 5.3 of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
@@ -168,11 +181,11 @@ The following image describes the pattern of the object fifos for matrix A:
 
 3. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
 
-4. Why are different tiling dimensions (r, s, t) chosen for vector intrinsic instructions? Explain how these values are related to the hardware requirements and how they enhance efficiency.
+4. Change the parameters: (m, k, n, r, s, t) in the code for `Whole Array Matrix Multiplication`, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
 
-5. Change the parameters: (m, k, n, r, s, t) in the code, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
+5. Extend the basic passthrough example provided, such that the data passes through two compute tiles instead of one. Measure the performance and compare it with the single compute tile design.
 
-6. Move drain() above fill(). Does the code stall? Explain why.
+6. Given the basic single tile matrix multiplication example, combine it with two tile passthrough to create a cascading matrix multiplication design that uses two compute tiles. Randomize input matrices `X`, `W1` and `W2` of sizes `64x64x64` and type `int8` in the main function. Pass matrix `X` to the first compute tile that multiplies it with `W1` to produce an intermediate matrix `Y1`. Pass matrix `Y1` to the second compute tile that multiplies it with `W2` to produce the output matrix `Y2`. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
 
 
 5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
