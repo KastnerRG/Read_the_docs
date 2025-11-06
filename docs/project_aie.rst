@@ -33,8 +33,8 @@ The new IRON flow aims to increase developer productivity by providing high leve
   * On-campus WiFi: **UCSD_PROTECTED** (not UCSD_GUEST)
   * UCSD VPN using Cisco Secure Client `[More Info] <https://support.eng.ucsd.edu/how-to-guides/new-cisco-secure-client>`_
 
-2. Check the `UCSD_2025_Tokens.xlsx` spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
-3. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
+2. Check the **UCSD_2025_Tokens.xlsx** spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
+3. Open a browser and visit your assigned URL **https://aupcloud.io/aipc-##** and sign in with the unique token **ucsd-iron25-user-##** given to you.
 4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
 5. Copy the files from `AIE Project Directory <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/aie-project>`_ to `notebooks/mlir-aie/myproject` directory in your AIE instance.
 
@@ -88,22 +88,22 @@ The following image shows the dataflow for the single core matrix multiplication
 
 How it works:
 
-* `r=2, s=8, t=8` are the intrinsic dimensions for the `MMUL` API used in the kernel (C++) code.
-* `m, k, n` are the dimensions of the matrices we want to multiply. We mulitply matrix `A` of size `m x k` with matrix `B` of size `k x n` to get output matrix `C` of size `m x n`.
-* `main()` function generates random input matrices, and a reference output matrix. It then calls the `matrix_multiplication_single_core` function. This compiles just-in-time (JIT) during the first call and executes.
-* The `matrix_multiplication_single_core` function sets up the dataflow through the AI engines via `ObjectFIFOs`, defines the kernel function and compute tile, then performs the runtime operations to transfer data to/from the AI engines and execute the kernel.
+* ``r=2, s=8, t=8`` are the intrinsic dimensions for the ``MMUL`` API used in the kernel (C++) code.
+* ``m, k, n`` are the dimensions of the matrices we want to multiply. We mulitply matrix ``A`` of size ``m x k`` with matrix ``B`` of size ``k x n`` to get output matrix ``C`` of size ``m x n``.
+* ``main()`` function generates random input matrices, and a reference output matrix. It then calls the ``matrix_multiplication_single_core`` function. This compiles just-in-time (JIT) during the first call and executes.
+* The ``matrix_multiplication_single_core`` function sets up the dataflow through the AI engines via ``ObjectFIFOs``, defines the kernel function and compute tile, then performs the runtime operations to transfer data to/from the AI engines and execute the kernel.
 
 **Vector intrinsic size: (r,s,t)**
 
-Each compute core of the AI Engine is a VLIW vector processor. That is, it can perform 512 int8, or 64 int16 multiply-accumulate operations in parallel, within one clock cycle. It also can perform two loads and one store of vectors in one clock cycle. Therefore, to maximize the performance, the kernel code uses `aie::load_v()` and `aie::store_v()` primitive functions to load entire vectors: a row from matrix A of size `r` and a column from matrix B of size `s`. We also use the `MMUL::mac()` primitive to perform the multiply-accumulate on a pair of vectors. We perform four such vector MACs at once to maximize performance. The APIs and primitives are listed `here <https://www.xilinx.com/htmldocs/xilinx2022_2/aiengine_api/aie_api/doc/modules.html>`_.
+Each compute core of the AI Engine is a VLIW vector processor. That is, it can perform 512 int8, or 64 int16 multiply-accumulate operations in parallel, within one clock cycle. It also can perform two loads and one store of vectors in one clock cycle. Therefore, to maximize the performance, the kernel code uses ``aie::load_v()`` and ``aie::store_v()`` primitive functions to load entire vectors: a row from matrix A of size ``r`` and a column from matrix B of size ``s``. We also use the ``MMUL::mac()`` primitive to perform the multiply-accumulate on a pair of vectors. We perform four such vector MACs at once to maximize performance. The APIs and primitives are listed `here <https://www.xilinx.com/htmldocs/xilinx2022_2/aiengine_api/aie_api/doc/modules.html>`_.
 
 
 **Tiling on the fly using ObjectFifos**
 
-The `fifo_A` and `fifo_B` receive sub-matrices of size `m` x `k` and `k` x `n`, respectively. The FIFOs translate those matrices from a row-major format into the `r` x `s`-sized and `s` x `t`-sized blocks required by the hardware's vector instrinsics before sending them into the compute cores memory.
+The ``fifo_A`` and ``fifo_B`` receive sub-matrices of size ``m`` x ``k`` and ``k`` x ``n``, respectively. The FIFOs translate those matrices from a row-major format into the ``r`` x ``s``-sized and ``s`` x ``t``-sized blocks required by the hardware's vector instrinsics before sending them into the compute cores memory.
 
-For matrix A (`fifo_A`), this transformation is expressed using the following wraps and strides as a list of tuples `(wrap, stride)`, given as arguments to the `object_fifo()` operation:
-(Note that `//` denotes integer floor-division in Python.)
+For matrix A (``fifo_A``), this transformation is expressed using the following wraps and strides as a list of tuples ``(wrap, stride)``, given as arguments to the ``object_fifo()`` operation:
+(Note that ``//`` denotes integer floor-division in Python.)
 
     
 * (m // r, r * k),   # Pair 1
@@ -193,9 +193,9 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 5. Extend the basic passthrough example provided, such that the data passes through two compute tiles instead of one. Measure the performance and compare it with the single compute tile design.
 
-6. Modify `basic_mm.py` and `matmul.cc` to implement a simple dense layer that performs `Y = ReLU(X @ W)`. The python file should be named `dense.py`, kernel function should be named `dense()` and the kernel file should be named `dense.cc`. Hint: Mathematically, `ReLU(z) = max(z,0)`. In the kernel code, you can create a vector of zeros with `auto zeros = aie::zeros<DTYPE, MMUL::size_C>();`. You can perform a vectorized max with `auto vec3 = aie::max(vec1, vec2)`.
+6. Modify ``basic_mm.py`` and ``matmul.cc`` to implement a simple dense layer that performs ``Y = ReLU(X @ W)``. The python file should be named ``dense.py``, kernel function should be named ``dense()`` and the kernel file should be named ``dense.cc``. Hint: Mathematically, ``ReLU(z) = max(z,0)``. In the kernel code, you can create a vector of zeros with ``auto zeros = aie::zeros<DTYPE, MMUL::size_C>();``. You can perform a vectorized max with ``auto vec3 = aie::max(vec1, vec2)``.
 
-7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in `nn.py` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
+7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in ``nn.py`` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from ``2,8,8`` to ``4,8,4`` and describe your observations.
 
 
 5) Submission Procedure
