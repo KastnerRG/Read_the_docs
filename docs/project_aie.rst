@@ -34,7 +34,7 @@ The new IRON flow aims to increase developer productivity by providing high leve
   * UCSD VPN using Cisco Secure Client `[More Info] <https://support.eng.ucsd.edu/how-to-guides/new-cisco-secure-client>`_
 
 2. Check the `UCSD_2025_Tokens.xlsx` spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
-2. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
+3. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
 4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
 5. Copy the files from `AIE Project Directory <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/aie-project>`_ to `notebooks/mlir-aie/myproject` directory in your AIE instance.
 
