@@ -140,10 +140,18 @@ The following image describes the pattern of the object fifos for matrix A:
 ------------------------------------
 
 In this example, the above single core matrix multiplication is extended to use all compute tiles of the 4x4 AI Engine array. To run the whole array matrix multiplication:
+
    ``/notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/whole_array``
 
    ``make run use_iron=1``
 
+0. `Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/whole_array>`_
+1. `Host + Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/whole_array_iron.py>`_
+2. `Kernel code <https://github.com/Xilinx/mlir-aie/blob/main/aie_kernels/aie2/mm.cc>`_
+
+.. image:: image/whole_array_design.png
+
+The above image describes the whole array matrix multiplication design for the Ryzen AI device. You can visualize the dataflow using `this notebook <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/mat_mul_whole_array_visualization.ipynb>`_
 
 The dataflow in the Matrix Multiplication design is as follows. Two submatrices of size `r` x `s` from matrix A are broacasted across the each row of the AIE tiles. Similarly, two submatrices of size `s` x `t` from matrix B are broadcasted across each column of the AIE tiles. The compute tiles perform the vector multiply-accumulate operations on the submatrices and store the results in the output matrix C.
 
@@ -190,15 +198,6 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
 ------------------------------------------------------------------------------
-
-0. `Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/whole_array>`_
-1. `Host code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/test.cpp>`_
-2. `Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/aie2.py>`_
-3. `Kernel code <https://github.com/Xilinx/mlir-aie/blob/dfad2074779ce69db95f24cf7cf7a2a1fabf299d/aie_kernels/aie2/mm.cc#L42>`_
-
-.. image:: image/whole_array_design.png
-
-The above image describes the whole array matrix multiplication design for the Ryzen AI device. 
 
 The whole array design is efficient for matrices that are much bigger than the 4x4 AI Engine array. However, if the N dimension is small, it would be wasteful to pad the matrix with zeros. The following is a design that would be more efficient for small N dimensions:
 
