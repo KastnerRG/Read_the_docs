@@ -95,7 +95,11 @@ def main():
     Y2 = iron.zeros(m * n, dtype=dtype, device="npu")
 
     # reference
-    ref = (X.numpy() @ W1.numpy()) @ W2.numpy()
+    dense_1 = X.numpy() @ W1.numpy()
+    relu_1 = np.maximum(dense_1,0)
+    dense_2 = relu_1 @ W2.numpy()
+    relu_2 = np.maximum(dense_2,0)
+    ref = relu_2 
 
     # run
     chain_two_tiles(X, W1, W2, Y2)

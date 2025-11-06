@@ -58,11 +58,16 @@ void matmul(const DTYPE *__restrict A, const DTYPE *__restrict B, DTYPE *__restr
         C10.mac(A1, B0);
         C11.mac(A1, B1);
       }
+
+      auto C00_i16 = C00.template to_vector<DTYPE>();
+      auto C01_i16 = C01.template to_vector<DTYPE>();
+      auto C10_i16 = C10.template to_vector<DTYPE>();
+      auto C11_i16 = C11.template to_vector<DTYPE>();
         
-      aie::store_v(C + ((row + 0) * (n / t) + (col + 0)) * MMUL::size_C, C00.template to_vector<DTYPE>());
-      aie::store_v(C + ((row + 0) * (n / t) + (col + 1)) * MMUL::size_C, C01.template to_vector<DTYPE>());
-      aie::store_v(C + ((row + 1) * (n / t) + (col + 0)) * MMUL::size_C, C10.template to_vector<DTYPE>());
-      aie::store_v(C + ((row + 1) * (n / t) + (col + 1)) * MMUL::size_C, C11.template to_vector<DTYPE>());
+      aie::store_v(C + ((row + 0) * (n / t) + (col + 0)) * MMUL::size_C, C00_i16);
+      aie::store_v(C + ((row + 0) * (n / t) + (col + 1)) * MMUL::size_C, C01_i16);
+      aie::store_v(C + ((row + 1) * (n / t) + (col + 0)) * MMUL::size_C, C10_i16);
+      aie::store_v(C + ((row + 1) * (n / t) + (col + 1)) * MMUL::size_C, C11_i16);
     }
   }
 }

@@ -193,10 +193,33 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 5. Extend the basic passthrough example provided, such that the data passes through two compute tiles instead of one. Measure the performance and compare it with the single compute tile design.
 
-6. Given the basic single tile matrix multiplication example, we can combine it with two tile passthrough to create a cascading matrix multiplication design that uses two compute tiles. Fill the blanks in `chained_matmul.py` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
+6. Modify `basic_mm.py` and `matmul.cc` to implement a simple dense layer that performs `Y = ReLU(X @ W)`. The python file should be named `dense.py`, kernel function should be named `dense()` and the kernel file should be named `dense.cc`. Hint: Mathematically, `ReLU(z) = max(z,0)`. In the kernel code, you can create a vector of zeros with `auto zeros = aie::zeros<DTYPE, MMUL::size_C>();`. You can perform a vectorized max with `auto vec3 = aie::max(vec1, vec2)`.
+
+7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in `nn.py` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
 
 
-5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
+5) Submission Procedure
+-------------------------
+
+You must submit your code (and only your code, not generated files). We must be able to use what is provided (*.cpp, *.py files) and directly run your design in NPU Cloud. If you change test benches to answer questions, please submit them as well.
+
+You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+
+Your repo must contain a folder named "aie" at the top-level. This folder must be organized as follows:
+
+* **Report.pdf**
+
+* **passthrough_two_tiles.py**
+
+* **dense.cc**
+
+* **dense.py**
+
+* **nn.py**
+
+
+
+6) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
 ------------------------------------------------------------------------------
 
 The whole array design is efficient for matrices that are much bigger than the 4x4 AI Engine array. However, if the N dimension is small, it would be wasteful to pad the matrix with zeros. The following is a design that would be more efficient for small N dimensions:

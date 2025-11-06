@@ -44,8 +44,8 @@ def matrix_multiplication_single_core(input0, input1, output):
     fifo_C_L2L3 = fifo_C_L1L2.cons().forward(dims_to_stream=tap_C_L1L2.transformation_dims, name="C_L2L3")
 
     matmul_kernel = ExternalFunction(
-        "dense",
-        source_file=os.path.join(os.path.dirname(__file__), "dense.cc"),
+        "matmul",
+        source_file=os.path.join(os.path.dirname(__file__), "matmul.cc"),
         arg_types=[a_ty, b_ty, c_ty],
         include_dirs=[cxx_header_path()],
     )
