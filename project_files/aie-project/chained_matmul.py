@@ -1,4 +1,3 @@
-# nn.py — two-tile matmul chain (int8, r,s,t = 2,8,8), simplified names and prints
 import sys, os
 import numpy as np
 import aie.iron as iron
