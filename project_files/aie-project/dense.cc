@@ -21,7 +21,7 @@ extern "C" {
 // Multiply A and B, and add the result onto the values already in C.
 // A, B, and C must be tiled into tiles of size r*s, s*t, and r*t,
 // respectively (in our design, the DMA performs this tiling).
-void dense(const DTYPE *__restrict A, const DTYPE *__restrict B, DTYPE *__restrict C) {
+void matmul(const DTYPE *__restrict A, const DTYPE *__restrict B, DTYPE *__restrict C) {
   AIE_PREPARE_FOR_PIPELINING
   AIE_LOOP_MIN_ITERATION_COUNT(4)
   for (unsigned row = 0; row < m / r; row += 2) {
@@ -65,4 +65,6 @@ void dense(const DTYPE *__restrict A, const DTYPE *__restrict B, DTYPE *__restri
       aie::store_v(C + ((row + 1) * (n / t) + (col + 1)) * MMUL::size_C, C11.template to_vector<DTYPE>());
     }
   }
+}
+
 }
