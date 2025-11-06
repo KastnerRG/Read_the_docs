@@ -36,7 +36,7 @@ The new IRON flow aims to increase developer productivity by providing high leve
 2. Check the `UCSD_2025_Tokens.xlsx` spreadsheets shared as a Canvas Announcement and on Discord #announcement channel, and get the unique token & URL assigned to you.
 2. Open a browser and visit your assigned URL (`https://aupcloud.io/aipc-##` and sign in with the unique token `ucsd-iron25-user-##` given to you.
 4. Enter the duration (in minutes) you want the instance to run for (e.g., 180) and launch instance
-5. Copy the files from `AIE Project Directory <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/project1>`_ to `notebooks/mlir-aie/myproject` directory in your AIE instance.
+5. Copy the files from `AIE Project Directory <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/aie-project>`_ to `notebooks/mlir-aie/myproject` directory in your AIE instance.
 
 
 1) Mini Tutorial
@@ -72,8 +72,8 @@ Complete the `mini tutorial <https://github.com/Xilinx/mlir-aie/tree/main/progra
   3. Observe a new pattern
 
 
-2) Single Core Matrix Multiplication
-------------------------------------
+2) Single Core Tiled Matrix Multiplication
+------------------------------------------
 
 To run the basic matrix multiplication:
    ``cd /notebooks/mlir-aie/myproject``
@@ -98,7 +98,7 @@ How it works:
 Each compute core of the AI Engine is a VLIW vector processor. That is, it can perform 512 int8, or 64 int16 multiply-accumulate operations in parallel, within one clock cycle. It also can perform two loads and one store of vectors in one clock cycle. Therefore, to maximize the performance, the kernel code uses `aie::load_v()` and `aie::store_v()` primitive functions to load entire vectors: a row from matrix A of size `r` and a column from matrix B of size `s`. We also use the `MMUL::mac()` primitive to perform the multiply-accumulate on a pair of vectors. We perform four such vector MACs at once to maximize performance. The APIs and primitives are listed `here <https://www.xilinx.com/htmldocs/xilinx2022_2/aiengine_api/aie_api/doc/modules.html>`_.
 
 
-**Loading 2nd level tiles using object fifos**
+**Tiling on the fly using ObjectFifos**
 
 The `fifo_A` and `fifo_B` receive sub-matrices of size `m` x `k` and `k` x `n`, respectively. The FIFOs translate those matrices from a row-major format into the `r` x `s`-sized and `s` x `t`-sized blocks required by the hardware's vector instrinsics before sending them into the compute cores memory.
 
@@ -139,7 +139,7 @@ The following image describes the pattern of the object fifos for matrix A:
 3) Whole Array Matrix Multiplication
 ------------------------------------
 
-To run the whole array matrix multiplication:
+In this example, the above single core matrix multiplication is extended to use all compute tiles of the 4x4 AI Engine array. To run the whole array matrix multiplication:
    ``/notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/whole_array``
 
    ``make run use_iron=1``
@@ -185,7 +185,7 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 5. Extend the basic passthrough example provided, such that the data passes through two compute tiles instead of one. Measure the performance and compare it with the single compute tile design.
 
-6. Given the basic single tile matrix multiplication example, combine it with two tile passthrough to create a cascading matrix multiplication design that uses two compute tiles. Randomize input matrices `X`, `W1` and `W2` of sizes `64x64x64` and type `int8` in the main function. Pass matrix `X` to the first compute tile that multiplies it with `W1` to produce an intermediate matrix `Y1`. Pass matrix `Y1` to the second compute tile that multiplies it with `W2` to produce the output matrix `Y2`. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
+6. Given the basic single tile matrix multiplication example, we can combine it with two tile passthrough to create a cascading matrix multiplication design that uses two compute tiles. Fill the blanks in `chained_matmul.py` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from `2,8,8` to `4,8,4` and describe your observations.
 
 
 5) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
