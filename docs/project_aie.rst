@@ -219,8 +219,10 @@ Your repo must contain a folder named "aie" at the top-level. This folder must b
 
 
 
-6) Optional Project: Optimizing Whole Array Matrix Multiplication for Small N
-------------------------------------------------------------------------------
+Optimizing Whole Array Matrix Multiplication for Small N
+---------------------------------------------------------------------------------------------------------
+
+**NOTE: This is not a part of Project 4. You can choose to do this part as Project 5, if you prefer.**
 
 The whole array design is efficient for matrices that are much bigger than the 4x4 AI Engine array. However, if the N dimension is small, it would be wasteful to pad the matrix with zeros. The following is a design that would be more efficient for small N dimensions:
 
