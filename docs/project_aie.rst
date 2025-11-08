@@ -201,13 +201,14 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 5) Submission Procedure
 -------------------------
 
-You must submit your code (and only your code, not generated files). We must be able to use what is provided (*.cpp, *.py files) and directly run your design in NPU Cloud. If you change test benches to answer questions, please submit them as well.
+You must submit 
 
-You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions.
+* Report.pdf to gradescope
+* Code to a public repo.
 
-Your repo must contain a folder named "aie" at the top-level. This folder must be organized as follows:
+Your github repo must be public after the deadline (do not invite me). Include the link to the repo in the report. Keep it private, and make it public a day after the deadline. 
 
-* **Report.pdf**
+You must submit your code (and only your code, not generated files). We must be able to use what is provided (*.cpp, *.py files) and directly run your design in NPU Cloud. If you change test benches to answer questions, please submit them as well. You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to make sure it corresponds to the instructions. Your repo must contain a folder named "aie" at the top-level. This folder must be organized as follows:
 
 * **passthrough_two_tiles.py**
 
