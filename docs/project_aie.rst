@@ -82,7 +82,7 @@ The following python code (which you can run) shows how tiled matrix multiplicat
   import numpy as np
 
   m,k,n = 64, 32, 16  # Matrix dimensions
-  r,s,t = 8,4,2       # Tile dimensions
+  r,s,t = 8, 4, 2     # Tile dimensions
 
   '''
   Matrix Multiplication: A[m x k]  @  B[k x n]  =  C[m x n]
@@ -100,9 +100,9 @@ The following python code (which you can run) shows how tiled matrix multiplicat
   matrix C: (m x n) tiled into (m//r, n//t) number of small matrices of size (r x t) each
   '''
 
-  matA_tiled = matA.reshape(m//r,r,k//s,s).transpose(0,2,1,3) # (M//m,K//k,m,k)
-  matB_tiled = matB.reshape(k//s,s,n//t,t).transpose(0,2,1,3) # (K//k,N//n,k,n)
-  matC_tiled = np.zeros((m//r,n//t,r,t), dtype=np.int32)
+  matA_tiled = matA.reshape(m//r,r,k//s,s).transpose(0,2,1,3) # shape (m//r, K//k, r, s)
+  matB_tiled = matB.reshape(k//s,s,n//t,t).transpose(0,2,1,3) # shape (k//s, n//t, s, t)
+  matC_tiled = np.zeros((m//r,n//t,r,t), dtype=np.int32)      # shape (m//r, n//t, r, t)
 
   for im_tiles in range(m//r):
       for in_tiles in range(n//t):
@@ -117,9 +117,9 @@ The following python code (which you can run) shows how tiled matrix multiplicat
   Comparing outputs
   '''
 
-  matC_out = matC_tiled.transpose(0,2,1,3).reshape(m,n)
+  matC_out = matC_tiled.transpose(0,2,1,3).reshape(m,n)    # un-tile output matrix C to shape (m,n)
   diff = matC_exp-matC_out
-  error = diff.sum()
+  error = np.sum(np.abs(diff))
   print(error)
 
 
