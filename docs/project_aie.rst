@@ -80,6 +80,65 @@ To run the basic matrix multiplication:
 
    ``python basic_mm.py``
 
+Understanding Tiled Matrix Multiplication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following python code (which you can run) shows how tiled matrix multiplication works. It first generates two random matrices A and B, and computes the expected output matrix C using numpy's built-in matrix multiplication. It then performs tiled matrix multiplication by breaking down the input matrices into smaller tiles, multiplying them, and accumulating the results into the tiled output matrix. Finally, it un-tiles the output matrix to bring it to the original shape and compares the computed output with the expected output to verify correctness.
+
+.. code-block:: python
+
+  import numpy as np
+
+  '''
+  Matrix Multiplication: m,k,n
+  '''
+
+  m = 64
+  k = 32
+  n = 16
+
+  matA = np.random.randint(-10,10,(m,k), np.int32) # Matrix A of size (m x k)
+  matB = np.random.randint(-10,10,(k,n), np.int32) # Matrix B of size (k x n)
+
+  matC_exp = matA @ matB                           # Output matrix C of size (m x n)
+
+  '''
+  Matrix Multiplication tiled by r,s,t
+
+  matrix A: (m x k) tiled into (m//r, k//s) number of small matrices of size (r x s) each
+  matrix B: (k x n) tiled into (k//s, n//t) number of small matrices of size (s x t) each
+  matrix C: (m x n) tiled into (m//r, n//t) number of small matrices of size (r x t) each
+  '''
+
+  r = 8
+  s = 4
+  t = 2
+
+  matA_tiled = matA.reshape(m//r,r,k//s,s).transpose(0,2,1,3) # (M//m,K//k,m,k)
+  matB_tiled = matB.reshape(k//s,s,n//t,t).transpose(0,2,1,3) # (K//k,N//n,k,n)
+  matC_tiled = np.zeros((m//r,n//t,r,t), dtype=np.int32)
+
+  for im_tiles in range(m//r):
+      for in_tiles in range(n//t):
+          # each tile
+          out_tile = np.zeros((r,t), dtype=np.int32)
+          for ik_tiles in range (k//s):
+              A_tile = matA_tiled[im_tiles, ik_tiles]
+              B_tile = matB_tiled[ik_tiles, in_tiles]
+              out_tile += A_tile @ B_tile
+          matC_tiled[im_tiles,in_tiles] = out_tile
+
+
+  '''
+  Comparing outputs
+  '''
+
+  matC_out = matC_tiled.transpose(0,2,1,3).reshape(m,n)
+  diff = matC_exp-matC_out
+  error = diff.sum()
+  print(error)
+
+
 
 The following image shows the dataflow for the single core matrix multiplication:
 
