@@ -72,16 +72,8 @@ Complete the `mini tutorial <https://github.com/Xilinx/mlir-aie/tree/main/progra
   3. Observe a new pattern
 
 
-2) Single Core Tiled Matrix Multiplication
+2) Understanding Tiled Matrix Multiplication
 ------------------------------------------
-
-To run the basic matrix multiplication:
-   ``cd /notebooks/mlir-aie/myproject``
-
-   ``python basic_mm.py``
-
-Understanding Tiled Matrix Multiplication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The following python code (which you can run) shows how tiled matrix multiplication works. It first generates two random matrices A and B, and computes the expected output matrix C using numpy's built-in matrix multiplication. It then performs tiled matrix multiplication by breaking down the input matrices into smaller tiles, multiplying them, and accumulating the results into the tiled output matrix. Finally, it un-tiles the output matrix to bring it to the original shape and compares the computed output with the expected output to verify correctness.
 
@@ -89,17 +81,15 @@ The following python code (which you can run) shows how tiled matrix multiplicat
 
   import numpy as np
 
-  '''
-  Matrix Multiplication: m,k,n
-  '''
+  m,k,n = 64, 32, 16  # Matrix dimensions
+  r,s,t = 8,4,2       # Tile dimensions
 
-  m = 64
-  k = 32
-  n = 16
+  '''
+  Matrix Multiplication: A[m x k]  @  B[k x n]  =  C[m x n]
+  '''
 
   matA = np.random.randint(-10,10,(m,k), np.int32) # Matrix A of size (m x k)
   matB = np.random.randint(-10,10,(k,n), np.int32) # Matrix B of size (k x n)
-
   matC_exp = matA @ matB                           # Output matrix C of size (m x n)
 
   '''
@@ -109,10 +99,6 @@ The following python code (which you can run) shows how tiled matrix multiplicat
   matrix B: (k x n) tiled into (k//s, n//t) number of small matrices of size (s x t) each
   matrix C: (m x n) tiled into (m//r, n//t) number of small matrices of size (r x t) each
   '''
-
-  r = 8
-  s = 4
-  t = 2
 
   matA_tiled = matA.reshape(m//r,r,k//s,s).transpose(0,2,1,3) # (M//m,K//k,m,k)
   matB_tiled = matB.reshape(k//s,s,n//t,t).transpose(0,2,1,3) # (K//k,N//n,k,n)
@@ -127,8 +113,6 @@ The following python code (which you can run) shows how tiled matrix multiplicat
               B_tile = matB_tiled[ik_tiles, in_tiles]
               out_tile += A_tile @ B_tile
           matC_tiled[im_tiles,in_tiles] = out_tile
-
-
   '''
   Comparing outputs
   '''
@@ -139,6 +123,13 @@ The following python code (which you can run) shows how tiled matrix multiplicat
   print(error)
 
 
+3) Single Core Tiled Matrix Multiplication
+------------------------------------------
+
+To run the basic matrix multiplication:
+   ``cd /notebooks/mlir-aie/myproject``
+
+   ``python basic_mm.py``
 
 The following image shows the dataflow for the single core matrix multiplication:
 
@@ -195,7 +186,7 @@ The following image describes the pattern of the object fifos for matrix A:
 .. image:: image/object_fifo.png
 
 
-3) Whole Array Matrix Multiplication
+4) Whole Array Matrix Multiplication
 ------------------------------------
 
 In this example, the above single core matrix multiplication is extended to use all compute tiles of the 4x4 AI Engine array. To run the whole array matrix multiplication:
@@ -239,7 +230,7 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 
 
-4) Questions
+5) Questions
 -------------
 
 1. In Exercise 5.3 of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
@@ -257,7 +248,7 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in ``nn.py`` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from ``2,8,8`` to ``4,8,4`` and describe your observations.
 
 
-5) Submission Procedure
+6) Submission Procedure
 -------------------------
 
 You must submit 
