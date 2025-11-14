@@ -221,7 +221,7 @@ Under **Address Editor** note IP's address
 3) PYNQ board and Host program
 ------------------------------
 
-Download an appropriate image for your board from `here <http://www.pynq.io/board.html>`_ and write it to your micro SD Card (`PYNQ-Z2 setup instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_). It is recommended to use a dedicated software, e.g. Win32 Disk Imager to burn the .img file to the SD card instead of a simple copy-paste operation, if you find the board cannot booted properly. If you set the jumpers correctly, the boot process should not take more than **a few minutes**.
+Download an appropriate image for your board from `here <http://www.pynq.io/boards.html>`_ and write it to your micro SD Card (`PYNQ-Z2 setup instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_). It is recommended to use a dedicated software, e.g. Win32 Disk Imager to burn the .img file to the SD card instead of a simple copy-paste operation, if you find the board cannot booted properly. If you set the jumpers correctly, the boot process should not take more than **a few minutes**.
 
 Use the ethernet cable to connect the board to your machine, and set the static address as stated in the `PYNQ-Z2 tutorial <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_. Connect the JTAG port on the board with your machine using MicroUSB line, and use serial communication software (like PuTTY or Serial Port Unility) to access the command-line-tools (The picture below is for demo only, you don't need to run those commands). This is especially useful for fixing Linux-related issues of the board.
 
@@ -267,7 +267,7 @@ Note that there should be no ports named x, y, r, theta, as they all become some
 
 You should also be able to find the module named control_s_axi_U under the file tree, and locate the address as the lab tutorial.
 
-Setting up a Kria board for pynq is different, and a bit more complex. Please refer to the following resources: `Pynq-supporting boards (find KV260) <https://www.pynq.io/boards.html/>`_ , `Basic steps <https://discuss.pynq.io/t/kria-pynq-v3-0-release-now-with-kr260-support/4865>`_, `Kria pynq repo <https://github.com/Xilinx/Kria-PYNQ>`_ 
+Setting up a Kria board for pynq is different, and a bit more complex. Please refer to the following resources: `Pynq-supporting boards (find KV260) <https://www.pynq.io/boards.html>`_ , `Basic steps <https://discuss.pynq.io/t/kria-pynq-v3-0-release-now-with-kr260-support/4865>`_, `Kria pynq repo <https://github.com/Xilinx/Kria-PYNQ>`_ 
 
 Basics of FPGA & PS-PL interaction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

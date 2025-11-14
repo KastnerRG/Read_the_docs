@@ -6,7 +6,7 @@ Lab: SYCL on Intel DevCloud
 Getting Started
 ********************
 
-To complete this lab, you need access to Intel DevCloud. You can log into DevCloud using `JupyterLab <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/Welcome.ipynb?reset>`_ It is also possible to `access DevCloud using a command-line interface via ssh <https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/>`_.
+To complete this lab, you need access to Intel DevCloud. You can log into DevCloud using  `JupyterLab <https://github.com/IntelSoftware/Machine-Learning-using-oneAPI/blob/main/Welcome.ipynb>`_ It is also possible to `access DevCloud using a command-line interface via ssh <https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/>`_.
 
 Resources
 ************
@@ -15,7 +15,7 @@ oneAPI, SYCL, and DPC++ are open source and there are many resources available o
 
 * `oneAPI <https://www.oneapi.com/>`_
 
-* `Data Parallel C++ Essentials Jupyter Modules <https://jupyter.oneapi.devcloud.intel.com/hub/login?next=/lab/tree/oneAPI_Essentials/Welcome.ipynb?reset>`_
+* `Data Parallel C++ Essentials Jupyter Modules <https://github.com/IntelSoftware/Machine-Learning-using-oneAPI/blob/main/Welcome.ipynb>`_
 
 * `Developer Reference <https://software.intel.com/en-us/oneapi>`_
 

@@ -37,7 +37,7 @@ The load-store unit (LSU) in the baseline implementation requires hundreds of cy
 
 References:
 
-* `DPC++FPGA LSU Unit Control Tutorial <https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/DPC%2B%2BFPGA/Tutorials/Features/lsu_control>`_
+* `DPC++FPGA LSU Unit Control Tutorial <https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/lsu_control>`_
 
 * `oneAPI FPGA Optimization Guide : Load-Store Unit Styles <https://www.intel.com/content/www/us/en/develop/documentation/oneapi-fpga-optimization-guide/top/optimize-your-design/throughput-1/memory-accesses/load-store-units/load-store-unit-styles.html>`_
 
@@ -62,12 +62,12 @@ References:
 
 * `oneAPI FPGA Optimization Guide <https://software.intel.com/content/www/us/en/develop/documentation/oneapi-fpga-optimization-guide/top.html>`_
 
-* `dpcpp FPGA loop unroll example <https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/DPC++FPGA/Tutorials/Features/loop_unroll>`_
+* `dpcpp FPGA loop unroll example <https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/loop_unroll>`_
 
 4) Block Matrix Multiplication (BMM)
 ------------------------------------
 
-Block matrix multiplication is a common optimization to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a repository for a block matrix multiplication implemented in DPC++ <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/matrix_mul_dpcpp/block_matrix_mul>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_, which provides good background on blocking and how the design leverages it for parallel execution. This is different from the implementation you were using earlier; it has the additional ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the design to the problem at hand. You can upload the zip file to DevCloud using the Jupyter interface and unzip it via the Jupyter terminal.
+Block matrix multiplication is a common optimization to expose parallelism by loading and operating on blocks of the A and B matrices. Here is a repository for a block matrix multiplication implemented in DPC++ <https://github.com/KastnerRG/Read_the_docs/tree/master/project_files/matrix_mul_dpcpp/block_matrix_mul>`_. It is based on this `OpenCL implementation <https://www.intel.com/content/dam/develop/external/us/en/documents/intel-ocl-gemm.pdfl>`_, which provides good background on blocking and how the design leverages it for parallel execution. This is different from the implementation you were using earlier; it has the additional ability to change the block size and unrolling factor. We call these "knobs" since they can be changed to "tune" the design to the problem at hand. You can upload the zip file to DevCloud using the Jupyter interface and unzip it via the Jupyter terminal.
 
 Your goal is to change these knobs and observe their effects. After a few steps, you should see trends for each knob. You should use the results from previous steps to make *better* adjustments. You may want to adjust the LSU to something appropriate for the knobs you adjust, like you did for the previous questions. By focusing on a particular knob, try to maximize throughput (while adjusting the other knobs as necessary to help achieve this maximum). After you have done this for a few designs for each knob, you should be able to gain an understanding of which knobs are important in this design, how they effect the results, and why this is occurring. With this knowledge, we ask you to find points on the Pareto frontier (if you didn't already find them from the experimentation earlier). However, you don't have to achieve the absolute best maximum throughput for any particular knob; this is a design-space exploration problem and the goal is to gain an understanding of what possibilities for improvements exist and what trade-offs come with them. Briefly discuss these trends you noticed and what your thought process was as you moved from one design to another in your report, and reference the chart to explain your thoughts.
 
@@ -97,7 +97,7 @@ References: Spector provides a DSE for OpenCL FPGA-based `matrix multiplication 
 Bonus
 #####
 
-The `OpenCL implementation <https://www.intel.com/content/www/us/en/programmable/support/support-resources/design-examples/design-software/opencl/matrix-multiplication.html>`_ is simpler than the matrix multiply implementation used in Spector. As a bonus, you can implement the matrix multiply implementation used in Spector, in DPC++. A functionally correct code is enough for this section; you do not need to optimize it.
+The `OpenCL implementation <https://www.intel.com/content/dam/develop/external/us/en/documents/intel-ocl-gemm.pdf>`_ is simpler than the matrix multiply implementation used in Spector. As a bonus, you can implement the matrix multiply implementation used in Spector, in DPC++. A functionally correct code is enough for this section; you do not need to optimize it.
 
 5) Submission Procedure
 -----------------------

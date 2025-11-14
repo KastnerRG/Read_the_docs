@@ -198,7 +198,7 @@ The following are steps to implement your FIR11 HLS design on the PYNQ board. Yo
 
 The specific things you must do in this section are:
 
-* Download an appropriate image for your board from `here <http://www.pynq.io/board.html>`_ and write it to your SDCard (`PYNQ-Z2 instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_).
+* Download an appropriate image for your board from `here <http://www.pynq.io/boards.html>`_ and write it to your SDCard (`PYNQ-Z2 instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_).
 
 * Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
 
@@ -208,7 +208,7 @@ The specific things you must do in this section are:
 
 .. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
 
-Check `pynq.io <http://www.pynq.io/board.html>`_ for more info.
+Check `pynq.io <http://www.pynq.io/boards.html>`_ for more info.
 
 10) Report Guidelines
 ------------------------
