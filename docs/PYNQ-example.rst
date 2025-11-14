@@ -233,7 +233,7 @@ Note that there should be no ports named x, y, r, theta, as they all become some
 
 You should also be able to find the module named control_s_axi_U under the file tree, and locate the address as the lab tutorial.
 
-Setting up a Kria board for pynq is different, and a bit more complex. Please refer to the following resources: `Pynq-supporting boards (find KV260) <https://www.pynq.io/boards.html/>`_ , `Basic steps <https://discuss.pynq.io/t/kria-pynq-v3-0-release-now-with-kr260-support/4865>`_, `Kria pynq repo <https://github.com/Xilinx/Kria-PYNQ>`_ 
+Setting up a Kria board for pynq is different, and a bit more complex. Please refer to the following resources: `Pynq-supporting boards (find KV260) <https://www.pynq.io/boards.html>`_ , `Basic steps <https://discuss.pynq.io/t/kria-pynq-v3-0-release-now-with-kr260-support/4865>`_, `Kria pynq repo <https://github.com/Xilinx/Kria-PYNQ>`_ 
 
 Basics of FPGA & PS-PL interaction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
