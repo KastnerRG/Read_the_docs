@@ -233,7 +233,9 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 5) Questions
 -------------
 
-1. In Exercise 5.3 of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
+Q1, Q2 are based on mini tutorials. Q3 is a generic question. Q4 is based on the whole array matrix multiplication to observe the full performance of AI Engine. Q5-Q7 are your project, based on the starter code.
+
+1. In Exercise 5b of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
 
 2. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
 
