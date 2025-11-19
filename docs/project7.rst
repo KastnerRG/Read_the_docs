@@ -103,7 +103,7 @@ The FM Demodulator has three primary functions: ``downsample``, a linear filter 
 
 **downsample**
 ##########
-``downsample`` is a very straightforward operation. The function is given a factor ``N``, which indicates that the downsampler should pass on every Nth sample. The implementation of ``downsample`` can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/sigsys.py#L2673>`_.
+``downsample`` is a very straightforward operation. The function is given a factor ``N``, which indicates that the downsampler should pass on every Nth sample. The implementation of ``downsample`` can be found `here <https://github.com/mwickert/scikit-dsp-comm/blob/master/src/sk_dsp_comm/sigsys.py#L3056>`_.
 
 **linear filter**
 ################
@@ -141,7 +141,7 @@ To demodulate FM we require a discriminator circuit, which gives an output which
     disdata=(X*derY-Y*derX)/(X**2+Y**2)
     return disdata
 
-The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/sk_dsp_comm/rtlsdr_helper.py#L1825>`_ of an FM baseband discriminator.
+The above code is the `scikit-dsp-comm implementation <https://github.com/mwickert/scikit-dsp-comm/blob/master/src/sk_dsp_comm/synchronization.py#L770>`_ of an FM baseband discriminator.
 
 A frequency discriminator computes the derivative of the modulated phase.
 
