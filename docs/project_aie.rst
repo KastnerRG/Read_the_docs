@@ -241,7 +241,12 @@ Q1, Q2 are based on mini tutorials. Q3 is a generic question. Q4 is based on the
 
 3. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
 
-4. Change the parameters: (m, k, n, r, s, t), input and output datatypes (int8, int16, int32, and float) in the code for `Whole Array Matrix Multiplication`, generate performance metrics (runtime, GOPS), and compile it into a chart. You may edit the code to do so. Discuss your observations. If something fails, find out why and explain with a reference to relevant documentation.
+4. Measure the performance (runtime, GOPS) and limitations of AI Engines using the `Whole Array Matrix Multiplication` example. You may edit the code to do so.
+
+  a. Keep the datatypes and (r,s,t) default. Change the parameters: (m, k, n) only, and plot a graph with workload size (m*k*n) on the x-axis. Draw multiple lines, varying the workload's asymmetry for the same workload sizes. Eg. m doubled, k halved, n unchanged. m doubled, k unchanged, n halved.
+  b. Keep (r,s,t) fixed. For a set of linearly increasing workload size (m*k*n), change input and output datatypes (int8, int16, int32, and float) and plot another graph.
+  c. For the same set of increasing workload sizes, change (r,s,t)s and input/output datatypes, and plot another graph.
+  d. If anything did not work, refer to the documentation to find out why, and explain, citing that reference.
 
 5. Extend the basic passthrough example provided, such that the data passes through two compute tiles sequentially (one after another) instead of one. Measure the performance (runtime, GFLOPs) and compare it with the single compute tile design. To measure performance, study the code for the ``whole array matrix multiplication``, get the idea from there, and write equivalent Python code.
 
