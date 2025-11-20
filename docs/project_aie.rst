@@ -193,7 +193,7 @@ In this example, the above single core matrix multiplication is extended to use 
 
    ``/notebooks/mlir-aie/programming_examples/basic/matrix_multiplication/whole_array``
 
-   ``make run use_iron=1``
+   ``make clean && make run use_iron=1``
 
 0. `Tutorial <https://github.com/Xilinx/mlir-aie/tree/main/programming_examples/basic/matrix_multiplication/whole_array>`_
 1. `Host + Dataflow code <https://github.com/Xilinx/mlir-aie/blob/main/programming_examples/basic/matrix_multiplication/whole_array/whole_array_iron.py>`_
@@ -235,19 +235,19 @@ The two levels of tiling of the output matrix `C` (`MxN`) is shown below:
 
 Q1, Q2 are based on mini tutorials. Q3 is a generic question. Q4 is based on the whole array matrix multiplication to observe the full performance of AI Engine. Q5-Q7 are your project, based on the starter code.
 
-1. In Exercise 5b of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops for data access in each of them.
+1. In Exercise 5b of the mini tutorial, generate 3 different tensor access patterns (TAPs) for a 2D array. Write the equivalent nested loops (pseudocode or Python code) for data access in each of them. Include the code and TAP images in the report.
 
 2. What role do ObjectFIFOs play in the design of the data movement within the AIE array? Describe how ObjectFIFOs facilitate synchronization between compute cores and memory tiles.
 
 3. Discuss the purpose of "ping" and "pong" phases in data transfer. How does this design choice improve performance in handling large matrices?
 
-4. Change the parameters: (m, k, n, r, s, t) in the code for `Whole Array Matrix Multiplication`, generate performance metrics and compile it into a chart, for int8, int16, int32 and float datatypes. Discuss your observations.
+4. Change the parameters: (m, k, n, r, s, t), input and output datatypes (int8, int16, int32, and float) in the code for `Whole Array Matrix Multiplication`, generate performance metrics (runtime, GOPS), and compile it into a chart. You may edit the code to do so. Discuss your observations. If something fails, find out why and explain with a reference to relevant documentation.
 
-5. Extend the basic passthrough example provided, such that the data passes through two compute tiles instead of one. Measure the performance and compare it with the single compute tile design.
+5. Extend the basic passthrough example provided, such that the data passes through two compute tiles sequentially (one after another) instead of one. Measure the performance (runtime, GFLOPs) and compare it with the single compute tile design. To measure performance, study the code for the ``whole array matrix multiplication``, get the idea from there, and write equivalent Python code.
 
 6. Modify ``basic_mm.py`` and ``matmul.cc`` to implement a simple dense layer that performs ``Y = ReLU(X @ W)``. The python file should be named ``dense.py``, kernel function should be named ``dense()`` and the kernel file should be named ``dense.cc``. Hint: Mathematically, ``ReLU(z) = max(z,0)``. In the kernel code, you can create a vector of zeros with ``auto zeros = aie::zeros<DTYPE, MMUL::size_C>();``. You can perform a vectorized max with ``auto vec3 = aie::max(vec1, vec2)``.
 
-7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in ``nn.py`` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from ``2,8,8`` to ``4,8,4`` and describe your observations.
+7. Combine the dense layer from (Q6) with two tile passthrough (Q5) to create a two layer neural network. Fill the blanks in ``nn.py`` and get it working. Measure the performance and compare it with the single tile matrix multiplication design. Change the intrinsic sizes from ``2,8,8`` to ``4,8,4`` and describe your observations. If it passes, good. If it fails, explain why.
 
 
 6) Submission Procedure
