@@ -127,6 +127,8 @@ All projects will be ranked based on the two criteria above. You get the 5% extr
 You have to submit your code (and only your code, not other files nor HLS project files). Your code should have everything in it so we can synthesize it directly. 
 This means that you should use pragmas in your code, and not use the GUI to insert optimization directives. We must be able to import your source file and directly synthesize it.
 
+You must invite the TA for this project (GitHub username: abarajithan11) to your repo and make sure he has access. If he does not have access to the repo a day after the deadline, for ANY reason, you will be deducted 10 points from the total.
+
 You must follow the file structure below. We use automated scripts to pull your data, so **DOUBLE CHECK** your file/folder names to ensure they correspond to the instructions.
 
 Your repo must contain a folder named "bnn_project" at the top level. This folder must be organized as follows (similar to previous projects):
