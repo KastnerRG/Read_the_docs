@@ -95,23 +95,24 @@ The function that you must replicate in HLS is:
 
 4) Project Tasks
 ------------
-You are provided with an incomplete testbench and a complete Python golden model. Your project involves building a good testbench that works with Python (50%), and implementing the design and optimizing it (50%).
+You are provided with an incomplete C++ testbench and a complete Python golden model. Your project involves building a good testbench that works with Python (50%), and implementing the design and optimizing it (50%).
 
 1. Read and understand the Python code. Add functionality to the Python code to generate a C++ header file named ``hls/golden.h`` with inputs, weights, and golden outputs as C++ int arrays. Hint: for the first layer, you need to maintain the padding with zeros or ones, such that 24 such 1-bit weights + padding fits into an int32 word.
 2. Update the C++ testbench with ``#include golden.h``, such that it compares the outputs of every stage of hardware with python-generated golden values from your header. Update ``bnn.cpp`` to use the weights from the header.
 3. Design and implement a functionally correct ``feed_forward_quantized`` function for a binary neural network in HLS. Make sure to use XNOR and popcount operations. Use the testbench you developed to test your design along the way, checking the output of each layer of your network. Your HLS design must match the golden outputs given in the testbench. Hint: Remember to (1) do the XNOR only on valid bits (not padding), and (2) adjust for the difference due to (-1,1) binary from training in Python and (1,0) binary used in hardware.
 4. Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
 5. Demo the project on the PYNQ board. This project does not provide an example Jupyter notebook so you should create a notebook that demos your result.
-6. Provide a report that: (1) explains your different optimizations, (2) describes how you decided to interface your HLS IP core, and (3) provides details regarding your notebook demo. 
+6. Provide a report that: (1) documents your testbench integration (2) explains your different optimizations, (3) describes how you decided to interface your HLS IP core, and (4) provides details regarding your notebook demo. 
 
 Note: You can change the interface of the top-level HLS code. If you do, you should explain the rationale for these changes in your report. 
 
 Grading:
 
-* 45% for the implementation and documentation of a testbench integrated well with Python code. 5% for extra effort in making it extra nice and streamlined.
-* 45% for implementing the hardware design and applying optimizations. 5% extra for further optimization.
+* 45% for the implementation and documentation of a testbench integrated well with Python code. 5% for extra effort in making it extra nice and streamlined, relative to other groups.
+* 45% for implementing the hardware design and applying optimizations. 5% extra for further creative optimizations, relative to other groups.
 
-All projects will be ranked based on the two criteria above. You get the 5% extra based on the ranking. 
+All projects will be ranked based on the two criteria above. The extra 10% is intentionally left subjective. We cannot tell you what steps you can take to get it. It is an exercise for your creativity.
+
 You must invite the TA for this project (GitHub username: abarajithan11) to your repo and make sure he has access. If he does not have access to the repo a day after the deadline, for ANY reason, you will be deducted 10 points from the total.
 
 5) Optimization Hints
@@ -145,6 +146,6 @@ Your repo must contain a folder named "bnn_project" at the top level. This folde
   - ``.bit`` and ``.hwh`` files
   - ``bnn.ipynb`` host file
 
-**Report:** For this project, you must submit a report describing your design's implementation. You may add figures, diagrams, tables, or charts to describe your 
+**Report:** For this project, you must submit a report describing your testbench integration and your design's implementation. You may add figures, diagrams, tables, or charts to describe your 
 architectures with a short paragraph explaining them. There are no specific questions to answer. Just explain your design. 
 We will check if (1) your final BNN project functions are functionally correct (they pass their test benches) and (2) they use XNOR and popcount operations. 
