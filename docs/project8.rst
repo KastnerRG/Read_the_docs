@@ -34,7 +34,7 @@ The bnn_project folder contains:
  
   - bnn.h - header file
  
-  - bnn_test.cpp - test bench for each layer and final output
+  - bnn_test.cpp - incomplete testbench for each layer and final output
  
   - script.tcl - Use this to create your project
  
@@ -95,13 +95,23 @@ The function that you must replicate in HLS is:
 
 4) Project Tasks
 ------------
+You are provided with an incomplete testbench and a complete Python golden model. Your project involves building a good testbench that works with Python (50%), and implementing the design and optimizing it (50%).
 
-1. Design and implement a functionally correct ``feed_forward_quantized`` function for a binary neural network in HLS. Make sure to use XNOR and popcount operations. You are provided a testbench that you can use to test your design along the way which checks the output of each layer of your network. Your HLS design must match the golden outputs given in the testbench.
-2. Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
-3. Demo the project on the pynq board. This project does not provide an example Jupyter notebook so you should create a notebook that demos your result.
-4. Provide a report that: (1) explains your different optimizations, (2) describes how you decided to interface your HLS IP core, and (3) provides details regarding your notebook demo. 
+1. Read and understand the Python code. Add functionality to generate a file named ``hls/golden.h`` with inputs, weights, and golden outputs as int arrays. Hint: for the first layer, you need to maintain the padding for every 24 weight values (one bit each) with zeros or ones, such that 24 such weights + padding fits into an int32 word.
+2. Update the C++ testbench with ``#include golden.h``, such that it compares the outputs of every stage with python-generated values. Update ``bnn.cpp`` to use the weights from the header.
+3. Design and implement a functionally correct ``feed_forward_quantized`` function for a binary neural network in HLS. Make sure to use XNOR and popcount operations. Use the testbench you developed to test your design along the way, checking the output of each layer of your network. Your HLS design must match the golden outputs given in the testbench. Hint: Remember to (1) do the XNOR only on valid bits (not padding), and (2) adjust for the difference due to (-1,1) binary from training in Python and (1,0) binary used in hardware.
+4. Optimize your design to increase throughput and minimize latency. Consider optimizations like dataflow, loop unrolling, and pipelining. Provide details and trade-offs of design optimizations in your report.
+5. Demo the project on the PYNQ board. This project does not provide an example Jupyter notebook so you should create a notebook that demos your result.
+6. Provide a report that: (1) explains your different optimizations, (2) describes how you decided to interface your HLS IP core, and (3) provides details regarding your notebook demo. 
 
 Note: You can change the interface of the top-level HLS code. If you do, you should explain the rationale for these changes in your report. 
+
+Grading:
+
+* 45% for the implementation and documentation of a testbench integrated well with Python code. 5% for extra effort in making it extra nice and streamlined.
+* 45% for implementing the hardware design and applying optimizations. 5% extra for further optimization.
+
+All projects will be ranked based on the two criteria above. You get the 5% extra based on the ranking.
 
 5) Optimization Hints
 -----------------------
@@ -127,7 +137,7 @@ Your repo must contain a folder named "bnn_project" at the top level. This folde
 
 * Folder **bnn_project**
 
-  - Source code (``*.cpp``, ``*.h``, ``*.tcl``) and reports (``.rpt`` and ``.xml``).
+  - Source code for design and testbench (``*.py``, ``*.cpp``, ``*.h``, ``*.tcl``) and reports (``.rpt`` and ``.xml``).
 
 * Folder **Demo**
 
