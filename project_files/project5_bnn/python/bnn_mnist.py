@@ -15,7 +15,7 @@ class BNN_MNIST:
         self.quantize = np.vectorize(self.quantize)
 
         self.adj = lambda x: x*2-1
-        self.adj = np.vectorize(self.adj)
+        self.adj = np.vectorize(self.adj, otypes=[float])
         self.model = np.load("weights/model.npy", allow_pickle=True).item()
         # print(model.keys)
         # dict_keys(['fc1w', 'fc2w', 'fc3w'])
