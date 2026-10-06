@@ -48,7 +48,7 @@ and the USB port should now work for MacOS when plugged into the `USB 3.0 DRP I`
 2) How did we figure this out?
 --------------------------------------------------
 
-At the time of writing, these steps have not been documented by AMD, nor has the out-of-the-box incompatibility with windows. We figured this out by reading the scripts in the board. This information might be useful if the image is changed and these steps need to be updated for the new image.
+At the time of writing, these steps have not been documented by AMD, nor has the out-of-the-box incompatibility with MacOS. We figured this out by reading the scripts in the board. This information might be useful if the image is changed and these steps need to be updated for the new image.
 
 To view the usbgadget service, run ::
 
