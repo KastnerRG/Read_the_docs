@@ -185,34 +185,14 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
   - **(a)** Combine any number of optimizations to get your best throughput. What optimizations did you use to obtain this result? Report the latency, II, throughput (in MHz). It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock).
   - **(b)** Report the resource usage of your design with the best throughput. Explain why the resource usage is high compared with the baseline in Question 2.
 
-* **Question 8 - Github Username:** Include the URL of the GitHub Repository of your assignment. Instructions are in section 11.
+* **Question 8 - Github Username:** Include the URL of the GitHub Repository of your assignment. Instructions are in section 10.
   
 It is possible that some optimizations have little (or no effect). Some optimizations may only work when used in combination with others. This is what makes the design space exploration process difficult (and interesting).
 
 * **Note**: You should use ap_int types if necessary for required bit width. You can read about ap_int from `here <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Overview-of-Arbitrary-Precision-Integer-Data-Types>`_ or from section 2.10 of the `textbook <http://kastner.ucsd.edu/hlsbook/>`_. 
 
-9) PYNQ Demo
-------------------------
 
-**UCSD students: this part is optional for project 1**.
-
-The following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
-
-The specific things you must do in this section are:
-
-* Download an appropriate image for your board from `here <http://www.pynq.io/boards.html>`_ and write it to your SDCard (`PYNQ-Z2 instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_).
-
-* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
-
-* Implement your **11-tap** FIR design on PYNQ board.
-
-* Write a host program *host_fir.ipynb*. The expected output is as shown below:
-
-.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
-
-Check `pynq.io <http://www.pynq.io/boards.html>`_ for more info.
-
-10) Report Guidelines
+9) Report Guidelines
 ------------------------
 
 You only have to answer the questions in the report. The report should be concise and well-written. Answers to each sub-questions should be cleary marked (e.g., Q1.(a)). You do not need to include any code in the report. Explanation of the code / design is also not required unless the questions explicitly requires so. Report should be submitted to Canvas as a PDF file.
@@ -256,7 +236,7 @@ Figure 1 shows an example graph of resource usage for eight designs. Figure 2 sh
 *Figure 2. Example throughput results for different FIR designs. Note that these are only for reference and do not correspond exactly to the results you can/should obtain.*
 
 
-11) Code Submission
+10) Code Submission
 ------------------------------
 
 You must also submit your code. We should be able to run your code and re-produce the results. 
@@ -307,7 +287,26 @@ Your repo must contain a "fir" folder at the top level. This folder must be orga
 
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
+11) PYNQ Demo
+------------------------
 
+**UCSD students: this part is optional for project 1**.
+
+The following are steps to implement your FIR11 HLS design on the PYNQ board. You will provide the input data (chirp signal) from the Notebook and get the output from the PL on PYNQ. To do that, you must write a *host_fir.ipynb* program.
+
+The specific things you must do in this section are:
+
+* Download an appropriate image for your board from `here <http://www.pynq.io/boards.html>`_ and write it to your SDCard (`PYNQ-Z2 instructions <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_).
+
+* Go through :doc:`Lab: Pynq Memory Mapped IO <PYNQ-example>` example and learn how to write an IP for PYNQ and interact with it.
+
+* Implement your **11-tap** FIR design on PYNQ board.
+
+* Write a host program *host_fir.ipynb*. The expected output is as shown below:
+
+.. image:: https://github.com/KastnerRG/pp4fpgas/raw/master/labs/images/demo1.png
+
+Check `pynq.io <http://www.pynq.io/boards.html>`_ for more info.
 
 12) Grading Rubric
 ------------------
