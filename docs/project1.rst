@@ -259,6 +259,8 @@ Figure 1 shows an example graph of resource usage for eight designs. Figure 2 sh
 
 You must also submit your code. We should be able to run your code and re-produce the results. 
 
+**UCSD students**: Please follow `this link <https://docs.google.com/document/d/1vamnAJ91pljq4jQmap9eUxgFKAawff_kTMgoMBzeW-g/edit?usp=sharing/>`_ for instructions on accepting the Github Classroom50 invitation and creating assignment repos.
+
 You will need to submit one folder per question. Also, please keep a copy of the report in the repo.
 
  - **Report.pdf**
