@@ -184,6 +184,8 @@ Questions 2-7 refers to FIR128. You should have a functionally correct design be
 
   - **(a)** Combine any number of optimizations to get your best throughput. What optimizations did you use to obtain this result? Report the latency, II, throughput (in MHz). It is possible to create a design that outputs a result every cycle, i.e., get one sample per cycle, so a throughput of 100 MHz (assuming a 10 ns clock).
   - **(b)** Report the resource usage of your design with the best throughput. Explain why the resource usage is high compared with the baseline in Question 2.
+
+* **Question 8 - Github Username:** Include the URL of the GitHub Repository of your assignment. Instructions are in section 11.
   
 It is possible that some optimizations have little (or no effect). Some optimizations may only work when used in combination with others. This is what makes the design space exploration process difficult (and interesting).
 
