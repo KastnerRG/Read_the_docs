@@ -21,9 +21,9 @@ You should start this assignment by understanding the 11-tap FIR filter and impl
 
 Before you start, we strongly suggest you familiarize yourself with the high-level synthesis tool.
 
-* Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.amd.com/r/en-US/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps, though they provide a good preview of the optimizations you will find in future projects.
+* Vitis HLS: A good option is this `VitisHLS User Guide <https://docs.amd.com/r/2024.2-English/ug1399-vitis-hls/Introduction>`_. You do not need to go through the optimization steps, though they provide a good preview of the optimizations you will find in future projects.
 
-* Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.amd.com/r/en-US/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
+* Vivado: Xilinx tool for RTL, SoC design (excluding firmware), and FPGA prototyping. It is not required for this project if you are not planning to prototype on Zynq FPGA. `Vivado User Guide: Getting Started <https://docs.amd.com/r/2024.2-English/ug910-vivado-getting-started/Vivado-Design-Suite-Overview>`_
 
 You can follow the `lab tutorials <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example.html>`_ step by step (up to C synthesis and exporting RTL) to complete the Vitis HLS environment setup.
 
@@ -308,10 +308,6 @@ Your repo must contain a "fir" folder at the top level. This folder must be orga
 * Folder **Demo**: (WES students only) host_fir.ipynb | .bit | .hwh
 
 
-Submission
-~~~~~~~~~~
-
-Place your repo on your private Bitbucket or GitHub repository. Give the instructors collaborator or read-only access. Put separate assignments in separate folders; name each folder according to the project. Place your report directly under your project folder.
 
 12) Grading Rubric
 ------------------
