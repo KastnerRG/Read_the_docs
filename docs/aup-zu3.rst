@@ -10,7 +10,9 @@ As tested by the writers of this guide, the getting started guide works for Wind
 1) MacOS Setup
 --------------------------------------------------
 
-By default, the device doesn't properly work on MacOS due to incompatibility with `RNDIS <https://en.wikipedia.org/wiki/RNDIS>`_. This guide is subject to change if the PYNQ image is updated in some way, but for 3.1 it should work.
+By default, the device doesn't properly work on MacOS due to incompatibility with `RNDIS <https://en.wikipedia.org/wiki/RNDIS>`_. This guide is subject to change if the PYNQ image is updated in some way, but for 3.1 it should work. 
+
+If you are at UCSD and enrolled in the class, you should be able to download a (zstd compressed) image that should work for any microSD >= 16GB with the following steps already implemented, and it should also autoexpand to fill the whole card once your device is booted with it. `The link is here <https://ucsdcloud-my.sharepoint.com/:u:/g/personal/dzuberi_ucsd_edu/IQAARi9ywb8WTrAAlJoqZtc_AbtKFOAoWkFD-KTOM-npeyA?e=ua6UA5>`_. You will need to decompress it with zstd and either stream it to dd or write it to your SSD and then write the image with dd, BalenaEtcher, or whatever alternative you would like. Otherwise, or if you would rather go through the steps yourself, proceed with the rest of the guide.
 
 First, you want to write the image from the link above to your Micro SD card, as in the guide. Next, plug a USB-C cable into both your computer and the port in the FPGA board labeled **PROG UART**.
 
