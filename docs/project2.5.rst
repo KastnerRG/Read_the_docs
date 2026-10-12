@@ -70,6 +70,14 @@ The final goal is to implement this phase detector. To achieve this goal, you wi
 
 2. Connect the complex matched filter and CORDIC modules to implement the receiver. Verify this overall design with the given testbench. For the purpose of debugging, if you plot the outputs of this step,you should expect the waveforms as shown in the figure below.
 
+Design ``phasedetector`` to process one I/Q sample per call::
+
+    void phasedetector(data_t I, data_t Q, data_t *R, data_t *Theta);
+
+The testbench calls this function for each of the 1024 input samples and checks all outputs against the golden data. 
+Keep the sample loop in the testbench. 
+Use the provided testbench for C simulation and C/RTL co-simulation (optional).
+
 .. Note:: You are encouraged to modify this implementation code to gain better utilization or throughput.                                                                                              	 Remember to submit modified .cpp and .h files
         
 4) PYNQ Demo

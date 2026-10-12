@@ -43,8 +43,8 @@ int main ()
   float signal_I[SAMPLES];
   float signal_Q[SAMPLES];
 
-  float output_R[SAMPLES];
-  float output_Theta[SAMPLES];
+  data_t output_R[SAMPLES];
+  data_t output_Theta[SAMPLES];
 
   float gold_R[SAMPLES];
   float gold_Theta[SAMPLES];
@@ -69,7 +69,10 @@ int main ()
   }
 
   //Call the HLS block
-  phasedetector(signal_I, signal_Q, output_R, output_Theta, SAMPLES);
+  for (i = 0; i < SAMPLES; i++)
+  {
+    phasedetector(signal_I[i], signal_Q[i], &output_R[i], &output_Theta[i]);
+  }
 
   for (i = 0; i < SAMPLES;i++)
   {

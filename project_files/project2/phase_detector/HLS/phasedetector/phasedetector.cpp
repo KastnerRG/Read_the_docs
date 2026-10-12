@@ -5,7 +5,6 @@
 	INPUT:
 		I: signal for I sample
 		Q: signal for Q sample
-		length: array size
 
 	OUTPUT:
 		R: Radius
@@ -16,13 +15,11 @@
 #include "phasedetector.h"
 
 void phasedetector (
-  data_t *I,
-  data_t *Q,
+  data_t I,
+  data_t Q,
 
   data_t *R,
-  data_t *Theta,
-
-  int length
+  data_t *Theta
   ){
 
 	// Write your code here

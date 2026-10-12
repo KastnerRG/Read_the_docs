@@ -19,13 +19,11 @@ typedef float data_t;
 typedef float acc_t;
 
 void phasedetector (
-  data_t *I,
-  data_t *Q,
+  data_t I,
+  data_t Q,
 
   data_t *R,
-  data_t *Theta,
-
-  int length
+  data_t *Theta
   );
 
 void cordiccart2pol(data_t x, data_t y, data_t * r, data_t * theta);
