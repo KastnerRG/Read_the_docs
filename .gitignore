@@ -1,11 +1,38 @@
-# hls projects
+# HLS build outputs
 **/*.proj/
+**/*.prj/
 **/*.comp/
 **/logs/
 *.rpt
 *.tcl
 *.log
+*.jou
 out.dat
 workspace/
 project_*/
 !project_files/
+
+# Course Tcl sources
+!project_files/scripts/*.tcl
+!**/script.tcl
+!**/directives.tcl
+
+# Board definitions and generated Vivado projects
+/board_files/
+**/build/
+.Xil/
+*.str
+ps7_summary.html
+psu_summary.html
+
+# Host compilation and Python/Jupyter caches
+*.o
+*_test.bin
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local documentation builds
+/docs/_build/
+*.ini
+!**/__hls_config__.ini

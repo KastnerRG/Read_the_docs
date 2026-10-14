@@ -10,7 +10,12 @@ Parallel Programming for FPGAs: Projects and Labs
 
 While writing the book, we developed projects and labs for the students to learn the HLS tools and to build real systems using FPGAs. This serves a general one stop shop for those projects and labs. The projects and labs have a direct correspondance to the chapters in this book and were written to accompany each other.
 
-The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xilinx/PYNQ>`_ and `Intel's DevCloud <https://software.intel.com/content/www/us/en/develop/tools/devcloud.html>`_ to deploy HLS code onto an FPGA. The Xilinx labs/projects target the `PYNQ-Z2 board <http://www.pynq.io/boards.html>`_. Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the Pynq setup. If needed, it is possible `wirelessly access the Pynq-Z2 <https://www.nengo.ai/nengo-pynq/connect.html#via-a-computer>`_. DevCloud provides access to the tools and FPGAs remotely.
+The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xilinx/PYNQ>`_ and `Intel's DevCloud <https://software.intel.com/content/www/us/en/develop/tools/devcloud.html>`_ to deploy HLS code onto an FPGA.
+The AMD HLS labs/projects support the `PYNQ-Z2 board <http://www.pynq.io/boards.html>`_ and the `AUP-ZU3 board <https://xilinx.github.io/AUP-ZU3/>`_.
+Use ``TARGET=pynq`` (the default) or ``TARGET=zu3`` with the Makefiles; see :doc:`ZU3-example` for build commands, board presets, and AUP-ZU3 setup.
+Please follow this `link <https://pynq.readthedocs.io/en/latest/getting_started/pynq_z2_setup.html>`_ for the PYNQ-Z2 setup.
+If needed, it is possible to `wirelessly access the Pynq-Z2 <https://www.nengo.ai/nengo-pynq/connect.html#via-a-computer>`_.
+DevCloud provides access to the tools and FPGAs remotely.
 
 .. toctree::
    :maxdepth: 2
@@ -28,6 +33,7 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    project7
    project8
    PYNQ-example
+   ZU3-example
    vitis_unified
    PYNQ-example-legacy
    axidma_single
@@ -36,5 +42,4 @@ The projects and labs use the `Xilinx PYNQ infrastructure <https://github.com/Xi
    interrupts
    microblaze.ipynb
    devcloud
-   aup-zu3
 

@@ -12,6 +12,8 @@ You do have the option to use the GUI of Vitis Unified IDE. We'll cover it `here
 
 If you're curious about GUI-based classic Vitis HLS, check `here <https://pp4fpgas.readthedocs.io/en/latest/PYNQ-example-legacy.html>`_ for a the legacy version of this lab using GUI with Xilinx Vivado and Vitis HLS 2022.2.
 
+For students using AUP-ZU3, follow :doc:`ZU3-example` for the corresponding board preset, Vivado screenshots, and downloadable notebook.
+
 0) Vivado Design suite installation
 ------------------------------------
 
