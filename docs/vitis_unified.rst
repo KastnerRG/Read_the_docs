@@ -73,8 +73,8 @@ After running ``make report``, you already have a component folder with all the 
   - fir.comp - This folder contains all artifacts of C simulation and C synthesis. 
 
 
-3) Visulaize Simulationand Synthesis Results
----------------------------------------------
+3) Visulaize Simulation and Synthesis Results
+----------------------------------------------
 
 In Vitis 2024 and on, an HLS project is called a "component". A complete system project working on a board might have many components connected to each other across heterogeneous compute domains.
 
@@ -84,12 +84,16 @@ You can use the Visit GUI app to find an existing component and visualize the de
 
 Click "Update" if you see this error.
 
-Go to step to see the features you can use with Vitis GUI app.
+.. image:: ./image/Update.png
+
+Go to **Step 5** to see the features you can use with Vitis GUI app.
 
 4) Start a Component from Scratch
 ---------------------------------
 
-At welcome page, select **Open workspace** and create a new workspace folder. One convinient option would be just to creat a folder local to your fir11 source files.
+**Alternatively,** you can also choose to create a HLS component with Vitis GUI app
+
+At the welcome page, select **Open workspace** and create a new workspace folder. One convinient option would be just to creat a folder local to your fir11 source files.
 
 .. image:: ./image/lab1/vitis-welcome.png
 .. image:: ./image/lab1/workspace.png
@@ -112,10 +116,13 @@ Now, you can see the opntions at the bottom-left corner, including C simulation,
 
 .. image:: ./image/lab1/options.png
 
-Simply click on the button to run simulation & synthesis. 
+5) Features
+------------
 
+.. image:: ./image/Visualization.png
 
+The top-left sections contains project settings, source and testbench files. You can configure and edit them as needed.
 
-There are some advanced GUI features that you can explore, such as code analysis and function call graph. This could give you a better understanding of the code structure and performance (e.g., how well are they pipelined).
+There are some advanced GUI features that you can explore in bottom-left, such as code analysis and function call graph. This could give you a better understanding of the code structure and performance (e.g., how well are they pipelined).
 
-.. image:: ./image/lab1/info.png
+You can also run C simulation and C synthesis by clicking on the buttons in Vitis.
