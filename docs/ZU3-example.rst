@@ -4,10 +4,12 @@ Lab: AUP-ZU3 Memory Mapped IO (s_axilite)
 This is the AUP-ZU3 version of :doc:`PYNQ-example`, using the same Lab 1 C++ source in ``project_files/lab1``.
 We build the function :math:`f(x) = 2x` as an AXI-Lite accelerator, connect it to the ARM processing system, generate a bitstream, and prepare a PYNQ notebook to call it.
 The screenshots were captured from a real Vivado 2024.1 GUI on the remote desktop.
-The desktop flow has been checked through bitstream generation; the notebook is provided without saved on-board execution results.
+The course boards are the **4 GB** AUP-ZU3; every step below assumes that board.
+The overlay and notebook code have been run on a 4 GB AUP-ZU3 with the PYNQ 3.1.1 image.
+To set up the board itself (SD card image, cables, Jupyter), see :ref:`zu3-board-setup`.
 
-0) Tools and board setup
-------------------------
+0) Build tools setup
+--------------------
 
 Install Vivado and Vitis with support for Zynq UltraScale+ MPSoC devices, or use the course's existing installation.
 See the installation resources in :doc:`PYNQ-example` for the general tool setup.
@@ -37,10 +39,8 @@ The ``pp4fpga`` environment is for building on the host; the notebook runs in th
 Board presets
 ~~~~~~~~~~~~~
 
-Select the preset that matches the physical board's DDR capacity.
-The default is ``realdigital.org:aup-zu3-4gb:part0:1.0``.
-Use ``ZU3_DDR=8gb`` with Make for the 8 GB board.
-Both boards use the same FPGA part, but their processing-system presets differ.
+The course boards use the 4 GB preset ``realdigital.org:aup-zu3-4gb:part0:1.0``, which is the Make default.
+Vivado also lists an 8 GB preset; do not select it, because its processing-system and DDR settings do not match the 4 GB board.
 
 HLS synthesis and IP export only need the FPGA device support installed with the AMD tools.
 Bitstream generation also needs the board preset to configure the processing system and DDR correctly.
@@ -49,10 +49,6 @@ If it is missing, it downloads the `Real Digital board files <https://github.com
 Run this once before the manual GUI walkthrough to prepare the IP and, if necessary, the board files::
 
   make block-design TARGET=zu3
-
-For an 8 GB board, use::
-
-  make block-design TARGET=zu3 ZU3_DDR=8gb
 
 If Make downloaded the presets, start the GUI from ``project_files/lab1`` and enter the following in its Tcl Console before opening the New Project wizard::
 
@@ -126,7 +122,6 @@ You can build the complete overlay directly from the terminal::
   make bitstream TARGET=zu3
 
 This writes matching ``build/zu3/mul.bit`` and ``build/zu3/mul.hwh`` files.
-For an 8 GB board, add ``ZU3_DDR=8gb``.
 To inspect this generated project, open ``build/zu3/vivado/overlay.xpr`` in Vivado.
 
 The following GUI walkthrough covers the same stages as the PYNQ-Z2 lab.
@@ -161,15 +156,14 @@ The HLS IP will be imported after the project is created.
 
    Create an RTL project without adding source files yet.
 
-On the **Default Part** page, switch to **Boards** and choose **Zynq UltraScale+ AUP-ZU3 4GB Development Board**.
-Choose the 8 GB entry if that matches your hardware.
+On the **Default Part** page, switch to **Boards** and choose **Zynq UltraScale+ AUP-ZU3 4GB Development Board** (not the 8GB entry).
 Confirm the device is ``xczu3eg-sfvc784-2-e``.
 
 .. figure:: image/zu3_lab1/board_selection.png
    :alt: AUP-ZU3 4 GB and 8 GB board presets in the Vivado board selector.
    :width: 100%
 
-   Select the board preset for your DDR capacity.
+   Select the 4 GB board preset.
 
 Click **Next**, check the project summary, and click **Finish**.
 
@@ -412,19 +406,63 @@ The `PYNQ Overlay documentation <https://pynq.readthedocs.io/en/v3.1/pynq_librar
 3.1) Set up the board
 ~~~~~~~~~~~~~~~~~~~~~
 
-Follow the `official AUP-ZU3 getting-started guide <https://xilinx.github.io/AUP-ZU3/getting_started.html>`_ to prepare the board.
-Download the PYNQ image matching its 4 GB or 8 GB DDR capacity and write it to a microSD card; 16 GB or larger is recommended.
-The course's PYNQ 3.1 setup notes use the `AUP-ZU3 3.1.1 4 GB image <https://download.amd.com/opendownload/pynq/AUP-ZU3-3.1.1-4gb.zip>`_ for the 4 GB board.
-For other memory configurations or image versions, use the downloads linked from the official guide.
+You need:
 
-Set the BOOT switch to SD, insert the prepared card, connect the board to the host, and supply power as described in the guide.
-Wait for the board's boot sequence to complete.
-The original course setup was tested with USB-C networking on Windows and Linux.
-For macOS with the PYNQ 3.1 image, follow the USB networking steps below.
+* the 4 GB AUP-ZU3 board and a USB-C power adapter that supports USB Power Delivery at 9 V / 3 A (the 45 W adapter from the board kit works);
+* a microSD card of 16 GB or larger;
+* a USB cable from your computer to the board's USB-C port (USB-C to USB-C, or USB-A to USB-C).
 
-Once the board is running, open its Jupyter interface.
-For USB Ethernet gadget networking, the official guide uses ``http://192.168.3.1/lab``.
-Use the board's assigned address if you connect through a different network.
+**Download the image.**
+Download the `PYNQ 3.1.1 image for the 4 GB AUP-ZU3 <https://df5xthistukvx.cloudfront.net/AUP-ZU3-3.1.1-4GB-21Apr2026.tar.gz>`_ (about 2.2 GB).
+It is listed as "PYNQ for ZU3 V4 boards - 4G" on `Real Digital's AUP-ZU3 page <https://www.realdigital.org/hardware/aup-zu3>`_; get it from there if the direct link stops working.
+Do not use an 8 GB image on the course boards.
+
+**Write the image to the microSD card.**
+The download is a compressed archive, not the card image itself.
+Extract the image file from it; the ``tar`` command is built into Windows 10/11, macOS, and Linux::
+
+  tar -xzf AUP-ZU3-3.1.1-4GB-21Apr2026.tar.gz AUP-ZU3-3.1.1-4gb.img
+
+This produces ``AUP-ZU3-3.1.1-4gb.img`` (about 9.8 GB).
+The archive also contains a ``boot/`` folder, which you do not need.
+Write the ``.img`` file to the microSD card with `balenaEtcher <https://etcher.balena.io/>`_ or another disk-image writer.
+Writing erases the card, so double-check that you selected the microSD card and not another drive.
+Afterwards, Windows may say the card must be formatted before it can be used; click **Cancel**, because formatting would erase the image.
+
+**Connect the board.**
+The connectors used here are along the top edge of the board:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Connector (board label)
+     - Use
+   * - **EXT PWR** (USB-C, top right)
+     - Power adapter.
+   * - **USB 3.0 DRP** (two USB-C ports, top left, next to the Mini DisplayPort)
+     - Your computer. PYNQ makes the board appear as a USB network adapter, which is how you reach Jupyter.
+   * - **PROG UART** (USB-C, between the DRP ports and the SD slot)
+     - Optional: serial console (115200 baud) and JTAG for Vivado. It does **not** give you Jupyter.
+
+#. Set the **BOOT** switch, next to the microSD slot, to **SD**.
+#. Insert the microSD card.
+#. Connect one of the **USB 3.0 DRP** ports to your computer.
+#. Connect the power adapter to **EXT PWR**.
+#. Turn on the power switch in the top-right corner.
+
+The **ON** LED and two PS LEDs light immediately, and one PS LED blinks in a heartbeat pattern.
+After about 30-60 seconds the **DONE** LED turns on, and a few seconds later the user and RGB LEDs flash.
+The board is then ready.
+
+**Open Jupyter.**
+On Windows and Linux, the board appears as a new USB network adapter on your computer.
+On macOS, complete section 3.2 first.
+Open ``http://192.168.3.1/lab`` in Chrome, Firefox, or Edge and log in with the password ``xilinx``.
+If the page does not load, wait another minute, then try the other USB 3.0 DRP port.
+If you connect the board through a different network instead, use the board's assigned address.
+
+For more detail, see the `official AUP-ZU3 getting-started guide <https://xilinx.github.io/AUP-ZU3/getting_started.html>`_.
 
 3.2) macOS USB networking with PYNQ 3.1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -469,6 +507,7 @@ After rebooting, use the board's **USB 3.0 DRP I** networking port to connect to
 3.3) Inspect the USB networking configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+This section is optional background; you do not need it to run the lab.
 The original course guide found the macOS workaround by inspecting the board's USB gadget service and startup script.
 On the board, inspect the service with::
 
@@ -496,8 +535,10 @@ Inspect the service and script if you are adapting these steps to a different PY
 3.4) Run the Lab 1 notebook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Download :download:`the Lab 1 ZU3 notebook <../project_files/lab1/demo/mul_zu3.ipynb>` and upload it alongside ``mul.bit`` and ``mul.hwh`` into one directory on the board.
-Use either the Make-generated pair or the manual-project pair.
+Download :download:`the Lab 1 ZU3 notebook <../project_files/lab1/demo/mul_zu3.ipynb>`.
+In Jupyter's file browser on the board, create a new folder (for example ``lab1``), open it, and use the **Upload** button to add ``mul_zu3.ipynb``, ``mul.bit``, and ``mul.hwh``.
+All three files must be in the same folder.
+Use either the Make-generated pair or the manual-project pair of ``mul.bit`` and ``mul.hwh``.
 Open the notebook with the board's PYNQ Python kernel and run its cells in order.
 
 The notebook loads the overlay, finds ``mul_0`` through the hardware metadata, and prints its register map:
@@ -521,9 +562,7 @@ For example:
    assert result == 10
    print(result)
 
-The expected result is ``10``.
-This is an expected value, not a recorded board measurement.
-No board notebook screenshot is included yet because hardware was unavailable during preparation of this walkthrough.
+The expected result is ``10``, and every value in the notebook's test list should print twice its input with no assertion errors.
 Save the notebook with its real outputs after all assertions pass on your board.
 
 4) Troubleshooting
@@ -560,7 +599,7 @@ AUP-ZU3 is missing from the board selector
 
 Run ``make block-design TARGET=zu3`` and check whether the preset was downloaded into ``board_files/``.
 Register the board repository in the GUI Tcl Console as shown in section 0, then reopen the wizard.
-Select the board entry matching your DDR capacity.
+Select the 4 GB entry.
 See :ref:`zu3-board-presets` for custom ``BOARD_REPO`` paths.
 
 The notebook cannot find the IP, or a call times out
