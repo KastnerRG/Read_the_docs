@@ -10,7 +10,21 @@ ifeq ($(USE_VITIS),1)
 HLS_COMPILER ?= vitis-run --mode hls --tcl
 # Vitis 2025 bundles HLS without exposing a vitis_hls launcher on PATH.
 VITIS_HLS_PATH ?= $(shell command -v vitis_hls 2>/dev/null || command -v vitis-run 2>/dev/null)
-VHLS ?= $(abspath $(dir $(VITIS_HLS_PATH))/..)
+VITIS_RUN_PATH ?= $(shell command -v vitis-run 2>/dev/null)
+# HLS headers live in Vitis/<ver>/include, but 2024.x launches vitis_hls from
+# Vitis_HLS/<ver>/bin, so probe each candidate root for ap_int.h.
+VITIS_HLS_ROOT := $(abspath $(dir $(VITIS_HLS_PATH))/..)
+VHLS_CANDIDATES := $(XILINX_HLS) $(VITIS_HLS_ROOT) \
+  $(abspath $(VITIS_HLS_ROOT)/../../Vitis/$(notdir $(VITIS_HLS_ROOT))) \
+  $(if $(VITIS_RUN_PATH),$(abspath $(dir $(VITIS_RUN_PATH))/..)) $(XILINX_VITIS)
+VHLS ?= $(or $(firstword $(foreach d,$(VHLS_CANDIDATES),$(if $(wildcard $(d)/include/ap_int.h),$(d)))),$(VITIS_HLS_ROOT))
+ifeq ($(wildcard $(VHLS)/include/ap_int.h),)
+ifeq ($(strip $(VITIS_HLS_PATH)),)
+$(warning Could not find "vitis_hls" or "vitis-run" on PATH; C++ testbenches will not find HLS headers)
+else ifneq ($(wildcard $(VITIS_HLS_PATH)),)
+$(warning No include/ap_int.h under VHLS=$(VHLS); set VHLS=<Vitis install dir>)
+endif
+endif
 else
 HLS_COMPILER ?= vivado_hls -f
 VHLS ?= $(shell vivado_hls -r)

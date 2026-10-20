@@ -36,3 +36,4 @@ __pycache__/
 /docs/_build/
 *.ini
 !**/__hls_config__.ini
+untracked
