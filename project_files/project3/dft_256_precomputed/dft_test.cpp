@@ -72,7 +72,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R.error, rmse_I.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R.error > 0.1 || rmse_I.error > 0.1 ) {
+	if (!(rmse_R.error <= 0.1) || !(rmse_I.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "FAIL: Output DOES NOT match the golden output\n");
 		fprintf(stdout, "*******************************************\n");

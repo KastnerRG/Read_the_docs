@@ -139,7 +139,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R2.error, rmse_I2.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R2.error > 0.1 || rmse_I2.error > 0.1 ) {
+	if (!(rmse_R2.error <= 0.1) || !(rmse_I2.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 2 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -171,7 +171,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R3.error, rmse_I3.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R3.error > 0.1 || rmse_I3.error > 0.1 ) {
+	if (!(rmse_R3.error <= 0.1) || !(rmse_I3.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 3 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -203,7 +203,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R4.error, rmse_I4.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R4.error > 0.1 || rmse_I4.error > 0.1 ) {
+	if (!(rmse_R4.error <= 0.1) || !(rmse_I4.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 4 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -235,7 +235,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R5.error, rmse_I5.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R5.error > 0.1 || rmse_I5.error > 0.1 ) {
+	if (!(rmse_R5.error <= 0.1) || !(rmse_I5.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 5 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -267,7 +267,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R6.error, rmse_I6.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R6.error > 0.1 || rmse_I6.error > 0.1 ) {
+	if (!(rmse_R6.error <= 0.1) || !(rmse_I6.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 6 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -299,7 +299,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R7.error, rmse_I7.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R7.error > 0.1 || rmse_I7.error > 0.1 ) {
+	if (!(rmse_R7.error <= 0.1) || !(rmse_I7.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 7 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -331,7 +331,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R8.error, rmse_I8.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R8.error > 0.1 || rmse_I8.error > 0.1 ) {
+	if (!(rmse_R8.error <= 0.1) || !(rmse_I8.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 8 FAIL\n");
 		fprintf(stdout, "*******************************************\n");
@@ -363,7 +363,7 @@ int main()
 	printf("%0.15f %0.15f\n", rmse_R9.error, rmse_I9.error);
 	printf("----------------------------------------------\n");
 
-	if (rmse_R9.error > 0.1 || rmse_I9.error > 0.1 ) {
+	if (!(rmse_R9.error <= 0.1) || !(rmse_I9.error <= 0.1)) {
 		fprintf(stdout, "*******************************************\n");
 		fprintf(stdout, "Stage 9 FAIL\n");
 		fprintf(stdout, "*******************************************\n");

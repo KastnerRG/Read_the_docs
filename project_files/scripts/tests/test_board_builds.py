@@ -81,7 +81,9 @@ class BoardBuildTests(unittest.TestCase):
                 "from pathlib import Path\nimport re, sys\n"
                 "script = Path(sys.argv[1]).read_text()\n"
                 "component = re.search(r'open_component (\\S+)', script).group(1)\n"
-                "Path(component).mkdir(exist_ok=True)\n"
+                "report = Path(component, 'hls/syn/report/mul_csynth.rpt')\n"
+                "report.parent.mkdir(parents=True, exist_ok=True)\n"
+                "report.touch()\n"
                 "with open('build_calls', 'a') as calls: calls.write(component + '\\n')\n"
             )
             args = [f"GEN_TCL={SCRIPTS / 'gen_hls_runner_script.py'}",
@@ -119,9 +121,67 @@ class BoardBuildTests(unittest.TestCase):
                                     cwd=directory, capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertFalse((directory / "mul_zu3.comp/.csynth").exists())
-            output = self.run_command([*args, "HLS_COMPILER=echo SYNTHESIS_RETRIED"], directory)
+            retried_hls = directory / "retry.py"
+            retried_hls.write_text(
+                "from pathlib import Path\nimport sys\nprint('SYNTHESIS_RETRIED', sys.argv[1])\n"
+                "report = Path('mul_zu3.comp/hls/syn/report/mul_csynth.rpt')\n"
+                "report.parent.mkdir(parents=True, exist_ok=True)\nreport.touch()\n"
+            )
+            output = self.run_command([*args, f"HLS_COMPILER={sys.executable} {retried_hls}"], directory)
             self.assertIn("SYNTHESIS_RETRIED mul_zu3.tcl", output)
             self.assertTrue((directory / "mul_zu3.comp/.csynth").exists())
+
+    def test_tools_that_exit_zero_without_output_fail_the_build(self):
+        # vitis-run and vivado exit 0 when they cannot load libtinfo.so.5 on ieng6.
+        # Each failure must also leave the previous good output where it was.
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for filename in ("Makefile", "__hls_config__.ini", "mul.cpp", "mul.h", "mul_test.cpp"):
+                shutil.copy(PROJECTS / "lab1" / filename, directory)
+            args = ["make", "--no-print-directory", "VITIS_HLS_PATH=/tmp/vitis_hls",
+                    f"GEN_TCL={SCRIPTS / 'gen_hls_runner_script.py'}", f"PYTHON={sys.executable}",
+                    "TARGET=zu3"]
+            stale_report = directory / "mul_zu3.comp/hls/syn/report/mul_csynth.rpt"
+            stale_report.parent.mkdir(parents=True)
+            stale_report.write_text("previous report\n")
+            result = subprocess.run([*args, "HLS_COMPILER=true", "hls"],
+                                    cwd=directory, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("libtinfo.so.5", result.stderr)
+            self.assertFalse((directory / "mul_zu3.comp/.csynth").exists())
+            self.assertEqual(stale_report.read_text(), "previous report\n")
+
+            (directory / "mul_zu3.comp/.csynth").touch()
+            ip_xml = directory / "mul_zu3.comp/hls/impl/ip/component.xml"
+            ip_xml.parent.mkdir(parents=True)
+            ip_xml.write_text("previous ip\n")
+            result = subprocess.run([*args, "HLS_COMPILER=true", "ip"],
+                                    cwd=directory, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("component.xml", result.stderr)
+            self.assertEqual(ip_xml.read_text(), "previous ip\n")
+
+            fake_export = directory / "export.py"
+            fake_export.write_text(f"from pathlib import Path\nPath('{ip_xml}').touch()\n")
+            stale_bit = directory / "build/zu3/mul.bit"
+            stale_bit.parent.mkdir(parents=True)
+            stale_bit.write_text("previous bit\n")
+            for vivado in ("true", "false"):  # exits 0 without output, or fails outright
+                result = subprocess.run([*args, f"HLS_COMPILER={sys.executable} {fake_export}",
+                                         f"VIVADO={vivado}", "bitstream"],
+                                        cwd=directory, capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                if vivado == "true":
+                    self.assertIn("build/zu3/mul.bit", result.stderr)
+                self.assertEqual(stale_bit.read_text(), "previous bit\n")
+                self.assertFalse(stale_bit.with_suffix(".bit.prev").exists())
+
+            fake_vivado = directory / "vivado.py"
+            fake_vivado.write_text("from pathlib import Path\nPath('build/zu3/mul.bit').write_text('new bit\\n')\n")
+            self.run_command([*args, f"HLS_COMPILER={sys.executable} {fake_export}",
+                              f"VIVADO={sys.executable} {fake_vivado}", "bitstream"], directory)
+            self.assertEqual(stale_bit.read_text(), "new bit\n")
+            self.assertFalse(stale_bit.with_suffix(".bit.prev").exists())
 
 
     def test_axi_burst_uses_32_bit_addresses_only_on_pynq(self):

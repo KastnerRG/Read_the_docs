@@ -52,15 +52,21 @@ HLS_COMPONENT := $(TOP)$(HLS_SUFFIX).comp
 HLS_STAMP := $(HLS_COMPONENT)/.csynth
 HLS_SCRIPT := $(TOP)$(HLS_SUFFIX).tcl
 HLS_EXPORT := export_$(TOP)$(HLS_SUFFIX).tcl
+HLS_REPORT := $(HLS_COMPONENT)/hls/syn/report/$(TOP)_csynth.rpt
+HLS_IP_XML := $(HLS_COMPONENT)/hls/impl/ip/component.xml
 OVERLAY_DIR := $(CURDIR)/build/$(TARGET)
 BD_TCL ?= $(BOARD_SCRIPTS)overlay.tcl
 .DEFAULT_GOAL := hls
+
+# vitis-run and vivado can exit 0 when they fail to start, so each tool step
+# runs through this wrapper, which fails unless the tool wrote a new output.
+RUN_CHECKED = sh $(BOARD_SCRIPTS)run_checked.sh
 
 $(HLS_SCRIPT): $(wildcard *.cpp *.h *.hpp directives.tcl) $(HLS_CONFIG_FILE) $(GEN_TCL) $(MAKEFILE_LIST)
 	$(PYTHON) $(GEN_TCL) -c $(HLS_CONFIG_FILE) -i $(HLS_INPUT) -o $@ --part $(FPGA_PART) --component $(HLS_COMPONENT) $(HLS_FLAGS)
 
 $(HLS_STAMP): $(HLS_SCRIPT)
-	$(HLS_COMPILER) $<
+	$(RUN_CHECKED) "$(HLS_REPORT)" "HLS synthesis" $(HLS_COMPILER) $<
 	touch $@
 
 hls: $(HLS_STAMP)
@@ -73,12 +79,16 @@ ip: hls
 	@printf '%s\n' 'open_component $(HLS_COMPONENT)' \
 	  'export_design -format ip_catalog -rtl verilog -vendor xilinx.com -library hls -version 1.0 -ipname $(TOP)' \
 	  'exit' > $(HLS_EXPORT)
-	$(HLS_COMPILER) $(HLS_EXPORT)
+	$(RUN_CHECKED) "$(HLS_IP_XML)" "HLS IP export" $(HLS_COMPILER) $(HLS_EXPORT)
 
 board-ip: ip
 
+# block-design leaves only the Vivado project; bitstream also copies out the overlay.
+block-design: BOARD_OUTPUT = $(OVERLAY_DIR)/vivado/overlay.xpr
+bitstream: BOARD_OUTPUT = $(OVERLAY_DIR)/$(TOP).bit
 block-design bitstream: ip
-	PP4FPGA_HOST_LD_LIBRARY_PATH="$${LD_LIBRARY_PATH-}" $(VIVADO) -mode batch -source "$(BOARD_SCRIPTS)build_bitstream.tcl" \
+	$(RUN_CHECKED) "$(BOARD_OUTPUT)" "Vivado $@" \
+	  env PP4FPGA_HOST_LD_LIBRARY_PATH="$${LD_LIBRARY_PATH-}" $(VIVADO) -mode batch -source "$(BOARD_SCRIPTS)build_bitstream.tcl" \
 	  -tclargs "$(TARGET)" "$(FPGA_PART)" "$(BOARD_PART)" "$(BOARD_REPO)" \
 	  "$(CURDIR)/$(HLS_COMPONENT)/hls/impl/ip" "$(TOP)" "$(OVERLAY_DIR)" "$(JOBS)" "$(BD_TCL)" "$@" \
 	  "$(BOARD_CACHE)" "$(BOARD_PYTHON)"

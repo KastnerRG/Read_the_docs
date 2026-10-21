@@ -52,9 +52,9 @@ include $(dir $(GEN_TCL))boards.mk
 %.o: %.cpp
 	$(CXX) -I$(VHLS)/include -c $< -o $@
 
-%_test.bin: %_test.cpp $(NON_TEST_CPP)
+%_test.bin: %_test.cpp $(NON_TEST_CPP) $(wildcard *.h *.hpp)
 	# Link the test executable against the testbench and all non-test sources.
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(CXX) -I$(VHLS)/include $^ -g -o $@
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(CXX) -I$(VHLS)/include $(filter %.cpp,$^) -g -o $@
 
 #  missing cos_table and sin_table definition. No testbench files available
 #	dft.c \

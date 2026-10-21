@@ -30,8 +30,8 @@ $(warning $(EXAMPLES_LOG))
 %.o: %.cpp
 	$(CXX) -I$(VHLS)/include -c $< -o $@
 
-%_test.bin: %_test.cpp %.cpp 
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(CXX) -I$(VHLS)/include $? -g -o $@
+%_test.bin: %_test.cpp %.cpp $(wildcard *.h *.hpp)
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(CXX) -I$(VHLS)/include $(filter %.cpp,$^) -g -o $@
 
 #  missing cos_table and sin_table definition. No testbench files available
 #	dft.c \
