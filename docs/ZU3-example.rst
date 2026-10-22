@@ -3,7 +3,7 @@ Lab: AUP-ZU3 Memory Mapped IO (s_axilite)
 
 This is the AUP-ZU3 version of :doc:`PYNQ-example`, using the same Lab 1 C++ source in ``project_files/lab1``.
 We build the function :math:`f(x) = 2x` as an AXI-Lite accelerator, connect it to the ARM processing system, generate a bitstream, and prepare a PYNQ notebook to call it.
-The screenshots were captured from a real Vivado 2024.1 GUI on the remote desktop.
+The screenshots were captured from a real Vivado 2024.1 GUI.
 The course boards are the **4 GB** AUP-ZU3; every step below assumes that board.
 The overlay and notebook code have been run on a 4 GB AUP-ZU3 with the PYNQ 3.1.1 image.
 To set up the board itself (SD card image, cables, Jupyter), see :ref:`zu3-board-setup`.
@@ -11,28 +11,20 @@ To set up the board itself (SD card image, cables, Jupyter), see :ref:`zu3-board
 0) Build tools setup
 --------------------
 
-Install Vivado and Vitis with support for Zynq UltraScale+ MPSoC devices, or use the course's existing installation.
-See the installation resources in :doc:`PYNQ-example` for the general tool setup.
-This walkthrough uses version 2024.1 and the ``xczu3eg-sfvc784-2-e`` device.
+This walkthrough uses Vivado and Vitis 2024.1 and the ``xczu3eg-sfvc784-2-e`` device.
 
-If you do not already have the build environment, create it once with Conda::
+Make sure you have Vivado and Vitis in your ``PATH``.
+Each of these commands should print a path::
 
-  conda create -n pp4fpga python=3.11 numpy=1.26 zlib
+  command -v vivado
+  command -v vitis-run
+  command -v python3
 
-On waiter, activate the Python environment and source both tool settings before running Make::
+Then go to the lab folder::
 
-  source ~/.bashrc
-  conda activate pp4fpga
-  source /tools/Xilinx/Vivado/2024.1/settings64.sh
-  source /tools/Xilinx/Vitis_HLS/2024.1/settings64.sh
-  cd ~/scratch/Read_the_docs/project_files/lab1
-  command -v python3 vitis-run vivado
+  cd Read_the_docs/project_files/lab1
 
-If your account has the ``x24`` alias, you can use it to source both settings scripts.
-
-On another machine, use the corresponding settings scripts for your installation.
-A working Python 3 executable must be on ``PATH``.
-The ``pp4fpga`` environment is for building on the host; the notebook runs in the board's PYNQ Python environment.
+The notebook runs in the board's PYNQ Python environment.
 
 .. _zu3-board-presets:
 
@@ -67,20 +59,6 @@ For custom or manually downloaded board definitions, pass ``BOARD_REPO=/absolute
 This path is added to Vivado's existing board repositories.
 With an explicit ``BOARD_REPO``, the requested preset must be available there or already installed; the build does not download a replacement repository.
 Use ``BOARD_PART=<vendor>:<board>:part0:<version>`` if your preset has a different identifier.
-
-Working through SSH and RDP
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The build can run in an SSH terminal while Vivado opens on your remote desktop.
-On waiter, the desktop used for these screenshots was ``:11.0``::
-
-  export DISPLAY=:11.0
-  export XAUTHORITY="$HOME/.Xauthority"
-  vivado -mode gui
-
-Use the ``DISPLAY`` value from a terminal inside your own RDP desktop; it can change between sessions.
-Keep that desktop unlocked while following the GUI steps.
-No second VS Code installation is needed on the desktop.
 
 1) Vitis HLS: C/C++ to RTL
 --------------------------
@@ -535,6 +513,15 @@ Inspect the service and script if you are adapting these steps to a different PY
 3.4) Run the Lab 1 notebook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Copy ``mul.bit`` and ``mul.hwh`` from the build server to your own computer with ``scp``.
+Run these commands in a terminal on your computer, not on the server.
+For example, with ieng6 as the server and the repository cloned in your home directory::
+
+  scp <username>@ieng6.ucsd.edu:~/Read_the_docs/project_files/lab1/build/zu3/mul.bit .
+  scp <username>@ieng6.ucsd.edu:~/Read_the_docs/project_files/lab1/build/zu3/mul.hwh .
+
+For the manual project, use ``build/zu3_gui`` instead of ``build/zu3``.
+
 Download :download:`the Lab 1 ZU3 notebook <../project_files/lab1/demo/mul_zu3.ipynb>`.
 In Jupyter's file browser on the board, create a new folder (for example ``lab1``), open it, and use the **Upload** button to add ``mul_zu3.ipynb``, ``mul.bit``, and ``mul.hwh``.
 All three files must be in the same folder.
@@ -571,28 +558,7 @@ Save the notebook with its real outputs after all assertions pass on your board.
 ``vitis-run`` or ``python3`` is missing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Activate ``pp4fpga`` and source both tool settings in the same shell used for Make, as shown in section 0.
-Check ``command -v python3 vitis-run vivado``.
-On another host, source that host's tool settings and provide a Python 3 environment.
-
-``libz.so.1`` is missing, followed by ``Unsupported architecture``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-On waiter, the ``pp4fpga`` activation hook adds the environment's library directory to ``LD_LIBRARY_PATH``.
-Run ``conda activate pp4fpga`` before invoking the AMD tools.
-For a newly created environment on waiter without that hook, activate it and add its runtime library directory in the build shell::
-
-  conda activate pp4fpga
-  export LD_LIBRARY_PATH="$CONDA_PREFIX/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-
-If the prepared environment was already active before the hook was installed, deactivate and reactivate it::
-
-  conda deactivate
-  conda activate pp4fpga
-  ldd "$(command -v uname)"
-
-The architecture message is a consequence of the launcher failing to run its host utilities.
-Fix the missing runtime library first.
+Check ``command -v python3 vitis-run vivado`` in the shell used for Make, as shown in section 0.
 
 AUP-ZU3 is missing from the board selector
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -639,7 +605,7 @@ For example, from the repository root::
   make -C project_files/project5_bnn/hls hls TARGET=zu3
   make -C project_files/lab1 bitstream TARGET=zu3
 
-Source the AMD tool settings and ensure ``python3`` is on your PATH as described in section 0.
+Check that the AMD tools and ``python3`` are on your PATH as described in section 0.
 This shared flow uses Vitis Unified HLS commands and was developed with version 2024.1.
 The Intel DPC++ examples use their own build flow.
 
