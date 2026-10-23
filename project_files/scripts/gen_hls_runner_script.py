@@ -19,6 +19,9 @@ Arguments:
     -c, --config: Config file name (default: __hls_config__.ini)
     -id, --id: ID tag when accessing multiple versions (optional)
     -imp, --impl: include implementation run (optional)
+    --part: Override the FPGA part selected by the configuration file (optional)
+    --component: Override the output component directory (optional)
+    --m-axi-addr32: Use 32-bit AXI master addresses (optional)
 
 The script reads the provided input file and configuration file, and generates an
 HLS Tcl script based on the specified parameters. The  HLS Tcl script is then written 
@@ -78,10 +81,13 @@ def write_script(
     output_file,
     impl,
     params,
+    component=None,
+    m_axi_addr32=False,
 ):
     "Write the HLS script to the output file"
 
     file_root = input_file.split(".")[0]
+    component = component or f"{file_root}.comp"
 
     # get the HLS Tcl script parameters
     top = params["top"]
@@ -89,6 +95,9 @@ def write_script(
     period = params["period"]
     files = params["files"]
     tb_files = params["tb_files"]
+    directives = params.get("directives", "")
+    directives_flow = f"source {directives}" if directives else ""
+    interface_flow = "config_interface -m_axi_addr64=false" if m_axi_addr32 else ""
 
     # if tb_files in ini file is defined tb_files = none then don't
     # add tb_files in the Tcl script
@@ -107,7 +116,7 @@ def write_script(
 
     with open(output_file, "w", encoding="utf-8") as file:
         script_text = f"""\
-                    open_component {file_root}.comp -reset
+                    open_component {component} -reset
                     add_files [list {files}]
                     {tb_add_files}
                     set_top {top}
@@ -115,6 +124,8 @@ def write_script(
                     set_part {part}
                     puts "Running: set_part {part}"
                     create_clock -period {period}
+                    {interface_flow}
+                    {directives_flow}
                     csynth_design
                     {impl_flow}
                     exit"""
@@ -159,6 +170,7 @@ def get_script_parameters(input_file, config, id_tag=None):
         "period": config["DEFAULTS"]["period"],
         "files": file_basename,
         "tb_files": f"{file_rootname}-top.{file_suffix}",
+        "directives": "",
     }
 
     # update each parameter if it is defined in the config file and
@@ -183,7 +195,8 @@ def get_script_parameters(input_file, config, id_tag=None):
     return parameters
 
 
-def main(input_file, output_file, config_file, id_tag=None, impl=False):
+def main(input_file, output_file, config_file, id_tag=None, impl=False,
+         part=None, component=None, m_axi_addr32=False):
     """Main function to process input file and write to output file"""
 
     logging.debug(
@@ -202,12 +215,16 @@ def main(input_file, output_file, config_file, id_tag=None, impl=False):
 
     # get the script parameters
     params = get_script_parameters(input_file, config, id_tag)
+    if part is not None:
+        params["part"] = part
 
     write_script(
         input_file,
         output_file,
         impl,
         params,
+        component,
+        m_axi_addr32,
     )
 
     output_file = Path(output_file)
@@ -248,6 +265,11 @@ if __name__ == "__main__":
         required=False,
     )
 
+    parser.add_argument("--part", help="Override the configured FPGA part")
+    parser.add_argument("--component", help="Output HLS component directory")
+    parser.add_argument("--m-axi-addr32", action="store_true",
+                        help="Use 32-bit AXI master addresses")
+
     args = parser.parse_args()
 
     logging.basicConfig(level=args.verbose)
@@ -255,4 +277,5 @@ if __name__ == "__main__":
     # add info log message of the python command line
     logging.info(f"Running: {' '.join(sys.argv)}")
 
-    main(args.input, args.output, args.config, args.id, args.impl)
+    main(args.input, args.output, args.config, args.id, args.impl,
+         args.part, args.component, args.m_axi_addr32)
