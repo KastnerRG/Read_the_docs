@@ -22,6 +22,8 @@ int main () {
 	for (int i = 0; i < LEN; i++) {
 		pktA.data = inputA[i];
 		pktB.data = inputB[i];
+		pktA.keep = pktB.keep = 0xf;
+		pktA.strb = pktB.strb = 0xf;
 		// Prepare tlast signal
 		if (i == LEN -1) {
 			pktA.last = 1;

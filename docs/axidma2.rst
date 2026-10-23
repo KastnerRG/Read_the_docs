@@ -20,7 +20,7 @@ Defining the interfaces is a bit more complicated here. First we have to define 
 	typedef hls::axis<float, 0,0,0> transPkt;
 
 
-``float`` is our data type, the other parameters are for side channels, it's safe to just leave them as 0 for this lab.
+``float`` is our 32-bit data type. The three zero parameters disable the optional ``TUSER``, ``TID``, and ``TDEST`` side channels. The packet still includes ``keep`` (``TKEEP``), ``strb`` (``TSTRB``), and ``last`` (``TLAST``).
 
 
 The interfaces to our top function must be defined as AXI-Stream channels:
@@ -44,22 +44,36 @@ From a software perspective, you can think of these interfaces as FIFO queues wi
 	Bdata = Bpkt.data;
 
 
+Construct separate output packets and set their side channels explicitly:
+
 .. code-block :: c++
 
-	Apkt.data = Cdata;
-	Bpkt.data = Ddata;
-	// Re-use the input packets to preserve side channel signals
-	C.write(Apkt);
-	D.write(Bpkt);
+	const bool last = Apkt.last || Bpkt.last;
+	transPkt Cpkt, Dpkt;
+	Cpkt.data = Adata + Bdata;
+	Dpkt.data = Adata - Bdata;
+	Cpkt.keep = 0xf;
+	Cpkt.strb = 0xf;
+	Dpkt.keep = 0xf;
+	Dpkt.strb = 0xf;
+	Cpkt.last = last;
+	Dpkt.last = last;
+	C.write(Cpkt);
+	D.write(Dpkt);
+	if (last) {
+		break;
+	}
 
 
-The most important optional side channel signal is ``last`` (named ``TLAST`` in actual hardware). This indicates the end of a stream of data. In most cases people hope the accelerator to keep processing data until the end of the input stream. In this lab, we set the program ``for`` loop to run indefinitely until it receive the last input packet, which comes with a high ``last`` signal.
+Each result is a complete four-byte float, so ``keep`` and ``strb`` are set to ``0xf``: all four bytes are present and contain data. ``last`` marks the final beat of a packet. The ``while`` loop stops when either input asserts ``last``, and both output packets use that same end condition. This ensures that both receive DMAs see an output packet boundary when the kernel stops.
 
-It's important to handle the side channels properly to prevent DMAs from hanging. One easy way is to just re-use the input packets for output as shown above.
+This lab requires both input buffers to contain the same nonzero number of complete ``float32`` values, with ``TLAST`` asserted on the same final input pair. Each output buffer has space for that same number of floats. The shared end condition does not provide general support for unequal input lengths: the kernel reads one value from each input on every iteration, and unread data from a longer transfer can leave its send DMA blocked.
+
+PYNQ does not require the output to reuse an input packet object. It requires valid output data, byte qualifiers, and packet boundaries. If another accelerator changes the output width or number of values, construct the output masks and ``TLAST`` for that output format and size the host receive buffers accordingly, rather than copying input metadata.
 
 ``axis_fp_example_test.cpp`` is a simple software testbench. Note that since both ``read()`` and ``write()`` functions are blocking, we have to write all the input data to the input stream before calling the function. This is different from hardware execution.
 
-As we did in lab1, use command ``make ip`` to run C simulation, C synthesis, and export RTL as an IP core for Vivado.
+Run ``make test`` to compile and execute the C++ testbench, then ``make ip`` to run C synthesis and export RTL as an IP core for Vivado. The current ``make ip`` flow does not run C simulation or C/RTL co-simulation.
 
 
 2) Vivado: Generating bitstream from RTL code
@@ -158,6 +172,8 @@ Follow the same step as as `lab 1 <https://pp4fpgas.readthedocs.io/en/latest/PYN
 
 After the above steps finish, keep your **project directory > project_1 > project_1.runs > impl_1 > design_1_wrapper.bit** and **project directory > project_1 > project_1.gen > sources_1 > bd > design_1 > hw_handoff > design_1.hwh** for Pynq implementation. You should make sure that the bitstream and the hardware handoff files have the same name.
 
+After changing the HLS source, export the IP again, refresh or upgrade the HLS IP in Vivado, and regenerate the bitstream. Copy the new ``.bit`` and matching ``.hwh`` files to PYNQ before testing the change.
+
 You can close and exit from Vivado tool.
 
 3) Host program
@@ -189,10 +205,10 @@ You can check the register map of the HLS IP, and start the IP by writing to the
 .. code-block :: python3
 
 	CONTROL_REGISTER = 0x0
-	hls_ip.write(CONTROL_REGISTER, 0x1) # 0x81 will set bit 0
+	hls_ip.write(CONTROL_REGISTER, 0x1) # AP_START; 0x81 also enables auto-restart
 	hls_ip.register_map
 
-It is recommended to start the receive process first.
+The supplied notebook allocates equally sized ``np.float32`` buffers for both inputs and outputs. Keep the receive-before-send order shown below so both output DMAs are ready to accept results. Start the HLS IP again for each new pair of input transfers when using the single-run ``0x1`` control value above.
 
 .. code-block :: python3
 

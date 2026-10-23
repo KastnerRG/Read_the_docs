@@ -1,5 +1,4 @@
 #include "axis_fp_example.h"
-#include <math.h>
 
 
 void axis_fp_example(
@@ -10,27 +9,29 @@ void axis_fp_example(
 ){
 #pragma HLS INTERFACE mode=axis port=A,B,C,D
 #pragma HLS INTERFACE mode=s_axilite port=return
-	//fp_int Adata, Bdata, Cdata, Ddata;
-	transPkt Apkt, Bpkt, Cpkt, Dpkt;
-	float Adata, Bdata, Cdata, Ddata;
-
+	// A and B must contain the same nonzero number of complete float samples.
 	while (true) {
-		Apkt = A.read();
-		Bpkt = B.read();
-		// Use integer type to read from the AXIS packets
-		Adata = Apkt.data;
-		Bdata = Bpkt.data;
-		//// Do the calculation s with floating points
-		Cdata = Adata + Bdata;
-		Ddata = Adata - Bdata;
-		////AXIS output packets are expecting integer type
-		Apkt.data = Cdata;
-		Bpkt.data = Ddata;
-		// Re-use the input packets to preserve side channel signals
-		// Write the results to the output streams
-		C.write(Apkt);
-		D.write(Bpkt);
-		if (Apkt.last == 1 || Bpkt.last == 1) {
+		const transPkt Apkt = A.read();
+		const transPkt Bpkt = B.read();
+		const float Adata = Apkt.data;
+		const float Bdata = Bpkt.data;
+		const bool last = (Apkt.last == 1 || Bpkt.last == 1);
+
+		transPkt Cpkt, Dpkt;
+		Cpkt.data = Adata + Bdata;
+		Cpkt.keep = 0xf; 
+		Cpkt.strb = 0xf; 
+		Cpkt.last = last;
+
+		Dpkt.data = Adata - Bdata;
+		Dpkt.keep = 0xf;
+		Dpkt.strb = 0xf;
+		Dpkt.last = last;
+
+		C.write(Cpkt);
+		D.write(Dpkt);
+		
+		if (last) {
 			break;
 		}
 	}
