@@ -38,6 +38,7 @@ DevCloud provides access to the tools and FPGAs remotely.
    PYNQ-example-legacy
    axidma_single
    axidma2
+   axi4_cli
    axi4
    interrupts
    microblaze.ipynb

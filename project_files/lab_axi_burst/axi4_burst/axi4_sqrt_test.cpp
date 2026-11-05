@@ -2,12 +2,12 @@
 #include<iostream>
 int main()
 {
-	float in[50],out[50];
+	float in[50],out[50] = {};
 	int ct=0;
-	int length=30;
+	int length=40;
 	for(int i=0;i<length;i++)
 		in[i]=(float)(i*i);
-	axi4_sqrt(in,out,30);
+	axi4_sqrt(in,out,length);
 	for(int i=0;i<length;i++)
 	{
 		if(out[i]==(float)i)
@@ -17,5 +17,5 @@ int main()
 		std::cout<<"PASS"<<std::endl;
 	else
 		std::cout<<"FAIL"<<std::endl;
-	return 0;
+	return ct==length ? 0 : 1;
 }

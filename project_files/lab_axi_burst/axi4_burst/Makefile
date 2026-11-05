@@ -1,71 +1,40 @@
-# This makefile was tested with Vivado HLS 2019.2
-# and Vitis v2024.1
-# 
-#
-
-# select the HLS compiler to use (vivado_hls or vitis)
+# Vitis HLS 2024.2
 TOP = axi4_sqrt
-# -------------------------------------------------------
-
-EXAMPLES_CPP = $(shell ls *_test.cpp)
-EXAMPLES_BIN = $(patsubst %.cpp,%,$(EXAMPLES_CPP))
-EXAMPLES_LOG = $(patsubst %.cpp,%.log,$(EXAMPLES_CPP))
-
-# Collect all non-test C++ sources so we can support multi-file designs.
-# Non-test sources are any .cpp files that do not match '*_test.cpp'.
-NON_TEST_CPP = $(filter-out %_test.cpp,$(wildcard *.cpp))
-
-# Note: the HLS TCL generator used by this project expects a single input
-# file name (the key used to select a section in the INI file). To include
-# multiple implementation files in the HLS flow, add a `files = ...` entry
-# for the top-level section in `__hls_config__.ini`. Example:
-#
-# [$(TOP).cpp]
-# top = $(TOP)
-# files = $(TOP).cpp helper1.cpp helper2.cpp
-# tb_files = $(TOP)_test.cpp
-#
-# The generator will read `files` from the INI and include them in the Tcl
-# it writes. We therefore call the generator with -i $(TOP).cpp below.
-
-CC = gcc
-CXX = g++
-
-# insert new LD path to the LD_LIBRARY_PATH if it is not already there
-# 
-LD_PATH_NEW = /usr/lib/x86_64-linux-gnu
-LD_LIBRARY_PATH := $(shell echo $(value LD_LIBRARY_PATH) | grep -q $(LD_PATH_NEW) || echo $(LD_PATH_NEW):)$(value LD_LIBRARY_PATH)
-
-# ------------ Set the script path to generate tcl scripts ----------------
+PYTHON ?= python3
+HLS_COMPILER ?= vitis-run --mode hls --tcl
 GEN_TCL = $(CURDIR)/../../scripts/gen_hls_runner_script.py
-# -------------------------------------------------------------------------
-
-#HLS_CONFIG_FILE = $(CURDIR)/__hls_config__.ini
 HLS_CONFIG_FILE = $(CURDIR)/__hls_config__.ini
+HLS_COMPONENT = $(TOP).comp
+HLS_REPORT = $(HLS_COMPONENT)/hls/syn/report/$(TOP)_csynth.rpt
+RUN_CHECKED = sh $(dir $(GEN_TCL))run_checked.sh
 
-# Preserve the PYNQ lab's 32-bit AXI master addresses.
-HLS_FLAGS = $(if $(filter pynq,$(TARGET)),--m-axi-addr32)
-include $(dir $(GEN_TCL))boards.mk
+.DEFAULT_GOAL := hls
 
-#$(warning $(EXAMPLES_LOG))
+$(TOP).tcl: $(wildcard *.cpp *.h *.hpp) $(HLS_CONFIG_FILE) $(GEN_TCL) Makefile
+	$(PYTHON) $(GEN_TCL) -c $(HLS_CONFIG_FILE) -i $(TOP).cpp -o $@ --m-axi-addr32
 
-%.o: %.cpp
-	$(CXX) -I$(VHLS)/include -c $< -o $@
+$(HLS_COMPONENT)/.csynth: $(TOP).tcl
+	$(RUN_CHECKED) "$(HLS_REPORT)" "HLS synthesis" $(HLS_COMPILER) $<
+	touch $@
 
-%_test.bin: %_test.cpp $(NON_TEST_CPP) $(wildcard *.h *.hpp)
-	# Link the test executable against the testbench and all non-test sources.
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH) $(CXX) -I$(VHLS)/include $(filter %.cpp,$^) -g -o $@
+hls: $(HLS_COMPONENT)/.csynth
 
-#  missing cos_table and sin_table definition. No testbench files available
-#	dft.c \
-#	dft_precompute.c \
+report: hls
+	cp -f $(HLS_REPORT) $(CURDIR)
 
-%.log: %.bin
-	./$< > $@ 2>&1 || { s=$$?; echo "./$< > $@ failed $$s" >&2; exit $$s; }
+sim: HLS_COMMAND = csim_design
+sim: HLS_OUTPUT = $(HLS_COMPONENT)/hls/csim/report/$(TOP)_csim.log
+cosim: HLS_COMMAND = cosim_design
+cosim: HLS_OUTPUT = $(HLS_COMPONENT)/hls/sim/report/$(TOP)_cosim.rpt
+ip: HLS_COMMAND = export_design -format ip_catalog -rtl verilog -vendor xilinx.com -library hls -version 1.0 -ipname $(TOP)
+ip: HLS_OUTPUT = $(HLS_COMPONENT)/hls/impl/ip/component.xml
 
-test: $(EXAMPLES_LOG)
+sim cosim ip: hls
+	@printf '%s\n' 'open_component $(HLS_COMPONENT)' '$(HLS_COMMAND)' 'exit' > $@_$(TOP).tcl
+	$(RUN_CHECKED) "$(HLS_OUTPUT)" "HLS $@" $(HLS_COMPILER) $@_$(TOP).tcl
 
-.PHONY: clean hls test report ip
+clean:
+	rm -rf $(HLS_COMPONENT) logs .Xil
+	rm -f $(TOP).tcl sim_$(TOP).tcl cosim_$(TOP).tcl ip_$(TOP).tcl *.log *.jou *.rpt
 
-# Prevent make from deleting the .bin intermediate files
-.PRECIOUS: %.bin %.tcl
+.PHONY: hls report sim cosim ip clean

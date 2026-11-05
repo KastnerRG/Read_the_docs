@@ -33,7 +33,7 @@ class BoardBuildTests(unittest.TestCase):
     def test_every_project_routes_both_boards(self):
         for makefile in sorted(PROJECTS.rglob("Makefile")):
             text = makefile.read_text()
-            if "GEN_TCL" not in text:
+            if not re.search(r"^include .*(?:boards|hls)\.mk", text, re.MULTILINE):
                 continue
             top = re.search(r"^TOP = (\w+)", text, re.MULTILINE).group(1)
             for target, part in PARTS.items():
@@ -184,21 +184,31 @@ class BoardBuildTests(unittest.TestCase):
             self.assertFalse(stale_bit.with_suffix(".bit.prev").exists())
 
 
-    def test_axi_burst_uses_32_bit_addresses_only_on_pynq(self):
+    def test_axi_burst_uses_configured_pynq_part_and_hls_targets(self):
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp)
             source = PROJECTS / "lab_axi_burst/axi4_burst"
             for filename in ("Makefile", "__hls_config__.ini", "axi4_sqrt.cpp", "axi4_sqrt_test.cpp"):
                 shutil.copy(source / filename, directory)
-            for target, suffix in (("pynq", ""), ("zu3", "_zu3")):
-                script = f"axi4_sqrt{suffix}.tcl"
-                self.make(directory, script, f"TARGET={target}",
-                          f"GEN_TCL={SCRIPTS / 'gen_hls_runner_script.py'}")
-                text = (directory / script).read_text()
-                command = "config_interface -m_axi_addr64=false"
-                self.assertEqual(command in text, target == "pynq")
-                if target == "pynq":
-                    self.assertLess(text.index(command), text.index("csynth_design"))
+            generator = f"GEN_TCL={SCRIPTS / 'gen_hls_runner_script.py'}"
+            self.make(directory, "axi4_sqrt.tcl", generator)
+            text = (directory / "axi4_sqrt.tcl").read_text()
+            self.assertIn("set_part xc7z020-clg400-1", text)
+            self.assertIn("create_clock -period 10", text)
+            self.assertLess(text.index("config_interface -m_axi_addr64=false"),
+                            text.index("csynth_design"))
+            for target, command in {
+                "hls": "HLS synthesis", "report": "cp -f", "sim": "csim_design",
+                "cosim": "cosim_design", "ip": "export_design -format ip_catalog",
+            }.items():
+                with self.subTest(target=target):
+                    output = self.make(directory, "-n", target, generator)
+                    self.assertIn(command, output)
+                    self.assertNotIn("build_bitstream.tcl", output)
+            result = subprocess.run(["make", "-n", "bitstream", generator],
+                                    cwd=directory, capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("No rule to make target 'bitstream'", result.stderr)
 
     def test_clean_preserves_course_sources_and_the_other_board(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -261,7 +271,7 @@ class BoardBuildTests(unittest.TestCase):
     def test_legacy_make_commands_work_without_target(self):
         for makefile in sorted(PROJECTS.rglob("Makefile")):
             text = makefile.read_text()
-            if "GEN_TCL" not in text:
+            if not re.search(r"^include .*(?:boards|hls)\.mk", text, re.MULTILINE):
                 continue
             top = re.search(r"^TOP = (\w+)", text, re.MULTILINE).group(1)
             for target in (None, "test", "hls", "report", "ip", "clean"):

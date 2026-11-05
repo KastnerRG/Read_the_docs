@@ -1,5 +1,5 @@
-Lab: AXI4-Burst Mode (m_axi)
-============================
+Lab: AXI4-Burst Mode (m_axi) (legacy)
+=====================================
 
 Simple example of AXI4-Burst Mode
 ***********************************
