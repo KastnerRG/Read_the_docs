@@ -44,10 +44,11 @@ Find the code `here <https://github.com/KastnerRG/Read_the_docs/tree/master/proj
 
 An AXI4 burst can transfer multiple data beats with one address request, reducing address overhead. Here, ``memcpy`` exposes consecutive memory accesses that HLS can implement as bursts; suitable loops can do this too. One copy may require several bursts.
 
-* ``m_axi`` makes ``in`` and ``out`` memory masters. Their different ``bundle`` names create separate AXI interfaces.
+* ``in`` and ``out`` are memory-mapped managers. Their different ``bundle`` names create separate AXI interfaces.
 * ``offset=slave`` exposes each buffer's base address through an AXI-Lite register for the host to program.
-* ``s_axilite ... bundle=sqrt`` groups those addresses, ``len``, and start/done control (``port=return``) into one control interface.
-* ``depth=50`` sizes each pointer's C/RTL co-simulation buffer for 50 floats. It does not set burst length or add bounds checks; ``len`` controls the number of floats copied.
+* ``s_axilite ... bundle=sqrt`` groups those addresses, ``len``, and start/done control into one control interface.
+* ``depth=50`` sizes each pointer's C/RTL co-simulation buffer for 50 floats. This parameter does not set burst length.
+* In this example, burst length can be affected by ``len``, or can be specified by pragmas ``max_read_burst_length`` and ``max_read_burst_length``.
 
 See the `AMD interface pragma reference <https://docs.amd.com/r/2024.2-English/ug1399-vitis-hls/pragma-HLS-interface>`_ for details.
 
